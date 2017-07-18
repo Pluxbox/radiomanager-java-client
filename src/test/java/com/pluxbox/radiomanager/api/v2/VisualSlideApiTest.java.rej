@@ -1,0 +1,44 @@
+--- sdk/sdk-java/src/test/java/com/pluxbox/radiomanager/api/v2/VisualSlideApiTest.java
++++ sdk/sdk-java/src/test/java/com/pluxbox/radiomanager/api/v2/VisualSlideApiTest.java
+@@ -14,17 +14,9 @@
+ package com.pluxbox.radiomanager.api.v2;
+ 
+ import com.pluxbox.radiomanager.api.invoker.ApiException;
+-import com.pluxbox.radiomanager.api.models.NotFound;
+-import com.pluxbox.radiomanager.api.models.TooManyRequests;
+-import com.pluxbox.radiomanager.api.models.VisualImageResult;
+ import com.pluxbox.radiomanager.api.models.VisualResult;
+-import org.junit.Test;
+ import org.junit.Ignore;
+-
+-import java.util.ArrayList;
+-import java.util.HashMap;
+-import java.util.List;
+-import java.util.Map;
++import org.junit.Test;
+ 
+ /**
+  * API tests for VisualSlideApi
+@@ -33,22 +25,6 @@
+ public class VisualSlideApiTest {
+ 
+     private final VisualSlideApi api = new VisualSlideApi();
+-
+-    
+-    /**
+-     * Get Visual Slide Image as JPEG
+-     *
+-     * Get Visual Slide Image as JPEG
+-     *
+-     * @throws ApiException
+-     *          if the Api call fails
+-     */
+-    @Test
+-    public void downloadVisualSlideTest() throws ApiException {
+-        VisualImageResult response = api.downloadVisualSlide();
+-
+-        // TODO: test validations
+-    }
+     
+     /**
+      * Get Visual Slide Image as Base64
