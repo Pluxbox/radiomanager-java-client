@@ -157,7 +157,6 @@ Class | Method | HTTP request | Description
 *UserApi* | [**getUserById**](docs/UserApi.md#getUserById) | **GET** /users/{id} | Get user by id
 *UserApi* | [**inviteUserByMail**](docs/UserApi.md#inviteUserByMail) | **POST** /users/invite | Invite user by mail
 *UserApi* | [**listUsers**](docs/UserApi.md#listUsers) | **GET** /users | Get all users.
-*VisualSlideApi* | [**downloadVisualSlide**](docs/VisualSlideApi.md#downloadVisualSlide) | **GET** /visual/image | Get Visual Slide Image as JPEG
 *VisualSlideApi* | [**getVisualSlide**](docs/VisualSlideApi.md#getVisualSlide) | **GET** /visual | Get Visual Slide Image as Base64
 
 
