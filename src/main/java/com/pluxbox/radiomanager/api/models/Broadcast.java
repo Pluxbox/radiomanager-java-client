@@ -1,6 +1,6 @@
 /*
- * Pluxbox Radiomanager Client
- * Pluxbox RadioManager gives you the power, flexibility and speed you always wanted in a lightweight and easy-to-use web-based radio solution. With Pluxbox RadioManager you can organise your radio workflow and automate your omnichannel communication with your listeners. We offer wide range specialised services for the radio and connections like Hybrid Radio, Visual Radio, your website and social media without losing focus on your broadcast. For more information visit https://pluxbox.com
+ * RadioManager
+ * RadioManager
  *
  * OpenAPI spec version: 2.0
  * Contact: support@pluxbox.com
@@ -26,7 +26,6 @@ import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Broadcast
@@ -82,7 +81,7 @@ public class Broadcast {
   private Boolean published = null;
 
   @SerializedName("repetition_uid")
-  private UUID repetitionUid = null;
+  private String repetitionUid = null;
 
   /**
    * Gets or Sets repetitionType
@@ -438,7 +437,7 @@ public class Broadcast {
     this.published = published;
   }
 
-  public Broadcast repetitionUid(UUID repetitionUid) {
+  public Broadcast repetitionUid(String repetitionUid) {
     this.repetitionUid = repetitionUid;
     return this;
   }
@@ -448,11 +447,11 @@ public class Broadcast {
    * @return repetitionUid
   **/
   @ApiModelProperty(example = "1234abcd", value = "")
-  public UUID getRepetitionUid() {
+  public String getRepetitionUid() {
     return repetitionUid;
   }
 
-  public void setRepetitionUid(UUID repetitionUid) {
+  public void setRepetitionUid(String repetitionUid) {
     this.repetitionUid = repetitionUid;
   }
 

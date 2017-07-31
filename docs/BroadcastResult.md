@@ -25,7 +25,7 @@ Name | Type | Description | Notes
 **recommended** | **Boolean** |  |  [optional]
 **language** | **String** |  |  [optional]
 **published** | **Boolean** |  |  [optional]
-**repetitionUid** | [**UUID**](UUID.md) |  |  [optional]
+**repetitionUid** | **String** |  |  [optional]
 **repetitionType** | [**RepetitionTypeEnum**](#RepetitionTypeEnum) |  |  [optional]
 **repetitionEnd** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]
 **repetitionStart** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]

@@ -1,6 +1,6 @@
 /*
- * Pluxbox Radiomanager Client
- * Pluxbox RadioManager gives you the power, flexibility and speed you always wanted in a lightweight and easy-to-use web-based radio solution. With Pluxbox RadioManager you can organise your radio workflow and automate your omnichannel communication with your listeners. We offer wide range specialised services for the radio and connections like Hybrid Radio, Visual Radio, your website and social media without losing focus on your broadcast. For more information visit https://pluxbox.com
+ * RadioManager
+ * RadioManager
  *
  * OpenAPI spec version: 2.0
  * Contact: support@pluxbox.com
@@ -449,7 +449,7 @@ public class BlockApi {
         if (startMin != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "start-min", startMin));
         if (startMax != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "start_max", startMax));
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "start-max", startMax));
         if (broadcastId != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "broadcast_id", broadcastId));
         if (programId != null)

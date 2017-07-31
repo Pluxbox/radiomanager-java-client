@@ -147,6 +147,11 @@ Class | Method | HTTP request | Description
 *ProgramApi* | [**getProgramById**](docs/ProgramApi.md#getProgramById) | **GET** /programs/{id} | Get program by id
 *ProgramApi* | [**listPrograms**](docs/ProgramApi.md#listPrograms) | **GET** /programs | Get all programs.
 *ProgramApi* | [**updateProgramByID**](docs/ProgramApi.md#updateProgramByID) | **PATCH** /programs/{id} | Update program by id
+*StoryApi* | [**createStory**](docs/StoryApi.md#createStory) | **POST** /stories | Create story.
+*StoryApi* | [**deleteStoryById**](docs/StoryApi.md#deleteStoryById) | **DELETE** /stories/{id} | Delete story by id
+*StoryApi* | [**getStoryById**](docs/StoryApi.md#getStoryById) | **GET** /stories/{id} | Get story by id
+*StoryApi* | [**listStories**](docs/StoryApi.md#listStories) | **GET** /stories | Get all stories.
+*StoryApi* | [**updateStoryByID**](docs/StoryApi.md#updateStoryByID) | **PATCH** /stories/{id} | Update story by id
 *StringApi* | [**getStringsByName**](docs/StringApi.md#getStringsByName) | **GET** /strings/{name} | Get Strings (formatted)
 *TagApi* | [**createTag**](docs/TagApi.md#createTag) | **POST** /tags | Create tag.
 *TagApi* | [**deleteTagById**](docs/TagApi.md#deleteTagById) | **DELETE** /tags/{id} | Delete tag by id
@@ -260,6 +265,13 @@ Class | Method | HTTP request | Description
  - [ProgramResults](docs/ProgramResults.md)
  - [ReadOnly](docs/ReadOnly.md)
  - [RelationsPlaceholder](docs/RelationsPlaceholder.md)
+ - [Story](docs/Story.md)
+ - [StoryOutputOnly](docs/StoryOutputOnly.md)
+ - [StoryRelations](docs/StoryRelations.md)
+ - [StoryRelationsItems](docs/StoryRelationsItems.md)
+ - [StoryRelationsTags](docs/StoryRelationsTags.md)
+ - [StoryRelationsTagsParams](docs/StoryRelationsTagsParams.md)
+ - [StoryResults](docs/StoryResults.md)
  - [Success](docs/Success.md)
  - [Tag](docs/Tag.md)
  - [TagOutputOnly](docs/TagOutputOnly.md)
@@ -292,6 +304,8 @@ Class | Method | HTTP request | Description
  - [PresenterResult](docs/PresenterResult.md)
  - [ProgramDataInput](docs/ProgramDataInput.md)
  - [ProgramResult](docs/ProgramResult.md)
+ - [StoryDataInput](docs/StoryDataInput.md)
+ - [StoryResult](docs/StoryResult.md)
  - [TagDataInput](docs/TagDataInput.md)
  - [TagResult](docs/TagResult.md)
 

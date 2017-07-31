@@ -1,6 +1,6 @@
 /*
- * Pluxbox Radiomanager Client
- * Pluxbox RadioManager gives you the power, flexibility and speed you always wanted in a lightweight and easy-to-use web-based radio solution. With Pluxbox RadioManager you can organise your radio workflow and automate your omnichannel communication with your listeners. We offer wide range specialised services for the radio and connections like Hybrid Radio, Visual Radio, your website and social media without losing focus on your broadcast. For more information visit https://pluxbox.com
+ * RadioManager
+ * RadioManager
  *
  * OpenAPI spec version: 2.0
  * Contact: support@pluxbox.com
@@ -35,10 +35,10 @@ public class EPGBroadcast {
   private List<BroadcastResult> _20160111 = new ArrayList<BroadcastResult>();
 
   @SerializedName("next_page_url")
-  private String nextPageUrl = "http://radiomanager/pb/api/v1/broadcasts/epg/{identifier}/2016-01-12";
+  private String nextPageUrl = "https://raidiomanager.pluxbox.com/api/v1/broadcasts/epg/{identifier}/2016-01-12";
 
   @SerializedName("prev_page_url")
-  private String prevPageUrl = "http://radiomanager/pb/api/v1/broadcasts/epg/{identifier}/2016-01-10";
+  private String prevPageUrl = "https://raidiomanager.pluxbox.com/pb/api/v1/broadcasts/epg/{identifier}/2016-01-10";
 
   public EPGBroadcast _20160111(List<BroadcastResult> _20160111) {
     this._20160111 = _20160111;
