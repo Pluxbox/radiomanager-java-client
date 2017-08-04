@@ -211,6 +211,6 @@ public class ItemResults {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
+  
 }
 

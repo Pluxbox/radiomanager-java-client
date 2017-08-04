@@ -88,6 +88,6 @@ public class InviteUserSuccess {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
+  
 }
 

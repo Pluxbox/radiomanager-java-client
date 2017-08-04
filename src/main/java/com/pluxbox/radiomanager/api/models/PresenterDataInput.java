@@ -139,7 +139,7 @@ public class PresenterDataInput {
    * @return active
   **/
   @ApiModelProperty(example = "true", value = "")
-  public Boolean isActive() {
+  public Boolean getActive() {
     return active;
   }
 
@@ -214,6 +214,6 @@ public class PresenterDataInput {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
+  
 }
 

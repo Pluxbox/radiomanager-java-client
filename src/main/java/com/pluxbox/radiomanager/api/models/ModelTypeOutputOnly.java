@@ -88,6 +88,6 @@ public class ModelTypeOutputOnly {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
+  
 }
 

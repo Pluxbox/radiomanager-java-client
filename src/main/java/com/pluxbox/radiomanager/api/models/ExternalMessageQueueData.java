@@ -230,6 +230,6 @@ public class ExternalMessageQueueData {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
+  
 }
 

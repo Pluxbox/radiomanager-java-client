@@ -391,7 +391,7 @@ public class Broadcast {
    * @return recommended
   **/
   @ApiModelProperty(example = "true", value = "")
-  public Boolean isRecommended() {
+  public Boolean getRecommended() {
     return recommended;
   }
 
@@ -427,7 +427,7 @@ public class Broadcast {
    * @return published
   **/
   @ApiModelProperty(example = "true", value = "")
-  public Boolean isPublished() {
+  public Boolean getPublished() {
     return published;
   }
 
@@ -625,6 +625,6 @@ public class Broadcast {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
+  
 }
 

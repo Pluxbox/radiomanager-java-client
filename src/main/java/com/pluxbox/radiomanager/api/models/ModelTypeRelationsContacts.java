@@ -158,6 +158,6 @@ public class ModelTypeRelationsContacts {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
+  
 }
 

@@ -158,6 +158,6 @@ public class ContactRelationsItems {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
+  
 }
 

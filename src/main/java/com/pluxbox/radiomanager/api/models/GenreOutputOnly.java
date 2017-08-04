@@ -88,6 +88,6 @@ public class GenreOutputOnly {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
+  
 }
 

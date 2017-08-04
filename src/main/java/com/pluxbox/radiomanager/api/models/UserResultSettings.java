@@ -56,7 +56,7 @@ public class UserResultSettings {
    * @return showSideBar
   **/
   @ApiModelProperty(example = "true", value = "")
-  public Boolean isShowSideBar() {
+  public Boolean getShowSideBar() {
     return showSideBar;
   }
 
@@ -74,7 +74,7 @@ public class UserResultSettings {
    * @return showSocialBar
   **/
   @ApiModelProperty(example = "true", value = "")
-  public Boolean isShowSocialBar() {
+  public Boolean getShowSocialBar() {
     return showSocialBar;
   }
 
@@ -92,7 +92,7 @@ public class UserResultSettings {
    * @return showCheckboxColumn
   **/
   @ApiModelProperty(example = "true", value = "")
-  public Boolean isShowCheckboxColumn() {
+  public Boolean getShowCheckboxColumn() {
     return showCheckboxColumn;
   }
 
@@ -110,7 +110,7 @@ public class UserResultSettings {
    * @return showTimeColumn
   **/
   @ApiModelProperty(example = "true", value = "")
-  public Boolean isShowTimeColumn() {
+  public Boolean getShowTimeColumn() {
     return showTimeColumn;
   }
 
@@ -128,7 +128,7 @@ public class UserResultSettings {
    * @return showSpeechTime
   **/
   @ApiModelProperty(example = "true", value = "")
-  public Boolean isShowSpeechTime() {
+  public Boolean getShowSpeechTime() {
     return showSpeechTime;
   }
 
@@ -203,6 +203,6 @@ public class UserResultSettings {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
+  
 }
 

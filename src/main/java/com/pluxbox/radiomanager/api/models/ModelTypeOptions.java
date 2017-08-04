@@ -88,6 +88,6 @@ public class ModelTypeOptions {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
+  
 }
 

@@ -330,7 +330,7 @@ public class ItemDataInput {
    * @return recommended
   **/
   @ApiModelProperty(example = "false", value = "")
-  public Boolean isRecommended() {
+  public Boolean getRecommended() {
     return recommended;
   }
 
@@ -402,7 +402,7 @@ public class ItemDataInput {
    * @return staticStart
   **/
   @ApiModelProperty(example = "false", value = "")
-  public Boolean isStaticStart() {
+  public Boolean getStaticStart() {
     return staticStart;
   }
 
@@ -573,6 +573,6 @@ public class ItemDataInput {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
+  
 }
 

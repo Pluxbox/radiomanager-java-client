@@ -215,6 +215,6 @@ public class CampaignOutputOnly {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
+  
 }
 

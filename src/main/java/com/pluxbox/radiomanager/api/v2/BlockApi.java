@@ -76,9 +76,8 @@ public class BlockApi {
             .replaceAll("\\{" + "id" + "\\}", apiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         if (externalStationId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("_external_station_id", externalStationId));
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "_external_station_id", externalStationId));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -109,7 +108,7 @@ public class BlockApi {
         }
 
         String[] localVarAuthNames = new String[] { "API Key" };
-        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
     @SuppressWarnings("rawtypes")
@@ -206,7 +205,6 @@ public class BlockApi {
         String localVarPath = "/blocks/current";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -237,7 +235,7 @@ public class BlockApi {
         }
 
         String[] localVarAuthNames = new String[] { "API Key" };
-        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
     @SuppressWarnings("rawtypes")
@@ -323,7 +321,6 @@ public class BlockApi {
         String localVarPath = "/blocks/next";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -354,7 +351,7 @@ public class BlockApi {
         }
 
         String[] localVarAuthNames = new String[] { "API Key" };
-        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
     @SuppressWarnings("rawtypes")
@@ -447,21 +444,20 @@ public class BlockApi {
         String localVarPath = "/blocks";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         if (page != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("page", page));
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "page", page));
         if (startMin != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("start-min", startMin));
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "start-min", startMin));
         if (startMax != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("start-max", startMax));
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "start-max", startMax));
         if (broadcastId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("broadcast_id", broadcastId));
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "broadcast_id", broadcastId));
         if (programId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("program_id", programId));
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "program_id", programId));
         if (itemId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("item_id", itemId));
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "item_id", itemId));
         if (externalStationId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("_external_station_id", externalStationId));
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "_external_station_id", externalStationId));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -492,7 +488,7 @@ public class BlockApi {
         }
 
         String[] localVarAuthNames = new String[] { "API Key" };
-        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
     @SuppressWarnings("rawtypes")

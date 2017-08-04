@@ -231,6 +231,6 @@ public class GenreResult {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
+  
 }
 

@@ -182,6 +182,6 @@ public class ContactOutputOnly {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
+  
 }
 

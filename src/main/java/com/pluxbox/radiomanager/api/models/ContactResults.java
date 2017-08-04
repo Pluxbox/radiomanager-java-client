@@ -306,6 +306,6 @@ public class ContactResults {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
+  
 }
 

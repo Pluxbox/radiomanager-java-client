@@ -158,6 +158,6 @@ public class ItemRelationsBlock {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
+  
 }
 

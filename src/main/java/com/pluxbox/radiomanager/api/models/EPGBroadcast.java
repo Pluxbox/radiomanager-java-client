@@ -142,6 +142,6 @@ public class EPGBroadcast {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
+  
 }
 

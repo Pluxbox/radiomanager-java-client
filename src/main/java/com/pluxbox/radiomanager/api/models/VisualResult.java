@@ -88,6 +88,6 @@ public class VisualResult {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
+  
 }
 

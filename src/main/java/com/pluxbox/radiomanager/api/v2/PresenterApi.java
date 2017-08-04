@@ -77,7 +77,6 @@ public class PresenterApi {
         String localVarPath = "/presenters";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -108,7 +107,7 @@ public class PresenterApi {
         }
 
         String[] localVarAuthNames = new String[] { "API Key" };
-        return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
     @SuppressWarnings("rawtypes")
@@ -204,7 +203,6 @@ public class PresenterApi {
             .replaceAll("\\{" + "id" + "\\}", apiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -235,7 +233,7 @@ public class PresenterApi {
         }
 
         String[] localVarAuthNames = new String[] { "API Key" };
-        return apiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
     @SuppressWarnings("rawtypes")
@@ -332,9 +330,8 @@ public class PresenterApi {
             .replaceAll("\\{" + "id" + "\\}", apiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         if (externalStationId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("_external_station_id", externalStationId));
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "_external_station_id", externalStationId));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -365,7 +362,7 @@ public class PresenterApi {
         }
 
         String[] localVarAuthNames = new String[] { "API Key" };
-        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
     @SuppressWarnings("rawtypes")
@@ -467,17 +464,16 @@ public class PresenterApi {
         String localVarPath = "/presenters";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         if (page != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("page", page));
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "page", page));
         if (modelTypeId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("model_type_id", modelTypeId));
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "model_type_id", modelTypeId));
         if (programId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("program_id", programId));
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "program_id", programId));
         if (broadcastId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("broadcast_id", broadcastId));
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "broadcast_id", broadcastId));
         if (externalStationId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("_external_station_id", externalStationId));
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "_external_station_id", externalStationId));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -508,7 +504,7 @@ public class PresenterApi {
         }
 
         String[] localVarAuthNames = new String[] { "API Key" };
-        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
     @SuppressWarnings("rawtypes")
@@ -612,7 +608,6 @@ public class PresenterApi {
             .replaceAll("\\{" + "id" + "\\}", apiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -643,7 +638,7 @@ public class PresenterApi {
         }
 
         String[] localVarAuthNames = new String[] { "API Key" };
-        return apiClient.buildCall(localVarPath, "PATCH", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "PATCH", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
     @SuppressWarnings("rawtypes")

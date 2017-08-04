@@ -41,7 +41,7 @@ public class InlineResponse202 {
    * @return success
   **/
   @ApiModelProperty(example = "true", value = "")
-  public Boolean isSuccess() {
+  public Boolean getSuccess() {
     return success;
   }
 
@@ -88,6 +88,6 @@ public class InlineResponse202 {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
+  
 }
 

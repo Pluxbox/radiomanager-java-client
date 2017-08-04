@@ -132,7 +132,7 @@ public class Program {
    * @return disabled
   **/
   @ApiModelProperty(example = "false", value = "")
-  public Boolean isDisabled() {
+  public Boolean getDisabled() {
     return disabled;
   }
 
@@ -258,7 +258,7 @@ public class Program {
    * @return recommended
   **/
   @ApiModelProperty(example = "false", value = "")
-  public Boolean isRecommended() {
+  public Boolean getRecommended() {
     return recommended;
   }
 
@@ -365,6 +365,6 @@ public class Program {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
+  
 }
 

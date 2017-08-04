@@ -401,7 +401,7 @@ public class BroadcastDataInput {
    * @return recommended
   **/
   @ApiModelProperty(example = "true", value = "")
-  public Boolean isRecommended() {
+  public Boolean getRecommended() {
     return recommended;
   }
 
@@ -437,7 +437,7 @@ public class BroadcastDataInput {
    * @return published
   **/
   @ApiModelProperty(example = "true", value = "")
-  public Boolean isPublished() {
+  public Boolean getPublished() {
     return published;
   }
 
@@ -691,6 +691,6 @@ public class BroadcastDataInput {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
+  
 }
 

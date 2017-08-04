@@ -98,6 +98,6 @@ public class StoryInputOnly {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
+  
 }
 

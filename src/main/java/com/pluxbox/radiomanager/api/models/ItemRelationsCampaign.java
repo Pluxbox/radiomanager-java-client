@@ -158,6 +158,6 @@ public class ItemRelationsCampaign {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
+  
 }
 

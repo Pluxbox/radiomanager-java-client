@@ -161,7 +161,7 @@ public class CampaignDataInput {
    * @return recommended
   **/
   @ApiModelProperty(example = "true", value = "")
-  public Boolean isRecommended() {
+  public Boolean getRecommended() {
     return recommended;
   }
 
@@ -238,6 +238,6 @@ public class CampaignDataInput {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
+  
 }
 
