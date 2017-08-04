@@ -306,6 +306,6 @@ public class PresenterResults {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

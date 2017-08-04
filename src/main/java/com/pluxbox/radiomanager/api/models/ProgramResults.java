@@ -306,6 +306,6 @@ public class ProgramResults {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

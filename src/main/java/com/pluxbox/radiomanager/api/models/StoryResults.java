@@ -306,6 +306,6 @@ public class StoryResults {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

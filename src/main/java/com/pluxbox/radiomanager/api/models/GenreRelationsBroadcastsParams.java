@@ -88,6 +88,6 @@ public class GenreRelationsBroadcastsParams {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

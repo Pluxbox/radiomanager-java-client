@@ -88,6 +88,6 @@ public class ContactFieldValues {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

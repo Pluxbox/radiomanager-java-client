@@ -22,31 +22,41 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * VisualResult
+ * StoryInputOnly
  */
 
-public class VisualResult {
-  @SerializedName("value")
-  private String value = null;
+public class StoryInputOnly {
+  @SerializedName("tags")
+  private List<Integer> tags = null;
 
-  public VisualResult value(String value) {
-    this.value = value;
+  public StoryInputOnly tags(List<Integer> tags) {
+    this.tags = tags;
+    return this;
+  }
+
+  public StoryInputOnly addTagsItem(Integer tagsItem) {
+    if (this.tags == null) {
+      this.tags = new ArrayList<Integer>();
+    }
+    this.tags.add(tagsItem);
     return this;
   }
 
    /**
-   * Get value
-   * @return value
+   * Get tags
+   * @return tags
   **/
-  @ApiModelProperty(example = "BASE64STRING", value = "")
-  public String getValue() {
-    return value;
+  @ApiModelProperty(value = "")
+  public List<Integer> getTags() {
+    return tags;
   }
 
-  public void setValue(String value) {
-    this.value = value;
+  public void setTags(List<Integer> tags) {
+    this.tags = tags;
   }
 
 
@@ -58,22 +68,22 @@ public class VisualResult {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    VisualResult visualResult = (VisualResult) o;
-    return Objects.equals(this.value, visualResult.value);
+    StoryInputOnly storyInputOnly = (StoryInputOnly) o;
+    return Objects.equals(this.tags, storyInputOnly.tags);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(value);
+    return Objects.hash(tags);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class VisualResult {\n");
+    sb.append("class StoryInputOnly {\n");
     
-    sb.append("    value: ").append(toIndentedString(value)).append("\n");
+    sb.append("    tags: ").append(toIndentedString(tags)).append("\n");
     sb.append("}");
     return sb.toString();
   }

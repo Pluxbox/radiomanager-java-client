@@ -24,7 +24,7 @@ Name | Type | Description | Notes
 **repetitionType** | [**RepetitionTypeEnum**](#RepetitionTypeEnum) |  |  [optional]
 **repetitionEnd** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]
 **repetitionStart** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]
-**repetitionDays** | **List&lt;Boolean&gt;** |  |  [optional]
+**repetitionDays** | **String** |  |  [optional]
 **ptyCodeId** | **Long** |  |  [optional]
 **tags** | **List&lt;Integer&gt;** |  |  [optional]
 **presenters** | **List&lt;Integer&gt;** |  |  [optional]

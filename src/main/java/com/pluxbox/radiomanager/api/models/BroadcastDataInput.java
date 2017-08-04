@@ -146,7 +146,7 @@ public class BroadcastDataInput {
   private OffsetDateTime repetitionStart = null;
 
   @SerializedName("repetition_days")
-  private List<Boolean> repetitionDays = null;
+  private String repetitionDays = null;
 
   @SerializedName("pty_code_id")
   private Long ptyCodeId = null;
@@ -401,7 +401,7 @@ public class BroadcastDataInput {
    * @return recommended
   **/
   @ApiModelProperty(example = "true", value = "")
-  public Boolean getRecommended() {
+  public Boolean isRecommended() {
     return recommended;
   }
 
@@ -437,7 +437,7 @@ public class BroadcastDataInput {
    * @return published
   **/
   @ApiModelProperty(example = "true", value = "")
-  public Boolean getPublished() {
+  public Boolean isPublished() {
     return published;
   }
 
@@ -517,16 +517,8 @@ public class BroadcastDataInput {
     this.repetitionStart = repetitionStart;
   }
 
-  public BroadcastDataInput repetitionDays(List<Boolean> repetitionDays) {
+  public BroadcastDataInput repetitionDays(String repetitionDays) {
     this.repetitionDays = repetitionDays;
-    return this;
-  }
-
-  public BroadcastDataInput addRepetitionDaysItem(Boolean repetitionDaysItem) {
-    if (this.repetitionDays == null) {
-      this.repetitionDays = new ArrayList<Boolean>();
-    }
-    this.repetitionDays.add(repetitionDaysItem);
     return this;
   }
 
@@ -535,11 +527,11 @@ public class BroadcastDataInput {
    * @return repetitionDays
   **/
   @ApiModelProperty(value = "")
-  public List<Boolean> getRepetitionDays() {
+  public String getRepetitionDays() {
     return repetitionDays;
   }
 
-  public void setRepetitionDays(List<Boolean> repetitionDays) {
+  public void setRepetitionDays(String repetitionDays) {
     this.repetitionDays = repetitionDays;
   }
 
@@ -699,6 +691,6 @@ public class BroadcastDataInput {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

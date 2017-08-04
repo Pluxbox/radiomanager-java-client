@@ -33,8 +33,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * BroadcastResult
@@ -168,7 +166,7 @@ public class BroadcastResult {
   private OffsetDateTime repetitionStart = null;
 
   @SerializedName("repetition_days")
-  private List<Boolean> repetitionDays = null;
+  private String repetitionDays = null;
 
   @SerializedName("pty_code_id")
   private Long ptyCodeId = null;
@@ -525,7 +523,7 @@ public class BroadcastResult {
    * @return recommended
   **/
   @ApiModelProperty(example = "true", value = "")
-  public Boolean getRecommended() {
+  public Boolean isRecommended() {
     return recommended;
   }
 
@@ -561,7 +559,7 @@ public class BroadcastResult {
    * @return published
   **/
   @ApiModelProperty(example = "true", value = "")
-  public Boolean getPublished() {
+  public Boolean isPublished() {
     return published;
   }
 
@@ -641,16 +639,8 @@ public class BroadcastResult {
     this.repetitionStart = repetitionStart;
   }
 
-  public BroadcastResult repetitionDays(List<Boolean> repetitionDays) {
+  public BroadcastResult repetitionDays(String repetitionDays) {
     this.repetitionDays = repetitionDays;
-    return this;
-  }
-
-  public BroadcastResult addRepetitionDaysItem(Boolean repetitionDaysItem) {
-    if (this.repetitionDays == null) {
-      this.repetitionDays = new ArrayList<Boolean>();
-    }
-    this.repetitionDays.add(repetitionDaysItem);
     return this;
   }
 
@@ -659,11 +649,11 @@ public class BroadcastResult {
    * @return repetitionDays
   **/
   @ApiModelProperty(value = "")
-  public List<Boolean> getRepetitionDays() {
+  public String getRepetitionDays() {
     return repetitionDays;
   }
 
-  public void setRepetitionDays(List<Boolean> repetitionDays) {
+  public void setRepetitionDays(String repetitionDays) {
     this.repetitionDays = repetitionDays;
   }
 
@@ -897,6 +887,6 @@ public class BroadcastResult {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

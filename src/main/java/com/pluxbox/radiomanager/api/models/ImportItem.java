@@ -183,7 +183,7 @@ public class ImportItem {
    * @return recommended
   **/
   @ApiModelProperty(example = "false", value = "")
-  public Boolean getRecommended() {
+  public Boolean isRecommended() {
     return recommended;
   }
 
@@ -201,7 +201,7 @@ public class ImportItem {
    * @return staticStart
   **/
   @ApiModelProperty(example = "false", value = "")
-  public Boolean getStaticStart() {
+  public Boolean isStaticStart() {
     return staticStart;
   }
 
@@ -338,6 +338,6 @@ public class ImportItem {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

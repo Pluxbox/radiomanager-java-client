@@ -88,6 +88,6 @@ public class Success {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

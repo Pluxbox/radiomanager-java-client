@@ -395,6 +395,6 @@ public class ContactResult {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

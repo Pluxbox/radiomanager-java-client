@@ -192,7 +192,7 @@ public class StoryResult {
    * @return recommended
   **/
   @ApiModelProperty(example = "true", value = "")
-  public Boolean getRecommended() {
+  public Boolean isRecommended() {
     return recommended;
   }
 
@@ -371,6 +371,6 @@ public class StoryResult {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

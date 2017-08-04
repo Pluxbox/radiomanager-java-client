@@ -202,7 +202,7 @@ public class UserResult {
    * @return active
   **/
   @ApiModelProperty(example = "true", value = "")
-  public Boolean getActive() {
+  public Boolean isActive() {
     return active;
   }
 
@@ -238,7 +238,7 @@ public class UserResult {
    * @return language
   **/
   @ApiModelProperty(example = "false", value = "")
-  public Boolean getLanguage() {
+  public Boolean isLanguage() {
     return language;
   }
 
@@ -343,6 +343,6 @@ public class UserResult {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

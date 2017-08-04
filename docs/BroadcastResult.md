@@ -29,7 +29,7 @@ Name | Type | Description | Notes
 **repetitionType** | [**RepetitionTypeEnum**](#RepetitionTypeEnum) |  |  [optional]
 **repetitionEnd** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]
 **repetitionStart** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]
-**repetitionDays** | **List&lt;Boolean&gt;** |  |  [optional]
+**repetitionDays** | **String** |  |  [optional]
 **ptyCodeId** | **Long** |  |  [optional]
 **items** | [**BroadcastRelationsItems**](BroadcastRelationsItems.md) |  |  [optional]
 **blocks** | [**BroadcastRelationsBlocks**](BroadcastRelationsBlocks.md) |  |  [optional]

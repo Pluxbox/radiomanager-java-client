@@ -88,6 +88,6 @@ public class ModelTypeRelationsCampaignsParams {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

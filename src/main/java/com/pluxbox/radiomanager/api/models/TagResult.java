@@ -303,6 +303,6 @@ public class TagResult {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

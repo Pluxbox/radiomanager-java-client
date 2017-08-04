@@ -181,6 +181,6 @@ public class PresenterOutputOnly {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

@@ -158,6 +158,6 @@ public class ModelTypeRelationsItems {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

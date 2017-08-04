@@ -95,6 +95,6 @@ public class UnprocessableEntity {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

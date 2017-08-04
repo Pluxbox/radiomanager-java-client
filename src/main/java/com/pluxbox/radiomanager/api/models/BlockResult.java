@@ -324,6 +324,6 @@ public class BlockResult {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

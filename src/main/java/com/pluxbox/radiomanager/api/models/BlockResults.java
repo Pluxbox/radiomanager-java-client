@@ -306,6 +306,6 @@ public class BlockResults {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

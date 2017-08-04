@@ -306,6 +306,6 @@ public class CampaignResults {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 
