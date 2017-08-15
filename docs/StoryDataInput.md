@@ -9,7 +9,6 @@ Name | Type | Description | Notes
 **fieldValues** | **Object** |  |  [optional]
 **name** | **String** |  | 
 **description** | **String** |  |  [optional]
-**tags** | **List&lt;Integer&gt;** |  |  [optional]
 
 
 
