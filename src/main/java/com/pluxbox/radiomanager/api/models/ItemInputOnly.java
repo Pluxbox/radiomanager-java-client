@@ -30,7 +30,7 @@ import java.util.List;
  */
 
 public class ItemInputOnly {
-  @SerializedName("previous_id")
+  @SerializedName("_previous_id")
   private Long previousId = null;
 
   @SerializedName("contacts")

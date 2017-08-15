@@ -131,7 +131,7 @@ public class ItemDataInput {
   @SerializedName("details")
   private String details = null;
 
-  @SerializedName("previous_id")
+  @SerializedName("_previous_id")
   private Long previousId = null;
 
   @SerializedName("contacts")
