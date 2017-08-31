@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **modelTypeId** | **Long** |  | 
 **blockId** | **Long** |  |  [optional]
-**externalId** | **Long** |  | 
+**externalId** | **String** |  |  [optional]
 **fieldValues** | [**ImportItemFieldValues**](ImportItemFieldValues.md) |  |  [optional]
 **title** | **String** |  |  [optional]
 **duration** | **Long** |  |  [optional]

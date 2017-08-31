@@ -41,7 +41,7 @@ public class ItemDataInput {
   private Long blockId = null;
 
   @SerializedName("external_id")
-  private Long externalId = null;
+  private String externalId = null;
 
   @SerializedName("field_values")
   private ImportItemFieldValues fieldValues = null;
@@ -176,7 +176,7 @@ public class ItemDataInput {
     this.blockId = blockId;
   }
 
-  public ItemDataInput externalId(Long externalId) {
+  public ItemDataInput externalId(String externalId) {
     this.externalId = externalId;
     return this;
   }
@@ -185,12 +185,12 @@ public class ItemDataInput {
    * Get externalId
    * @return externalId
   **/
-  @ApiModelProperty(example = "0", required = true, value = "")
-  public Long getExternalId() {
+  @ApiModelProperty(example = "0", value = "")
+  public String getExternalId() {
     return externalId;
   }
 
-  public void setExternalId(Long externalId) {
+  public void setExternalId(String externalId) {
     this.externalId = externalId;
   }
 
