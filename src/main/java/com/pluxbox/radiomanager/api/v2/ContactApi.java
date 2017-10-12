@@ -448,16 +448,19 @@ public class ContactApi {
     /**
      * Build call for listContacts
      * @param page Current page *(Optional)* (optional, default to 1)
-     * @param modelTypeId Search on ModelType ID *(Optional)* (optional)
-     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param itemId Search on Item ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param modelTypeId Search on ModelType ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param limit Results per page *(Optional)* (optional)
+     * @param orderBy Field to order the results *(Optional)* (optional)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call listContactsCall(Long page, Long modelTypeId, Long tagId, Long itemId, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call listContactsCall(Long page, Long itemId, Long modelTypeId, Long tagId, Long limit, String orderBy, String orderDirection, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
@@ -466,12 +469,18 @@ public class ContactApi {
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         if (page != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "page", page));
+        if (itemId != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "item_id", itemId));
         if (modelTypeId != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "model_type_id", modelTypeId));
         if (tagId != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "tag_id", tagId));
-        if (itemId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "item_id", itemId));
+        if (limit != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "limit", limit));
+        if (orderBy != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "order-by", orderBy));
+        if (orderDirection != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "order-direction", orderDirection));
         if (externalStationId != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "_external_station_id", externalStationId));
 
@@ -508,10 +517,10 @@ public class ContactApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call listContactsValidateBeforeCall(Long page, Long modelTypeId, Long tagId, Long itemId, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call listContactsValidateBeforeCall(Long page, Long itemId, Long modelTypeId, Long tagId, Long limit, String orderBy, String orderDirection, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         
-        com.squareup.okhttp.Call call = listContactsCall(page, modelTypeId, tagId, itemId, externalStationId, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = listContactsCall(page, itemId, modelTypeId, tagId, limit, orderBy, orderDirection, externalStationId, progressListener, progressRequestListener);
         return call;
 
         
@@ -524,15 +533,18 @@ public class ContactApi {
      * Get all contacts.
      * List all contacts.
      * @param page Current page *(Optional)* (optional, default to 1)
-     * @param modelTypeId Search on ModelType ID *(Optional)* (optional)
-     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param itemId Search on Item ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param modelTypeId Search on ModelType ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param limit Results per page *(Optional)* (optional)
+     * @param orderBy Field to order the results *(Optional)* (optional)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @return ContactResults
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ContactResults listContacts(Long page, Long modelTypeId, Long tagId, Long itemId, Long externalStationId) throws ApiException {
-        ApiResponse<ContactResults> resp = listContactsWithHttpInfo(page, modelTypeId, tagId, itemId, externalStationId);
+    public ContactResults listContacts(Long page, Long itemId, Long modelTypeId, Long tagId, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
+        ApiResponse<ContactResults> resp = listContactsWithHttpInfo(page, itemId, modelTypeId, tagId, limit, orderBy, orderDirection, externalStationId);
         return resp.getData();
     }
 
@@ -540,15 +552,18 @@ public class ContactApi {
      * Get all contacts.
      * List all contacts.
      * @param page Current page *(Optional)* (optional, default to 1)
-     * @param modelTypeId Search on ModelType ID *(Optional)* (optional)
-     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param itemId Search on Item ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param modelTypeId Search on ModelType ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param limit Results per page *(Optional)* (optional)
+     * @param orderBy Field to order the results *(Optional)* (optional)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @return ApiResponse&lt;ContactResults&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<ContactResults> listContactsWithHttpInfo(Long page, Long modelTypeId, Long tagId, Long itemId, Long externalStationId) throws ApiException {
-        com.squareup.okhttp.Call call = listContactsValidateBeforeCall(page, modelTypeId, tagId, itemId, externalStationId, null, null);
+    public ApiResponse<ContactResults> listContactsWithHttpInfo(Long page, Long itemId, Long modelTypeId, Long tagId, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
+        com.squareup.okhttp.Call call = listContactsValidateBeforeCall(page, itemId, modelTypeId, tagId, limit, orderBy, orderDirection, externalStationId, null, null);
         Type localVarReturnType = new TypeToken<ContactResults>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -557,15 +572,18 @@ public class ContactApi {
      * Get all contacts. (asynchronously)
      * List all contacts.
      * @param page Current page *(Optional)* (optional, default to 1)
-     * @param modelTypeId Search on ModelType ID *(Optional)* (optional)
-     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param itemId Search on Item ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param modelTypeId Search on ModelType ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param limit Results per page *(Optional)* (optional)
+     * @param orderBy Field to order the results *(Optional)* (optional)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call listContactsAsync(Long page, Long modelTypeId, Long tagId, Long itemId, Long externalStationId, final ApiCallback<ContactResults> callback) throws ApiException {
+    public com.squareup.okhttp.Call listContactsAsync(Long page, Long itemId, Long modelTypeId, Long tagId, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback<ContactResults> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -586,7 +604,7 @@ public class ContactApi {
             };
         }
 
-        com.squareup.okhttp.Call call = listContactsValidateBeforeCall(page, modelTypeId, tagId, itemId, externalStationId, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = listContactsValidateBeforeCall(page, itemId, modelTypeId, tagId, limit, orderBy, orderDirection, externalStationId, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<ContactResults>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;

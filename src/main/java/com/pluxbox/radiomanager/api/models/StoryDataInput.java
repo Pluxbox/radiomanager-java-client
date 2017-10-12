@@ -20,9 +20,12 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.pluxbox.radiomanager.api.models.Story;
+import com.pluxbox.radiomanager.api.models.StoryInputOnly;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * StoryDataInput
@@ -43,6 +46,9 @@ public class StoryDataInput {
 
   @SerializedName("description")
   private String description = null;
+
+  @SerializedName("tags")
+  private List<Integer> tags = null;
 
   public StoryDataInput modelTypeId(Long modelTypeId) {
     this.modelTypeId = modelTypeId;
@@ -134,6 +140,32 @@ public class StoryDataInput {
     this.description = description;
   }
 
+  public StoryDataInput tags(List<Integer> tags) {
+    this.tags = tags;
+    return this;
+  }
+
+  public StoryDataInput addTagsItem(Integer tagsItem) {
+    if (this.tags == null) {
+      this.tags = new ArrayList<Integer>();
+    }
+    this.tags.add(tagsItem);
+    return this;
+  }
+
+   /**
+   * Get tags
+   * @return tags
+  **/
+  @ApiModelProperty(value = "")
+  public List<Integer> getTags() {
+    return tags;
+  }
+
+  public void setTags(List<Integer> tags) {
+    this.tags = tags;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -148,12 +180,13 @@ public class StoryDataInput {
         Objects.equals(this.recommended, storyDataInput.recommended) &&
         Objects.equals(this.fieldValues, storyDataInput.fieldValues) &&
         Objects.equals(this.name, storyDataInput.name) &&
-        Objects.equals(this.description, storyDataInput.description);
+        Objects.equals(this.description, storyDataInput.description) &&
+        Objects.equals(this.tags, storyDataInput.tags);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(modelTypeId, recommended, fieldValues, name, description);
+    return Objects.hash(modelTypeId, recommended, fieldValues, name, description, tags);
   }
 
 
@@ -167,6 +200,7 @@ public class StoryDataInput {
     sb.append("    fieldValues: ").append(toIndentedString(fieldValues)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    tags: ").append(toIndentedString(tags)).append("\n");
     sb.append("}");
     return sb.toString();
   }

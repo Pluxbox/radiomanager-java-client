@@ -1,6 +1,6 @@
 # PresenterApi
 
-All URIs are relative to *https://staging.radiomanager.pluxbox.com/api/v2*
+All URIs are relative to *https://radiomanager.pb/api/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -180,7 +180,7 @@ Name | Type | Description  | Notes
 
 <a name="listPresenters"></a>
 # **listPresenters**
-> PresenterResults listPresenters(page, modelTypeId, programId, broadcastId, externalStationId)
+> PresenterResults listPresenters(page, programId, broadcastId, modelTypeId, limit, orderBy, orderDirection, externalStationId)
 
 Get all presenters.
 
@@ -205,12 +205,15 @@ API Key.setApiKey("YOUR API KEY");
 
 PresenterApi apiInstance = new PresenterApi();
 Long page = 789L; // Long | Current page *(Optional)*
-Long modelTypeId = 789L; // Long | Search on ModelType ID (Optional)
 Long programId = 789L; // Long | Search on Program ID *(Optional)* `(Relation)`
 Long broadcastId = 789L; // Long | Search on Broadcast ID *(Optional)* `(Relation)`
+Long modelTypeId = 789L; // Long | Search on ModelType ID (Optional)
+Long limit = 789L; // Long | Results per page *(Optional)*
+String orderBy = "orderBy_example"; // String | Field to order the results *(Optional)*
+String orderDirection = "orderDirection_example"; // String | Direction of ordering *(Optional)*
 Long externalStationId = 789L; // Long | Query on a different (content providing) station *(Optional)*
 try {
-    PresenterResults result = apiInstance.listPresenters(page, modelTypeId, programId, broadcastId, externalStationId);
+    PresenterResults result = apiInstance.listPresenters(page, programId, broadcastId, modelTypeId, limit, orderBy, orderDirection, externalStationId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling PresenterApi#listPresenters");
@@ -223,9 +226,12 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page** | **Long**| Current page *(Optional)* | [optional]
- **modelTypeId** | **Long**| Search on ModelType ID (Optional) | [optional]
  **programId** | **Long**| Search on Program ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
  **broadcastId** | **Long**| Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
+ **modelTypeId** | **Long**| Search on ModelType ID (Optional) | [optional]
+ **limit** | **Long**| Results per page *(Optional)* | [optional]
+ **orderBy** | **String**| Field to order the results *(Optional)* | [optional]
+ **orderDirection** | **String**| Direction of ordering *(Optional)* | [optional] [enum: asc, desc]
  **externalStationId** | **Long**| Query on a different (content providing) station *(Optional)* | [optional]
 
 ### Return type

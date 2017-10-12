@@ -1,6 +1,6 @@
 # StoryApi
 
-All URIs are relative to *https://staging.radiomanager.pluxbox.com/api/v2*
+All URIs are relative to *https://radiomanager.pb/api/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -180,7 +180,7 @@ Name | Type | Description  | Notes
 
 <a name="listStories"></a>
 # **listStories**
-> StoryResults listStories(page, modelTypeId, tagId, itemId, externalStationId)
+> StoryResults listStories(page, itemId, modelTypeId, tagId, limit, orderBy, orderDirection, externalStationId)
 
 Get all stories.
 
@@ -205,12 +205,15 @@ API Key.setApiKey("YOUR API KEY");
 
 StoryApi apiInstance = new StoryApi();
 Long page = 1L; // Long | Current page *(Optional)*
-Long modelTypeId = 789L; // Long | Search on ModelType ID *(Optional)*
-Long tagId = 789L; // Long | Search on Tag ID *(Optional)* `(Relation)`
 Long itemId = 789L; // Long | Search on Item ID *(Optional)* `(Relation)`
+Long modelTypeId = 789L; // Long | Search on ModelType ID *(Optional)* `(Relation)`
+Long tagId = 789L; // Long | Search on Tag ID *(Optional)* `(Relation)`
+Long limit = 789L; // Long | Results per page *(Optional)*
+String orderBy = "orderBy_example"; // String | Field to order the results *(Optional)*
+String orderDirection = "orderDirection_example"; // String | Direction of ordering *(Optional)*
 Long externalStationId = 789L; // Long | Query on a different (content providing) station *(Optional)*
 try {
-    StoryResults result = apiInstance.listStories(page, modelTypeId, tagId, itemId, externalStationId);
+    StoryResults result = apiInstance.listStories(page, itemId, modelTypeId, tagId, limit, orderBy, orderDirection, externalStationId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling StoryApi#listStories");
@@ -223,9 +226,12 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page** | **Long**| Current page *(Optional)* | [optional] [default to 1]
- **modelTypeId** | **Long**| Search on ModelType ID *(Optional)* | [optional]
- **tagId** | **Long**| Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
  **itemId** | **Long**| Search on Item ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
+ **modelTypeId** | **Long**| Search on ModelType ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
+ **tagId** | **Long**| Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
+ **limit** | **Long**| Results per page *(Optional)* | [optional]
+ **orderBy** | **String**| Field to order the results *(Optional)* | [optional]
+ **orderDirection** | **String**| Direction of ordering *(Optional)* | [optional] [enum: asc, desc]
  **externalStationId** | **Long**| Query on a different (content providing) station *(Optional)* | [optional]
 
 ### Return type

@@ -193,20 +193,23 @@ public class ModelTypeApi {
     /**
      * Build call for listModelTypes
      * @param page Current page *(Optional)* (optional)
-     * @param model  (optional)
      * @param programId Search on Program ID *(Optional)* (optional)
      * @param broadcastId Search on Broadcast ID *(Optional)* (optional)
      * @param itemId Search on Item ID *(Optional)* (optional)
      * @param campaignId Search on Campaign ID *(Optional)* (optional)
      * @param presenterId Search on Presenter ID *(Optional)* (optional)
      * @param contactId Search on Contact ID *(Optional)* (optional)
+     * @param model Search Modeltypes for certain Model *(Optional)* (optional)
+     * @param limit Results per page *(Optional)* (optional)
+     * @param orderBy Field to order the results *(Optional)* (optional)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call listModelTypesCall(Long page, String model, Long programId, Long broadcastId, Long itemId, Long campaignId, Long presenterId, Long contactId, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call listModelTypesCall(Long page, Long programId, Long broadcastId, Long itemId, Long campaignId, Long presenterId, Long contactId, String model, Long limit, String orderBy, String orderDirection, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
@@ -215,8 +218,6 @@ public class ModelTypeApi {
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         if (page != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "page", page));
-        if (model != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "model", model));
         if (programId != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "program_id", programId));
         if (broadcastId != null)
@@ -229,6 +230,14 @@ public class ModelTypeApi {
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "presenter_id", presenterId));
         if (contactId != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "contact_id", contactId));
+        if (model != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "model", model));
+        if (limit != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "limit", limit));
+        if (orderBy != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "order-by", orderBy));
+        if (orderDirection != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "order-direction", orderDirection));
         if (externalStationId != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "_external_station_id", externalStationId));
 
@@ -265,10 +274,10 @@ public class ModelTypeApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call listModelTypesValidateBeforeCall(Long page, String model, Long programId, Long broadcastId, Long itemId, Long campaignId, Long presenterId, Long contactId, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call listModelTypesValidateBeforeCall(Long page, Long programId, Long broadcastId, Long itemId, Long campaignId, Long presenterId, Long contactId, String model, Long limit, String orderBy, String orderDirection, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         
-        com.squareup.okhttp.Call call = listModelTypesCall(page, model, programId, broadcastId, itemId, campaignId, presenterId, contactId, externalStationId, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = listModelTypesCall(page, programId, broadcastId, itemId, campaignId, presenterId, contactId, model, limit, orderBy, orderDirection, externalStationId, progressListener, progressRequestListener);
         return call;
 
         
@@ -281,19 +290,22 @@ public class ModelTypeApi {
      * Get all modelTypes.
      * List all modelTypes.
      * @param page Current page *(Optional)* (optional)
-     * @param model  (optional)
      * @param programId Search on Program ID *(Optional)* (optional)
      * @param broadcastId Search on Broadcast ID *(Optional)* (optional)
      * @param itemId Search on Item ID *(Optional)* (optional)
      * @param campaignId Search on Campaign ID *(Optional)* (optional)
      * @param presenterId Search on Presenter ID *(Optional)* (optional)
      * @param contactId Search on Contact ID *(Optional)* (optional)
+     * @param model Search Modeltypes for certain Model *(Optional)* (optional)
+     * @param limit Results per page *(Optional)* (optional)
+     * @param orderBy Field to order the results *(Optional)* (optional)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @return ModelTypeResults
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ModelTypeResults listModelTypes(Long page, String model, Long programId, Long broadcastId, Long itemId, Long campaignId, Long presenterId, Long contactId, Long externalStationId) throws ApiException {
-        ApiResponse<ModelTypeResults> resp = listModelTypesWithHttpInfo(page, model, programId, broadcastId, itemId, campaignId, presenterId, contactId, externalStationId);
+    public ModelTypeResults listModelTypes(Long page, Long programId, Long broadcastId, Long itemId, Long campaignId, Long presenterId, Long contactId, String model, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
+        ApiResponse<ModelTypeResults> resp = listModelTypesWithHttpInfo(page, programId, broadcastId, itemId, campaignId, presenterId, contactId, model, limit, orderBy, orderDirection, externalStationId);
         return resp.getData();
     }
 
@@ -301,19 +313,22 @@ public class ModelTypeApi {
      * Get all modelTypes.
      * List all modelTypes.
      * @param page Current page *(Optional)* (optional)
-     * @param model  (optional)
      * @param programId Search on Program ID *(Optional)* (optional)
      * @param broadcastId Search on Broadcast ID *(Optional)* (optional)
      * @param itemId Search on Item ID *(Optional)* (optional)
      * @param campaignId Search on Campaign ID *(Optional)* (optional)
      * @param presenterId Search on Presenter ID *(Optional)* (optional)
      * @param contactId Search on Contact ID *(Optional)* (optional)
+     * @param model Search Modeltypes for certain Model *(Optional)* (optional)
+     * @param limit Results per page *(Optional)* (optional)
+     * @param orderBy Field to order the results *(Optional)* (optional)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @return ApiResponse&lt;ModelTypeResults&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<ModelTypeResults> listModelTypesWithHttpInfo(Long page, String model, Long programId, Long broadcastId, Long itemId, Long campaignId, Long presenterId, Long contactId, Long externalStationId) throws ApiException {
-        com.squareup.okhttp.Call call = listModelTypesValidateBeforeCall(page, model, programId, broadcastId, itemId, campaignId, presenterId, contactId, externalStationId, null, null);
+    public ApiResponse<ModelTypeResults> listModelTypesWithHttpInfo(Long page, Long programId, Long broadcastId, Long itemId, Long campaignId, Long presenterId, Long contactId, String model, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
+        com.squareup.okhttp.Call call = listModelTypesValidateBeforeCall(page, programId, broadcastId, itemId, campaignId, presenterId, contactId, model, limit, orderBy, orderDirection, externalStationId, null, null);
         Type localVarReturnType = new TypeToken<ModelTypeResults>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -322,19 +337,22 @@ public class ModelTypeApi {
      * Get all modelTypes. (asynchronously)
      * List all modelTypes.
      * @param page Current page *(Optional)* (optional)
-     * @param model  (optional)
      * @param programId Search on Program ID *(Optional)* (optional)
      * @param broadcastId Search on Broadcast ID *(Optional)* (optional)
      * @param itemId Search on Item ID *(Optional)* (optional)
      * @param campaignId Search on Campaign ID *(Optional)* (optional)
      * @param presenterId Search on Presenter ID *(Optional)* (optional)
      * @param contactId Search on Contact ID *(Optional)* (optional)
+     * @param model Search Modeltypes for certain Model *(Optional)* (optional)
+     * @param limit Results per page *(Optional)* (optional)
+     * @param orderBy Field to order the results *(Optional)* (optional)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call listModelTypesAsync(Long page, String model, Long programId, Long broadcastId, Long itemId, Long campaignId, Long presenterId, Long contactId, Long externalStationId, final ApiCallback<ModelTypeResults> callback) throws ApiException {
+    public com.squareup.okhttp.Call listModelTypesAsync(Long page, Long programId, Long broadcastId, Long itemId, Long campaignId, Long presenterId, Long contactId, String model, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback<ModelTypeResults> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -355,7 +373,7 @@ public class ModelTypeApi {
             };
         }
 
-        com.squareup.okhttp.Call call = listModelTypesValidateBeforeCall(page, model, programId, broadcastId, itemId, campaignId, presenterId, contactId, externalStationId, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = listModelTypesValidateBeforeCall(page, programId, broadcastId, itemId, campaignId, presenterId, contactId, model, limit, orderBy, orderDirection, externalStationId, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<ModelTypeResults>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;

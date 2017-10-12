@@ -448,16 +448,19 @@ public class StoryApi {
     /**
      * Build call for listStories
      * @param page Current page *(Optional)* (optional, default to 1)
-     * @param modelTypeId Search on ModelType ID *(Optional)* (optional)
-     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param itemId Search on Item ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param modelTypeId Search on ModelType ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param limit Results per page *(Optional)* (optional)
+     * @param orderBy Field to order the results *(Optional)* (optional)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call listStoriesCall(Long page, Long modelTypeId, Long tagId, Long itemId, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call listStoriesCall(Long page, Long itemId, Long modelTypeId, Long tagId, Long limit, String orderBy, String orderDirection, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
@@ -466,12 +469,18 @@ public class StoryApi {
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         if (page != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "page", page));
+        if (itemId != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "item_id", itemId));
         if (modelTypeId != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "model_type_id", modelTypeId));
         if (tagId != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "tag_id", tagId));
-        if (itemId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "item_id", itemId));
+        if (limit != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "limit", limit));
+        if (orderBy != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "order-by", orderBy));
+        if (orderDirection != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "order-direction", orderDirection));
         if (externalStationId != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "_external_station_id", externalStationId));
 
@@ -508,10 +517,10 @@ public class StoryApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call listStoriesValidateBeforeCall(Long page, Long modelTypeId, Long tagId, Long itemId, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call listStoriesValidateBeforeCall(Long page, Long itemId, Long modelTypeId, Long tagId, Long limit, String orderBy, String orderDirection, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         
-        com.squareup.okhttp.Call call = listStoriesCall(page, modelTypeId, tagId, itemId, externalStationId, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = listStoriesCall(page, itemId, modelTypeId, tagId, limit, orderBy, orderDirection, externalStationId, progressListener, progressRequestListener);
         return call;
 
         
@@ -524,15 +533,18 @@ public class StoryApi {
      * Get all stories.
      * List all stories.
      * @param page Current page *(Optional)* (optional, default to 1)
-     * @param modelTypeId Search on ModelType ID *(Optional)* (optional)
-     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param itemId Search on Item ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param modelTypeId Search on ModelType ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param limit Results per page *(Optional)* (optional)
+     * @param orderBy Field to order the results *(Optional)* (optional)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @return StoryResults
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public StoryResults listStories(Long page, Long modelTypeId, Long tagId, Long itemId, Long externalStationId) throws ApiException {
-        ApiResponse<StoryResults> resp = listStoriesWithHttpInfo(page, modelTypeId, tagId, itemId, externalStationId);
+    public StoryResults listStories(Long page, Long itemId, Long modelTypeId, Long tagId, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
+        ApiResponse<StoryResults> resp = listStoriesWithHttpInfo(page, itemId, modelTypeId, tagId, limit, orderBy, orderDirection, externalStationId);
         return resp.getData();
     }
 
@@ -540,15 +552,18 @@ public class StoryApi {
      * Get all stories.
      * List all stories.
      * @param page Current page *(Optional)* (optional, default to 1)
-     * @param modelTypeId Search on ModelType ID *(Optional)* (optional)
-     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param itemId Search on Item ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param modelTypeId Search on ModelType ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param limit Results per page *(Optional)* (optional)
+     * @param orderBy Field to order the results *(Optional)* (optional)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @return ApiResponse&lt;StoryResults&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<StoryResults> listStoriesWithHttpInfo(Long page, Long modelTypeId, Long tagId, Long itemId, Long externalStationId) throws ApiException {
-        com.squareup.okhttp.Call call = listStoriesValidateBeforeCall(page, modelTypeId, tagId, itemId, externalStationId, null, null);
+    public ApiResponse<StoryResults> listStoriesWithHttpInfo(Long page, Long itemId, Long modelTypeId, Long tagId, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
+        com.squareup.okhttp.Call call = listStoriesValidateBeforeCall(page, itemId, modelTypeId, tagId, limit, orderBy, orderDirection, externalStationId, null, null);
         Type localVarReturnType = new TypeToken<StoryResults>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -557,15 +572,18 @@ public class StoryApi {
      * Get all stories. (asynchronously)
      * List all stories.
      * @param page Current page *(Optional)* (optional, default to 1)
-     * @param modelTypeId Search on ModelType ID *(Optional)* (optional)
-     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param itemId Search on Item ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param modelTypeId Search on ModelType ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param limit Results per page *(Optional)* (optional)
+     * @param orderBy Field to order the results *(Optional)* (optional)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call listStoriesAsync(Long page, Long modelTypeId, Long tagId, Long itemId, Long externalStationId, final ApiCallback<StoryResults> callback) throws ApiException {
+    public com.squareup.okhttp.Call listStoriesAsync(Long page, Long itemId, Long modelTypeId, Long tagId, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback<StoryResults> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -586,7 +604,7 @@ public class StoryApi {
             };
         }
 
-        com.squareup.okhttp.Call call = listStoriesValidateBeforeCall(page, modelTypeId, tagId, itemId, externalStationId, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = listStoriesValidateBeforeCall(page, itemId, modelTypeId, tagId, limit, orderBy, orderDirection, externalStationId, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<StoryResults>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;

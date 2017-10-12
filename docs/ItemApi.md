@@ -1,6 +1,6 @@
 # ItemApi
 
-All URIs are relative to *https://staging.radiomanager.pluxbox.com/api/v2*
+All URIs are relative to *https://radiomanager.pb/api/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -294,7 +294,7 @@ Name | Type | Description  | Notes
 
 <a name="listItems"></a>
 # **listItems**
-> ItemResults listItems(page, orderBy, orderDirection, startMin, startMax, durationMin, durationMax, status, modelTypeId, programDraftId, userDraftId, stationDraftId, blockId, broadcastId, campaignId, contactId, programId, tagId, externalStationId)
+> ItemResults listItems(page, blockId, broadcastId, modelTypeId, tagId, campaignId, contactId, programDraftId, userDraftId, stationDraftId, programId, startMin, startMax, durationMin, durationMax, status, limit, orderBy, orderDirection, externalStationId)
 
 Get a list of all the items currently in your station.
 
@@ -319,26 +319,27 @@ API Key.setApiKey("YOUR API KEY");
 
 ItemApi apiInstance = new ItemApi();
 Long page = 789L; // Long | Current page *(Optional)*
-String orderBy = "orderBy_example"; // String | Field to order the results *(Optional)*
-String orderDirection = "orderDirection_example"; // String | Direction of ordering *(Optional)*
+Long blockId = 789L; // Long | Search on Block ID *(Optional)* `(Relation)`
+Long broadcastId = 789L; // Long | Search on Broadcast ID *(Optional)* `(Relation)`
+Long modelTypeId = 789L; // Long | Search on ModelType ID *(Optional)* `(Relation)`
+Long tagId = 789L; // Long | Search on Tag ID *(Optional)* `(Relation)`
+Long campaignId = 789L; // Long | Search on Campaign ID *(Optional)* `(Relation)`
+Long contactId = 789L; // Long | Search on Contact ID *(Optional)* `(Relation)`
+Long programDraftId = 789L; // Long | Search on Program Draft ID *(Optional)*
+Long userDraftId = 789L; // Long | Search on User Draft ID *(Optional)*
+Long stationDraftId = 789L; // Long | Search on Station Draft ID *(Optional)*
+Long programId = 789L; // Long | Search on Program ID *(Optional)* `(Relation)`
 OffsetDateTime startMin = new OffsetDateTime(); // OffsetDateTime | Minimum start date *(Optional)*
 OffsetDateTime startMax = new OffsetDateTime(); // OffsetDateTime | Maximum start date *(Optional)*
 Integer durationMin = 56; // Integer | Minimum duration (seconds) *(Optional)*
 Integer durationMax = 56; // Integer | Maximum duration (seconds) *(Optional)*
 String status = "status_example"; // String | Play Status of item *(Optional)*
-Long modelTypeId = 789L; // Long | Search on ModelType ID *(Optional)*
-Long programDraftId = 789L; // Long | Search on Program Draft ID *(Optional)*
-Long userDraftId = 789L; // Long | Search on User Draft ID *(Optional)*
-Long stationDraftId = 789L; // Long | Search on Station Draft ID *(Optional)*
-Long blockId = 789L; // Long | Search on Block ID *(Optional)* `(Relation)`
-Long broadcastId = 789L; // Long | Search on Broadcast ID *(Optional)* `(Relation)`
-Long campaignId = 789L; // Long | Search on Campaign ID *(Optional)* `(Relation)`
-Long contactId = 789L; // Long | Search on Contact ID *(Optional)* `(Relation)`
-Long programId = 789L; // Long | Search on Program ID *(Optional)* `(Relation)`
-Long tagId = 789L; // Long | Search on Tag ID *(Optional)* `(Relation)`
+Long limit = 789L; // Long | Results per page *(Optional)*
+String orderBy = "orderBy_example"; // String | Field to order the results *(Optional)*
+String orderDirection = "orderDirection_example"; // String | Direction of ordering *(Optional)*
 Long externalStationId = 789L; // Long | Query on a different (content providing) station *(Optional)*
 try {
-    ItemResults result = apiInstance.listItems(page, orderBy, orderDirection, startMin, startMax, durationMin, durationMax, status, modelTypeId, programDraftId, userDraftId, stationDraftId, blockId, broadcastId, campaignId, contactId, programId, tagId, externalStationId);
+    ItemResults result = apiInstance.listItems(page, blockId, broadcastId, modelTypeId, tagId, campaignId, contactId, programDraftId, userDraftId, stationDraftId, programId, startMin, startMax, durationMin, durationMax, status, limit, orderBy, orderDirection, externalStationId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling ItemApi#listItems");
@@ -351,23 +352,24 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page** | **Long**| Current page *(Optional)* | [optional]
- **orderBy** | **String**| Field to order the results *(Optional)* | [optional]
- **orderDirection** | **String**| Direction of ordering *(Optional)* | [optional] [enum: asc, desc]
+ **blockId** | **Long**| Search on Block ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
+ **broadcastId** | **Long**| Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
+ **modelTypeId** | **Long**| Search on ModelType ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
+ **tagId** | **Long**| Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
+ **campaignId** | **Long**| Search on Campaign ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
+ **contactId** | **Long**| Search on Contact ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
+ **programDraftId** | **Long**| Search on Program Draft ID *(Optional)* | [optional]
+ **userDraftId** | **Long**| Search on User Draft ID *(Optional)* | [optional]
+ **stationDraftId** | **Long**| Search on Station Draft ID *(Optional)* | [optional]
+ **programId** | **Long**| Search on Program ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
  **startMin** | **OffsetDateTime**| Minimum start date *(Optional)* | [optional]
  **startMax** | **OffsetDateTime**| Maximum start date *(Optional)* | [optional]
  **durationMin** | **Integer**| Minimum duration (seconds) *(Optional)* | [optional]
  **durationMax** | **Integer**| Maximum duration (seconds) *(Optional)* | [optional]
  **status** | **String**| Play Status of item *(Optional)* | [optional] [enum: scheduled, playing, played]
- **modelTypeId** | **Long**| Search on ModelType ID *(Optional)* | [optional]
- **programDraftId** | **Long**| Search on Program Draft ID *(Optional)* | [optional]
- **userDraftId** | **Long**| Search on User Draft ID *(Optional)* | [optional]
- **stationDraftId** | **Long**| Search on Station Draft ID *(Optional)* | [optional]
- **blockId** | **Long**| Search on Block ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
- **broadcastId** | **Long**| Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
- **campaignId** | **Long**| Search on Campaign ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
- **contactId** | **Long**| Search on Contact ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
- **programId** | **Long**| Search on Program ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
- **tagId** | **Long**| Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
+ **limit** | **Long**| Results per page *(Optional)* | [optional]
+ **orderBy** | **String**| Field to order the results *(Optional)* | [optional]
+ **orderDirection** | **String**| Direction of ordering *(Optional)* | [optional] [enum: asc, desc]
  **externalStationId** | **Long**| Query on a different (content providing) station *(Optional)* | [optional]
 
 ### Return type

@@ -689,30 +689,31 @@ public class ItemApi {
     /**
      * Build call for listItems
      * @param page Current page *(Optional)* (optional)
-     * @param orderBy Field to order the results *(Optional)* (optional)
-     * @param orderDirection Direction of ordering *(Optional)* (optional)
+     * @param blockId Search on Block ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param broadcastId Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param modelTypeId Search on ModelType ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param campaignId Search on Campaign ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param contactId Search on Contact ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param programDraftId Search on Program Draft ID *(Optional)* (optional)
+     * @param userDraftId Search on User Draft ID *(Optional)* (optional)
+     * @param stationDraftId Search on Station Draft ID *(Optional)* (optional)
+     * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param startMin Minimum start date *(Optional)* (optional)
      * @param startMax Maximum start date *(Optional)* (optional)
      * @param durationMin Minimum duration (seconds) *(Optional)* (optional)
      * @param durationMax Maximum duration (seconds) *(Optional)* (optional)
      * @param status Play Status of item *(Optional)* (optional)
-     * @param modelTypeId Search on ModelType ID *(Optional)* (optional)
-     * @param programDraftId Search on Program Draft ID *(Optional)* (optional)
-     * @param userDraftId Search on User Draft ID *(Optional)* (optional)
-     * @param stationDraftId Search on Station Draft ID *(Optional)* (optional)
-     * @param blockId Search on Block ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param broadcastId Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param campaignId Search on Campaign ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param contactId Search on Contact ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param limit Results per page *(Optional)* (optional)
+     * @param orderBy Field to order the results *(Optional)* (optional)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call listItemsCall(Long page, String orderBy, String orderDirection, OffsetDateTime startMin, OffsetDateTime startMax, Integer durationMin, Integer durationMax, String status, Long modelTypeId, Long programDraftId, Long userDraftId, Long stationDraftId, Long blockId, Long broadcastId, Long campaignId, Long contactId, Long programId, Long tagId, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call listItemsCall(Long page, Long blockId, Long broadcastId, Long modelTypeId, Long tagId, Long campaignId, Long contactId, Long programDraftId, Long userDraftId, Long stationDraftId, Long programId, OffsetDateTime startMin, OffsetDateTime startMax, Integer durationMin, Integer durationMax, String status, Long limit, String orderBy, String orderDirection, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
@@ -721,10 +722,26 @@ public class ItemApi {
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         if (page != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "page", page));
-        if (orderBy != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "order-by", orderBy));
-        if (orderDirection != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "order-direction", orderDirection));
+        if (blockId != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "block_id", blockId));
+        if (broadcastId != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "broadcast_id", broadcastId));
+        if (modelTypeId != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "model_type_id", modelTypeId));
+        if (tagId != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "tag_id", tagId));
+        if (campaignId != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "campaign_id", campaignId));
+        if (contactId != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "contact_id", contactId));
+        if (programDraftId != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "program_draft_id", programDraftId));
+        if (userDraftId != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "user_draft_id", userDraftId));
+        if (stationDraftId != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "station_draft_id", stationDraftId));
+        if (programId != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "program_id", programId));
         if (startMin != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "start-min", startMin));
         if (startMax != null)
@@ -735,26 +752,12 @@ public class ItemApi {
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "duration-max", durationMax));
         if (status != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "status", status));
-        if (modelTypeId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "model_type_id", modelTypeId));
-        if (programDraftId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "program_draft_id", programDraftId));
-        if (userDraftId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "user_draft_id", userDraftId));
-        if (stationDraftId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "station_draft_id", stationDraftId));
-        if (blockId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "block_id", blockId));
-        if (broadcastId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "broadcast_id", broadcastId));
-        if (campaignId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "campaign_id", campaignId));
-        if (contactId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "contact_id", contactId));
-        if (programId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "program_id", programId));
-        if (tagId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "tag_id", tagId));
+        if (limit != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "limit", limit));
+        if (orderBy != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "order-by", orderBy));
+        if (orderDirection != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "order-direction", orderDirection));
         if (externalStationId != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "_external_station_id", externalStationId));
 
@@ -791,10 +794,10 @@ public class ItemApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call listItemsValidateBeforeCall(Long page, String orderBy, String orderDirection, OffsetDateTime startMin, OffsetDateTime startMax, Integer durationMin, Integer durationMax, String status, Long modelTypeId, Long programDraftId, Long userDraftId, Long stationDraftId, Long blockId, Long broadcastId, Long campaignId, Long contactId, Long programId, Long tagId, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call listItemsValidateBeforeCall(Long page, Long blockId, Long broadcastId, Long modelTypeId, Long tagId, Long campaignId, Long contactId, Long programDraftId, Long userDraftId, Long stationDraftId, Long programId, OffsetDateTime startMin, OffsetDateTime startMax, Integer durationMin, Integer durationMax, String status, Long limit, String orderBy, String orderDirection, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         
-        com.squareup.okhttp.Call call = listItemsCall(page, orderBy, orderDirection, startMin, startMax, durationMin, durationMax, status, modelTypeId, programDraftId, userDraftId, stationDraftId, blockId, broadcastId, campaignId, contactId, programId, tagId, externalStationId, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = listItemsCall(page, blockId, broadcastId, modelTypeId, tagId, campaignId, contactId, programDraftId, userDraftId, stationDraftId, programId, startMin, startMax, durationMin, durationMax, status, limit, orderBy, orderDirection, externalStationId, progressListener, progressRequestListener);
         return call;
 
         
@@ -807,29 +810,30 @@ public class ItemApi {
      * Get a list of all the items currently in your station.
      * Get a list of all the items currently in your station. This feature supports pagination and will give a maximum results of 50 items back.
      * @param page Current page *(Optional)* (optional)
-     * @param orderBy Field to order the results *(Optional)* (optional)
-     * @param orderDirection Direction of ordering *(Optional)* (optional)
+     * @param blockId Search on Block ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param broadcastId Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param modelTypeId Search on ModelType ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param campaignId Search on Campaign ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param contactId Search on Contact ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param programDraftId Search on Program Draft ID *(Optional)* (optional)
+     * @param userDraftId Search on User Draft ID *(Optional)* (optional)
+     * @param stationDraftId Search on Station Draft ID *(Optional)* (optional)
+     * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param startMin Minimum start date *(Optional)* (optional)
      * @param startMax Maximum start date *(Optional)* (optional)
      * @param durationMin Minimum duration (seconds) *(Optional)* (optional)
      * @param durationMax Maximum duration (seconds) *(Optional)* (optional)
      * @param status Play Status of item *(Optional)* (optional)
-     * @param modelTypeId Search on ModelType ID *(Optional)* (optional)
-     * @param programDraftId Search on Program Draft ID *(Optional)* (optional)
-     * @param userDraftId Search on User Draft ID *(Optional)* (optional)
-     * @param stationDraftId Search on Station Draft ID *(Optional)* (optional)
-     * @param blockId Search on Block ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param broadcastId Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param campaignId Search on Campaign ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param contactId Search on Contact ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param limit Results per page *(Optional)* (optional)
+     * @param orderBy Field to order the results *(Optional)* (optional)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @return ItemResults
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ItemResults listItems(Long page, String orderBy, String orderDirection, OffsetDateTime startMin, OffsetDateTime startMax, Integer durationMin, Integer durationMax, String status, Long modelTypeId, Long programDraftId, Long userDraftId, Long stationDraftId, Long blockId, Long broadcastId, Long campaignId, Long contactId, Long programId, Long tagId, Long externalStationId) throws ApiException {
-        ApiResponse<ItemResults> resp = listItemsWithHttpInfo(page, orderBy, orderDirection, startMin, startMax, durationMin, durationMax, status, modelTypeId, programDraftId, userDraftId, stationDraftId, blockId, broadcastId, campaignId, contactId, programId, tagId, externalStationId);
+    public ItemResults listItems(Long page, Long blockId, Long broadcastId, Long modelTypeId, Long tagId, Long campaignId, Long contactId, Long programDraftId, Long userDraftId, Long stationDraftId, Long programId, OffsetDateTime startMin, OffsetDateTime startMax, Integer durationMin, Integer durationMax, String status, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
+        ApiResponse<ItemResults> resp = listItemsWithHttpInfo(page, blockId, broadcastId, modelTypeId, tagId, campaignId, contactId, programDraftId, userDraftId, stationDraftId, programId, startMin, startMax, durationMin, durationMax, status, limit, orderBy, orderDirection, externalStationId);
         return resp.getData();
     }
 
@@ -837,29 +841,30 @@ public class ItemApi {
      * Get a list of all the items currently in your station.
      * Get a list of all the items currently in your station. This feature supports pagination and will give a maximum results of 50 items back.
      * @param page Current page *(Optional)* (optional)
-     * @param orderBy Field to order the results *(Optional)* (optional)
-     * @param orderDirection Direction of ordering *(Optional)* (optional)
+     * @param blockId Search on Block ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param broadcastId Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param modelTypeId Search on ModelType ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param campaignId Search on Campaign ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param contactId Search on Contact ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param programDraftId Search on Program Draft ID *(Optional)* (optional)
+     * @param userDraftId Search on User Draft ID *(Optional)* (optional)
+     * @param stationDraftId Search on Station Draft ID *(Optional)* (optional)
+     * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param startMin Minimum start date *(Optional)* (optional)
      * @param startMax Maximum start date *(Optional)* (optional)
      * @param durationMin Minimum duration (seconds) *(Optional)* (optional)
      * @param durationMax Maximum duration (seconds) *(Optional)* (optional)
      * @param status Play Status of item *(Optional)* (optional)
-     * @param modelTypeId Search on ModelType ID *(Optional)* (optional)
-     * @param programDraftId Search on Program Draft ID *(Optional)* (optional)
-     * @param userDraftId Search on User Draft ID *(Optional)* (optional)
-     * @param stationDraftId Search on Station Draft ID *(Optional)* (optional)
-     * @param blockId Search on Block ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param broadcastId Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param campaignId Search on Campaign ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param contactId Search on Contact ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param limit Results per page *(Optional)* (optional)
+     * @param orderBy Field to order the results *(Optional)* (optional)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @return ApiResponse&lt;ItemResults&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<ItemResults> listItemsWithHttpInfo(Long page, String orderBy, String orderDirection, OffsetDateTime startMin, OffsetDateTime startMax, Integer durationMin, Integer durationMax, String status, Long modelTypeId, Long programDraftId, Long userDraftId, Long stationDraftId, Long blockId, Long broadcastId, Long campaignId, Long contactId, Long programId, Long tagId, Long externalStationId) throws ApiException {
-        com.squareup.okhttp.Call call = listItemsValidateBeforeCall(page, orderBy, orderDirection, startMin, startMax, durationMin, durationMax, status, modelTypeId, programDraftId, userDraftId, stationDraftId, blockId, broadcastId, campaignId, contactId, programId, tagId, externalStationId, null, null);
+    public ApiResponse<ItemResults> listItemsWithHttpInfo(Long page, Long blockId, Long broadcastId, Long modelTypeId, Long tagId, Long campaignId, Long contactId, Long programDraftId, Long userDraftId, Long stationDraftId, Long programId, OffsetDateTime startMin, OffsetDateTime startMax, Integer durationMin, Integer durationMax, String status, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
+        com.squareup.okhttp.Call call = listItemsValidateBeforeCall(page, blockId, broadcastId, modelTypeId, tagId, campaignId, contactId, programDraftId, userDraftId, stationDraftId, programId, startMin, startMax, durationMin, durationMax, status, limit, orderBy, orderDirection, externalStationId, null, null);
         Type localVarReturnType = new TypeToken<ItemResults>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -868,29 +873,30 @@ public class ItemApi {
      * Get a list of all the items currently in your station. (asynchronously)
      * Get a list of all the items currently in your station. This feature supports pagination and will give a maximum results of 50 items back.
      * @param page Current page *(Optional)* (optional)
-     * @param orderBy Field to order the results *(Optional)* (optional)
-     * @param orderDirection Direction of ordering *(Optional)* (optional)
+     * @param blockId Search on Block ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param broadcastId Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param modelTypeId Search on ModelType ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param campaignId Search on Campaign ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param contactId Search on Contact ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param programDraftId Search on Program Draft ID *(Optional)* (optional)
+     * @param userDraftId Search on User Draft ID *(Optional)* (optional)
+     * @param stationDraftId Search on Station Draft ID *(Optional)* (optional)
+     * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param startMin Minimum start date *(Optional)* (optional)
      * @param startMax Maximum start date *(Optional)* (optional)
      * @param durationMin Minimum duration (seconds) *(Optional)* (optional)
      * @param durationMax Maximum duration (seconds) *(Optional)* (optional)
      * @param status Play Status of item *(Optional)* (optional)
-     * @param modelTypeId Search on ModelType ID *(Optional)* (optional)
-     * @param programDraftId Search on Program Draft ID *(Optional)* (optional)
-     * @param userDraftId Search on User Draft ID *(Optional)* (optional)
-     * @param stationDraftId Search on Station Draft ID *(Optional)* (optional)
-     * @param blockId Search on Block ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param broadcastId Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param campaignId Search on Campaign ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param contactId Search on Contact ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param limit Results per page *(Optional)* (optional)
+     * @param orderBy Field to order the results *(Optional)* (optional)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call listItemsAsync(Long page, String orderBy, String orderDirection, OffsetDateTime startMin, OffsetDateTime startMax, Integer durationMin, Integer durationMax, String status, Long modelTypeId, Long programDraftId, Long userDraftId, Long stationDraftId, Long blockId, Long broadcastId, Long campaignId, Long contactId, Long programId, Long tagId, Long externalStationId, final ApiCallback<ItemResults> callback) throws ApiException {
+    public com.squareup.okhttp.Call listItemsAsync(Long page, Long blockId, Long broadcastId, Long modelTypeId, Long tagId, Long campaignId, Long contactId, Long programDraftId, Long userDraftId, Long stationDraftId, Long programId, OffsetDateTime startMin, OffsetDateTime startMax, Integer durationMin, Integer durationMax, String status, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback<ItemResults> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -911,7 +917,7 @@ public class ItemApi {
             };
         }
 
-        com.squareup.okhttp.Call call = listItemsValidateBeforeCall(page, orderBy, orderDirection, startMin, startMax, durationMin, durationMax, status, modelTypeId, programDraftId, userDraftId, stationDraftId, blockId, broadcastId, campaignId, contactId, programId, tagId, externalStationId, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = listItemsValidateBeforeCall(page, blockId, broadcastId, modelTypeId, tagId, campaignId, contactId, programDraftId, userDraftId, stationDraftId, programId, startMin, startMax, durationMin, durationMax, status, limit, orderBy, orderDirection, externalStationId, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<ItemResults>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;

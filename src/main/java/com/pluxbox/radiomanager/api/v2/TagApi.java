@@ -452,13 +452,16 @@ public class TagApi {
      * @param itemId Search on Item ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param broadcastId Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param contactId Search on Contact ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param limit Results per page *(Optional)* (optional)
+     * @param orderBy Field to order the results *(Optional)* (optional)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call listTagsCall(Long page, Long programId, Long itemId, Long broadcastId, Long contactId, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call listTagsCall(Long page, Long programId, Long itemId, Long broadcastId, Long contactId, Long limit, String orderBy, String orderDirection, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
@@ -475,6 +478,12 @@ public class TagApi {
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "broadcast_id", broadcastId));
         if (contactId != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "contact_id", contactId));
+        if (limit != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "limit", limit));
+        if (orderBy != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "order-by", orderBy));
+        if (orderDirection != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "order-direction", orderDirection));
         if (externalStationId != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "_external_station_id", externalStationId));
 
@@ -511,10 +520,10 @@ public class TagApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call listTagsValidateBeforeCall(Long page, Long programId, Long itemId, Long broadcastId, Long contactId, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call listTagsValidateBeforeCall(Long page, Long programId, Long itemId, Long broadcastId, Long contactId, Long limit, String orderBy, String orderDirection, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         
-        com.squareup.okhttp.Call call = listTagsCall(page, programId, itemId, broadcastId, contactId, externalStationId, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = listTagsCall(page, programId, itemId, broadcastId, contactId, limit, orderBy, orderDirection, externalStationId, progressListener, progressRequestListener);
         return call;
 
         
@@ -531,12 +540,15 @@ public class TagApi {
      * @param itemId Search on Item ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param broadcastId Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param contactId Search on Contact ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param limit Results per page *(Optional)* (optional)
+     * @param orderBy Field to order the results *(Optional)* (optional)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @return TagResults
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public TagResults listTags(Long page, Long programId, Long itemId, Long broadcastId, Long contactId, Long externalStationId) throws ApiException {
-        ApiResponse<TagResults> resp = listTagsWithHttpInfo(page, programId, itemId, broadcastId, contactId, externalStationId);
+    public TagResults listTags(Long page, Long programId, Long itemId, Long broadcastId, Long contactId, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
+        ApiResponse<TagResults> resp = listTagsWithHttpInfo(page, programId, itemId, broadcastId, contactId, limit, orderBy, orderDirection, externalStationId);
         return resp.getData();
     }
 
@@ -548,12 +560,15 @@ public class TagApi {
      * @param itemId Search on Item ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param broadcastId Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param contactId Search on Contact ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param limit Results per page *(Optional)* (optional)
+     * @param orderBy Field to order the results *(Optional)* (optional)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @return ApiResponse&lt;TagResults&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<TagResults> listTagsWithHttpInfo(Long page, Long programId, Long itemId, Long broadcastId, Long contactId, Long externalStationId) throws ApiException {
-        com.squareup.okhttp.Call call = listTagsValidateBeforeCall(page, programId, itemId, broadcastId, contactId, externalStationId, null, null);
+    public ApiResponse<TagResults> listTagsWithHttpInfo(Long page, Long programId, Long itemId, Long broadcastId, Long contactId, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
+        com.squareup.okhttp.Call call = listTagsValidateBeforeCall(page, programId, itemId, broadcastId, contactId, limit, orderBy, orderDirection, externalStationId, null, null);
         Type localVarReturnType = new TypeToken<TagResults>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -566,12 +581,15 @@ public class TagApi {
      * @param itemId Search on Item ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param broadcastId Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param contactId Search on Contact ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param limit Results per page *(Optional)* (optional)
+     * @param orderBy Field to order the results *(Optional)* (optional)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call listTagsAsync(Long page, Long programId, Long itemId, Long broadcastId, Long contactId, Long externalStationId, final ApiCallback<TagResults> callback) throws ApiException {
+    public com.squareup.okhttp.Call listTagsAsync(Long page, Long programId, Long itemId, Long broadcastId, Long contactId, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback<TagResults> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -592,7 +610,7 @@ public class TagApi {
             };
         }
 
-        com.squareup.okhttp.Call call = listTagsValidateBeforeCall(page, programId, itemId, broadcastId, contactId, externalStationId, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = listTagsValidateBeforeCall(page, programId, itemId, broadcastId, contactId, limit, orderBy, orderDirection, externalStationId, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<TagResults>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;

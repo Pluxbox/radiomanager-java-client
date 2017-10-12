@@ -443,12 +443,15 @@ public class UserApi {
      * Build call for listUsers
      * @param page Current page *(Optional)* (optional, default to 1)
      * @param roleId Search on Role ID *(Optional)* (optional)
+     * @param limit Results per page *(Optional)* (optional)
+     * @param orderBy Field to order the results *(Optional)* (optional)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call listUsersCall(Long page, Long roleId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call listUsersCall(Long page, Long roleId, Long limit, String orderBy, String orderDirection, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
@@ -459,6 +462,12 @@ public class UserApi {
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "page", page));
         if (roleId != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "role_id", roleId));
+        if (limit != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "limit", limit));
+        if (orderBy != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "order-by", orderBy));
+        if (orderDirection != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "order-direction", orderDirection));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -493,10 +502,10 @@ public class UserApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call listUsersValidateBeforeCall(Long page, Long roleId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call listUsersValidateBeforeCall(Long page, Long roleId, Long limit, String orderBy, String orderDirection, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         
-        com.squareup.okhttp.Call call = listUsersCall(page, roleId, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = listUsersCall(page, roleId, limit, orderBy, orderDirection, progressListener, progressRequestListener);
         return call;
 
         
@@ -510,11 +519,14 @@ public class UserApi {
      * List all users.
      * @param page Current page *(Optional)* (optional, default to 1)
      * @param roleId Search on Role ID *(Optional)* (optional)
+     * @param limit Results per page *(Optional)* (optional)
+     * @param orderBy Field to order the results *(Optional)* (optional)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @return UserResults
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public UserResults listUsers(Long page, Long roleId) throws ApiException {
-        ApiResponse<UserResults> resp = listUsersWithHttpInfo(page, roleId);
+    public UserResults listUsers(Long page, Long roleId, Long limit, String orderBy, String orderDirection) throws ApiException {
+        ApiResponse<UserResults> resp = listUsersWithHttpInfo(page, roleId, limit, orderBy, orderDirection);
         return resp.getData();
     }
 
@@ -523,11 +535,14 @@ public class UserApi {
      * List all users.
      * @param page Current page *(Optional)* (optional, default to 1)
      * @param roleId Search on Role ID *(Optional)* (optional)
+     * @param limit Results per page *(Optional)* (optional)
+     * @param orderBy Field to order the results *(Optional)* (optional)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @return ApiResponse&lt;UserResults&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<UserResults> listUsersWithHttpInfo(Long page, Long roleId) throws ApiException {
-        com.squareup.okhttp.Call call = listUsersValidateBeforeCall(page, roleId, null, null);
+    public ApiResponse<UserResults> listUsersWithHttpInfo(Long page, Long roleId, Long limit, String orderBy, String orderDirection) throws ApiException {
+        com.squareup.okhttp.Call call = listUsersValidateBeforeCall(page, roleId, limit, orderBy, orderDirection, null, null);
         Type localVarReturnType = new TypeToken<UserResults>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -537,11 +552,14 @@ public class UserApi {
      * List all users.
      * @param page Current page *(Optional)* (optional, default to 1)
      * @param roleId Search on Role ID *(Optional)* (optional)
+     * @param limit Results per page *(Optional)* (optional)
+     * @param orderBy Field to order the results *(Optional)* (optional)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call listUsersAsync(Long page, Long roleId, final ApiCallback<UserResults> callback) throws ApiException {
+    public com.squareup.okhttp.Call listUsersAsync(Long page, Long roleId, Long limit, String orderBy, String orderDirection, final ApiCallback<UserResults> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -562,7 +580,7 @@ public class UserApi {
             };
         }
 
-        com.squareup.okhttp.Call call = listUsersValidateBeforeCall(page, roleId, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = listUsersValidateBeforeCall(page, roleId, limit, orderBy, orderDirection, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<UserResults>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;

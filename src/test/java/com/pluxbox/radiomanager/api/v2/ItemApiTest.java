@@ -138,25 +138,26 @@ public class ItemApiTest {
     @Test
     public void listItemsTest() throws ApiException {
         Long page = null;
-        String orderBy = null;
-        String orderDirection = null;
+        Long blockId = null;
+        Long broadcastId = null;
+        Long modelTypeId = null;
+        Long tagId = null;
+        Long campaignId = null;
+        Long contactId = null;
+        Long programDraftId = null;
+        Long userDraftId = null;
+        Long stationDraftId = null;
+        Long programId = null;
         OffsetDateTime startMin = null;
         OffsetDateTime startMax = null;
         Integer durationMin = null;
         Integer durationMax = null;
         String status = null;
-        Long modelTypeId = null;
-        Long programDraftId = null;
-        Long userDraftId = null;
-        Long stationDraftId = null;
-        Long blockId = null;
-        Long broadcastId = null;
-        Long campaignId = null;
-        Long contactId = null;
-        Long programId = null;
-        Long tagId = null;
+        Long limit = null;
+        String orderBy = null;
+        String orderDirection = null;
         Long externalStationId = null;
-        ItemResults response = api.listItems(page, orderBy, orderDirection, startMin, startMax, durationMin, durationMax, status, modelTypeId, programDraftId, userDraftId, stationDraftId, blockId, broadcastId, campaignId, contactId, programId, tagId, externalStationId);
+        ItemResults response = api.listItems(page, blockId, broadcastId, modelTypeId, tagId, campaignId, contactId, programDraftId, userDraftId, stationDraftId, programId, startMin, startMax, durationMin, durationMax, status, limit, orderBy, orderDirection, externalStationId);
 
         // TODO: test validations
     }

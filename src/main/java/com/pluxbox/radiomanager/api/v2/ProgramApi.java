@@ -448,20 +448,23 @@ public class ProgramApi {
     /**
      * Build call for listPrograms
      * @param page Current page *(Optional)* (optional)
-     * @param genreId Search on Genre ID *(Optional)* (optional)
-     * @param modelTypeId Search on ModelType ID *(Optional)* (optional)
-     * @param presenterId Search on Presenter ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param broadcastId Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param itemId Search on Item ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param modelTypeId Search on ModelType ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param presenterId Search on Presenter ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param genreId Search on Genre ID *(Optional)* (optional)
      * @param blockId Search on Block ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param itemId Search on Item ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param limit Results per page *(Optional)* (optional)
+     * @param orderBy Field to order the results *(Optional)* (optional)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call listProgramsCall(Long page, Long genreId, Long modelTypeId, Long presenterId, Long tagId, Long broadcastId, Long itemId, Long blockId, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call listProgramsCall(Long page, Long broadcastId, Long modelTypeId, Long tagId, Long presenterId, Long genreId, Long blockId, Long itemId, Long limit, String orderBy, String orderDirection, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
@@ -470,20 +473,26 @@ public class ProgramApi {
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         if (page != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "page", page));
-        if (genreId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "genre_id", genreId));
-        if (modelTypeId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "model_type_id", modelTypeId));
-        if (presenterId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "presenter_id", presenterId));
-        if (tagId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "tag_id", tagId));
         if (broadcastId != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "broadcast_id", broadcastId));
-        if (itemId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "item_id", itemId));
+        if (modelTypeId != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "model_type_id", modelTypeId));
+        if (tagId != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "tag_id", tagId));
+        if (presenterId != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "presenter_id", presenterId));
+        if (genreId != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "genre_id", genreId));
         if (blockId != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "block_id", blockId));
+        if (itemId != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "item_id", itemId));
+        if (limit != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "limit", limit));
+        if (orderBy != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "order-by", orderBy));
+        if (orderDirection != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "order-direction", orderDirection));
         if (externalStationId != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "_external_station_id", externalStationId));
 
@@ -520,10 +529,10 @@ public class ProgramApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call listProgramsValidateBeforeCall(Long page, Long genreId, Long modelTypeId, Long presenterId, Long tagId, Long broadcastId, Long itemId, Long blockId, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call listProgramsValidateBeforeCall(Long page, Long broadcastId, Long modelTypeId, Long tagId, Long presenterId, Long genreId, Long blockId, Long itemId, Long limit, String orderBy, String orderDirection, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         
-        com.squareup.okhttp.Call call = listProgramsCall(page, genreId, modelTypeId, presenterId, tagId, broadcastId, itemId, blockId, externalStationId, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = listProgramsCall(page, broadcastId, modelTypeId, tagId, presenterId, genreId, blockId, itemId, limit, orderBy, orderDirection, externalStationId, progressListener, progressRequestListener);
         return call;
 
         
@@ -536,19 +545,22 @@ public class ProgramApi {
      * Get all programs.
      * List all programs.
      * @param page Current page *(Optional)* (optional)
-     * @param genreId Search on Genre ID *(Optional)* (optional)
-     * @param modelTypeId Search on ModelType ID *(Optional)* (optional)
-     * @param presenterId Search on Presenter ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param broadcastId Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param itemId Search on Item ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param modelTypeId Search on ModelType ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param presenterId Search on Presenter ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param genreId Search on Genre ID *(Optional)* (optional)
      * @param blockId Search on Block ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param itemId Search on Item ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param limit Results per page *(Optional)* (optional)
+     * @param orderBy Field to order the results *(Optional)* (optional)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @return ProgramResults
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ProgramResults listPrograms(Long page, Long genreId, Long modelTypeId, Long presenterId, Long tagId, Long broadcastId, Long itemId, Long blockId, Long externalStationId) throws ApiException {
-        ApiResponse<ProgramResults> resp = listProgramsWithHttpInfo(page, genreId, modelTypeId, presenterId, tagId, broadcastId, itemId, blockId, externalStationId);
+    public ProgramResults listPrograms(Long page, Long broadcastId, Long modelTypeId, Long tagId, Long presenterId, Long genreId, Long blockId, Long itemId, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
+        ApiResponse<ProgramResults> resp = listProgramsWithHttpInfo(page, broadcastId, modelTypeId, tagId, presenterId, genreId, blockId, itemId, limit, orderBy, orderDirection, externalStationId);
         return resp.getData();
     }
 
@@ -556,19 +568,22 @@ public class ProgramApi {
      * Get all programs.
      * List all programs.
      * @param page Current page *(Optional)* (optional)
-     * @param genreId Search on Genre ID *(Optional)* (optional)
-     * @param modelTypeId Search on ModelType ID *(Optional)* (optional)
-     * @param presenterId Search on Presenter ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param broadcastId Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param itemId Search on Item ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param modelTypeId Search on ModelType ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param presenterId Search on Presenter ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param genreId Search on Genre ID *(Optional)* (optional)
      * @param blockId Search on Block ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param itemId Search on Item ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param limit Results per page *(Optional)* (optional)
+     * @param orderBy Field to order the results *(Optional)* (optional)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @return ApiResponse&lt;ProgramResults&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<ProgramResults> listProgramsWithHttpInfo(Long page, Long genreId, Long modelTypeId, Long presenterId, Long tagId, Long broadcastId, Long itemId, Long blockId, Long externalStationId) throws ApiException {
-        com.squareup.okhttp.Call call = listProgramsValidateBeforeCall(page, genreId, modelTypeId, presenterId, tagId, broadcastId, itemId, blockId, externalStationId, null, null);
+    public ApiResponse<ProgramResults> listProgramsWithHttpInfo(Long page, Long broadcastId, Long modelTypeId, Long tagId, Long presenterId, Long genreId, Long blockId, Long itemId, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
+        com.squareup.okhttp.Call call = listProgramsValidateBeforeCall(page, broadcastId, modelTypeId, tagId, presenterId, genreId, blockId, itemId, limit, orderBy, orderDirection, externalStationId, null, null);
         Type localVarReturnType = new TypeToken<ProgramResults>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -577,19 +592,22 @@ public class ProgramApi {
      * Get all programs. (asynchronously)
      * List all programs.
      * @param page Current page *(Optional)* (optional)
-     * @param genreId Search on Genre ID *(Optional)* (optional)
-     * @param modelTypeId Search on ModelType ID *(Optional)* (optional)
-     * @param presenterId Search on Presenter ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param broadcastId Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param itemId Search on Item ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param modelTypeId Search on ModelType ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param presenterId Search on Presenter ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param genreId Search on Genre ID *(Optional)* (optional)
      * @param blockId Search on Block ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param itemId Search on Item ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param limit Results per page *(Optional)* (optional)
+     * @param orderBy Field to order the results *(Optional)* (optional)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call listProgramsAsync(Long page, Long genreId, Long modelTypeId, Long presenterId, Long tagId, Long broadcastId, Long itemId, Long blockId, Long externalStationId, final ApiCallback<ProgramResults> callback) throws ApiException {
+    public com.squareup.okhttp.Call listProgramsAsync(Long page, Long broadcastId, Long modelTypeId, Long tagId, Long presenterId, Long genreId, Long blockId, Long itemId, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback<ProgramResults> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -610,7 +628,7 @@ public class ProgramApi {
             };
         }
 
-        com.squareup.okhttp.Call call = listProgramsValidateBeforeCall(page, genreId, modelTypeId, presenterId, tagId, broadcastId, itemId, blockId, externalStationId, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = listProgramsValidateBeforeCall(page, broadcastId, modelTypeId, tagId, presenterId, genreId, blockId, itemId, limit, orderBy, orderDirection, externalStationId, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<ProgramResults>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;

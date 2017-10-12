@@ -1,19 +1,19 @@
-# ExternalMessageApi
+# StationApi
 
 All URIs are relative to *https://radiomanager.pb/api/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**queueExternalMessage**](ExternalMessageApi.md#queueExternalMessage) | **POST** /externalmessagequeue | Queue External Message.
+[**getStation**](StationApi.md#getStation) | **GET** /station | Get own station only
 
 
-<a name="queueExternalMessage"></a>
-# **queueExternalMessage**
-> Object queueExternalMessage(message)
+<a name="getStation"></a>
+# **getStation**
+> StationResult getStation()
 
-Queue External Message.
+Get own station only
 
-Queue External Message.
+Get own station only
 
 ### Example
 ```java
@@ -22,7 +22,7 @@ Queue External Message.
 //import com.pluxbox.radiomanager.api.invoker.ApiException;
 //import com.pluxbox.radiomanager.api.invoker.Configuration;
 //import com.pluxbox.radiomanager.api.invoker.auth.*;
-//import com.pluxbox.radiomanager.api.v2.ExternalMessageApi;
+//import com.pluxbox.radiomanager.api.v2.StationApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -32,26 +32,22 @@ API Key.setApiKey("YOUR API KEY");
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //API Key.setApiKeyPrefix("Token");
 
-ExternalMessageApi apiInstance = new ExternalMessageApi();
-ExternalMessageQueueData message = new ExternalMessageQueueData(); // ExternalMessageQueueData | Data **(Required)**
+StationApi apiInstance = new StationApi();
 try {
-    Object result = apiInstance.queueExternalMessage(message);
+    StationResult result = apiInstance.getStation();
     System.out.println(result);
 } catch (ApiException e) {
-    System.err.println("Exception when calling ExternalMessageApi#queueExternalMessage");
+    System.err.println("Exception when calling StationApi#getStation");
     e.printStackTrace();
 }
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **message** | [**ExternalMessageQueueData**](ExternalMessageQueueData.md)| Data **(Required)** |
+This endpoint does not need any parameter.
 
 ### Return type
 
-**Object**
+[**StationResult**](StationResult.md)
 
 ### Authorization
 

@@ -1,6 +1,6 @@
 # UserApi
 
-All URIs are relative to *https://staging.radiomanager.pluxbox.com/api/v2*
+All URIs are relative to *https://radiomanager.pb/api/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -177,7 +177,7 @@ Name | Type | Description  | Notes
 
 <a name="listUsers"></a>
 # **listUsers**
-> UserResults listUsers(page, roleId)
+> UserResults listUsers(page, roleId, limit, orderBy, orderDirection)
 
 Get all users.
 
@@ -203,8 +203,11 @@ API Key.setApiKey("YOUR API KEY");
 UserApi apiInstance = new UserApi();
 Long page = 1L; // Long | Current page *(Optional)*
 Long roleId = 789L; // Long | Search on Role ID *(Optional)*
+Long limit = 789L; // Long | Results per page *(Optional)*
+String orderBy = "orderBy_example"; // String | Field to order the results *(Optional)*
+String orderDirection = "orderDirection_example"; // String | Direction of ordering *(Optional)*
 try {
-    UserResults result = apiInstance.listUsers(page, roleId);
+    UserResults result = apiInstance.listUsers(page, roleId, limit, orderBy, orderDirection);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling UserApi#listUsers");
@@ -218,6 +221,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page** | **Long**| Current page *(Optional)* | [optional] [default to 1]
  **roleId** | **Long**| Search on Role ID *(Optional)* | [optional]
+ **limit** | **Long**| Results per page *(Optional)* | [optional]
+ **orderBy** | **String**| Field to order the results *(Optional)* | [optional]
+ **orderDirection** | **String**| Direction of ordering *(Optional)* | [optional] [enum: asc, desc]
 
 ### Return type
 

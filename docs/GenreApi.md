@@ -1,6 +1,6 @@
 # GenreApi
 
-All URIs are relative to *https://staging.radiomanager.pluxbox.com/api/v2*
+All URIs are relative to *https://radiomanager.pb/api/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -67,7 +67,7 @@ Name | Type | Description  | Notes
 
 <a name="listGenres"></a>
 # **listGenres**
-> GenreResults listGenres(page, parentId, programId, broadcastId, externalStationId)
+> GenreResults listGenres(page, parentId, programId, broadcastId, limit, orderBy, orderDirection, externalStationId)
 
 List all genres.
 
@@ -95,9 +95,12 @@ Long page = 789L; // Long | Current page *(Optional)*
 Long parentId = 789L; // Long | Search on Parent ID of Genre *(Optional)*
 Long programId = 789L; // Long | Search on Program ID *(Optional)* `(Relation)`
 Long broadcastId = 789L; // Long | Search on Broadcast ID *(Optional)* `(Relation)`
+Long limit = 789L; // Long | Results per page *(Optional)*
+String orderBy = "orderBy_example"; // String | Field to order the results *(Optional)*
+String orderDirection = "orderDirection_example"; // String | Direction of ordering *(Optional)*
 Long externalStationId = 789L; // Long | Query on a different (content providing) station *(Optional)*
 try {
-    GenreResults result = apiInstance.listGenres(page, parentId, programId, broadcastId, externalStationId);
+    GenreResults result = apiInstance.listGenres(page, parentId, programId, broadcastId, limit, orderBy, orderDirection, externalStationId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling GenreApi#listGenres");
@@ -113,6 +116,9 @@ Name | Type | Description  | Notes
  **parentId** | **Long**| Search on Parent ID of Genre *(Optional)* | [optional]
  **programId** | **Long**| Search on Program ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
  **broadcastId** | **Long**| Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
+ **limit** | **Long**| Results per page *(Optional)* | [optional]
+ **orderBy** | **String**| Field to order the results *(Optional)* | [optional]
+ **orderDirection** | **String**| Direction of ordering *(Optional)* | [optional] [enum: asc, desc]
  **externalStationId** | **Long**| Query on a different (content providing) station *(Optional)* | [optional]
 
 ### Return type

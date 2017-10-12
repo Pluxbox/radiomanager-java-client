@@ -1,6 +1,6 @@
 # TagApi
 
-All URIs are relative to *https://staging.radiomanager.pluxbox.com/api/v2*
+All URIs are relative to *https://radiomanager.pb/api/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -180,7 +180,7 @@ Name | Type | Description  | Notes
 
 <a name="listTags"></a>
 # **listTags**
-> TagResults listTags(page, programId, itemId, broadcastId, contactId, externalStationId)
+> TagResults listTags(page, programId, itemId, broadcastId, contactId, limit, orderBy, orderDirection, externalStationId)
 
 Get a list of all the tags currently in your station.
 
@@ -209,9 +209,12 @@ Long programId = 789L; // Long | Search on Program ID *(Optional)* `(Relation)`
 Long itemId = 789L; // Long | Search on Item ID *(Optional)* `(Relation)`
 Long broadcastId = 789L; // Long | Search on Broadcast ID *(Optional)* `(Relation)`
 Long contactId = 789L; // Long | Search on Contact ID *(Optional)* `(Relation)`
+Long limit = 789L; // Long | Results per page *(Optional)*
+String orderBy = "orderBy_example"; // String | Field to order the results *(Optional)*
+String orderDirection = "orderDirection_example"; // String | Direction of ordering *(Optional)*
 Long externalStationId = 789L; // Long | Query on a different (content providing) station *(Optional)*
 try {
-    TagResults result = apiInstance.listTags(page, programId, itemId, broadcastId, contactId, externalStationId);
+    TagResults result = apiInstance.listTags(page, programId, itemId, broadcastId, contactId, limit, orderBy, orderDirection, externalStationId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling TagApi#listTags");
@@ -228,6 +231,9 @@ Name | Type | Description  | Notes
  **itemId** | **Long**| Search on Item ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
  **broadcastId** | **Long**| Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
  **contactId** | **Long**| Search on Contact ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
+ **limit** | **Long**| Results per page *(Optional)* | [optional]
+ **orderBy** | **String**| Field to order the results *(Optional)* | [optional]
+ **orderDirection** | **String**| Direction of ordering *(Optional)* | [optional] [enum: asc, desc]
  **externalStationId** | **Long**| Query on a different (content providing) station *(Optional)* | [optional]
 
 ### Return type

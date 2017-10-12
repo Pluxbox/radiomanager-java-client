@@ -196,13 +196,16 @@ public class GenreApi {
      * @param parentId Search on Parent ID of Genre *(Optional)* (optional)
      * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param broadcastId Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param limit Results per page *(Optional)* (optional)
+     * @param orderBy Field to order the results *(Optional)* (optional)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call listGenresCall(Long page, Long parentId, Long programId, Long broadcastId, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call listGenresCall(Long page, Long parentId, Long programId, Long broadcastId, Long limit, String orderBy, String orderDirection, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
@@ -217,6 +220,12 @@ public class GenreApi {
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "program_id", programId));
         if (broadcastId != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "broadcast_id", broadcastId));
+        if (limit != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "limit", limit));
+        if (orderBy != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "order-by", orderBy));
+        if (orderDirection != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "order-direction", orderDirection));
         if (externalStationId != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "_external_station_id", externalStationId));
 
@@ -253,10 +262,10 @@ public class GenreApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call listGenresValidateBeforeCall(Long page, Long parentId, Long programId, Long broadcastId, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call listGenresValidateBeforeCall(Long page, Long parentId, Long programId, Long broadcastId, Long limit, String orderBy, String orderDirection, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         
-        com.squareup.okhttp.Call call = listGenresCall(page, parentId, programId, broadcastId, externalStationId, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = listGenresCall(page, parentId, programId, broadcastId, limit, orderBy, orderDirection, externalStationId, progressListener, progressRequestListener);
         return call;
 
         
@@ -272,12 +281,15 @@ public class GenreApi {
      * @param parentId Search on Parent ID of Genre *(Optional)* (optional)
      * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param broadcastId Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param limit Results per page *(Optional)* (optional)
+     * @param orderBy Field to order the results *(Optional)* (optional)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @return GenreResults
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public GenreResults listGenres(Long page, Long parentId, Long programId, Long broadcastId, Long externalStationId) throws ApiException {
-        ApiResponse<GenreResults> resp = listGenresWithHttpInfo(page, parentId, programId, broadcastId, externalStationId);
+    public GenreResults listGenres(Long page, Long parentId, Long programId, Long broadcastId, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
+        ApiResponse<GenreResults> resp = listGenresWithHttpInfo(page, parentId, programId, broadcastId, limit, orderBy, orderDirection, externalStationId);
         return resp.getData();
     }
 
@@ -288,12 +300,15 @@ public class GenreApi {
      * @param parentId Search on Parent ID of Genre *(Optional)* (optional)
      * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param broadcastId Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param limit Results per page *(Optional)* (optional)
+     * @param orderBy Field to order the results *(Optional)* (optional)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @return ApiResponse&lt;GenreResults&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<GenreResults> listGenresWithHttpInfo(Long page, Long parentId, Long programId, Long broadcastId, Long externalStationId) throws ApiException {
-        com.squareup.okhttp.Call call = listGenresValidateBeforeCall(page, parentId, programId, broadcastId, externalStationId, null, null);
+    public ApiResponse<GenreResults> listGenresWithHttpInfo(Long page, Long parentId, Long programId, Long broadcastId, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
+        com.squareup.okhttp.Call call = listGenresValidateBeforeCall(page, parentId, programId, broadcastId, limit, orderBy, orderDirection, externalStationId, null, null);
         Type localVarReturnType = new TypeToken<GenreResults>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -305,12 +320,15 @@ public class GenreApi {
      * @param parentId Search on Parent ID of Genre *(Optional)* (optional)
      * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param broadcastId Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param limit Results per page *(Optional)* (optional)
+     * @param orderBy Field to order the results *(Optional)* (optional)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call listGenresAsync(Long page, Long parentId, Long programId, Long broadcastId, Long externalStationId, final ApiCallback<GenreResults> callback) throws ApiException {
+    public com.squareup.okhttp.Call listGenresAsync(Long page, Long parentId, Long programId, Long broadcastId, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback<GenreResults> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -331,7 +349,7 @@ public class GenreApi {
             };
         }
 
-        com.squareup.okhttp.Call call = listGenresValidateBeforeCall(page, parentId, programId, broadcastId, externalStationId, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = listGenresValidateBeforeCall(page, parentId, programId, broadcastId, limit, orderBy, orderDirection, externalStationId, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<GenreResults>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;

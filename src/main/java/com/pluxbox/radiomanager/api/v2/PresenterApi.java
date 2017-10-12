@@ -448,16 +448,19 @@ public class PresenterApi {
     /**
      * Build call for listPresenters
      * @param page Current page *(Optional)* (optional)
-     * @param modelTypeId Search on ModelType ID (Optional) (optional)
      * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param broadcastId Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param modelTypeId Search on ModelType ID (Optional) (optional)
+     * @param limit Results per page *(Optional)* (optional)
+     * @param orderBy Field to order the results *(Optional)* (optional)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call listPresentersCall(Long page, Long modelTypeId, Long programId, Long broadcastId, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call listPresentersCall(Long page, Long programId, Long broadcastId, Long modelTypeId, Long limit, String orderBy, String orderDirection, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
@@ -466,12 +469,18 @@ public class PresenterApi {
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         if (page != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "page", page));
-        if (modelTypeId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "model_type_id", modelTypeId));
         if (programId != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "program_id", programId));
         if (broadcastId != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "broadcast_id", broadcastId));
+        if (modelTypeId != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "model_type_id", modelTypeId));
+        if (limit != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "limit", limit));
+        if (orderBy != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "order-by", orderBy));
+        if (orderDirection != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "order-direction", orderDirection));
         if (externalStationId != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "_external_station_id", externalStationId));
 
@@ -508,10 +517,10 @@ public class PresenterApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call listPresentersValidateBeforeCall(Long page, Long modelTypeId, Long programId, Long broadcastId, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call listPresentersValidateBeforeCall(Long page, Long programId, Long broadcastId, Long modelTypeId, Long limit, String orderBy, String orderDirection, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         
-        com.squareup.okhttp.Call call = listPresentersCall(page, modelTypeId, programId, broadcastId, externalStationId, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = listPresentersCall(page, programId, broadcastId, modelTypeId, limit, orderBy, orderDirection, externalStationId, progressListener, progressRequestListener);
         return call;
 
         
@@ -524,15 +533,18 @@ public class PresenterApi {
      * Get all presenters.
      * List all presenters.
      * @param page Current page *(Optional)* (optional)
-     * @param modelTypeId Search on ModelType ID (Optional) (optional)
      * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param broadcastId Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param modelTypeId Search on ModelType ID (Optional) (optional)
+     * @param limit Results per page *(Optional)* (optional)
+     * @param orderBy Field to order the results *(Optional)* (optional)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @return PresenterResults
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public PresenterResults listPresenters(Long page, Long modelTypeId, Long programId, Long broadcastId, Long externalStationId) throws ApiException {
-        ApiResponse<PresenterResults> resp = listPresentersWithHttpInfo(page, modelTypeId, programId, broadcastId, externalStationId);
+    public PresenterResults listPresenters(Long page, Long programId, Long broadcastId, Long modelTypeId, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
+        ApiResponse<PresenterResults> resp = listPresentersWithHttpInfo(page, programId, broadcastId, modelTypeId, limit, orderBy, orderDirection, externalStationId);
         return resp.getData();
     }
 
@@ -540,15 +552,18 @@ public class PresenterApi {
      * Get all presenters.
      * List all presenters.
      * @param page Current page *(Optional)* (optional)
-     * @param modelTypeId Search on ModelType ID (Optional) (optional)
      * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param broadcastId Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param modelTypeId Search on ModelType ID (Optional) (optional)
+     * @param limit Results per page *(Optional)* (optional)
+     * @param orderBy Field to order the results *(Optional)* (optional)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @return ApiResponse&lt;PresenterResults&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<PresenterResults> listPresentersWithHttpInfo(Long page, Long modelTypeId, Long programId, Long broadcastId, Long externalStationId) throws ApiException {
-        com.squareup.okhttp.Call call = listPresentersValidateBeforeCall(page, modelTypeId, programId, broadcastId, externalStationId, null, null);
+    public ApiResponse<PresenterResults> listPresentersWithHttpInfo(Long page, Long programId, Long broadcastId, Long modelTypeId, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
+        com.squareup.okhttp.Call call = listPresentersValidateBeforeCall(page, programId, broadcastId, modelTypeId, limit, orderBy, orderDirection, externalStationId, null, null);
         Type localVarReturnType = new TypeToken<PresenterResults>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -557,15 +572,18 @@ public class PresenterApi {
      * Get all presenters. (asynchronously)
      * List all presenters.
      * @param page Current page *(Optional)* (optional)
-     * @param modelTypeId Search on ModelType ID (Optional) (optional)
      * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param broadcastId Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param modelTypeId Search on ModelType ID (Optional) (optional)
+     * @param limit Results per page *(Optional)* (optional)
+     * @param orderBy Field to order the results *(Optional)* (optional)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call listPresentersAsync(Long page, Long modelTypeId, Long programId, Long broadcastId, Long externalStationId, final ApiCallback<PresenterResults> callback) throws ApiException {
+    public com.squareup.okhttp.Call listPresentersAsync(Long page, Long programId, Long broadcastId, Long modelTypeId, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback<PresenterResults> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -586,7 +604,7 @@ public class PresenterApi {
             };
         }
 
-        com.squareup.okhttp.Call call = listPresentersValidateBeforeCall(page, modelTypeId, programId, broadcastId, externalStationId, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = listPresentersValidateBeforeCall(page, programId, broadcastId, modelTypeId, limit, orderBy, orderDirection, externalStationId, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<PresenterResults>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;

@@ -1,6 +1,6 @@
 # BlockApi
 
-All URIs are relative to *https://staging.radiomanager.pluxbox.com/api/v2*
+All URIs are relative to *https://radiomanager.pb/api/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -171,7 +171,7 @@ This endpoint does not need any parameter.
 
 <a name="listBlocks"></a>
 # **listBlocks**
-> BlockResults listBlocks(page, startMin, startMax, broadcastId, programId, itemId, externalStationId)
+> BlockResults listBlocks(page, broadcastId, itemId, programId, startMin, startMax, limit, orderBy, orderDirection, externalStationId)
 
 Get a list of all blocks currently in your station.
 
@@ -196,14 +196,17 @@ API Key.setApiKey("YOUR API KEY");
 
 BlockApi apiInstance = new BlockApi();
 Long page = 1L; // Long | Current page *(Optional)*
+Long broadcastId = 789L; // Long | Search on Broadcast ID *(Optional)* `(Relation)`
+Long itemId = 789L; // Long | Search on Item ID *(Optional)* `(Relation)`
+Long programId = 789L; // Long | Search on Program ID *(Optional)* `(Relation)`
 OffsetDateTime startMin = new OffsetDateTime(); // OffsetDateTime | Minimum start date *(Optional)*
 OffsetDateTime startMax = new OffsetDateTime(); // OffsetDateTime | Maximum start date *(Optional)*
-Long broadcastId = 789L; // Long | Search on Broadcast ID *(Optional)* `(Relation)`
-Long programId = 789L; // Long | Search on Program ID *(Optional)* `(Relation)`
-Long itemId = 789L; // Long | Search on Item ID *(Optional)* `(Relation)`
+Long limit = 789L; // Long | Results per page *(Optional)*
+String orderBy = "orderBy_example"; // String | Field to order the results *(Optional)*
+String orderDirection = "orderDirection_example"; // String | Direction of ordering *(Optional)*
 Long externalStationId = 789L; // Long | Query on a different (content providing) station *(Optional)*
 try {
-    BlockResults result = apiInstance.listBlocks(page, startMin, startMax, broadcastId, programId, itemId, externalStationId);
+    BlockResults result = apiInstance.listBlocks(page, broadcastId, itemId, programId, startMin, startMax, limit, orderBy, orderDirection, externalStationId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling BlockApi#listBlocks");
@@ -216,11 +219,14 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page** | **Long**| Current page *(Optional)* | [optional] [default to 1]
+ **broadcastId** | **Long**| Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
+ **itemId** | **Long**| Search on Item ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
+ **programId** | **Long**| Search on Program ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
  **startMin** | **OffsetDateTime**| Minimum start date *(Optional)* | [optional]
  **startMax** | **OffsetDateTime**| Maximum start date *(Optional)* | [optional]
- **broadcastId** | **Long**| Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
- **programId** | **Long**| Search on Program ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
- **itemId** | **Long**| Search on Item ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
+ **limit** | **Long**| Results per page *(Optional)* | [optional]
+ **orderBy** | **String**| Field to order the results *(Optional)* | [optional]
+ **orderDirection** | **String**| Direction of ordering *(Optional)* | [optional] [enum: asc, desc]
  **externalStationId** | **Long**| Query on a different (content providing) station *(Optional)* | [optional]
 
 ### Return type

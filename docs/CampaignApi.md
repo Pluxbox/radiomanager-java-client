@@ -1,6 +1,6 @@
 # CampaignApi
 
-All URIs are relative to *https://staging.radiomanager.pluxbox.com/api/v2*
+All URIs are relative to *https://radiomanager.pb/api/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -180,7 +180,7 @@ Name | Type | Description  | Notes
 
 <a name="listCampaigns"></a>
 # **listCampaigns**
-> CampaignResults listCampaigns(page, modelTypeId, itemId, startMin, startMax, externalStationId)
+> CampaignResults listCampaigns(page, itemId, modelTypeId, startMin, startMax, limit, orderBy, orderDirection, externalStationId)
 
 Get all campaigns.
 
@@ -205,13 +205,16 @@ API Key.setApiKey("YOUR API KEY");
 
 CampaignApi apiInstance = new CampaignApi();
 Long page = 789L; // Long | Current page *(Optional)*
-Long modelTypeId = 789L; // Long | Search on ModelType ID *(Optional)*
 Long itemId = 789L; // Long | Search on Item ID *(Optional)* `(Relation)`
+Long modelTypeId = 789L; // Long | Search on ModelType ID *(Optional)* `(Relation)`
 OffsetDateTime startMin = new OffsetDateTime(); // OffsetDateTime | Minimum start date *(Optional)*
 OffsetDateTime startMax = new OffsetDateTime(); // OffsetDateTime | Maximum start date *(Optional)*
+Long limit = 789L; // Long | Results per page *(Optional)*
+String orderBy = "orderBy_example"; // String | Field to order the results *(Optional)*
+String orderDirection = "orderDirection_example"; // String | Direction of ordering *(Optional)*
 Long externalStationId = 789L; // Long | Query on a different (content providing) station *(Optional)*
 try {
-    CampaignResults result = apiInstance.listCampaigns(page, modelTypeId, itemId, startMin, startMax, externalStationId);
+    CampaignResults result = apiInstance.listCampaigns(page, itemId, modelTypeId, startMin, startMax, limit, orderBy, orderDirection, externalStationId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling CampaignApi#listCampaigns");
@@ -224,10 +227,13 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page** | **Long**| Current page *(Optional)* | [optional]
- **modelTypeId** | **Long**| Search on ModelType ID *(Optional)* | [optional]
  **itemId** | **Long**| Search on Item ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
+ **modelTypeId** | **Long**| Search on ModelType ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
  **startMin** | **OffsetDateTime**| Minimum start date *(Optional)* | [optional]
  **startMax** | **OffsetDateTime**| Maximum start date *(Optional)* | [optional]
+ **limit** | **Long**| Results per page *(Optional)* | [optional]
+ **orderBy** | **String**| Field to order the results *(Optional)* | [optional]
+ **orderDirection** | **String**| Direction of ordering *(Optional)* | [optional] [enum: asc, desc]
  **externalStationId** | **Long**| Query on a different (content providing) station *(Optional)* | [optional]
 
 ### Return type

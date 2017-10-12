@@ -1,6 +1,6 @@
 # BroadcastApi
 
-All URIs are relative to *https://staging.radiomanager.pluxbox.com/api/v2*
+All URIs are relative to *https://radiomanager.pb/api/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -237,7 +237,7 @@ This endpoint does not need any parameter.
 
 <a name="getDailyEPG"></a>
 # **getDailyEPG**
-> EPGBroadcast getDailyEPG(date)
+> EPGBroadcast getDailyEPG(date, withunpublished)
 
 Get daily EPG
 
@@ -262,8 +262,9 @@ API Key.setApiKey("YOUR API KEY");
 
 BroadcastApi apiInstance = new BroadcastApi();
 OffsetDateTime date = new OffsetDateTime(); // OffsetDateTime | Date *(Optional)*
+Boolean withunpublished = true; // Boolean | Show Unpublished *(Optional)*
 try {
-    EPGBroadcast result = apiInstance.getDailyEPG(date);
+    EPGBroadcast result = apiInstance.getDailyEPG(date, withunpublished);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling BroadcastApi#getDailyEPG");
@@ -276,6 +277,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **date** | **OffsetDateTime**| Date *(Optional)* | [optional]
+ **withunpublished** | **Boolean**| Show Unpublished *(Optional)* | [optional]
 
 ### Return type
 
@@ -292,7 +294,7 @@ Name | Type | Description  | Notes
 
 <a name="getEPGByDate"></a>
 # **getEPGByDate**
-> EPGBroadcast getEPGByDate(date)
+> EPGBroadcast getEPGByDate(date, withunpublished)
 
 Get EPG by date
 
@@ -317,8 +319,9 @@ API Key.setApiKey("YOUR API KEY");
 
 BroadcastApi apiInstance = new BroadcastApi();
 OffsetDateTime date = new OffsetDateTime(); // OffsetDateTime | Date *(Optional)*
+Boolean withunpublished = true; // Boolean | Show Unpublished *(Optional)*
 try {
-    EPGBroadcast result = apiInstance.getEPGByDate(date);
+    EPGBroadcast result = apiInstance.getEPGByDate(date, withunpublished);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling BroadcastApi#getEPGByDate");
@@ -331,6 +334,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **date** | **OffsetDateTime**| Date *(Optional)* | [optional]
+ **withunpublished** | **Boolean**| Show Unpublished *(Optional)* | [optional]
 
 ### Return type
 
@@ -398,7 +402,7 @@ This endpoint does not need any parameter.
 
 <a name="getWeeklyEPG"></a>
 # **getWeeklyEPG**
-> EPGBroadcast getWeeklyEPG(date)
+> EPGBroadcast getWeeklyEPG(date, withunpublished)
 
 Get weekly EPG
 
@@ -423,8 +427,9 @@ API Key.setApiKey("YOUR API KEY");
 
 BroadcastApi apiInstance = new BroadcastApi();
 String date = "date_example"; // String | Date *(Optional)*
+Boolean withunpublished = true; // Boolean | Show Unpublished *(Optional)*
 try {
-    EPGBroadcast result = apiInstance.getWeeklyEPG(date);
+    EPGBroadcast result = apiInstance.getWeeklyEPG(date, withunpublished);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling BroadcastApi#getWeeklyEPG");
@@ -437,6 +442,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **date** | **String**| Date *(Optional)* | [optional]
+ **withunpublished** | **Boolean**| Show Unpublished *(Optional)* | [optional]
 
 ### Return type
 
@@ -453,7 +459,7 @@ Name | Type | Description  | Notes
 
 <a name="listBroadcasts"></a>
 # **listBroadcasts**
-> BroadcastResults listBroadcasts(page, startMin, startMax, modelTypeId, tagId, presenterId, itemId, blockId, genreId, programId, externalStationId)
+> BroadcastResults listBroadcasts(page, programId, blockId, modelTypeId, tagId, presenterId, genreId, itemId, startMin, startMax, limit, orderBy, orderDirection, externalStationId)
 
 Get all broadcasts.
 
@@ -478,18 +484,21 @@ API Key.setApiKey("YOUR API KEY");
 
 BroadcastApi apiInstance = new BroadcastApi();
 Long page = 1L; // Long | Current page *(Optional)*
-OffsetDateTime startMin = new OffsetDateTime(); // OffsetDateTime | Minimum start date *(Optional)*
-OffsetDateTime startMax = new OffsetDateTime(); // OffsetDateTime | Maximum start date *(Optional)*
-Long modelTypeId = 789L; // Long | Search on ModelType ID *(Optional)*
+Long programId = 789L; // Long | Search on Program ID *(Optional)* `(Relation)`
+Long blockId = 789L; // Long | Search on Block ID *(Optional)* `(Relation)`
+Long modelTypeId = 789L; // Long | Search on ModelType ID *(Optional)* `(Relation)`
 Long tagId = 789L; // Long | Search on Tag ID *(Optional)* `(Relation)`
 Long presenterId = 789L; // Long | Search on Presenter ID *(Optional)* `(Relation)`
-Long itemId = 789L; // Long | Search on Item ID *(Optional)* `(Relation)`
-Long blockId = 789L; // Long | Search on Block ID *(Optional)* `(Relation)`
 Long genreId = 789L; // Long | Search on Genre ID *(Optional)* `(Relation)`
-Long programId = 789L; // Long | Search on Program ID *(Optional)* `(Relation)`
+Long itemId = 789L; // Long | Search on Item ID *(Optional)* `(Relation)`
+OffsetDateTime startMin = new OffsetDateTime(); // OffsetDateTime | Minimum start date *(Optional)*
+OffsetDateTime startMax = new OffsetDateTime(); // OffsetDateTime | Maximum start date *(Optional)*
+Long limit = 789L; // Long | Results per page *(Optional)*
+String orderBy = "orderBy_example"; // String | Field to order the results *(Optional)*
+String orderDirection = "orderDirection_example"; // String | Direction of ordering *(Optional)*
 Long externalStationId = 789L; // Long | Query on a different (content providing) station *(Optional)*
 try {
-    BroadcastResults result = apiInstance.listBroadcasts(page, startMin, startMax, modelTypeId, tagId, presenterId, itemId, blockId, genreId, programId, externalStationId);
+    BroadcastResults result = apiInstance.listBroadcasts(page, programId, blockId, modelTypeId, tagId, presenterId, genreId, itemId, startMin, startMax, limit, orderBy, orderDirection, externalStationId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling BroadcastApi#listBroadcasts");
@@ -502,15 +511,18 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page** | **Long**| Current page *(Optional)* | [optional] [default to 1]
- **startMin** | **OffsetDateTime**| Minimum start date *(Optional)* | [optional]
- **startMax** | **OffsetDateTime**| Maximum start date *(Optional)* | [optional]
- **modelTypeId** | **Long**| Search on ModelType ID *(Optional)* | [optional]
+ **programId** | **Long**| Search on Program ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
+ **blockId** | **Long**| Search on Block ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
+ **modelTypeId** | **Long**| Search on ModelType ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
  **tagId** | **Long**| Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
  **presenterId** | **Long**| Search on Presenter ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
- **itemId** | **Long**| Search on Item ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
- **blockId** | **Long**| Search on Block ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
  **genreId** | **Long**| Search on Genre ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
- **programId** | **Long**| Search on Program ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
+ **itemId** | **Long**| Search on Item ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
+ **startMin** | **OffsetDateTime**| Minimum start date *(Optional)* | [optional]
+ **startMax** | **OffsetDateTime**| Maximum start date *(Optional)* | [optional]
+ **limit** | **Long**| Results per page *(Optional)* | [optional]
+ **orderBy** | **String**| Field to order the results *(Optional)* | [optional]
+ **orderDirection** | **String**| Direction of ordering *(Optional)* | [optional] [enum: asc, desc]
  **externalStationId** | **Long**| Query on a different (content providing) station *(Optional)* | [optional]
 
 ### Return type

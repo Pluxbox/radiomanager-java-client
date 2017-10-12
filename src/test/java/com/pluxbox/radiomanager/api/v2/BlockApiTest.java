@@ -95,13 +95,16 @@ public class BlockApiTest {
     @Test
     public void listBlocksTest() throws ApiException {
         Long page = null;
+        Long broadcastId = null;
+        Long itemId = null;
+        Long programId = null;
         OffsetDateTime startMin = null;
         OffsetDateTime startMax = null;
-        Long broadcastId = null;
-        Long programId = null;
-        Long itemId = null;
+        Long limit = null;
+        String orderBy = null;
+        String orderDirection = null;
         Long externalStationId = null;
-        BlockResults response = api.listBlocks(page, startMin, startMax, broadcastId, programId, itemId, externalStationId);
+        BlockResults response = api.listBlocks(page, broadcastId, itemId, programId, startMin, startMax, limit, orderBy, orderDirection, externalStationId);
 
         // TODO: test validations
     }
