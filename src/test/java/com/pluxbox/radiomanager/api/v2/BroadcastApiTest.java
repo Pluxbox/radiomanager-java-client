@@ -118,8 +118,7 @@ public class BroadcastApiTest {
     @Test
     public void getDailyEPGTest() throws ApiException {
         OffsetDateTime date = null;
-        Boolean withunpublished = null;
-        EPGBroadcast response = api.getDailyEPG(date, withunpublished);
+        EPGBroadcast response = api.getDailyEPG(date);
 
         // TODO: test validations
     }
@@ -135,8 +134,7 @@ public class BroadcastApiTest {
     @Test
     public void getEPGByDateTest() throws ApiException {
         OffsetDateTime date = null;
-        Boolean withunpublished = null;
-        EPGBroadcast response = api.getEPGByDate(date, withunpublished);
+        EPGBroadcast response = api.getEPGByDate(date);
 
         // TODO: test validations
     }
@@ -167,8 +165,7 @@ public class BroadcastApiTest {
     @Test
     public void getWeeklyEPGTest() throws ApiException {
         String date = null;
-        Boolean withunpublished = null;
-        EPGBroadcast response = api.getWeeklyEPG(date, withunpublished);
+        EPGBroadcast response = api.getWeeklyEPG(date);
 
         // TODO: test validations
     }
@@ -184,20 +181,17 @@ public class BroadcastApiTest {
     @Test
     public void listBroadcastsTest() throws ApiException {
         Long page = null;
-        Long programId = null;
-        Long blockId = null;
+        OffsetDateTime startMin = null;
+        OffsetDateTime startMax = null;
         Long modelTypeId = null;
         Long tagId = null;
         Long presenterId = null;
-        Long genreId = null;
         Long itemId = null;
-        OffsetDateTime startMin = null;
-        OffsetDateTime startMax = null;
-        Long limit = null;
-        String orderBy = null;
-        String orderDirection = null;
+        Long blockId = null;
+        Long genreId = null;
+        Long programId = null;
         Long externalStationId = null;
-        BroadcastResults response = api.listBroadcasts(page, programId, blockId, modelTypeId, tagId, presenterId, genreId, itemId, startMin, startMax, limit, orderBy, orderDirection, externalStationId);
+        BroadcastResults response = api.listBroadcasts(page, startMin, startMax, modelTypeId, tagId, presenterId, itemId, blockId, genreId, programId, externalStationId);
 
         // TODO: test validations
     }

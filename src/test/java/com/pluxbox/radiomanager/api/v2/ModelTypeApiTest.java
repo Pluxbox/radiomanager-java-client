@@ -64,18 +64,15 @@ public class ModelTypeApiTest {
     @Test
     public void listModelTypesTest() throws ApiException {
         Long page = null;
+        String model = null;
         Long programId = null;
         Long broadcastId = null;
         Long itemId = null;
         Long campaignId = null;
         Long presenterId = null;
         Long contactId = null;
-        String model = null;
-        Long limit = null;
-        String orderBy = null;
-        String orderDirection = null;
         Long externalStationId = null;
-        ModelTypeResults response = api.listModelTypes(page, programId, broadcastId, itemId, campaignId, presenterId, contactId, model, limit, orderBy, orderDirection, externalStationId);
+        ModelTypeResults response = api.listModelTypes(page, model, programId, broadcastId, itemId, campaignId, presenterId, contactId, externalStationId);
 
         // TODO: test validations
     }

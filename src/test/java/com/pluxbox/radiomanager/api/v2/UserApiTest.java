@@ -100,10 +100,7 @@ public class UserApiTest {
     public void listUsersTest() throws ApiException {
         Long page = null;
         Long roleId = null;
-        Long limit = null;
-        String orderBy = null;
-        String orderDirection = null;
-        UserResults response = api.listUsers(page, roleId, limit, orderBy, orderDirection);
+        UserResults response = api.listUsers(page, roleId);
 
         // TODO: test validations
     }

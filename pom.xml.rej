@@ -1,0 +1,14 @@
+--- sdk/sdk-java/pom.xml
++++ sdk/sdk-java/pom.xml
+@@ -196,6 +196,11 @@
+       <version>${junit-version}</version>
+       <scope>test</scope>
+     </dependency>
++    <dependency>
++      <groupId>org.apache.maven.plugins</groupId>
++      <artifactId>maven-gpg-plugin</artifactId>
++      <version>1.5</version>
++    </dependency>
+   </dependencies>
+   <properties>
+     <java.version>1.8</java.version>

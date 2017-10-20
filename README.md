@@ -94,7 +94,7 @@ public class BlockApiExample {
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://radiomanager.pb/api/v2*
+All URIs are relative to *http://radiomanager.pb/api/v2*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
@@ -147,7 +147,6 @@ Class | Method | HTTP request | Description
 *ProgramApi* | [**getProgramById**](docs/ProgramApi.md#getProgramById) | **GET** /programs/{id} | Get program by id
 *ProgramApi* | [**listPrograms**](docs/ProgramApi.md#listPrograms) | **GET** /programs | Get all programs.
 *ProgramApi* | [**updateProgramByID**](docs/ProgramApi.md#updateProgramByID) | **PATCH** /programs/{id} | Update program by id
-*StationApi* | [**getStation**](docs/StationApi.md#getStation) | **GET** /station | Get own station only
 *StoryApi* | [**createStory**](docs/StoryApi.md#createStory) | **POST** /stories | Create story.
 *StoryApi* | [**deleteStoryById**](docs/StoryApi.md#deleteStoryById) | **DELETE** /stories/{id} | Delete story by id
 *StoryApi* | [**getStoryById**](docs/StoryApi.md#getStoryById) | **GET** /stories/{id} | Get story by id
@@ -266,8 +265,6 @@ Class | Method | HTTP request | Description
  - [ProgramResults](docs/ProgramResults.md)
  - [ReadOnly](docs/ReadOnly.md)
  - [RelationsPlaceholder](docs/RelationsPlaceholder.md)
- - [StationResult](docs/StationResult.md)
- - [StationResultStation](docs/StationResultStation.md)
  - [Story](docs/Story.md)
  - [StoryInputOnly](docs/StoryInputOnly.md)
  - [StoryOutputOnly](docs/StoryOutputOnly.md)

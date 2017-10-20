@@ -1,6 +1,6 @@
 # BroadcastApi
 
-All URIs are relative to *https://radiomanager.pb/api/v2*
+All URIs are relative to *https://staging.radiomanager.io/api/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -237,7 +237,7 @@ This endpoint does not need any parameter.
 
 <a name="getDailyEPG"></a>
 # **getDailyEPG**
-> EPGBroadcast getDailyEPG(date, withunpublished)
+> EPGResults getDailyEPG(date, withunpublished)
 
 Get daily EPG
 
@@ -264,7 +264,7 @@ BroadcastApi apiInstance = new BroadcastApi();
 OffsetDateTime date = new OffsetDateTime(); // OffsetDateTime | Date *(Optional)*
 Boolean withunpublished = true; // Boolean | Show Unpublished *(Optional)*
 try {
-    EPGBroadcast result = apiInstance.getDailyEPG(date, withunpublished);
+    EPGResults result = apiInstance.getDailyEPG(date, withunpublished);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling BroadcastApi#getDailyEPG");
@@ -281,7 +281,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EPGBroadcast**](EPGBroadcast.md)
+[**EPGResults**](EPGResults.md)
 
 ### Authorization
 
@@ -294,7 +294,7 @@ Name | Type | Description  | Notes
 
 <a name="getEPGByDate"></a>
 # **getEPGByDate**
-> EPGBroadcast getEPGByDate(date, withunpublished)
+> EPGResults getEPGByDate(date, withunpublished)
 
 Get EPG by date
 
@@ -321,7 +321,7 @@ BroadcastApi apiInstance = new BroadcastApi();
 OffsetDateTime date = new OffsetDateTime(); // OffsetDateTime | Date *(Optional)*
 Boolean withunpublished = true; // Boolean | Show Unpublished *(Optional)*
 try {
-    EPGBroadcast result = apiInstance.getEPGByDate(date, withunpublished);
+    EPGResults result = apiInstance.getEPGByDate(date, withunpublished);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling BroadcastApi#getEPGByDate");
@@ -338,7 +338,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EPGBroadcast**](EPGBroadcast.md)
+[**EPGResults**](EPGResults.md)
 
 ### Authorization
 
@@ -402,7 +402,7 @@ This endpoint does not need any parameter.
 
 <a name="getWeeklyEPG"></a>
 # **getWeeklyEPG**
-> EPGBroadcast getWeeklyEPG(date, withunpublished)
+> EPGResults getWeeklyEPG(date, withunpublished)
 
 Get weekly EPG
 
@@ -429,7 +429,7 @@ BroadcastApi apiInstance = new BroadcastApi();
 String date = "date_example"; // String | Date *(Optional)*
 Boolean withunpublished = true; // Boolean | Show Unpublished *(Optional)*
 try {
-    EPGBroadcast result = apiInstance.getWeeklyEPG(date, withunpublished);
+    EPGResults result = apiInstance.getWeeklyEPG(date, withunpublished);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling BroadcastApi#getWeeklyEPG");
@@ -446,7 +446,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EPGBroadcast**](EPGBroadcast.md)
+[**EPGResults**](EPGResults.md)
 
 ### Authorization
 
@@ -540,7 +540,7 @@ Name | Type | Description  | Notes
 
 <a name="printBroadcastById"></a>
 # **printBroadcastById**
-> EPGBroadcast printBroadcastById(id, programId, presenterId, tagId)
+> EPGResults printBroadcastById(id, programId, presenterId, tagId)
 
 Print Broadcast by id
 
@@ -569,7 +569,7 @@ Long programId = 789L; // Long | Search on Program ID *(Optional)* `(Relation)`
 Long presenterId = 789L; // Long | Search on Presenter ID *(Optional)* `(Relation)`
 Long tagId = 789L; // Long | Search on Tag ID *(Optional)* `(Relation)`
 try {
-    EPGBroadcast result = apiInstance.printBroadcastById(id, programId, presenterId, tagId);
+    EPGResults result = apiInstance.printBroadcastById(id, programId, presenterId, tagId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling BroadcastApi#printBroadcastById");
@@ -588,7 +588,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EPGBroadcast**](EPGBroadcast.md)
+[**EPGResults**](EPGResults.md)
 
 ### Authorization
 
