@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **programId** | **Long** |  |  [optional]
 **modelTypeId** | **Long** |  |  [optional]
 **stationId** | **Long** |  |  [optional]
-**fieldValues** | [**BroadcastFieldValues**](BroadcastFieldValues.md) |  |  [optional]
+**fieldValues** | **Object** |  |  [optional]
 **title** | **String** |  |  [optional]
 **start** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]
 **stop** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]

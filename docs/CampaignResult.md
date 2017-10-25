@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **item** | [**List&lt;Item&gt;**](Item.md) |  |  [optional]
 **externalStationId** | **Long** |  |  [optional]
 **modelTypeId** | **Long** |  | 
-**fieldValues** | **List&lt;Object&gt;** |  |  [optional]
+**fieldValues** | **Object** |  |  [optional]
 **title** | **String** |  |  [optional]
 **start** | [**OffsetDateTime**](OffsetDateTime.md) |  | 
 **stop** | [**OffsetDateTime**](OffsetDateTime.md) |  | 

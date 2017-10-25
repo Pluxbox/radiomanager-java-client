@@ -19,7 +19,6 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.pluxbox.radiomanager.api.models.ContactFieldValues;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -34,7 +33,7 @@ public class Contact {
   private Long modelTypeId = null;
 
   @SerializedName("field_values")
-  private ContactFieldValues fieldValues = null;
+  private Object fieldValues = null;
 
   @SerializedName("email")
   private String email = null;
@@ -66,7 +65,7 @@ public class Contact {
     this.modelTypeId = modelTypeId;
   }
 
-  public Contact fieldValues(ContactFieldValues fieldValues) {
+  public Contact fieldValues(Object fieldValues) {
     this.fieldValues = fieldValues;
     return this;
   }
@@ -76,11 +75,11 @@ public class Contact {
    * @return fieldValues
   **/
   @ApiModelProperty(value = "")
-  public ContactFieldValues getFieldValues() {
+  public Object getFieldValues() {
     return fieldValues;
   }
 
-  public void setFieldValues(ContactFieldValues fieldValues) {
+  public void setFieldValues(Object fieldValues) {
     this.fieldValues = fieldValues;
   }
 

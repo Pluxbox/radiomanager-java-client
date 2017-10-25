@@ -59,7 +59,7 @@ public class CampaignResult {
   private Long modelTypeId = null;
 
   @SerializedName("field_values")
-  private List<Object> fieldValues = null;
+  private Object fieldValues = null;
 
   @SerializedName("title")
   private String title = null;
@@ -216,16 +216,8 @@ public class CampaignResult {
     this.modelTypeId = modelTypeId;
   }
 
-  public CampaignResult fieldValues(List<Object> fieldValues) {
+  public CampaignResult fieldValues(Object fieldValues) {
     this.fieldValues = fieldValues;
-    return this;
-  }
-
-  public CampaignResult addFieldValuesItem(Object fieldValuesItem) {
-    if (this.fieldValues == null) {
-      this.fieldValues = new ArrayList<Object>();
-    }
-    this.fieldValues.add(fieldValuesItem);
     return this;
   }
 
@@ -234,11 +226,11 @@ public class CampaignResult {
    * @return fieldValues
   **/
   @ApiModelProperty(value = "")
-  public List<Object> getFieldValues() {
+  public Object getFieldValues() {
     return fieldValues;
   }
 
-  public void setFieldValues(List<Object> fieldValues) {
+  public void setFieldValues(Object fieldValues) {
     this.fieldValues = fieldValues;
   }
 

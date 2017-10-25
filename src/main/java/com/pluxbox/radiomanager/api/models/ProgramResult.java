@@ -21,7 +21,6 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.pluxbox.radiomanager.api.models.BroadcastRelationsModelType;
 import com.pluxbox.radiomanager.api.models.Program;
-import com.pluxbox.radiomanager.api.models.ProgramFieldValues;
 import com.pluxbox.radiomanager.api.models.ProgramOutputOnly;
 import com.pluxbox.radiomanager.api.models.ProgramRelations;
 import com.pluxbox.radiomanager.api.models.ProgramRelationsBlocks;
@@ -58,7 +57,7 @@ public class ProgramResult {
   private Long modelTypeId = null;
 
   @SerializedName("field_values")
-  private ProgramFieldValues fieldValues = null;
+  private Object fieldValues = null;
 
   @SerializedName("title")
   private String title = null;
@@ -219,7 +218,7 @@ public class ProgramResult {
     this.modelTypeId = modelTypeId;
   }
 
-  public ProgramResult fieldValues(ProgramFieldValues fieldValues) {
+  public ProgramResult fieldValues(Object fieldValues) {
     this.fieldValues = fieldValues;
     return this;
   }
@@ -229,11 +228,11 @@ public class ProgramResult {
    * @return fieldValues
   **/
   @ApiModelProperty(value = "")
-  public ProgramFieldValues getFieldValues() {
+  public Object getFieldValues() {
     return fieldValues;
   }
 
-  public void setFieldValues(ProgramFieldValues fieldValues) {
+  public void setFieldValues(Object fieldValues) {
     this.fieldValues = fieldValues;
   }
 

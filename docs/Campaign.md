@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **modelTypeId** | **Long** |  | 
-**fieldValues** | **List&lt;Object&gt;** |  |  [optional]
+**fieldValues** | **Object** |  |  [optional]
 **title** | **String** |  |  [optional]
 **start** | [**OffsetDateTime**](OffsetDateTime.md) |  | 
 **stop** | [**OffsetDateTime**](OffsetDateTime.md) |  | 

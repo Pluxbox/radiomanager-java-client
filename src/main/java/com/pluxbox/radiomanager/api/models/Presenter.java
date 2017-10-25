@@ -22,8 +22,6 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Presenter
@@ -34,7 +32,7 @@ public class Presenter {
   private Long modelTypeId = null;
 
   @SerializedName("field_values")
-  private List<Object> fieldValues = null;
+  private Object fieldValues = null;
 
   @SerializedName("firstname")
   private String firstname = null;
@@ -66,16 +64,8 @@ public class Presenter {
     this.modelTypeId = modelTypeId;
   }
 
-  public Presenter fieldValues(List<Object> fieldValues) {
+  public Presenter fieldValues(Object fieldValues) {
     this.fieldValues = fieldValues;
-    return this;
-  }
-
-  public Presenter addFieldValuesItem(Object fieldValuesItem) {
-    if (this.fieldValues == null) {
-      this.fieldValues = new ArrayList<Object>();
-    }
-    this.fieldValues.add(fieldValuesItem);
     return this;
   }
 
@@ -84,11 +74,11 @@ public class Presenter {
    * @return fieldValues
   **/
   @ApiModelProperty(value = "")
-  public List<Object> getFieldValues() {
+  public Object getFieldValues() {
     return fieldValues;
   }
 
-  public void setFieldValues(List<Object> fieldValues) {
+  public void setFieldValues(Object fieldValues) {
     this.fieldValues = fieldValues;
   }
 

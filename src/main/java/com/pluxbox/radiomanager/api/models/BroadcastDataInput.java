@@ -20,7 +20,6 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.pluxbox.radiomanager.api.models.Broadcast;
-import com.pluxbox.radiomanager.api.models.BroadcastFieldValues;
 import com.pluxbox.radiomanager.api.models.BroadcastInputOnly;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -44,7 +43,7 @@ public class BroadcastDataInput {
   private Long stationId = null;
 
   @SerializedName("field_values")
-  private BroadcastFieldValues fieldValues = null;
+  private Object fieldValues = null;
 
   @SerializedName("title")
   private String title = null;
@@ -211,7 +210,7 @@ public class BroadcastDataInput {
     this.stationId = stationId;
   }
 
-  public BroadcastDataInput fieldValues(BroadcastFieldValues fieldValues) {
+  public BroadcastDataInput fieldValues(Object fieldValues) {
     this.fieldValues = fieldValues;
     return this;
   }
@@ -221,11 +220,11 @@ public class BroadcastDataInput {
    * @return fieldValues
   **/
   @ApiModelProperty(value = "")
-  public BroadcastFieldValues getFieldValues() {
+  public Object getFieldValues() {
     return fieldValues;
   }
 
-  public void setFieldValues(BroadcastFieldValues fieldValues) {
+  public void setFieldValues(Object fieldValues) {
     this.fieldValues = fieldValues;
   }
 

@@ -24,8 +24,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * CampaignDataInput
@@ -36,7 +34,7 @@ public class CampaignDataInput {
   private Long modelTypeId = null;
 
   @SerializedName("field_values")
-  private List<Object> fieldValues = null;
+  private Object fieldValues = null;
 
   @SerializedName("title")
   private String title = null;
@@ -71,16 +69,8 @@ public class CampaignDataInput {
     this.modelTypeId = modelTypeId;
   }
 
-  public CampaignDataInput fieldValues(List<Object> fieldValues) {
+  public CampaignDataInput fieldValues(Object fieldValues) {
     this.fieldValues = fieldValues;
-    return this;
-  }
-
-  public CampaignDataInput addFieldValuesItem(Object fieldValuesItem) {
-    if (this.fieldValues == null) {
-      this.fieldValues = new ArrayList<Object>();
-    }
-    this.fieldValues.add(fieldValuesItem);
     return this;
   }
 
@@ -89,11 +79,11 @@ public class CampaignDataInput {
    * @return fieldValues
   **/
   @ApiModelProperty(value = "")
-  public List<Object> getFieldValues() {
+  public Object getFieldValues() {
     return fieldValues;
   }
 
-  public void setFieldValues(List<Object> fieldValues) {
+  public void setFieldValues(Object fieldValues) {
     this.fieldValues = fieldValues;
   }
 

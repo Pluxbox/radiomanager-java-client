@@ -22,7 +22,6 @@ import com.google.gson.stream.JsonWriter;
 import com.pluxbox.radiomanager.api.models.BlockRelationsProgram;
 import com.pluxbox.radiomanager.api.models.Broadcast;
 import com.pluxbox.radiomanager.api.models.BroadcastEPGRelations;
-import com.pluxbox.radiomanager.api.models.BroadcastFieldValues;
 import com.pluxbox.radiomanager.api.models.BroadcastOutputOnly;
 import com.pluxbox.radiomanager.api.models.BroadcastRelationsBlocks;
 import com.pluxbox.radiomanager.api.models.BroadcastRelationsItems;
@@ -66,7 +65,7 @@ public class BroadcastEPGResult {
   private Long stationId = null;
 
   @SerializedName("field_values")
-  private BroadcastFieldValues fieldValues = null;
+  private Object fieldValues = null;
 
   @SerializedName("title")
   private String title = null;
@@ -335,7 +334,7 @@ public class BroadcastEPGResult {
     this.stationId = stationId;
   }
 
-  public BroadcastEPGResult fieldValues(BroadcastFieldValues fieldValues) {
+  public BroadcastEPGResult fieldValues(Object fieldValues) {
     this.fieldValues = fieldValues;
     return this;
   }
@@ -345,11 +344,11 @@ public class BroadcastEPGResult {
    * @return fieldValues
   **/
   @ApiModelProperty(value = "")
-  public BroadcastFieldValues getFieldValues() {
+  public Object getFieldValues() {
     return fieldValues;
   }
 
-  public void setFieldValues(BroadcastFieldValues fieldValues) {
+  public void setFieldValues(Object fieldValues) {
     this.fieldValues = fieldValues;
   }
 
