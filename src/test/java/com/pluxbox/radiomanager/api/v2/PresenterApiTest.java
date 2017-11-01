@@ -100,14 +100,11 @@ public class PresenterApiTest {
     @Test
     public void listPresentersTest() throws ApiException {
         Long page = null;
+        Long modelTypeId = null;
         Long programId = null;
         Long broadcastId = null;
-        Long modelTypeId = null;
-        Long limit = null;
-        String orderBy = null;
-        String orderDirection = null;
         Long externalStationId = null;
-        PresenterResults response = api.listPresenters(page, programId, broadcastId, modelTypeId, limit, orderBy, orderDirection, externalStationId);
+        PresenterResults response = api.listPresenters(page, modelTypeId, programId, broadcastId, externalStationId);
 
         // TODO: test validations
     }

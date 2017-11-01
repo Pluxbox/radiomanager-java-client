@@ -19,7 +19,6 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.pluxbox.radiomanager.api.models.ImportItemFieldValues;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -39,7 +38,7 @@ public class ImportItem {
   private String externalId = null;
 
   @SerializedName("field_values")
-  private ImportItemFieldValues fieldValues = null;
+  private Object fieldValues = null;
 
   @SerializedName("title")
   private String title = null;
@@ -101,7 +100,7 @@ public class ImportItem {
     this.externalId = externalId;
   }
 
-  public ImportItem fieldValues(ImportItemFieldValues fieldValues) {
+  public ImportItem fieldValues(Object fieldValues) {
     this.fieldValues = fieldValues;
     return this;
   }
@@ -111,11 +110,11 @@ public class ImportItem {
    * @return fieldValues
   **/
   @ApiModelProperty(value = "")
-  public ImportItemFieldValues getFieldValues() {
+  public Object getFieldValues() {
     return fieldValues;
   }
 
-  public void setFieldValues(ImportItemFieldValues fieldValues) {
+  public void setFieldValues(Object fieldValues) {
     this.fieldValues = fieldValues;
   }
 

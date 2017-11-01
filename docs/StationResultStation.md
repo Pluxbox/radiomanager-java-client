@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **mediumName** | **String** |  |  [optional]
 **website** | **String** |  |  [optional]
 **email** | **String** |  |  [optional]
-**keywords** | **String** |  |  [optional]
+**keywords** | **List&lt;String&gt;** |  |  [optional]
 **description** | **String** |  |  [optional]
 **sms** | **String** |  |  [optional]
 **telephone** | **String** |  |  [optional]
@@ -28,6 +28,7 @@ Name | Type | Description | Notes
 **ptyCode** | **Integer** |  |  [optional]
 **ptyType** | **String** |  |  [optional]
 **stationKey** | **String** |  |  [optional]
+**timezone** | **String** |  |  [optional]
 **trialDate** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]
 
 

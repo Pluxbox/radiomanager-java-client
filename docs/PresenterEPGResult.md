@@ -1,5 +1,5 @@
 
-# Presenter
+# PresenterEPGResult
 
 ## Properties
 Name | Type | Description | Notes
@@ -10,6 +10,11 @@ Name | Type | Description | Notes
 **lastname** | **String** |  |  [optional]
 **active** | **Boolean** |  |  [optional]
 **name** | **String** |  |  [optional]
+**id** | **Long** |  | 
+**updatedAt** | [**OffsetDateTime**](OffsetDateTime.md) |  | 
+**createdAt** | [**OffsetDateTime**](OffsetDateTime.md) |  | 
+**deletedAt** | [**OffsetDateTime**](OffsetDateTime.md) |  | 
+**externalStationId** | **Long** |  |  [optional]
 
 
 

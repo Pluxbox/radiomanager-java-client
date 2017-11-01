@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **deletedAt** | [**OffsetDateTime**](OffsetDateTime.md) |  | 
 **externalStationId** | **Long** |  |  [optional]
 **modelTypeId** | **Long** |  | 
-**fieldValues** | **List&lt;Object&gt;** |  |  [optional]
+**fieldValues** | **Object** |  |  [optional]
 **firstname** | **String** |  |  [optional]
 **lastname** | **String** |  |  [optional]
 **active** | **Boolean** |  |  [optional]

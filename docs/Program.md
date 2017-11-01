@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **modelTypeId** | **Long** |  | 
-**fieldValues** | [**ProgramFieldValues**](ProgramFieldValues.md) |  |  [optional]
+**fieldValues** | **Object** |  |  [optional]
 **title** | **String** |  | 
 **disabled** | **Boolean** |  |  [optional]
 **genreId** | **Long** |  |  [optional]

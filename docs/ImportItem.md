@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **modelTypeId** | **Long** |  | 
 **externalId** | **String** |  | 
-**fieldValues** | [**ImportItemFieldValues**](ImportItemFieldValues.md) |  |  [optional]
+**fieldValues** | **Object** |  |  [optional]
 **title** | **String** |  |  [optional]
 **duration** | **Long** |  |  [optional]
 **start** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]

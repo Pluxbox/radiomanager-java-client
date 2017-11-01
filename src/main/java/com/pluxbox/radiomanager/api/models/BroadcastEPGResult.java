@@ -19,8 +19,15 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.pluxbox.radiomanager.api.models.BlockRelationsProgram;
 import com.pluxbox.radiomanager.api.models.Broadcast;
-import com.pluxbox.radiomanager.api.models.BroadcastInputOnly;
+import com.pluxbox.radiomanager.api.models.BroadcastEPGRelations;
+import com.pluxbox.radiomanager.api.models.BroadcastOutputOnly;
+import com.pluxbox.radiomanager.api.models.BroadcastRelationsBlocks;
+import com.pluxbox.radiomanager.api.models.BroadcastRelationsItems;
+import com.pluxbox.radiomanager.api.models.BroadcastRelationsModelType;
+import com.pluxbox.radiomanager.api.models.BroadcastRelationsTags;
+import com.pluxbox.radiomanager.api.models.PresenterEPGResult;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -29,10 +36,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * BroadcastDataInput
+ * BroadcastEPGResult
  */
 
-public class BroadcastDataInput {
+public class BroadcastEPGResult {
+  @SerializedName("id")
+  private Long id = null;
+
+  @SerializedName("updated_at")
+  private OffsetDateTime updatedAt = null;
+
+  @SerializedName("created_at")
+  private OffsetDateTime createdAt = null;
+
+  @SerializedName("deleted_at")
+  private OffsetDateTime deletedAt = null;
+
+  @SerializedName("_external_station_id")
+  private Long externalStationId = null;
+
   @SerializedName("program_id")
   private Long programId = null;
 
@@ -150,13 +172,115 @@ public class BroadcastDataInput {
   @SerializedName("pty_code_id")
   private Long ptyCodeId = null;
 
+  @SerializedName("items")
+  private BroadcastRelationsItems items = null;
+
+  @SerializedName("blocks")
+  private BroadcastRelationsBlocks blocks = null;
+
+  @SerializedName("program")
+  private BlockRelationsProgram program = null;
+
   @SerializedName("tags")
-  private List<Integer> tags = null;
+  private BroadcastRelationsTags tags = null;
 
   @SerializedName("presenters")
-  private List<Integer> presenters = null;
+  private List<PresenterEPGResult> presenters = null;
 
-  public BroadcastDataInput programId(Long programId) {
+  @SerializedName("model_type")
+  private BroadcastRelationsModelType modelType = null;
+
+  public BroadcastEPGResult id(Long id) {
+    this.id = id;
+    return this;
+  }
+
+   /**
+   * Get id
+   * @return id
+  **/
+  @ApiModelProperty(example = "1", required = true, value = "")
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public BroadcastEPGResult updatedAt(OffsetDateTime updatedAt) {
+    this.updatedAt = updatedAt;
+    return this;
+  }
+
+   /**
+   * Get updatedAt
+   * @return updatedAt
+  **/
+  @ApiModelProperty(example = "2016-01-11T22:01:11+02:00", required = true, value = "")
+  public OffsetDateTime getUpdatedAt() {
+    return updatedAt;
+  }
+
+  public void setUpdatedAt(OffsetDateTime updatedAt) {
+    this.updatedAt = updatedAt;
+  }
+
+  public BroadcastEPGResult createdAt(OffsetDateTime createdAt) {
+    this.createdAt = createdAt;
+    return this;
+  }
+
+   /**
+   * Get createdAt
+   * @return createdAt
+  **/
+  @ApiModelProperty(example = "2016-01-11T22:01:11+02:00", required = true, value = "")
+  public OffsetDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(OffsetDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public BroadcastEPGResult deletedAt(OffsetDateTime deletedAt) {
+    this.deletedAt = deletedAt;
+    return this;
+  }
+
+   /**
+   * Get deletedAt
+   * @return deletedAt
+  **/
+  @ApiModelProperty(example = "2016-01-11T22:01:11+02:00", required = true, value = "")
+  public OffsetDateTime getDeletedAt() {
+    return deletedAt;
+  }
+
+  public void setDeletedAt(OffsetDateTime deletedAt) {
+    this.deletedAt = deletedAt;
+  }
+
+  public BroadcastEPGResult externalStationId(Long externalStationId) {
+    this.externalStationId = externalStationId;
+    return this;
+  }
+
+   /**
+   * Get externalStationId
+   * @return externalStationId
+  **/
+  @ApiModelProperty(value = "")
+  public Long getExternalStationId() {
+    return externalStationId;
+  }
+
+  public void setExternalStationId(Long externalStationId) {
+    this.externalStationId = externalStationId;
+  }
+
+  public BroadcastEPGResult programId(Long programId) {
     this.programId = programId;
     return this;
   }
@@ -174,7 +298,7 @@ public class BroadcastDataInput {
     this.programId = programId;
   }
 
-  public BroadcastDataInput modelTypeId(Long modelTypeId) {
+  public BroadcastEPGResult modelTypeId(Long modelTypeId) {
     this.modelTypeId = modelTypeId;
     return this;
   }
@@ -192,7 +316,7 @@ public class BroadcastDataInput {
     this.modelTypeId = modelTypeId;
   }
 
-  public BroadcastDataInput stationId(Long stationId) {
+  public BroadcastEPGResult stationId(Long stationId) {
     this.stationId = stationId;
     return this;
   }
@@ -210,7 +334,7 @@ public class BroadcastDataInput {
     this.stationId = stationId;
   }
 
-  public BroadcastDataInput fieldValues(Object fieldValues) {
+  public BroadcastEPGResult fieldValues(Object fieldValues) {
     this.fieldValues = fieldValues;
     return this;
   }
@@ -228,7 +352,7 @@ public class BroadcastDataInput {
     this.fieldValues = fieldValues;
   }
 
-  public BroadcastDataInput title(String title) {
+  public BroadcastEPGResult title(String title) {
     this.title = title;
     return this;
   }
@@ -246,7 +370,7 @@ public class BroadcastDataInput {
     this.title = title;
   }
 
-  public BroadcastDataInput start(OffsetDateTime start) {
+  public BroadcastEPGResult start(OffsetDateTime start) {
     this.start = start;
     return this;
   }
@@ -264,7 +388,7 @@ public class BroadcastDataInput {
     this.start = start;
   }
 
-  public BroadcastDataInput stop(OffsetDateTime stop) {
+  public BroadcastEPGResult stop(OffsetDateTime stop) {
     this.stop = stop;
     return this;
   }
@@ -282,7 +406,7 @@ public class BroadcastDataInput {
     this.stop = stop;
   }
 
-  public BroadcastDataInput genreId(Long genreId) {
+  public BroadcastEPGResult genreId(Long genreId) {
     this.genreId = genreId;
     return this;
   }
@@ -300,7 +424,7 @@ public class BroadcastDataInput {
     this.genreId = genreId;
   }
 
-  public BroadcastDataInput description(String description) {
+  public BroadcastEPGResult description(String description) {
     this.description = description;
     return this;
   }
@@ -318,7 +442,7 @@ public class BroadcastDataInput {
     this.description = description;
   }
 
-  public BroadcastDataInput shortName(String shortName) {
+  public BroadcastEPGResult shortName(String shortName) {
     this.shortName = shortName;
     return this;
   }
@@ -336,7 +460,7 @@ public class BroadcastDataInput {
     this.shortName = shortName;
   }
 
-  public BroadcastDataInput mediumName(String mediumName) {
+  public BroadcastEPGResult mediumName(String mediumName) {
     this.mediumName = mediumName;
     return this;
   }
@@ -354,7 +478,7 @@ public class BroadcastDataInput {
     this.mediumName = mediumName;
   }
 
-  public BroadcastDataInput website(String website) {
+  public BroadcastEPGResult website(String website) {
     this.website = website;
     return this;
   }
@@ -372,7 +496,7 @@ public class BroadcastDataInput {
     this.website = website;
   }
 
-  public BroadcastDataInput email(String email) {
+  public BroadcastEPGResult email(String email) {
     this.email = email;
     return this;
   }
@@ -390,7 +514,7 @@ public class BroadcastDataInput {
     this.email = email;
   }
 
-  public BroadcastDataInput recommended(Boolean recommended) {
+  public BroadcastEPGResult recommended(Boolean recommended) {
     this.recommended = recommended;
     return this;
   }
@@ -408,7 +532,7 @@ public class BroadcastDataInput {
     this.recommended = recommended;
   }
 
-  public BroadcastDataInput language(String language) {
+  public BroadcastEPGResult language(String language) {
     this.language = language;
     return this;
   }
@@ -426,7 +550,7 @@ public class BroadcastDataInput {
     this.language = language;
   }
 
-  public BroadcastDataInput published(Boolean published) {
+  public BroadcastEPGResult published(Boolean published) {
     this.published = published;
     return this;
   }
@@ -444,7 +568,7 @@ public class BroadcastDataInput {
     this.published = published;
   }
 
-  public BroadcastDataInput repetitionUid(String repetitionUid) {
+  public BroadcastEPGResult repetitionUid(String repetitionUid) {
     this.repetitionUid = repetitionUid;
     return this;
   }
@@ -462,7 +586,7 @@ public class BroadcastDataInput {
     this.repetitionUid = repetitionUid;
   }
 
-  public BroadcastDataInput repetitionType(RepetitionTypeEnum repetitionType) {
+  public BroadcastEPGResult repetitionType(RepetitionTypeEnum repetitionType) {
     this.repetitionType = repetitionType;
     return this;
   }
@@ -480,7 +604,7 @@ public class BroadcastDataInput {
     this.repetitionType = repetitionType;
   }
 
-  public BroadcastDataInput repetitionEnd(OffsetDateTime repetitionEnd) {
+  public BroadcastEPGResult repetitionEnd(OffsetDateTime repetitionEnd) {
     this.repetitionEnd = repetitionEnd;
     return this;
   }
@@ -498,7 +622,7 @@ public class BroadcastDataInput {
     this.repetitionEnd = repetitionEnd;
   }
 
-  public BroadcastDataInput repetitionStart(OffsetDateTime repetitionStart) {
+  public BroadcastEPGResult repetitionStart(OffsetDateTime repetitionStart) {
     this.repetitionStart = repetitionStart;
     return this;
   }
@@ -516,7 +640,7 @@ public class BroadcastDataInput {
     this.repetitionStart = repetitionStart;
   }
 
-  public BroadcastDataInput repetitionDays(String repetitionDays) {
+  public BroadcastEPGResult repetitionDays(String repetitionDays) {
     this.repetitionDays = repetitionDays;
     return this;
   }
@@ -534,7 +658,7 @@ public class BroadcastDataInput {
     this.repetitionDays = repetitionDays;
   }
 
-  public BroadcastDataInput ptyCodeId(Long ptyCodeId) {
+  public BroadcastEPGResult ptyCodeId(Long ptyCodeId) {
     this.ptyCodeId = ptyCodeId;
     return this;
   }
@@ -553,16 +677,62 @@ public class BroadcastDataInput {
     this.ptyCodeId = ptyCodeId;
   }
 
-  public BroadcastDataInput tags(List<Integer> tags) {
-    this.tags = tags;
+  public BroadcastEPGResult items(BroadcastRelationsItems items) {
+    this.items = items;
     return this;
   }
 
-  public BroadcastDataInput addTagsItem(Integer tagsItem) {
-    if (this.tags == null) {
-      this.tags = new ArrayList<Integer>();
-    }
-    this.tags.add(tagsItem);
+   /**
+   * Get items
+   * @return items
+  **/
+  @ApiModelProperty(value = "")
+  public BroadcastRelationsItems getItems() {
+    return items;
+  }
+
+  public void setItems(BroadcastRelationsItems items) {
+    this.items = items;
+  }
+
+  public BroadcastEPGResult blocks(BroadcastRelationsBlocks blocks) {
+    this.blocks = blocks;
+    return this;
+  }
+
+   /**
+   * Get blocks
+   * @return blocks
+  **/
+  @ApiModelProperty(value = "")
+  public BroadcastRelationsBlocks getBlocks() {
+    return blocks;
+  }
+
+  public void setBlocks(BroadcastRelationsBlocks blocks) {
+    this.blocks = blocks;
+  }
+
+  public BroadcastEPGResult program(BlockRelationsProgram program) {
+    this.program = program;
+    return this;
+  }
+
+   /**
+   * Get program
+   * @return program
+  **/
+  @ApiModelProperty(value = "")
+  public BlockRelationsProgram getProgram() {
+    return program;
+  }
+
+  public void setProgram(BlockRelationsProgram program) {
+    this.program = program;
+  }
+
+  public BroadcastEPGResult tags(BroadcastRelationsTags tags) {
+    this.tags = tags;
     return this;
   }
 
@@ -571,22 +741,22 @@ public class BroadcastDataInput {
    * @return tags
   **/
   @ApiModelProperty(value = "")
-  public List<Integer> getTags() {
+  public BroadcastRelationsTags getTags() {
     return tags;
   }
 
-  public void setTags(List<Integer> tags) {
+  public void setTags(BroadcastRelationsTags tags) {
     this.tags = tags;
   }
 
-  public BroadcastDataInput presenters(List<Integer> presenters) {
+  public BroadcastEPGResult presenters(List<PresenterEPGResult> presenters) {
     this.presenters = presenters;
     return this;
   }
 
-  public BroadcastDataInput addPresentersItem(Integer presentersItem) {
+  public BroadcastEPGResult addPresentersItem(PresenterEPGResult presentersItem) {
     if (this.presenters == null) {
-      this.presenters = new ArrayList<Integer>();
+      this.presenters = new ArrayList<PresenterEPGResult>();
     }
     this.presenters.add(presentersItem);
     return this;
@@ -597,12 +767,30 @@ public class BroadcastDataInput {
    * @return presenters
   **/
   @ApiModelProperty(value = "")
-  public List<Integer> getPresenters() {
+  public List<PresenterEPGResult> getPresenters() {
     return presenters;
   }
 
-  public void setPresenters(List<Integer> presenters) {
+  public void setPresenters(List<PresenterEPGResult> presenters) {
     this.presenters = presenters;
+  }
+
+  public BroadcastEPGResult modelType(BroadcastRelationsModelType modelType) {
+    this.modelType = modelType;
+    return this;
+  }
+
+   /**
+   * Get modelType
+   * @return modelType
+  **/
+  @ApiModelProperty(value = "")
+  public BroadcastRelationsModelType getModelType() {
+    return modelType;
+  }
+
+  public void setModelType(BroadcastRelationsModelType modelType) {
+    this.modelType = modelType;
   }
 
 
@@ -614,44 +802,58 @@ public class BroadcastDataInput {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    BroadcastDataInput broadcastDataInput = (BroadcastDataInput) o;
-    return Objects.equals(this.programId, broadcastDataInput.programId) &&
-        Objects.equals(this.modelTypeId, broadcastDataInput.modelTypeId) &&
-        Objects.equals(this.stationId, broadcastDataInput.stationId) &&
-        Objects.equals(this.fieldValues, broadcastDataInput.fieldValues) &&
-        Objects.equals(this.title, broadcastDataInput.title) &&
-        Objects.equals(this.start, broadcastDataInput.start) &&
-        Objects.equals(this.stop, broadcastDataInput.stop) &&
-        Objects.equals(this.genreId, broadcastDataInput.genreId) &&
-        Objects.equals(this.description, broadcastDataInput.description) &&
-        Objects.equals(this.shortName, broadcastDataInput.shortName) &&
-        Objects.equals(this.mediumName, broadcastDataInput.mediumName) &&
-        Objects.equals(this.website, broadcastDataInput.website) &&
-        Objects.equals(this.email, broadcastDataInput.email) &&
-        Objects.equals(this.recommended, broadcastDataInput.recommended) &&
-        Objects.equals(this.language, broadcastDataInput.language) &&
-        Objects.equals(this.published, broadcastDataInput.published) &&
-        Objects.equals(this.repetitionUid, broadcastDataInput.repetitionUid) &&
-        Objects.equals(this.repetitionType, broadcastDataInput.repetitionType) &&
-        Objects.equals(this.repetitionEnd, broadcastDataInput.repetitionEnd) &&
-        Objects.equals(this.repetitionStart, broadcastDataInput.repetitionStart) &&
-        Objects.equals(this.repetitionDays, broadcastDataInput.repetitionDays) &&
-        Objects.equals(this.ptyCodeId, broadcastDataInput.ptyCodeId) &&
-        Objects.equals(this.tags, broadcastDataInput.tags) &&
-        Objects.equals(this.presenters, broadcastDataInput.presenters);
+    BroadcastEPGResult broadcastEPGResult = (BroadcastEPGResult) o;
+    return Objects.equals(this.id, broadcastEPGResult.id) &&
+        Objects.equals(this.updatedAt, broadcastEPGResult.updatedAt) &&
+        Objects.equals(this.createdAt, broadcastEPGResult.createdAt) &&
+        Objects.equals(this.deletedAt, broadcastEPGResult.deletedAt) &&
+        Objects.equals(this.externalStationId, broadcastEPGResult.externalStationId) &&
+        Objects.equals(this.programId, broadcastEPGResult.programId) &&
+        Objects.equals(this.modelTypeId, broadcastEPGResult.modelTypeId) &&
+        Objects.equals(this.stationId, broadcastEPGResult.stationId) &&
+        Objects.equals(this.fieldValues, broadcastEPGResult.fieldValues) &&
+        Objects.equals(this.title, broadcastEPGResult.title) &&
+        Objects.equals(this.start, broadcastEPGResult.start) &&
+        Objects.equals(this.stop, broadcastEPGResult.stop) &&
+        Objects.equals(this.genreId, broadcastEPGResult.genreId) &&
+        Objects.equals(this.description, broadcastEPGResult.description) &&
+        Objects.equals(this.shortName, broadcastEPGResult.shortName) &&
+        Objects.equals(this.mediumName, broadcastEPGResult.mediumName) &&
+        Objects.equals(this.website, broadcastEPGResult.website) &&
+        Objects.equals(this.email, broadcastEPGResult.email) &&
+        Objects.equals(this.recommended, broadcastEPGResult.recommended) &&
+        Objects.equals(this.language, broadcastEPGResult.language) &&
+        Objects.equals(this.published, broadcastEPGResult.published) &&
+        Objects.equals(this.repetitionUid, broadcastEPGResult.repetitionUid) &&
+        Objects.equals(this.repetitionType, broadcastEPGResult.repetitionType) &&
+        Objects.equals(this.repetitionEnd, broadcastEPGResult.repetitionEnd) &&
+        Objects.equals(this.repetitionStart, broadcastEPGResult.repetitionStart) &&
+        Objects.equals(this.repetitionDays, broadcastEPGResult.repetitionDays) &&
+        Objects.equals(this.ptyCodeId, broadcastEPGResult.ptyCodeId) &&
+        Objects.equals(this.items, broadcastEPGResult.items) &&
+        Objects.equals(this.blocks, broadcastEPGResult.blocks) &&
+        Objects.equals(this.program, broadcastEPGResult.program) &&
+        Objects.equals(this.tags, broadcastEPGResult.tags) &&
+        Objects.equals(this.presenters, broadcastEPGResult.presenters) &&
+        Objects.equals(this.modelType, broadcastEPGResult.modelType);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(programId, modelTypeId, stationId, fieldValues, title, start, stop, genreId, description, shortName, mediumName, website, email, recommended, language, published, repetitionUid, repetitionType, repetitionEnd, repetitionStart, repetitionDays, ptyCodeId, tags, presenters);
+    return Objects.hash(id, updatedAt, createdAt, deletedAt, externalStationId, programId, modelTypeId, stationId, fieldValues, title, start, stop, genreId, description, shortName, mediumName, website, email, recommended, language, published, repetitionUid, repetitionType, repetitionEnd, repetitionStart, repetitionDays, ptyCodeId, items, blocks, program, tags, presenters, modelType);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class BroadcastDataInput {\n");
+    sb.append("class BroadcastEPGResult {\n");
     
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    updatedAt: ").append(toIndentedString(updatedAt)).append("\n");
+    sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
+    sb.append("    deletedAt: ").append(toIndentedString(deletedAt)).append("\n");
+    sb.append("    externalStationId: ").append(toIndentedString(externalStationId)).append("\n");
     sb.append("    programId: ").append(toIndentedString(programId)).append("\n");
     sb.append("    modelTypeId: ").append(toIndentedString(modelTypeId)).append("\n");
     sb.append("    stationId: ").append(toIndentedString(stationId)).append("\n");
@@ -674,8 +876,12 @@ public class BroadcastDataInput {
     sb.append("    repetitionStart: ").append(toIndentedString(repetitionStart)).append("\n");
     sb.append("    repetitionDays: ").append(toIndentedString(repetitionDays)).append("\n");
     sb.append("    ptyCodeId: ").append(toIndentedString(ptyCodeId)).append("\n");
+    sb.append("    items: ").append(toIndentedString(items)).append("\n");
+    sb.append("    blocks: ").append(toIndentedString(blocks)).append("\n");
+    sb.append("    program: ").append(toIndentedString(program)).append("\n");
     sb.append("    tags: ").append(toIndentedString(tags)).append("\n");
     sb.append("    presenters: ").append(toIndentedString(presenters)).append("\n");
+    sb.append("    modelType: ").append(toIndentedString(modelType)).append("\n");
     sb.append("}");
     return sb.toString();
   }

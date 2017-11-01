@@ -104,11 +104,8 @@ public class TagApiTest {
         Long itemId = null;
         Long broadcastId = null;
         Long contactId = null;
-        Long limit = null;
-        String orderBy = null;
-        String orderDirection = null;
         Long externalStationId = null;
-        TagResults response = api.listTags(page, programId, itemId, broadcastId, contactId, limit, orderBy, orderDirection, externalStationId);
+        TagResults response = api.listTags(page, programId, itemId, broadcastId, contactId, externalStationId);
 
         // TODO: test validations
     }

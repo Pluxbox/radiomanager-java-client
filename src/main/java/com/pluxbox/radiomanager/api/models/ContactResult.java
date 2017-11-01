@@ -21,7 +21,6 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.pluxbox.radiomanager.api.models.BroadcastRelationsModelType;
 import com.pluxbox.radiomanager.api.models.Contact;
-import com.pluxbox.radiomanager.api.models.ContactFieldValues;
 import com.pluxbox.radiomanager.api.models.ContactOutputOnly;
 import com.pluxbox.radiomanager.api.models.ContactRelations;
 import com.pluxbox.radiomanager.api.models.ContactRelationsItems;
@@ -55,7 +54,7 @@ public class ContactResult {
   private Long modelTypeId = null;
 
   @SerializedName("field_values")
-  private ContactFieldValues fieldValues = null;
+  private Object fieldValues = null;
 
   @SerializedName("email")
   private String email = null;
@@ -186,7 +185,7 @@ public class ContactResult {
     this.modelTypeId = modelTypeId;
   }
 
-  public ContactResult fieldValues(ContactFieldValues fieldValues) {
+  public ContactResult fieldValues(Object fieldValues) {
     this.fieldValues = fieldValues;
     return this;
   }
@@ -196,11 +195,11 @@ public class ContactResult {
    * @return fieldValues
   **/
   @ApiModelProperty(value = "")
-  public ContactFieldValues getFieldValues() {
+  public Object getFieldValues() {
     return fieldValues;
   }
 
-  public void setFieldValues(ContactFieldValues fieldValues) {
+  public void setFieldValues(Object fieldValues) {
     this.fieldValues = fieldValues;
   }
 

@@ -27,11 +27,10 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
-import com.pluxbox.radiomanager.api.models.Broadcast;
 import com.pluxbox.radiomanager.api.models.BroadcastDataInput;
 import com.pluxbox.radiomanager.api.models.BroadcastResult;
 import com.pluxbox.radiomanager.api.models.BroadcastResults;
-import com.pluxbox.radiomanager.api.models.EPGBroadcast;
+import com.pluxbox.radiomanager.api.models.EPGResults;
 import com.pluxbox.radiomanager.api.models.Forbidden;
 import com.pluxbox.radiomanager.api.models.NotFound;
 import java.time.OffsetDateTime;
@@ -450,18 +449,21 @@ public class BroadcastApi {
     }
     /**
      * Build call for getCurrentBroadcast
+     * @param withunpublished Show Unpublished *(Optional)* (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call getCurrentBroadcastCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call getCurrentBroadcastCall(Boolean withunpublished, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
         String localVarPath = "/broadcasts/current";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        if (withunpublished != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "withunpublished", withunpublished));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -496,10 +498,10 @@ public class BroadcastApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call getCurrentBroadcastValidateBeforeCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call getCurrentBroadcastValidateBeforeCall(Boolean withunpublished, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         
-        com.squareup.okhttp.Call call = getCurrentBroadcastCall(progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = getCurrentBroadcastCall(withunpublished, progressListener, progressRequestListener);
         return call;
 
         
@@ -511,34 +513,37 @@ public class BroadcastApi {
     /**
      * Get current Broadcast
      * Get current Broadcast
-     * @return Broadcast
+     * @param withunpublished Show Unpublished *(Optional)* (optional)
+     * @return BroadcastResult
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public Broadcast getCurrentBroadcast() throws ApiException {
-        ApiResponse<Broadcast> resp = getCurrentBroadcastWithHttpInfo();
+    public BroadcastResult getCurrentBroadcast(Boolean withunpublished) throws ApiException {
+        ApiResponse<BroadcastResult> resp = getCurrentBroadcastWithHttpInfo(withunpublished);
         return resp.getData();
     }
 
     /**
      * Get current Broadcast
      * Get current Broadcast
-     * @return ApiResponse&lt;Broadcast&gt;
+     * @param withunpublished Show Unpublished *(Optional)* (optional)
+     * @return ApiResponse&lt;BroadcastResult&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<Broadcast> getCurrentBroadcastWithHttpInfo() throws ApiException {
-        com.squareup.okhttp.Call call = getCurrentBroadcastValidateBeforeCall(null, null);
-        Type localVarReturnType = new TypeToken<Broadcast>(){}.getType();
+    public ApiResponse<BroadcastResult> getCurrentBroadcastWithHttpInfo(Boolean withunpublished) throws ApiException {
+        com.squareup.okhttp.Call call = getCurrentBroadcastValidateBeforeCall(withunpublished, null, null);
+        Type localVarReturnType = new TypeToken<BroadcastResult>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
     /**
      * Get current Broadcast (asynchronously)
      * Get current Broadcast
+     * @param withunpublished Show Unpublished *(Optional)* (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getCurrentBroadcastAsync(final ApiCallback<Broadcast> callback) throws ApiException {
+    public com.squareup.okhttp.Call getCurrentBroadcastAsync(Boolean withunpublished, final ApiCallback<BroadcastResult> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -559,8 +564,8 @@ public class BroadcastApi {
             };
         }
 
-        com.squareup.okhttp.Call call = getCurrentBroadcastValidateBeforeCall(progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<Broadcast>(){}.getType();
+        com.squareup.okhttp.Call call = getCurrentBroadcastValidateBeforeCall(withunpublished, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<BroadcastResult>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -635,11 +640,11 @@ public class BroadcastApi {
      * Get current Broadcast
      * @param date Date *(Optional)* (optional)
      * @param withunpublished Show Unpublished *(Optional)* (optional)
-     * @return EPGBroadcast
+     * @return EPGResults
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public EPGBroadcast getDailyEPG(OffsetDateTime date, Boolean withunpublished) throws ApiException {
-        ApiResponse<EPGBroadcast> resp = getDailyEPGWithHttpInfo(date, withunpublished);
+    public EPGResults getDailyEPG(OffsetDateTime date, Boolean withunpublished) throws ApiException {
+        ApiResponse<EPGResults> resp = getDailyEPGWithHttpInfo(date, withunpublished);
         return resp.getData();
     }
 
@@ -648,12 +653,12 @@ public class BroadcastApi {
      * Get current Broadcast
      * @param date Date *(Optional)* (optional)
      * @param withunpublished Show Unpublished *(Optional)* (optional)
-     * @return ApiResponse&lt;EPGBroadcast&gt;
+     * @return ApiResponse&lt;EPGResults&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<EPGBroadcast> getDailyEPGWithHttpInfo(OffsetDateTime date, Boolean withunpublished) throws ApiException {
+    public ApiResponse<EPGResults> getDailyEPGWithHttpInfo(OffsetDateTime date, Boolean withunpublished) throws ApiException {
         com.squareup.okhttp.Call call = getDailyEPGValidateBeforeCall(date, withunpublished, null, null);
-        Type localVarReturnType = new TypeToken<EPGBroadcast>(){}.getType();
+        Type localVarReturnType = new TypeToken<EPGResults>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -666,7 +671,7 @@ public class BroadcastApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getDailyEPGAsync(OffsetDateTime date, Boolean withunpublished, final ApiCallback<EPGBroadcast> callback) throws ApiException {
+    public com.squareup.okhttp.Call getDailyEPGAsync(OffsetDateTime date, Boolean withunpublished, final ApiCallback<EPGResults> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -688,7 +693,7 @@ public class BroadcastApi {
         }
 
         com.squareup.okhttp.Call call = getDailyEPGValidateBeforeCall(date, withunpublished, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<EPGBroadcast>(){}.getType();
+        Type localVarReturnType = new TypeToken<EPGResults>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -763,11 +768,11 @@ public class BroadcastApi {
      * Get EPG by date
      * @param date Date *(Optional)* (optional)
      * @param withunpublished Show Unpublished *(Optional)* (optional)
-     * @return EPGBroadcast
+     * @return EPGResults
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public EPGBroadcast getEPGByDate(OffsetDateTime date, Boolean withunpublished) throws ApiException {
-        ApiResponse<EPGBroadcast> resp = getEPGByDateWithHttpInfo(date, withunpublished);
+    public EPGResults getEPGByDate(OffsetDateTime date, Boolean withunpublished) throws ApiException {
+        ApiResponse<EPGResults> resp = getEPGByDateWithHttpInfo(date, withunpublished);
         return resp.getData();
     }
 
@@ -776,12 +781,12 @@ public class BroadcastApi {
      * Get EPG by date
      * @param date Date *(Optional)* (optional)
      * @param withunpublished Show Unpublished *(Optional)* (optional)
-     * @return ApiResponse&lt;EPGBroadcast&gt;
+     * @return ApiResponse&lt;EPGResults&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<EPGBroadcast> getEPGByDateWithHttpInfo(OffsetDateTime date, Boolean withunpublished) throws ApiException {
+    public ApiResponse<EPGResults> getEPGByDateWithHttpInfo(OffsetDateTime date, Boolean withunpublished) throws ApiException {
         com.squareup.okhttp.Call call = getEPGByDateValidateBeforeCall(date, withunpublished, null, null);
-        Type localVarReturnType = new TypeToken<EPGBroadcast>(){}.getType();
+        Type localVarReturnType = new TypeToken<EPGResults>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -794,7 +799,7 @@ public class BroadcastApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getEPGByDateAsync(OffsetDateTime date, Boolean withunpublished, final ApiCallback<EPGBroadcast> callback) throws ApiException {
+    public com.squareup.okhttp.Call getEPGByDateAsync(OffsetDateTime date, Boolean withunpublished, final ApiCallback<EPGResults> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -816,24 +821,27 @@ public class BroadcastApi {
         }
 
         com.squareup.okhttp.Call call = getEPGByDateValidateBeforeCall(date, withunpublished, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<EPGBroadcast>(){}.getType();
+        Type localVarReturnType = new TypeToken<EPGResults>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
     /**
      * Build call for getNextBroadcast
+     * @param withunpublished Show Unpublished *(Optional)* (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call getNextBroadcastCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call getNextBroadcastCall(Boolean withunpublished, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
         String localVarPath = "/broadcasts/next";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        if (withunpublished != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "withunpublished", withunpublished));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -868,10 +876,10 @@ public class BroadcastApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call getNextBroadcastValidateBeforeCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call getNextBroadcastValidateBeforeCall(Boolean withunpublished, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         
-        com.squareup.okhttp.Call call = getNextBroadcastCall(progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = getNextBroadcastCall(withunpublished, progressListener, progressRequestListener);
         return call;
 
         
@@ -883,34 +891,37 @@ public class BroadcastApi {
     /**
      * Get next Broadcast
      * Get next Broadcast
-     * @return Broadcast
+     * @param withunpublished Show Unpublished *(Optional)* (optional)
+     * @return BroadcastResult
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public Broadcast getNextBroadcast() throws ApiException {
-        ApiResponse<Broadcast> resp = getNextBroadcastWithHttpInfo();
+    public BroadcastResult getNextBroadcast(Boolean withunpublished) throws ApiException {
+        ApiResponse<BroadcastResult> resp = getNextBroadcastWithHttpInfo(withunpublished);
         return resp.getData();
     }
 
     /**
      * Get next Broadcast
      * Get next Broadcast
-     * @return ApiResponse&lt;Broadcast&gt;
+     * @param withunpublished Show Unpublished *(Optional)* (optional)
+     * @return ApiResponse&lt;BroadcastResult&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<Broadcast> getNextBroadcastWithHttpInfo() throws ApiException {
-        com.squareup.okhttp.Call call = getNextBroadcastValidateBeforeCall(null, null);
-        Type localVarReturnType = new TypeToken<Broadcast>(){}.getType();
+    public ApiResponse<BroadcastResult> getNextBroadcastWithHttpInfo(Boolean withunpublished) throws ApiException {
+        com.squareup.okhttp.Call call = getNextBroadcastValidateBeforeCall(withunpublished, null, null);
+        Type localVarReturnType = new TypeToken<BroadcastResult>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
     /**
      * Get next Broadcast (asynchronously)
      * Get next Broadcast
+     * @param withunpublished Show Unpublished *(Optional)* (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getNextBroadcastAsync(final ApiCallback<Broadcast> callback) throws ApiException {
+    public com.squareup.okhttp.Call getNextBroadcastAsync(Boolean withunpublished, final ApiCallback<BroadcastResult> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -931,8 +942,8 @@ public class BroadcastApi {
             };
         }
 
-        com.squareup.okhttp.Call call = getNextBroadcastValidateBeforeCall(progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<Broadcast>(){}.getType();
+        com.squareup.okhttp.Call call = getNextBroadcastValidateBeforeCall(withunpublished, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<BroadcastResult>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -1007,11 +1018,11 @@ public class BroadcastApi {
      * Get weekly EPG
      * @param date Date *(Optional)* (optional)
      * @param withunpublished Show Unpublished *(Optional)* (optional)
-     * @return EPGBroadcast
+     * @return EPGResults
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public EPGBroadcast getWeeklyEPG(String date, Boolean withunpublished) throws ApiException {
-        ApiResponse<EPGBroadcast> resp = getWeeklyEPGWithHttpInfo(date, withunpublished);
+    public EPGResults getWeeklyEPG(String date, Boolean withunpublished) throws ApiException {
+        ApiResponse<EPGResults> resp = getWeeklyEPGWithHttpInfo(date, withunpublished);
         return resp.getData();
     }
 
@@ -1020,12 +1031,12 @@ public class BroadcastApi {
      * Get weekly EPG
      * @param date Date *(Optional)* (optional)
      * @param withunpublished Show Unpublished *(Optional)* (optional)
-     * @return ApiResponse&lt;EPGBroadcast&gt;
+     * @return ApiResponse&lt;EPGResults&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<EPGBroadcast> getWeeklyEPGWithHttpInfo(String date, Boolean withunpublished) throws ApiException {
+    public ApiResponse<EPGResults> getWeeklyEPGWithHttpInfo(String date, Boolean withunpublished) throws ApiException {
         com.squareup.okhttp.Call call = getWeeklyEPGValidateBeforeCall(date, withunpublished, null, null);
-        Type localVarReturnType = new TypeToken<EPGBroadcast>(){}.getType();
+        Type localVarReturnType = new TypeToken<EPGResults>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -1038,7 +1049,7 @@ public class BroadcastApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getWeeklyEPGAsync(String date, Boolean withunpublished, final ApiCallback<EPGBroadcast> callback) throws ApiException {
+    public com.squareup.okhttp.Call getWeeklyEPGAsync(String date, Boolean withunpublished, final ApiCallback<EPGResults> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -1060,7 +1071,7 @@ public class BroadcastApi {
         }
 
         com.squareup.okhttp.Call call = getWeeklyEPGValidateBeforeCall(date, withunpublished, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<EPGBroadcast>(){}.getType();
+        Type localVarReturnType = new TypeToken<EPGResults>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -1347,11 +1358,11 @@ public class BroadcastApi {
      * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param presenterId Search on Presenter ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @return EPGBroadcast
+     * @return EPGResults
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public EPGBroadcast printBroadcastById(Long id, Long programId, Long presenterId, Long tagId) throws ApiException {
-        ApiResponse<EPGBroadcast> resp = printBroadcastByIdWithHttpInfo(id, programId, presenterId, tagId);
+    public EPGResults printBroadcastById(Long id, Long programId, Long presenterId, Long tagId) throws ApiException {
+        ApiResponse<EPGResults> resp = printBroadcastByIdWithHttpInfo(id, programId, presenterId, tagId);
         return resp.getData();
     }
 
@@ -1362,12 +1373,12 @@ public class BroadcastApi {
      * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param presenterId Search on Presenter ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @return ApiResponse&lt;EPGBroadcast&gt;
+     * @return ApiResponse&lt;EPGResults&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<EPGBroadcast> printBroadcastByIdWithHttpInfo(Long id, Long programId, Long presenterId, Long tagId) throws ApiException {
+    public ApiResponse<EPGResults> printBroadcastByIdWithHttpInfo(Long id, Long programId, Long presenterId, Long tagId) throws ApiException {
         com.squareup.okhttp.Call call = printBroadcastByIdValidateBeforeCall(id, programId, presenterId, tagId, null, null);
-        Type localVarReturnType = new TypeToken<EPGBroadcast>(){}.getType();
+        Type localVarReturnType = new TypeToken<EPGResults>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -1382,7 +1393,7 @@ public class BroadcastApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call printBroadcastByIdAsync(Long id, Long programId, Long presenterId, Long tagId, final ApiCallback<EPGBroadcast> callback) throws ApiException {
+    public com.squareup.okhttp.Call printBroadcastByIdAsync(Long id, Long programId, Long presenterId, Long tagId, final ApiCallback<EPGResults> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -1404,7 +1415,7 @@ public class BroadcastApi {
         }
 
         com.squareup.okhttp.Call call = printBroadcastByIdValidateBeforeCall(id, programId, presenterId, tagId, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<EPGBroadcast>(){}.getType();
+        Type localVarReturnType = new TypeToken<EPGResults>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }

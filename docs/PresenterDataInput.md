@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **modelTypeId** | **Long** |  | 
-**fieldValues** | **List&lt;Object&gt;** |  |  [optional]
+**fieldValues** | **Object** |  |  [optional]
 **firstname** | **String** |  |  [optional]
 **lastname** | **String** |  |  [optional]
 **active** | **Boolean** |  |  [optional]
