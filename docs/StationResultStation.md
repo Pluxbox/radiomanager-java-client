@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **mediumName** | **String** |  |  [optional]
 **website** | **String** |  |  [optional]
 **email** | **String** |  |  [optional]
-**keywords** | **String** |  |  [optional]
+**keywords** | **List&lt;String&gt;** |  |  [optional]
 **description** | **String** |  |  [optional]
 **sms** | **String** |  |  [optional]
 **telephone** | **String** |  |  [optional]

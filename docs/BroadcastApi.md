@@ -186,7 +186,7 @@ Name | Type | Description  | Notes
 
 <a name="getCurrentBroadcast"></a>
 # **getCurrentBroadcast**
-> Broadcast getCurrentBroadcast()
+> BroadcastResult getCurrentBroadcast(withunpublished)
 
 Get current Broadcast
 
@@ -210,8 +210,9 @@ API Key.setApiKey("YOUR API KEY");
 //API Key.setApiKeyPrefix("Token");
 
 BroadcastApi apiInstance = new BroadcastApi();
+Boolean withunpublished = true; // Boolean | Show Unpublished *(Optional)*
 try {
-    Broadcast result = apiInstance.getCurrentBroadcast();
+    BroadcastResult result = apiInstance.getCurrentBroadcast(withunpublished);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling BroadcastApi#getCurrentBroadcast");
@@ -220,11 +221,14 @@ try {
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **withunpublished** | **Boolean**| Show Unpublished *(Optional)* | [optional]
 
 ### Return type
 
-[**Broadcast**](Broadcast.md)
+[**BroadcastResult**](BroadcastResult.md)
 
 ### Authorization
 
@@ -351,7 +355,7 @@ Name | Type | Description  | Notes
 
 <a name="getNextBroadcast"></a>
 # **getNextBroadcast**
-> Broadcast getNextBroadcast()
+> BroadcastResult getNextBroadcast(withunpublished)
 
 Get next Broadcast
 
@@ -375,8 +379,9 @@ API Key.setApiKey("YOUR API KEY");
 //API Key.setApiKeyPrefix("Token");
 
 BroadcastApi apiInstance = new BroadcastApi();
+Boolean withunpublished = true; // Boolean | Show Unpublished *(Optional)*
 try {
-    Broadcast result = apiInstance.getNextBroadcast();
+    BroadcastResult result = apiInstance.getNextBroadcast(withunpublished);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling BroadcastApi#getNextBroadcast");
@@ -385,11 +390,14 @@ try {
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **withunpublished** | **Boolean**| Show Unpublished *(Optional)* | [optional]
 
 ### Return type
 
-[**Broadcast**](Broadcast.md)
+[**BroadcastResult**](BroadcastResult.md)
 
 ### Authorization
 

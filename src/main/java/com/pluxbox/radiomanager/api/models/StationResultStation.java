@@ -23,6 +23,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * StationResultStation
@@ -57,7 +59,7 @@ public class StationResultStation {
   private String email = null;
 
   @SerializedName("keywords")
-  private String keywords = null;
+  private List<String> keywords = null;
 
   @SerializedName("description")
   private String description = null;
@@ -269,8 +271,16 @@ public class StationResultStation {
     this.email = email;
   }
 
-  public StationResultStation keywords(String keywords) {
+  public StationResultStation keywords(List<String> keywords) {
     this.keywords = keywords;
+    return this;
+  }
+
+  public StationResultStation addKeywordsItem(String keywordsItem) {
+    if (this.keywords == null) {
+      this.keywords = new ArrayList<String>();
+    }
+    this.keywords.add(keywordsItem);
     return this;
   }
 
@@ -278,12 +288,12 @@ public class StationResultStation {
    * Get keywords
    * @return keywords
   **/
-  @ApiModelProperty(example = "keywords", value = "")
-  public String getKeywords() {
+  @ApiModelProperty(value = "")
+  public List<String> getKeywords() {
     return keywords;
   }
 
-  public void setKeywords(String keywords) {
+  public void setKeywords(List<String> keywords) {
     this.keywords = keywords;
   }
 
