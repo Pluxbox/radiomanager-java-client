@@ -29,7 +29,6 @@ Name | Type | Description | Notes
 **ptyType** | **String** |  |  [optional]
 **stationKey** | **String** |  |  [optional]
 **timezone** | **String** |  |  [optional]
-**trialDate** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]
 
 
 

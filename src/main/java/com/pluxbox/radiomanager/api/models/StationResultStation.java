@@ -106,9 +106,6 @@ public class StationResultStation {
   @SerializedName("timezone")
   private String timezone = null;
 
-  @SerializedName("trial_date")
-  private OffsetDateTime trialDate = null;
-
   public StationResultStation id(Integer id) {
     this.id = id;
     return this;
@@ -567,24 +564,6 @@ public class StationResultStation {
     this.timezone = timezone;
   }
 
-  public StationResultStation trialDate(OffsetDateTime trialDate) {
-    this.trialDate = trialDate;
-    return this;
-  }
-
-   /**
-   * Get trialDate
-   * @return trialDate
-  **/
-  @ApiModelProperty(example = "2016-01-11", value = "")
-  public OffsetDateTime getTrialDate() {
-    return trialDate;
-  }
-
-  public void setTrialDate(OffsetDateTime trialDate) {
-    this.trialDate = trialDate;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -619,13 +598,12 @@ public class StationResultStation {
         Objects.equals(this.ptyCode, stationResultStation.ptyCode) &&
         Objects.equals(this.ptyType, stationResultStation.ptyType) &&
         Objects.equals(this.stationKey, stationResultStation.stationKey) &&
-        Objects.equals(this.timezone, stationResultStation.timezone) &&
-        Objects.equals(this.trialDate, stationResultStation.trialDate);
+        Objects.equals(this.timezone, stationResultStation.timezone);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, createdAt, updatedAt, systemName, shortName, mediumName, website, email, keywords, description, sms, telephone, genreId, language, active, logoRectangle, logo128x128, logo320x320, logo600x600, payOff, ptyCode, ptyType, stationKey, timezone, trialDate);
+    return Objects.hash(id, name, createdAt, updatedAt, systemName, shortName, mediumName, website, email, keywords, description, sms, telephone, genreId, language, active, logoRectangle, logo128x128, logo320x320, logo600x600, payOff, ptyCode, ptyType, stationKey, timezone);
   }
 
 
@@ -659,7 +637,6 @@ public class StationResultStation {
     sb.append("    ptyType: ").append(toIndentedString(ptyType)).append("\n");
     sb.append("    stationKey: ").append(toIndentedString(stationKey)).append("\n");
     sb.append("    timezone: ").append(toIndentedString(timezone)).append("\n");
-    sb.append("    trialDate: ").append(toIndentedString(trialDate)).append("\n");
     sb.append("}");
     return sb.toString();
   }
