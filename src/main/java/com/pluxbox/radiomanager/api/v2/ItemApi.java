@@ -32,7 +32,6 @@ import com.pluxbox.radiomanager.api.models.Data1;
 import com.pluxbox.radiomanager.api.models.Forbidden;
 import com.pluxbox.radiomanager.api.models.ImportItem;
 import com.pluxbox.radiomanager.api.models.InlineResponse202;
-import com.pluxbox.radiomanager.api.models.Item;
 import com.pluxbox.radiomanager.api.models.ItemDataInput;
 import com.pluxbox.radiomanager.api.models.ItemResult;
 import com.pluxbox.radiomanager.api.models.ItemResults;
@@ -1171,7 +1170,7 @@ public class ItemApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call updateItemByIdCall(Long id, Item data, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call updateItemByIdCall(Long id, ItemDataInput data, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = data;
         
         // create path and map variables
@@ -1213,7 +1212,7 @@ public class ItemApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call updateItemByIdValidateBeforeCall(Long id, Item data, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call updateItemByIdValidateBeforeCall(Long id, ItemDataInput data, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         // verify the required parameter 'id' is set
         if (id == null) {
@@ -1238,7 +1237,7 @@ public class ItemApi {
      * @return Success
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public Success updateItemById(Long id, Item data) throws ApiException {
+    public Success updateItemById(Long id, ItemDataInput data) throws ApiException {
         ApiResponse<Success> resp = updateItemByIdWithHttpInfo(id, data);
         return resp.getData();
     }
@@ -1251,7 +1250,7 @@ public class ItemApi {
      * @return ApiResponse&lt;Success&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<Success> updateItemByIdWithHttpInfo(Long id, Item data) throws ApiException {
+    public ApiResponse<Success> updateItemByIdWithHttpInfo(Long id, ItemDataInput data) throws ApiException {
         com.squareup.okhttp.Call call = updateItemByIdValidateBeforeCall(id, data, null, null);
         Type localVarReturnType = new TypeToken<Success>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
@@ -1266,7 +1265,7 @@ public class ItemApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call updateItemByIdAsync(Long id, Item data, final ApiCallback<Success> callback) throws ApiException {
+    public com.squareup.okhttp.Call updateItemByIdAsync(Long id, ItemDataInput data, final ApiCallback<Success> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;

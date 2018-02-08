@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **staticStart** | **Boolean** |  |  [optional]
 **details** | **String** |  |  [optional]
 **previousId** | **Long** |  |  [optional]
+**beforeId** | **Long** |  |  [optional]
 **contacts** | **List&lt;Integer&gt;** |  |  [optional]
 **tags** | **List&lt;Integer&gt;** |  |  [optional]
 

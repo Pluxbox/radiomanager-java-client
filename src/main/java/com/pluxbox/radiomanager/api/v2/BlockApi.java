@@ -368,8 +368,8 @@ public class BlockApi {
     }
 
     /**
-     * Get next Block
-     * Get next Block
+     * Get upcoming Block
+     * Get upcoming Block
      * @return BlockResult
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
@@ -379,8 +379,8 @@ public class BlockApi {
     }
 
     /**
-     * Get next Block
-     * Get next Block
+     * Get upcoming Block
+     * Get upcoming Block
      * @return ApiResponse&lt;BlockResult&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
@@ -391,8 +391,8 @@ public class BlockApi {
     }
 
     /**
-     * Get next Block (asynchronously)
-     * Get next Block
+     * Get upcoming Block (asynchronously)
+     * Get upcoming Block
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object

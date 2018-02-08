@@ -33,6 +33,9 @@ public class ItemInputOnly {
   @SerializedName("_previous_id")
   private Long previousId = null;
 
+  @SerializedName("_before_id")
+  private Long beforeId = null;
+
   @SerializedName("contacts")
   private List<Integer> contacts = null;
 
@@ -55,6 +58,24 @@ public class ItemInputOnly {
 
   public void setPreviousId(Long previousId) {
     this.previousId = previousId;
+  }
+
+  public ItemInputOnly beforeId(Long beforeId) {
+    this.beforeId = beforeId;
+    return this;
+  }
+
+   /**
+   * Get beforeId
+   * @return beforeId
+  **/
+  @ApiModelProperty(example = "1", value = "")
+  public Long getBeforeId() {
+    return beforeId;
+  }
+
+  public void setBeforeId(Long beforeId) {
+    this.beforeId = beforeId;
   }
 
   public ItemInputOnly contacts(List<Integer> contacts) {
@@ -120,13 +141,14 @@ public class ItemInputOnly {
     }
     ItemInputOnly itemInputOnly = (ItemInputOnly) o;
     return Objects.equals(this.previousId, itemInputOnly.previousId) &&
+        Objects.equals(this.beforeId, itemInputOnly.beforeId) &&
         Objects.equals(this.contacts, itemInputOnly.contacts) &&
         Objects.equals(this.tags, itemInputOnly.tags);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(previousId, contacts, tags);
+    return Objects.hash(previousId, beforeId, contacts, tags);
   }
 
 
@@ -136,6 +158,7 @@ public class ItemInputOnly {
     sb.append("class ItemInputOnly {\n");
     
     sb.append("    previousId: ").append(toIndentedString(previousId)).append("\n");
+    sb.append("    beforeId: ").append(toIndentedString(beforeId)).append("\n");
     sb.append("    contacts: ").append(toIndentedString(contacts)).append("\n");
     sb.append("    tags: ").append(toIndentedString(tags)).append("\n");
     sb.append("}");

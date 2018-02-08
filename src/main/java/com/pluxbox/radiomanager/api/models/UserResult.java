@@ -19,11 +19,14 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.pluxbox.radiomanager.api.models.UserResultRoles;
 import com.pluxbox.radiomanager.api.models.UserResultSettings;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * UserResult
@@ -63,8 +66,8 @@ public class UserResult {
   @SerializedName("active_external_station_id")
   private Long activeExternalStationId = null;
 
-  @SerializedName("role_id")
-  private Long roleId = null;
+  @SerializedName("roles")
+  private List<UserResultRoles> roles = null;
 
   public UserResult id(Long id) {
     this.id = id;
@@ -264,22 +267,30 @@ public class UserResult {
     this.activeExternalStationId = activeExternalStationId;
   }
 
-  public UserResult roleId(Long roleId) {
-    this.roleId = roleId;
+  public UserResult roles(List<UserResultRoles> roles) {
+    this.roles = roles;
+    return this;
+  }
+
+  public UserResult addRolesItem(UserResultRoles rolesItem) {
+    if (this.roles == null) {
+      this.roles = new ArrayList<UserResultRoles>();
+    }
+    this.roles.add(rolesItem);
     return this;
   }
 
    /**
-   * Get roleId
-   * @return roleId
+   * Get roles
+   * @return roles
   **/
-  @ApiModelProperty(example = "2", value = "")
-  public Long getRoleId() {
-    return roleId;
+  @ApiModelProperty(value = "")
+  public List<UserResultRoles> getRoles() {
+    return roles;
   }
 
-  public void setRoleId(Long roleId) {
-    this.roleId = roleId;
+  public void setRoles(List<UserResultRoles> roles) {
+    this.roles = roles;
   }
 
 
@@ -303,12 +314,12 @@ public class UserResult {
         Objects.equals(this.settings, userResult.settings) &&
         Objects.equals(this.language, userResult.language) &&
         Objects.equals(this.activeExternalStationId, userResult.activeExternalStationId) &&
-        Objects.equals(this.roleId, userResult.roleId);
+        Objects.equals(this.roles, userResult.roles);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, email, firstname, lastname, phone, createdAt, updatedAt, active, settings, language, activeExternalStationId, roleId);
+    return Objects.hash(id, email, firstname, lastname, phone, createdAt, updatedAt, active, settings, language, activeExternalStationId, roles);
   }
 
 
@@ -328,7 +339,7 @@ public class UserResult {
     sb.append("    settings: ").append(toIndentedString(settings)).append("\n");
     sb.append("    language: ").append(toIndentedString(language)).append("\n");
     sb.append("    activeExternalStationId: ").append(toIndentedString(activeExternalStationId)).append("\n");
-    sb.append("    roleId: ").append(toIndentedString(roleId)).append("\n");
+    sb.append("    roles: ").append(toIndentedString(roles)).append("\n");
     sb.append("}");
     return sb.toString();
   }

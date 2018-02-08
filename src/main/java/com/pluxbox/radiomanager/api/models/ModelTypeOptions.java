@@ -31,6 +31,9 @@ public class ModelTypeOptions {
   @SerializedName("color")
   private String color = null;
 
+  @SerializedName("subBroadcast")
+  private Boolean subBroadcast = null;
+
   public ModelTypeOptions color(String color) {
     this.color = color;
     return this;
@@ -49,6 +52,24 @@ public class ModelTypeOptions {
     this.color = color;
   }
 
+  public ModelTypeOptions subBroadcast(Boolean subBroadcast) {
+    this.subBroadcast = subBroadcast;
+    return this;
+  }
+
+   /**
+   * Get subBroadcast
+   * @return subBroadcast
+  **/
+  @ApiModelProperty(example = "true", value = "")
+  public Boolean getSubBroadcast() {
+    return subBroadcast;
+  }
+
+  public void setSubBroadcast(Boolean subBroadcast) {
+    this.subBroadcast = subBroadcast;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -59,12 +80,13 @@ public class ModelTypeOptions {
       return false;
     }
     ModelTypeOptions modelTypeOptions = (ModelTypeOptions) o;
-    return Objects.equals(this.color, modelTypeOptions.color);
+    return Objects.equals(this.color, modelTypeOptions.color) &&
+        Objects.equals(this.subBroadcast, modelTypeOptions.subBroadcast);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(color);
+    return Objects.hash(color, subBroadcast);
   }
 
 
@@ -74,6 +96,7 @@ public class ModelTypeOptions {
     sb.append("class ModelTypeOptions {\n");
     
     sb.append("    color: ").append(toIndentedString(color)).append("\n");
+    sb.append("    subBroadcast: ").append(toIndentedString(subBroadcast)).append("\n");
     sb.append("}");
     return sb.toString();
   }
