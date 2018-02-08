@@ -100,11 +100,14 @@ public class ContactApiTest {
     @Test
     public void listContactsTest() throws ApiException {
         Long page = null;
+        Long itemId = null;
         Long modelTypeId = null;
         Long tagId = null;
-        Long itemId = null;
+        Long limit = null;
+        String orderBy = null;
+        String orderDirection = null;
         Long externalStationId = null;
-        ContactResults response = api.listContacts(page, modelTypeId, tagId, itemId, externalStationId);
+        ContactResults response = api.listContacts(page, itemId, modelTypeId, tagId, limit, orderBy, orderDirection, externalStationId);
 
         // TODO: test validations
     }

@@ -19,7 +19,6 @@ import com.pluxbox.radiomanager.api.models.Data1;
 import com.pluxbox.radiomanager.api.models.Forbidden;
 import com.pluxbox.radiomanager.api.models.ImportItem;
 import com.pluxbox.radiomanager.api.models.InlineResponse202;
-import com.pluxbox.radiomanager.api.models.Item;
 import com.pluxbox.radiomanager.api.models.ItemDataInput;
 import com.pluxbox.radiomanager.api.models.ItemResult;
 import com.pluxbox.radiomanager.api.models.ItemResults;
@@ -138,25 +137,26 @@ public class ItemApiTest {
     @Test
     public void listItemsTest() throws ApiException {
         Long page = null;
-        String orderBy = null;
-        String orderDirection = null;
+        Long blockId = null;
+        Long broadcastId = null;
+        Long modelTypeId = null;
+        Long tagId = null;
+        Long campaignId = null;
+        Long contactId = null;
+        Long programDraftId = null;
+        Long userDraftId = null;
+        Long stationDraftId = null;
+        Long programId = null;
         OffsetDateTime startMin = null;
         OffsetDateTime startMax = null;
         Integer durationMin = null;
         Integer durationMax = null;
         String status = null;
-        Long modelTypeId = null;
-        Long programDraftId = null;
-        Long userDraftId = null;
-        Long stationDraftId = null;
-        Long blockId = null;
-        Long broadcastId = null;
-        Long campaignId = null;
-        Long contactId = null;
-        Long programId = null;
-        Long tagId = null;
+        Long limit = null;
+        String orderBy = null;
+        String orderDirection = null;
         Long externalStationId = null;
-        ItemResults response = api.listItems(page, orderBy, orderDirection, startMin, startMax, durationMin, durationMax, status, modelTypeId, programDraftId, userDraftId, stationDraftId, blockId, broadcastId, campaignId, contactId, programId, tagId, externalStationId);
+        ItemResults response = api.listItems(page, blockId, broadcastId, modelTypeId, tagId, campaignId, contactId, programDraftId, userDraftId, stationDraftId, programId, startMin, startMax, durationMin, durationMax, status, limit, orderBy, orderDirection, externalStationId);
 
         // TODO: test validations
     }
@@ -204,7 +204,7 @@ public class ItemApiTest {
     @Test
     public void updateItemByIdTest() throws ApiException {
         Long id = null;
-        Item data = null;
+        ItemDataInput data = null;
         Success response = api.updateItemById(id, data);
 
         // TODO: test validations

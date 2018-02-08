@@ -100,15 +100,18 @@ public class ProgramApiTest {
     @Test
     public void listProgramsTest() throws ApiException {
         Long page = null;
-        Long genreId = null;
-        Long modelTypeId = null;
-        Long presenterId = null;
-        Long tagId = null;
         Long broadcastId = null;
-        Long itemId = null;
+        Long modelTypeId = null;
+        Long tagId = null;
+        Long presenterId = null;
+        Long genreId = null;
         Long blockId = null;
+        Long itemId = null;
+        Long limit = null;
+        String orderBy = null;
+        String orderDirection = null;
         Long externalStationId = null;
-        ProgramResults response = api.listPrograms(page, genreId, modelTypeId, presenterId, tagId, broadcastId, itemId, blockId, externalStationId);
+        ProgramResults response = api.listPrograms(page, broadcastId, modelTypeId, tagId, presenterId, genreId, blockId, itemId, limit, orderBy, orderDirection, externalStationId);
 
         // TODO: test validations
     }
