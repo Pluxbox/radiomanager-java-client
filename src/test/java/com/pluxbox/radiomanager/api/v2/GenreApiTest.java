@@ -67,8 +67,11 @@ public class GenreApiTest {
         Long parentId = null;
         Long programId = null;
         Long broadcastId = null;
+        Long limit = null;
+        String orderBy = null;
+        String orderDirection = null;
         Long externalStationId = null;
-        GenreResults response = api.listGenres(page, parentId, programId, broadcastId, externalStationId);
+        GenreResults response = api.listGenres(page, parentId, programId, broadcastId, limit, orderBy, orderDirection, externalStationId);
 
         // TODO: test validations
     }

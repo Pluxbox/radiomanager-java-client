@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **email** | **String** |  | 
-**roleId** | **Long** |  | 
+**roleIds** | **List&lt;Integer&gt;** |  | 
 
 
 

@@ -94,13 +94,13 @@ public class BlockApiExample {
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *http://radiomanager.pb/api/v2*
+All URIs are relative to *https://staging.radiomanager.io/api/v2*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *BlockApi* | [**getBlockById**](docs/BlockApi.md#getBlockById) | **GET** /blocks/{id} | Get block by id
 *BlockApi* | [**getCurrentBlock**](docs/BlockApi.md#getCurrentBlock) | **GET** /blocks/current | Get current Block
-*BlockApi* | [**getNextBlock**](docs/BlockApi.md#getNextBlock) | **GET** /blocks/next | Get next Block
+*BlockApi* | [**getNextBlock**](docs/BlockApi.md#getNextBlock) | **GET** /blocks/next | Get upcoming Block
 *BlockApi* | [**listBlocks**](docs/BlockApi.md#listBlocks) | **GET** /blocks | Get a list of all blocks currently in your station.
 *BroadcastApi* | [**createBroadcast**](docs/BroadcastApi.md#createBroadcast) | **POST** /broadcasts | Create broadcast.
 *BroadcastApi* | [**deleteBroadcastById**](docs/BroadcastApi.md#deleteBroadcastById) | **DELETE** /broadcasts/{id} | Delete broadcast by id
@@ -123,7 +123,6 @@ Class | Method | HTTP request | Description
 *ContactApi* | [**getContactById**](docs/ContactApi.md#getContactById) | **GET** /contacts/{id} | Get contact by id
 *ContactApi* | [**listContacts**](docs/ContactApi.md#listContacts) | **GET** /contacts | Get all contacts.
 *ContactApi* | [**updateContactByID**](docs/ContactApi.md#updateContactByID) | **PATCH** /contacts/{id} | Update contact by id
-*ExternalMessageApi* | [**queueExternalMessage**](docs/ExternalMessageApi.md#queueExternalMessage) | **POST** /externalmessagequeue | Queue External Message.
 *GenreApi* | [**getGenreById**](docs/GenreApi.md#getGenreById) | **GET** /genres/{id} | Get genre by id
 *GenreApi* | [**listGenres**](docs/GenreApi.md#listGenres) | **GET** /genres | List all genres.
 *ItemApi* | [**createItem**](docs/ItemApi.md#createItem) | **POST** /items | Create an new item.
@@ -147,6 +146,7 @@ Class | Method | HTTP request | Description
 *ProgramApi* | [**getProgramById**](docs/ProgramApi.md#getProgramById) | **GET** /programs/{id} | Get program by id
 *ProgramApi* | [**listPrograms**](docs/ProgramApi.md#listPrograms) | **GET** /programs | Get all programs.
 *ProgramApi* | [**updateProgramByID**](docs/ProgramApi.md#updateProgramByID) | **PATCH** /programs/{id} | Update program by id
+*StationApi* | [**getStation**](docs/StationApi.md#getStation) | **GET** /station | Get own station only
 *StoryApi* | [**createStory**](docs/StoryApi.md#createStory) | **POST** /stories | Create story.
 *StoryApi* | [**deleteStoryById**](docs/StoryApi.md#deleteStoryById) | **DELETE** /stories/{id} | Delete story by id
 *StoryApi* | [**getStoryById**](docs/StoryApi.md#getStoryById) | **GET** /stories/{id} | Get story by id
@@ -176,7 +176,8 @@ Class | Method | HTTP request | Description
  - [BlockRelationsProgram](docs/BlockRelationsProgram.md)
  - [BlockResults](docs/BlockResults.md)
  - [Broadcast](docs/Broadcast.md)
- - [BroadcastFieldValues](docs/BroadcastFieldValues.md)
+ - [BroadcastEPGDay](docs/BroadcastEPGDay.md)
+ - [BroadcastEPGRelations](docs/BroadcastEPGRelations.md)
  - [BroadcastInputOnly](docs/BroadcastInputOnly.md)
  - [BroadcastOutputOnly](docs/BroadcastOutputOnly.md)
  - [BroadcastRelations](docs/BroadcastRelations.md)
@@ -194,7 +195,6 @@ Class | Method | HTTP request | Description
  - [CampaignRelationsItemsParams](docs/CampaignRelationsItemsParams.md)
  - [CampaignResults](docs/CampaignResults.md)
  - [Contact](docs/Contact.md)
- - [ContactFieldValues](docs/ContactFieldValues.md)
  - [ContactOutputOnly](docs/ContactOutputOnly.md)
  - [ContactRelations](docs/ContactRelations.md)
  - [ContactRelationsItems](docs/ContactRelationsItems.md)
@@ -203,8 +203,7 @@ Class | Method | HTTP request | Description
  - [ContactResults](docs/ContactResults.md)
  - [Data](docs/Data.md)
  - [Data1](docs/Data1.md)
- - [EPGBroadcast](docs/EPGBroadcast.md)
- - [ExternalMessageQueueData](docs/ExternalMessageQueueData.md)
+ - [EPGResults](docs/EPGResults.md)
  - [Forbidden](docs/Forbidden.md)
  - [Genre](docs/Genre.md)
  - [GenreOutputOnly](docs/GenreOutputOnly.md)
@@ -214,7 +213,6 @@ Class | Method | HTTP request | Description
  - [GenreRelationsPrograms](docs/GenreRelationsPrograms.md)
  - [GenreResults](docs/GenreResults.md)
  - [ImportItem](docs/ImportItem.md)
- - [ImportItemFieldValues](docs/ImportItemFieldValues.md)
  - [InlineResponse202](docs/InlineResponse202.md)
  - [InternalServerError](docs/InternalServerError.md)
  - [InviteUserData](docs/InviteUserData.md)
@@ -252,7 +250,6 @@ Class | Method | HTTP request | Description
  - [PresenterRelationsProgramsParams](docs/PresenterRelationsProgramsParams.md)
  - [PresenterResults](docs/PresenterResults.md)
  - [Program](docs/Program.md)
- - [ProgramFieldValues](docs/ProgramFieldValues.md)
  - [ProgramInputOnly](docs/ProgramInputOnly.md)
  - [ProgramOutputOnly](docs/ProgramOutputOnly.md)
  - [ProgramRelations](docs/ProgramRelations.md)
@@ -265,6 +262,8 @@ Class | Method | HTTP request | Description
  - [ProgramResults](docs/ProgramResults.md)
  - [ReadOnly](docs/ReadOnly.md)
  - [RelationsPlaceholder](docs/RelationsPlaceholder.md)
+ - [StationResult](docs/StationResult.md)
+ - [StationResultStation](docs/StationResultStation.md)
  - [Story](docs/Story.md)
  - [StoryInputOnly](docs/StoryInputOnly.md)
  - [StoryOutputOnly](docs/StoryOutputOnly.md)
@@ -287,11 +286,13 @@ Class | Method | HTTP request | Description
  - [TooManyRequests](docs/TooManyRequests.md)
  - [UnprocessableEntity](docs/UnprocessableEntity.md)
  - [UserResult](docs/UserResult.md)
+ - [UserResultRoles](docs/UserResultRoles.md)
  - [UserResultSettings](docs/UserResultSettings.md)
  - [UserResults](docs/UserResults.md)
  - [VisualResult](docs/VisualResult.md)
  - [BlockResult](docs/BlockResult.md)
  - [BroadcastDataInput](docs/BroadcastDataInput.md)
+ - [BroadcastEPGResult](docs/BroadcastEPGResult.md)
  - [BroadcastResult](docs/BroadcastResult.md)
  - [CampaignDataInput](docs/CampaignDataInput.md)
  - [CampaignResult](docs/CampaignResult.md)
@@ -302,6 +303,7 @@ Class | Method | HTTP request | Description
  - [ItemResult](docs/ItemResult.md)
  - [ModelTypeResult](docs/ModelTypeResult.md)
  - [PresenterDataInput](docs/PresenterDataInput.md)
+ - [PresenterEPGResult](docs/PresenterEPGResult.md)
  - [PresenterResult](docs/PresenterResult.md)
  - [ProgramDataInput](docs/ProgramDataInput.md)
  - [ProgramResult](docs/ProgramResult.md)

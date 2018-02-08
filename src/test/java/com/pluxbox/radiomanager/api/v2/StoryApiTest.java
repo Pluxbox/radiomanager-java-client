@@ -100,11 +100,14 @@ public class StoryApiTest {
     @Test
     public void listStoriesTest() throws ApiException {
         Long page = null;
+        Long itemId = null;
         Long modelTypeId = null;
         Long tagId = null;
-        Long itemId = null;
+        Long limit = null;
+        String orderBy = null;
+        String orderDirection = null;
         Long externalStationId = null;
-        StoryResults response = api.listStories(page, modelTypeId, tagId, itemId, externalStationId);
+        StoryResults response = api.listStories(page, itemId, modelTypeId, tagId, limit, orderBy, orderDirection, externalStationId);
 
         // TODO: test validations
     }

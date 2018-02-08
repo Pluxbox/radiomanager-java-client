@@ -22,6 +22,8 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * InviteUserData
@@ -31,8 +33,8 @@ public class InviteUserData {
   @SerializedName("email")
   private String email = null;
 
-  @SerializedName("role_id")
-  private Long roleId = null;
+  @SerializedName("role_ids")
+  private List<Integer> roleIds = new ArrayList<Integer>();
 
   public InviteUserData email(String email) {
     this.email = email;
@@ -52,22 +54,27 @@ public class InviteUserData {
     this.email = email;
   }
 
-  public InviteUserData roleId(Long roleId) {
-    this.roleId = roleId;
+  public InviteUserData roleIds(List<Integer> roleIds) {
+    this.roleIds = roleIds;
+    return this;
+  }
+
+  public InviteUserData addRoleIdsItem(Integer roleIdsItem) {
+    this.roleIds.add(roleIdsItem);
     return this;
   }
 
    /**
-   * Get roleId
-   * @return roleId
+   * Get roleIds
+   * @return roleIds
   **/
-  @ApiModelProperty(example = "2", required = true, value = "")
-  public Long getRoleId() {
-    return roleId;
+  @ApiModelProperty(required = true, value = "")
+  public List<Integer> getRoleIds() {
+    return roleIds;
   }
 
-  public void setRoleId(Long roleId) {
-    this.roleId = roleId;
+  public void setRoleIds(List<Integer> roleIds) {
+    this.roleIds = roleIds;
   }
 
 
@@ -81,12 +88,12 @@ public class InviteUserData {
     }
     InviteUserData inviteUserData = (InviteUserData) o;
     return Objects.equals(this.email, inviteUserData.email) &&
-        Objects.equals(this.roleId, inviteUserData.roleId);
+        Objects.equals(this.roleIds, inviteUserData.roleIds);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(email, roleId);
+    return Objects.hash(email, roleIds);
   }
 
 
@@ -96,7 +103,7 @@ public class InviteUserData {
     sb.append("class InviteUserData {\n");
     
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
-    sb.append("    roleId: ").append(toIndentedString(roleId)).append("\n");
+    sb.append("    roleIds: ").append(toIndentedString(roleIds)).append("\n");
     sb.append("}");
     return sb.toString();
   }

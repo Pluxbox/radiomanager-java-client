@@ -101,12 +101,15 @@ public class CampaignApiTest {
     @Test
     public void listCampaignsTest() throws ApiException {
         Long page = null;
-        Long modelTypeId = null;
         Long itemId = null;
+        Long modelTypeId = null;
         OffsetDateTime startMin = null;
         OffsetDateTime startMax = null;
+        Long limit = null;
+        String orderBy = null;
+        String orderDirection = null;
         Long externalStationId = null;
-        CampaignResults response = api.listCampaigns(page, modelTypeId, itemId, startMin, startMax, externalStationId);
+        CampaignResults response = api.listCampaigns(page, itemId, modelTypeId, startMin, startMax, limit, orderBy, orderDirection, externalStationId);
 
         // TODO: test validations
     }

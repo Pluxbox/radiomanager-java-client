@@ -133,6 +133,9 @@ public class ItemDataInput {
   @SerializedName("_previous_id")
   private Long previousId = null;
 
+  @SerializedName("_before_id")
+  private Long beforeId = null;
+
   @SerializedName("contacts")
   private List<Integer> contacts = null;
 
@@ -445,6 +448,24 @@ public class ItemDataInput {
     this.previousId = previousId;
   }
 
+  public ItemDataInput beforeId(Long beforeId) {
+    this.beforeId = beforeId;
+    return this;
+  }
+
+   /**
+   * Get beforeId
+   * @return beforeId
+  **/
+  @ApiModelProperty(example = "1", value = "")
+  public Long getBeforeId() {
+    return beforeId;
+  }
+
+  public void setBeforeId(Long beforeId) {
+    this.beforeId = beforeId;
+  }
+
   public ItemDataInput contacts(List<Integer> contacts) {
     this.contacts = contacts;
     return this;
@@ -524,13 +545,14 @@ public class ItemDataInput {
         Objects.equals(this.staticStart, itemDataInput.staticStart) &&
         Objects.equals(this.details, itemDataInput.details) &&
         Objects.equals(this.previousId, itemDataInput.previousId) &&
+        Objects.equals(this.beforeId, itemDataInput.beforeId) &&
         Objects.equals(this.contacts, itemDataInput.contacts) &&
         Objects.equals(this.tags, itemDataInput.tags);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(modelTypeId, blockId, externalId, fieldValues, title, duration, start, status, _import, campaignId, recommended, stationDraftId, programDraftId, userDraftId, staticStart, details, previousId, contacts, tags);
+    return Objects.hash(modelTypeId, blockId, externalId, fieldValues, title, duration, start, status, _import, campaignId, recommended, stationDraftId, programDraftId, userDraftId, staticStart, details, previousId, beforeId, contacts, tags);
   }
 
 
@@ -556,6 +578,7 @@ public class ItemDataInput {
     sb.append("    staticStart: ").append(toIndentedString(staticStart)).append("\n");
     sb.append("    details: ").append(toIndentedString(details)).append("\n");
     sb.append("    previousId: ").append(toIndentedString(previousId)).append("\n");
+    sb.append("    beforeId: ").append(toIndentedString(beforeId)).append("\n");
     sb.append("    contacts: ").append(toIndentedString(contacts)).append("\n");
     sb.append("    tags: ").append(toIndentedString(tags)).append("\n");
     sb.append("}");

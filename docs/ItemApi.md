@@ -522,7 +522,7 @@ API Key.setApiKey("YOUR API KEY");
 
 ItemApi apiInstance = new ItemApi();
 Long id = 789L; // Long | ID of Item **(Required)**
-Item data = new Item(); // Item | Data *(Optional)*
+ItemDataInput data = new ItemDataInput(); // ItemDataInput | Data *(Optional)*
 try {
     Success result = apiInstance.updateItemById(id, data);
     System.out.println(result);
@@ -537,7 +537,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **Long**| ID of Item **(Required)** |
- **data** | [**Item**](Item.md)| Data *(Optional)* | [optional]
+ **data** | [**ItemDataInput**](ItemDataInput.md)| Data *(Optional)* | [optional]
 
 ### Return type
 
