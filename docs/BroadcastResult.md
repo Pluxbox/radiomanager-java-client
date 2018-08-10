@@ -31,6 +31,7 @@ Name | Type | Description | Notes
 **repetitionStart** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]
 **repetitionDays** | **String** |  |  [optional]
 **ptyCodeId** | **Long** |  |  [optional]
+**genre** | [**BroadcastRelationsGenre**](BroadcastRelationsGenre.md) |  |  [optional]
 **items** | [**BroadcastRelationsItems**](BroadcastRelationsItems.md) |  |  [optional]
 **blocks** | [**BroadcastRelationsBlocks**](BroadcastRelationsBlocks.md) |  |  [optional]
 **program** | [**BlockRelationsProgram**](BlockRelationsProgram.md) |  |  [optional]

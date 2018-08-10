@@ -541,7 +541,6 @@ public class BroadcastDataInput {
 
    /**
    * Get ptyCodeId
-   * minimum: 1
    * @return ptyCodeId
   **/
   @ApiModelProperty(example = "1", value = "")

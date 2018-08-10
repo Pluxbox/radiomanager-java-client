@@ -29,6 +29,7 @@ Name | Type | Description | Notes
 **ptyType** | **String** |  |  [optional]
 **stationKey** | **String** |  |  [optional]
 **timezone** | **String** |  |  [optional]
+**startDays** | [**StationResultStationStartDays**](StationResultStationStartDays.md) |  |  [optional]
 
 
 

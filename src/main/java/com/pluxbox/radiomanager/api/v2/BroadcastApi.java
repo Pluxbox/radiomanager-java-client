@@ -1278,15 +1278,13 @@ public class BroadcastApi {
     /**
      * Build call for printBroadcastById
      * @param id ID of Broadcast **(Required)** (required)
-     * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param presenterId Search on Presenter ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param templateId Search on template ID *(Optional)* (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call printBroadcastByIdCall(Long id, Long programId, Long presenterId, Long tagId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call printBroadcastByIdCall(Long id, Long templateId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
@@ -1294,12 +1292,8 @@ public class BroadcastApi {
             .replaceAll("\\{" + "id" + "\\}", apiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        if (programId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "program_id", programId));
-        if (presenterId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "presenter_id", presenterId));
-        if (tagId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "tag_id", tagId));
+        if (templateId != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "template_id", templateId));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -1334,7 +1328,7 @@ public class BroadcastApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call printBroadcastByIdValidateBeforeCall(Long id, Long programId, Long presenterId, Long tagId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call printBroadcastByIdValidateBeforeCall(Long id, Long templateId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         // verify the required parameter 'id' is set
         if (id == null) {
@@ -1342,7 +1336,7 @@ public class BroadcastApi {
         }
         
         
-        com.squareup.okhttp.Call call = printBroadcastByIdCall(id, programId, presenterId, tagId, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = printBroadcastByIdCall(id, templateId, progressListener, progressRequestListener);
         return call;
 
         
@@ -1352,48 +1346,42 @@ public class BroadcastApi {
     }
 
     /**
-     * Print Broadcast by id
-     * Print Broadcast by id
+     * Print broadcast by id with template
+     * Print broadcast by id with template
      * @param id ID of Broadcast **(Required)** (required)
-     * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param presenterId Search on Presenter ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param templateId Search on template ID *(Optional)* (optional)
      * @return EPGResults
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public EPGResults printBroadcastById(Long id, Long programId, Long presenterId, Long tagId) throws ApiException {
-        ApiResponse<EPGResults> resp = printBroadcastByIdWithHttpInfo(id, programId, presenterId, tagId);
+    public EPGResults printBroadcastById(Long id, Long templateId) throws ApiException {
+        ApiResponse<EPGResults> resp = printBroadcastByIdWithHttpInfo(id, templateId);
         return resp.getData();
     }
 
     /**
-     * Print Broadcast by id
-     * Print Broadcast by id
+     * Print broadcast by id with template
+     * Print broadcast by id with template
      * @param id ID of Broadcast **(Required)** (required)
-     * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param presenterId Search on Presenter ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param templateId Search on template ID *(Optional)* (optional)
      * @return ApiResponse&lt;EPGResults&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<EPGResults> printBroadcastByIdWithHttpInfo(Long id, Long programId, Long presenterId, Long tagId) throws ApiException {
-        com.squareup.okhttp.Call call = printBroadcastByIdValidateBeforeCall(id, programId, presenterId, tagId, null, null);
+    public ApiResponse<EPGResults> printBroadcastByIdWithHttpInfo(Long id, Long templateId) throws ApiException {
+        com.squareup.okhttp.Call call = printBroadcastByIdValidateBeforeCall(id, templateId, null, null);
         Type localVarReturnType = new TypeToken<EPGResults>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
     /**
-     * Print Broadcast by id (asynchronously)
-     * Print Broadcast by id
+     * Print broadcast by id with template (asynchronously)
+     * Print broadcast by id with template
      * @param id ID of Broadcast **(Required)** (required)
-     * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param presenterId Search on Presenter ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param templateId Search on template ID *(Optional)* (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call printBroadcastByIdAsync(Long id, Long programId, Long presenterId, Long tagId, final ApiCallback<EPGResults> callback) throws ApiException {
+    public com.squareup.okhttp.Call printBroadcastByIdAsync(Long id, Long templateId, final ApiCallback<EPGResults> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -1414,7 +1402,7 @@ public class BroadcastApi {
             };
         }
 
-        com.squareup.okhttp.Call call = printBroadcastByIdValidateBeforeCall(id, programId, presenterId, tagId, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = printBroadcastByIdValidateBeforeCall(id, templateId, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<EPGResults>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;

@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**currentItemPostStructure**](ItemApi.md#currentItemPostStructure) | **POST** /items/current/structure | Post a current playing item, keep structure
 [**currentItemPostTiming**](ItemApi.md#currentItemPostTiming) | **POST** /items/current/timing | Post a current playing item
 [**deleteItemById**](ItemApi.md#deleteItemById) | **DELETE** /items/{id} | Delete item by ID.
+[**getCurrentItem**](ItemApi.md#getCurrentItem) | **GET** /items/current | Get current Item
 [**getItemById**](ItemApi.md#getItemById) | **GET** /items/{id} | Get extended item details by ID.
 [**listItems**](ItemApi.md#listItems) | **GET** /items | Get a list of all the items currently in your station.
 [**playlistPostStructure**](ItemApi.md#playlistPostStructure) | **POST** /items/playlist/structure | Post a playlist, keep current structure
@@ -235,6 +236,61 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json
  - **Accept**: application/json
 
+<a name="getCurrentItem"></a>
+# **getCurrentItem**
+> ItemResult getCurrentItem(lastplayed)
+
+Get current Item
+
+Get current Item
+
+### Example
+```java
+// Import classes:
+//import com.pluxbox.radiomanager.api.invoker.ApiClient;
+//import com.pluxbox.radiomanager.api.invoker.ApiException;
+//import com.pluxbox.radiomanager.api.invoker.Configuration;
+//import com.pluxbox.radiomanager.api.invoker.auth.*;
+//import com.pluxbox.radiomanager.api.v2.ItemApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: API Key
+ApiKeyAuth API Key = (ApiKeyAuth) defaultClient.getAuthentication("API Key");
+API Key.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//API Key.setApiKeyPrefix("Token");
+
+ItemApi apiInstance = new ItemApi();
+Boolean lastplayed = true; // Boolean | Show last played item if there is no current item*(Optional)*
+try {
+    ItemResult result = apiInstance.getCurrentItem(lastplayed);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling ItemApi#getCurrentItem");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **lastplayed** | **Boolean**| Show last played item if there is no current item*(Optional)* | [optional]
+
+### Return type
+
+[**ItemResult**](ItemResult.md)
+
+### Authorization
+
+[API Key](../README.md#API Key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
 <a name="getItemById"></a>
 # **getItemById**
 > ItemResult getItemById(id, externalStationId)
@@ -294,7 +350,7 @@ Name | Type | Description  | Notes
 
 <a name="listItems"></a>
 # **listItems**
-> ItemResults listItems(page, blockId, broadcastId, modelTypeId, tagId, campaignId, contactId, programDraftId, userDraftId, stationDraftId, programId, startMin, startMax, durationMin, durationMax, status, limit, orderBy, orderDirection, externalStationId)
+> ItemResults listItems(page, blockId, broadcastId, modelTypeId, tagId, campaignId, contactId, programDraftId, userDraftId, stationDraftId, programId, externalId, startMin, startMax, durationMin, durationMax, status, limit, orderBy, orderDirection, externalStationId)
 
 Get a list of all the items currently in your station.
 
@@ -329,6 +385,7 @@ Long programDraftId = 789L; // Long | Search on Program Draft ID *(Optional)*
 Long userDraftId = 789L; // Long | Search on User Draft ID *(Optional)*
 Long stationDraftId = 789L; // Long | Search on Station Draft ID *(Optional)*
 Long programId = 789L; // Long | Search on Program ID *(Optional)* `(Relation)`
+String externalId = "externalId_example"; // String | Search on External ID *(Optional)*
 OffsetDateTime startMin = new OffsetDateTime(); // OffsetDateTime | Minimum start date *(Optional)*
 OffsetDateTime startMax = new OffsetDateTime(); // OffsetDateTime | Maximum start date *(Optional)*
 Integer durationMin = 56; // Integer | Minimum duration (seconds) *(Optional)*
@@ -339,7 +396,7 @@ String orderBy = "orderBy_example"; // String | Field to order the results *(Opt
 String orderDirection = "orderDirection_example"; // String | Direction of ordering *(Optional)*
 Long externalStationId = 789L; // Long | Query on a different (content providing) station *(Optional)*
 try {
-    ItemResults result = apiInstance.listItems(page, blockId, broadcastId, modelTypeId, tagId, campaignId, contactId, programDraftId, userDraftId, stationDraftId, programId, startMin, startMax, durationMin, durationMax, status, limit, orderBy, orderDirection, externalStationId);
+    ItemResults result = apiInstance.listItems(page, blockId, broadcastId, modelTypeId, tagId, campaignId, contactId, programDraftId, userDraftId, stationDraftId, programId, externalId, startMin, startMax, durationMin, durationMax, status, limit, orderBy, orderDirection, externalStationId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling ItemApi#listItems");
@@ -362,6 +419,7 @@ Name | Type | Description  | Notes
  **userDraftId** | **Long**| Search on User Draft ID *(Optional)* | [optional]
  **stationDraftId** | **Long**| Search on Station Draft ID *(Optional)* | [optional]
  **programId** | **Long**| Search on Program ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
+ **externalId** | **String**| Search on External ID *(Optional)* | [optional]
  **startMin** | **OffsetDateTime**| Minimum start date *(Optional)* | [optional]
  **startMax** | **OffsetDateTime**| Maximum start date *(Optional)* | [optional]
  **durationMin** | **Integer**| Minimum duration (seconds) *(Optional)* | [optional]

@@ -13,7 +13,7 @@ Method | HTTP request | Description
 [**getNextBroadcast**](BroadcastApi.md#getNextBroadcast) | **GET** /broadcasts/next | Get next Broadcast
 [**getWeeklyEPG**](BroadcastApi.md#getWeeklyEPG) | **GET** /broadcasts/epg/weekly | Get weekly EPG
 [**listBroadcasts**](BroadcastApi.md#listBroadcasts) | **GET** /broadcasts | Get all broadcasts.
-[**printBroadcastById**](BroadcastApi.md#printBroadcastById) | **GET** /broadcasts/print/{id} | Print Broadcast by id
+[**printBroadcastById**](BroadcastApi.md#printBroadcastById) | **GET** /broadcasts/print/{id} | Print broadcast by id with template
 [**updateBroadcastByID**](BroadcastApi.md#updateBroadcastByID) | **PATCH** /broadcasts/{id} | Update broadcast by id
 
 
@@ -548,11 +548,11 @@ Name | Type | Description  | Notes
 
 <a name="printBroadcastById"></a>
 # **printBroadcastById**
-> EPGResults printBroadcastById(id, programId, presenterId, tagId)
+> EPGResults printBroadcastById(id, templateId)
 
-Print Broadcast by id
+Print broadcast by id with template
 
-Print Broadcast by id
+Print broadcast by id with template
 
 ### Example
 ```java
@@ -573,11 +573,9 @@ API Key.setApiKey("YOUR API KEY");
 
 BroadcastApi apiInstance = new BroadcastApi();
 Long id = 789L; // Long | ID of Broadcast **(Required)**
-Long programId = 789L; // Long | Search on Program ID *(Optional)* `(Relation)`
-Long presenterId = 789L; // Long | Search on Presenter ID *(Optional)* `(Relation)`
-Long tagId = 789L; // Long | Search on Tag ID *(Optional)* `(Relation)`
+Long templateId = 789L; // Long | Search on template ID *(Optional)*
 try {
-    EPGResults result = apiInstance.printBroadcastById(id, programId, presenterId, tagId);
+    EPGResults result = apiInstance.printBroadcastById(id, templateId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling BroadcastApi#printBroadcastById");
@@ -590,9 +588,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **Long**| ID of Broadcast **(Required)** |
- **programId** | **Long**| Search on Program ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
- **presenterId** | **Long**| Search on Presenter ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
- **tagId** | **Long**| Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
+ **templateId** | **Long**| Search on template ID *(Optional)* | [optional]
 
 ### Return type
 

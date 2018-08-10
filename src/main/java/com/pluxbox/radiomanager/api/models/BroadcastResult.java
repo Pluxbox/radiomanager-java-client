@@ -24,6 +24,7 @@ import com.pluxbox.radiomanager.api.models.Broadcast;
 import com.pluxbox.radiomanager.api.models.BroadcastOutputOnly;
 import com.pluxbox.radiomanager.api.models.BroadcastRelations;
 import com.pluxbox.radiomanager.api.models.BroadcastRelationsBlocks;
+import com.pluxbox.radiomanager.api.models.BroadcastRelationsGenre;
 import com.pluxbox.radiomanager.api.models.BroadcastRelationsItems;
 import com.pluxbox.radiomanager.api.models.BroadcastRelationsModelType;
 import com.pluxbox.radiomanager.api.models.BroadcastRelationsPresenters;
@@ -169,6 +170,9 @@ public class BroadcastResult {
 
   @SerializedName("pty_code_id")
   private Long ptyCodeId = null;
+
+  @SerializedName("genre")
+  private BroadcastRelationsGenre genre = null;
 
   @SerializedName("items")
   private BroadcastRelationsItems items = null;
@@ -663,7 +667,6 @@ public class BroadcastResult {
 
    /**
    * Get ptyCodeId
-   * minimum: 1
    * @return ptyCodeId
   **/
   @ApiModelProperty(example = "1", value = "")
@@ -673,6 +676,24 @@ public class BroadcastResult {
 
   public void setPtyCodeId(Long ptyCodeId) {
     this.ptyCodeId = ptyCodeId;
+  }
+
+  public BroadcastResult genre(BroadcastRelationsGenre genre) {
+    this.genre = genre;
+    return this;
+  }
+
+   /**
+   * Get genre
+   * @return genre
+  **/
+  @ApiModelProperty(value = "")
+  public BroadcastRelationsGenre getGenre() {
+    return genre;
+  }
+
+  public void setGenre(BroadcastRelationsGenre genre) {
+    this.genre = genre;
   }
 
   public BroadcastResult items(BroadcastRelationsItems items) {
@@ -820,6 +841,7 @@ public class BroadcastResult {
         Objects.equals(this.repetitionStart, broadcastResult.repetitionStart) &&
         Objects.equals(this.repetitionDays, broadcastResult.repetitionDays) &&
         Objects.equals(this.ptyCodeId, broadcastResult.ptyCodeId) &&
+        Objects.equals(this.genre, broadcastResult.genre) &&
         Objects.equals(this.items, broadcastResult.items) &&
         Objects.equals(this.blocks, broadcastResult.blocks) &&
         Objects.equals(this.program, broadcastResult.program) &&
@@ -830,7 +852,7 @@ public class BroadcastResult {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, updatedAt, createdAt, deletedAt, externalStationId, programId, modelTypeId, stationId, fieldValues, title, start, stop, genreId, description, shortName, mediumName, website, email, recommended, language, published, repetitionUid, repetitionType, repetitionEnd, repetitionStart, repetitionDays, ptyCodeId, items, blocks, program, tags, presenters, modelType);
+    return Objects.hash(id, updatedAt, createdAt, deletedAt, externalStationId, programId, modelTypeId, stationId, fieldValues, title, start, stop, genreId, description, shortName, mediumName, website, email, recommended, language, published, repetitionUid, repetitionType, repetitionEnd, repetitionStart, repetitionDays, ptyCodeId, genre, items, blocks, program, tags, presenters, modelType);
   }
 
 
@@ -866,6 +888,7 @@ public class BroadcastResult {
     sb.append("    repetitionStart: ").append(toIndentedString(repetitionStart)).append("\n");
     sb.append("    repetitionDays: ").append(toIndentedString(repetitionDays)).append("\n");
     sb.append("    ptyCodeId: ").append(toIndentedString(ptyCodeId)).append("\n");
+    sb.append("    genre: ").append(toIndentedString(genre)).append("\n");
     sb.append("    items: ").append(toIndentedString(items)).append("\n");
     sb.append("    blocks: ").append(toIndentedString(blocks)).append("\n");
     sb.append("    program: ").append(toIndentedString(program)).append("\n");
