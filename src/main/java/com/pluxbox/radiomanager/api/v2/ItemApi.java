@@ -554,6 +554,128 @@ public class ItemApi {
         return call;
     }
     /**
+     * Build call for getCurrentItem
+     * @param lastplayed Show last played item if there is no current item*(Optional)* (optional)
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     */
+    public com.squareup.okhttp.Call getCurrentItemCall(Boolean lastplayed, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        Object localVarPostBody = null;
+        
+        // create path and map variables
+        String localVarPath = "/items/current";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        if (lastplayed != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "lastplayed", lastplayed));
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+                @Override
+                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
+                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] { "API Key" };
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+    
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call getCurrentItemValidateBeforeCall(Boolean lastplayed, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+        
+        com.squareup.okhttp.Call call = getCurrentItemCall(lastplayed, progressListener, progressRequestListener);
+        return call;
+
+        
+        
+        
+        
+    }
+
+    /**
+     * Get current Item
+     * Get current Item
+     * @param lastplayed Show last played item if there is no current item*(Optional)* (optional)
+     * @return ItemResult
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ItemResult getCurrentItem(Boolean lastplayed) throws ApiException {
+        ApiResponse<ItemResult> resp = getCurrentItemWithHttpInfo(lastplayed);
+        return resp.getData();
+    }
+
+    /**
+     * Get current Item
+     * Get current Item
+     * @param lastplayed Show last played item if there is no current item*(Optional)* (optional)
+     * @return ApiResponse&lt;ItemResult&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<ItemResult> getCurrentItemWithHttpInfo(Boolean lastplayed) throws ApiException {
+        com.squareup.okhttp.Call call = getCurrentItemValidateBeforeCall(lastplayed, null, null);
+        Type localVarReturnType = new TypeToken<ItemResult>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
+    }
+
+    /**
+     * Get current Item (asynchronously)
+     * Get current Item
+     * @param lastplayed Show last played item if there is no current item*(Optional)* (optional)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     */
+    public com.squareup.okhttp.Call getCurrentItemAsync(Boolean lastplayed, final ApiCallback<ItemResult> callback) throws ApiException {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        com.squareup.okhttp.Call call = getCurrentItemValidateBeforeCall(lastplayed, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<ItemResult>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
+        return call;
+    }
+    /**
      * Build call for getItemById
      * @param id ID of Item **(Required)** (required)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
@@ -698,6 +820,7 @@ public class ItemApi {
      * @param userDraftId Search on User Draft ID *(Optional)* (optional)
      * @param stationDraftId Search on Station Draft ID *(Optional)* (optional)
      * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param externalId Search on External ID *(Optional)* (optional)
      * @param startMin Minimum start date *(Optional)* (optional)
      * @param startMax Maximum start date *(Optional)* (optional)
      * @param durationMin Minimum duration (seconds) *(Optional)* (optional)
@@ -712,7 +835,7 @@ public class ItemApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call listItemsCall(Long page, Long blockId, Long broadcastId, Long modelTypeId, Long tagId, Long campaignId, Long contactId, Long programDraftId, Long userDraftId, Long stationDraftId, Long programId, OffsetDateTime startMin, OffsetDateTime startMax, Integer durationMin, Integer durationMax, String status, Long limit, String orderBy, String orderDirection, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call listItemsCall(Long page, Long blockId, Long broadcastId, Long modelTypeId, Long tagId, Long campaignId, Long contactId, Long programDraftId, Long userDraftId, Long stationDraftId, Long programId, String externalId, OffsetDateTime startMin, OffsetDateTime startMax, Integer durationMin, Integer durationMax, String status, Long limit, String orderBy, String orderDirection, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
@@ -741,6 +864,8 @@ public class ItemApi {
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "station_draft_id", stationDraftId));
         if (programId != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "program_id", programId));
+        if (externalId != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "external_id", externalId));
         if (startMin != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "start-min", startMin));
         if (startMax != null)
@@ -793,10 +918,10 @@ public class ItemApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call listItemsValidateBeforeCall(Long page, Long blockId, Long broadcastId, Long modelTypeId, Long tagId, Long campaignId, Long contactId, Long programDraftId, Long userDraftId, Long stationDraftId, Long programId, OffsetDateTime startMin, OffsetDateTime startMax, Integer durationMin, Integer durationMax, String status, Long limit, String orderBy, String orderDirection, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call listItemsValidateBeforeCall(Long page, Long blockId, Long broadcastId, Long modelTypeId, Long tagId, Long campaignId, Long contactId, Long programDraftId, Long userDraftId, Long stationDraftId, Long programId, String externalId, OffsetDateTime startMin, OffsetDateTime startMax, Integer durationMin, Integer durationMax, String status, Long limit, String orderBy, String orderDirection, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         
-        com.squareup.okhttp.Call call = listItemsCall(page, blockId, broadcastId, modelTypeId, tagId, campaignId, contactId, programDraftId, userDraftId, stationDraftId, programId, startMin, startMax, durationMin, durationMax, status, limit, orderBy, orderDirection, externalStationId, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = listItemsCall(page, blockId, broadcastId, modelTypeId, tagId, campaignId, contactId, programDraftId, userDraftId, stationDraftId, programId, externalId, startMin, startMax, durationMin, durationMax, status, limit, orderBy, orderDirection, externalStationId, progressListener, progressRequestListener);
         return call;
 
         
@@ -819,6 +944,7 @@ public class ItemApi {
      * @param userDraftId Search on User Draft ID *(Optional)* (optional)
      * @param stationDraftId Search on Station Draft ID *(Optional)* (optional)
      * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param externalId Search on External ID *(Optional)* (optional)
      * @param startMin Minimum start date *(Optional)* (optional)
      * @param startMax Maximum start date *(Optional)* (optional)
      * @param durationMin Minimum duration (seconds) *(Optional)* (optional)
@@ -831,8 +957,8 @@ public class ItemApi {
      * @return ItemResults
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ItemResults listItems(Long page, Long blockId, Long broadcastId, Long modelTypeId, Long tagId, Long campaignId, Long contactId, Long programDraftId, Long userDraftId, Long stationDraftId, Long programId, OffsetDateTime startMin, OffsetDateTime startMax, Integer durationMin, Integer durationMax, String status, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
-        ApiResponse<ItemResults> resp = listItemsWithHttpInfo(page, blockId, broadcastId, modelTypeId, tagId, campaignId, contactId, programDraftId, userDraftId, stationDraftId, programId, startMin, startMax, durationMin, durationMax, status, limit, orderBy, orderDirection, externalStationId);
+    public ItemResults listItems(Long page, Long blockId, Long broadcastId, Long modelTypeId, Long tagId, Long campaignId, Long contactId, Long programDraftId, Long userDraftId, Long stationDraftId, Long programId, String externalId, OffsetDateTime startMin, OffsetDateTime startMax, Integer durationMin, Integer durationMax, String status, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
+        ApiResponse<ItemResults> resp = listItemsWithHttpInfo(page, blockId, broadcastId, modelTypeId, tagId, campaignId, contactId, programDraftId, userDraftId, stationDraftId, programId, externalId, startMin, startMax, durationMin, durationMax, status, limit, orderBy, orderDirection, externalStationId);
         return resp.getData();
     }
 
@@ -850,6 +976,7 @@ public class ItemApi {
      * @param userDraftId Search on User Draft ID *(Optional)* (optional)
      * @param stationDraftId Search on Station Draft ID *(Optional)* (optional)
      * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param externalId Search on External ID *(Optional)* (optional)
      * @param startMin Minimum start date *(Optional)* (optional)
      * @param startMax Maximum start date *(Optional)* (optional)
      * @param durationMin Minimum duration (seconds) *(Optional)* (optional)
@@ -862,8 +989,8 @@ public class ItemApi {
      * @return ApiResponse&lt;ItemResults&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<ItemResults> listItemsWithHttpInfo(Long page, Long blockId, Long broadcastId, Long modelTypeId, Long tagId, Long campaignId, Long contactId, Long programDraftId, Long userDraftId, Long stationDraftId, Long programId, OffsetDateTime startMin, OffsetDateTime startMax, Integer durationMin, Integer durationMax, String status, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
-        com.squareup.okhttp.Call call = listItemsValidateBeforeCall(page, blockId, broadcastId, modelTypeId, tagId, campaignId, contactId, programDraftId, userDraftId, stationDraftId, programId, startMin, startMax, durationMin, durationMax, status, limit, orderBy, orderDirection, externalStationId, null, null);
+    public ApiResponse<ItemResults> listItemsWithHttpInfo(Long page, Long blockId, Long broadcastId, Long modelTypeId, Long tagId, Long campaignId, Long contactId, Long programDraftId, Long userDraftId, Long stationDraftId, Long programId, String externalId, OffsetDateTime startMin, OffsetDateTime startMax, Integer durationMin, Integer durationMax, String status, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
+        com.squareup.okhttp.Call call = listItemsValidateBeforeCall(page, blockId, broadcastId, modelTypeId, tagId, campaignId, contactId, programDraftId, userDraftId, stationDraftId, programId, externalId, startMin, startMax, durationMin, durationMax, status, limit, orderBy, orderDirection, externalStationId, null, null);
         Type localVarReturnType = new TypeToken<ItemResults>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -882,6 +1009,7 @@ public class ItemApi {
      * @param userDraftId Search on User Draft ID *(Optional)* (optional)
      * @param stationDraftId Search on Station Draft ID *(Optional)* (optional)
      * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param externalId Search on External ID *(Optional)* (optional)
      * @param startMin Minimum start date *(Optional)* (optional)
      * @param startMax Maximum start date *(Optional)* (optional)
      * @param durationMin Minimum duration (seconds) *(Optional)* (optional)
@@ -895,7 +1023,7 @@ public class ItemApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call listItemsAsync(Long page, Long blockId, Long broadcastId, Long modelTypeId, Long tagId, Long campaignId, Long contactId, Long programDraftId, Long userDraftId, Long stationDraftId, Long programId, OffsetDateTime startMin, OffsetDateTime startMax, Integer durationMin, Integer durationMax, String status, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback<ItemResults> callback) throws ApiException {
+    public com.squareup.okhttp.Call listItemsAsync(Long page, Long blockId, Long broadcastId, Long modelTypeId, Long tagId, Long campaignId, Long contactId, Long programDraftId, Long userDraftId, Long stationDraftId, Long programId, String externalId, OffsetDateTime startMin, OffsetDateTime startMax, Integer durationMin, Integer durationMax, String status, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback<ItemResults> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -916,7 +1044,7 @@ public class ItemApi {
             };
         }
 
-        com.squareup.okhttp.Call call = listItemsValidateBeforeCall(page, blockId, broadcastId, modelTypeId, tagId, campaignId, contactId, programDraftId, userDraftId, stationDraftId, programId, startMin, startMax, durationMin, durationMax, status, limit, orderBy, orderDirection, externalStationId, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = listItemsValidateBeforeCall(page, blockId, broadcastId, modelTypeId, tagId, campaignId, contactId, programDraftId, userDraftId, stationDraftId, programId, externalId, startMin, startMax, durationMin, durationMax, status, limit, orderBy, orderDirection, externalStationId, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<ItemResults>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
