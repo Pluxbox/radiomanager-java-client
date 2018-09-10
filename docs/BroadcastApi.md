@@ -548,7 +548,7 @@ Name | Type | Description  | Notes
 
 <a name="printBroadcastById"></a>
 # **printBroadcastById**
-> EPGResults printBroadcastById(id, templateId)
+> String printBroadcastById(id, templateId)
 
 Print broadcast by id with template
 
@@ -575,7 +575,7 @@ BroadcastApi apiInstance = new BroadcastApi();
 Long id = 789L; // Long | ID of Broadcast **(Required)**
 Long templateId = 789L; // Long | Search on template ID *(Optional)*
 try {
-    EPGResults result = apiInstance.printBroadcastById(id, templateId);
+    String result = apiInstance.printBroadcastById(id, templateId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling BroadcastApi#printBroadcastById");
@@ -592,7 +592,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EPGResults**](EPGResults.md)
+**String**
 
 ### Authorization
 

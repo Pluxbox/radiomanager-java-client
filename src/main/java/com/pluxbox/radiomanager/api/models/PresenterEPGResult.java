@@ -146,7 +146,7 @@ public class PresenterEPGResult {
    * @return active
   **/
   @ApiModelProperty(example = "true", value = "")
-  public Boolean getActive() {
+  public Boolean isActive() {
     return active;
   }
 
@@ -321,6 +321,6 @@ public class PresenterEPGResult {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

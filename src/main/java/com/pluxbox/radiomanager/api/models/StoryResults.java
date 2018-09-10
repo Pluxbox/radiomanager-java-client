@@ -230,7 +230,7 @@ public class StoryResults {
 
   public StoryResults addResultsItem(StoryResult resultsItem) {
     if (this.results == null) {
-      this.results = new ArrayList<StoryResult>();
+      this.results = new ArrayList<>();
     }
     this.results.add(resultsItem);
     return this;
@@ -306,6 +306,6 @@ public class StoryResults {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

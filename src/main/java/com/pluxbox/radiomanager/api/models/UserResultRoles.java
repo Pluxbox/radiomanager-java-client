@@ -157,6 +157,6 @@ public class UserResultRoles {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

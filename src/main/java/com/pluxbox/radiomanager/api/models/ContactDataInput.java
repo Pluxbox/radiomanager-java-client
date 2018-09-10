@@ -204,6 +204,6 @@ public class ContactDataInput {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

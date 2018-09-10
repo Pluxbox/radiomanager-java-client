@@ -32,7 +32,7 @@ import java.util.List;
 
 public class EPGResults {
   @SerializedName("days")
-  private List<BroadcastEPGDay> days = new ArrayList<BroadcastEPGDay>();
+  private List<BroadcastEPGDay> days = new ArrayList<>();
 
   @SerializedName("next_page_url")
   private String nextPageUrl = null;
@@ -142,6 +142,6 @@ public class EPGResults {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

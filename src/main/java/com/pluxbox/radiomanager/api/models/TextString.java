@@ -181,6 +181,6 @@ public class TextString {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

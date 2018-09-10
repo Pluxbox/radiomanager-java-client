@@ -88,6 +88,6 @@ public class BlockRelationsItemsParams {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

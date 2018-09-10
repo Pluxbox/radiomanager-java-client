@@ -69,14 +69,15 @@ public class ModelTypeApi {
      */
     public com.squareup.okhttp.Call getModelTypeByIdCall(Long id, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
-        
+
         // create path and map variables
         String localVarPath = "/model_types/{id}"
             .replaceAll("\\{" + "id" + "\\}", apiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         if (externalStationId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "_external_station_id", externalStationId));
+        localVarQueryParams.addAll(apiClient.parameterToPair("_external_station_id", externalStationId));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -107,9 +108,9 @@ public class ModelTypeApi {
         }
 
         String[] localVarAuthNames = new String[] { "API Key" };
-        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
-    
+
     @SuppressWarnings("rawtypes")
     private com.squareup.okhttp.Call getModelTypeByIdValidateBeforeCall(Long id, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
@@ -118,14 +119,10 @@ public class ModelTypeApi {
             throw new ApiException("Missing the required parameter 'id' when calling getModelTypeById(Async)");
         }
         
-        
+
         com.squareup.okhttp.Call call = getModelTypeByIdCall(id, externalStationId, progressListener, progressRequestListener);
         return call;
 
-        
-        
-        
-        
     }
 
     /**
@@ -211,35 +208,36 @@ public class ModelTypeApi {
      */
     public com.squareup.okhttp.Call listModelTypesCall(Long page, Long programId, Long broadcastId, Long itemId, Long campaignId, Long presenterId, Long contactId, String model, Long limit, String orderBy, String orderDirection, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
-        
+
         // create path and map variables
         String localVarPath = "/model_types";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         if (page != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "page", page));
+        localVarQueryParams.addAll(apiClient.parameterToPair("page", page));
         if (programId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "program_id", programId));
+        localVarQueryParams.addAll(apiClient.parameterToPair("program_id", programId));
         if (broadcastId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "broadcast_id", broadcastId));
+        localVarQueryParams.addAll(apiClient.parameterToPair("broadcast_id", broadcastId));
         if (itemId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "item_id", itemId));
+        localVarQueryParams.addAll(apiClient.parameterToPair("item_id", itemId));
         if (campaignId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "campaign_id", campaignId));
+        localVarQueryParams.addAll(apiClient.parameterToPair("campaign_id", campaignId));
         if (presenterId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "presenter_id", presenterId));
+        localVarQueryParams.addAll(apiClient.parameterToPair("presenter_id", presenterId));
         if (contactId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "contact_id", contactId));
+        localVarQueryParams.addAll(apiClient.parameterToPair("contact_id", contactId));
         if (model != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "model", model));
+        localVarQueryParams.addAll(apiClient.parameterToPair("model", model));
         if (limit != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "limit", limit));
+        localVarQueryParams.addAll(apiClient.parameterToPair("limit", limit));
         if (orderBy != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "order-by", orderBy));
+        localVarQueryParams.addAll(apiClient.parameterToPair("order-by", orderBy));
         if (orderDirection != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "order-direction", orderDirection));
+        localVarQueryParams.addAll(apiClient.parameterToPair("order-direction", orderDirection));
         if (externalStationId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "_external_station_id", externalStationId));
+        localVarQueryParams.addAll(apiClient.parameterToPair("_external_station_id", externalStationId));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -270,20 +268,16 @@ public class ModelTypeApi {
         }
 
         String[] localVarAuthNames = new String[] { "API Key" };
-        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
-    
+
     @SuppressWarnings("rawtypes")
     private com.squareup.okhttp.Call listModelTypesValidateBeforeCall(Long page, Long programId, Long broadcastId, Long itemId, Long campaignId, Long presenterId, Long contactId, String model, Long limit, String orderBy, String orderDirection, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
-        
+
         com.squareup.okhttp.Call call = listModelTypesCall(page, programId, broadcastId, itemId, campaignId, presenterId, contactId, model, limit, orderBy, orderDirection, externalStationId, progressListener, progressRequestListener);
         return call;
 
-        
-        
-        
-        
     }
 
     /**

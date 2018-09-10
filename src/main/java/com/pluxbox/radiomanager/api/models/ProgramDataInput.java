@@ -141,7 +141,7 @@ public class ProgramDataInput {
    * @return disabled
   **/
   @ApiModelProperty(example = "false", value = "")
-  public Boolean getDisabled() {
+  public Boolean isDisabled() {
     return disabled;
   }
 
@@ -267,7 +267,7 @@ public class ProgramDataInput {
    * @return recommended
   **/
   @ApiModelProperty(example = "false", value = "")
-  public Boolean getRecommended() {
+  public Boolean isRecommended() {
     return recommended;
   }
 
@@ -318,7 +318,7 @@ public class ProgramDataInput {
 
   public ProgramDataInput addTagsItem(Integer tagsItem) {
     if (this.tags == null) {
-      this.tags = new ArrayList<Integer>();
+      this.tags = new ArrayList<>();
     }
     this.tags.add(tagsItem);
     return this;
@@ -344,7 +344,7 @@ public class ProgramDataInput {
 
   public ProgramDataInput addPresentersItem(Integer presentersItem) {
     if (this.presenters == null) {
-      this.presenters = new ArrayList<Integer>();
+      this.presenters = new ArrayList<>();
     }
     this.presenters.add(presentersItem);
     return this;
@@ -430,6 +430,6 @@ public class ProgramDataInput {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

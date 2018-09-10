@@ -279,7 +279,7 @@ public class StationResultStation {
 
   public StationResultStation addKeywordsItem(String keywordsItem) {
     if (this.keywords == null) {
-      this.keywords = new ArrayList<String>();
+      this.keywords = new ArrayList<>();
     }
     this.keywords.add(keywordsItem);
     return this;
@@ -398,7 +398,7 @@ public class StationResultStation {
    * @return active
   **/
   @ApiModelProperty(example = "true", value = "")
-  public Boolean getActive() {
+  public Boolean isActive() {
     return active;
   }
 
@@ -675,6 +675,6 @@ public class StationResultStation {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

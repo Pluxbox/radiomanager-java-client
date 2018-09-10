@@ -137,7 +137,7 @@ public class ItemResults {
 
   public ItemResults addResultsItem(ItemResult resultsItem) {
     if (this.results == null) {
-      this.results = new ArrayList<ItemResult>();
+      this.results = new ArrayList<>();
     }
     this.results.add(resultsItem);
     return this;
@@ -211,6 +211,6 @@ public class ItemResults {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

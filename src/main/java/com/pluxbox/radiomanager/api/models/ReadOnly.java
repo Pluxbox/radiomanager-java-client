@@ -111,6 +111,6 @@ public class ReadOnly {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

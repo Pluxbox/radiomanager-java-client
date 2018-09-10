@@ -226,6 +226,6 @@ public class StationResultStationStartDays {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

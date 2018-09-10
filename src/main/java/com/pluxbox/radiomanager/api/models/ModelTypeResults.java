@@ -230,7 +230,7 @@ public class ModelTypeResults {
 
   public ModelTypeResults addResultsItem(ModelTypeResult resultsItem) {
     if (this.results == null) {
-      this.results = new ArrayList<ModelTypeResult>();
+      this.results = new ArrayList<>();
     }
     this.results.add(resultsItem);
     return this;
@@ -306,6 +306,6 @@ public class ModelTypeResults {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

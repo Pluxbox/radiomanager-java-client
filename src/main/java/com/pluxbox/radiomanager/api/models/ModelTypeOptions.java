@@ -62,7 +62,7 @@ public class ModelTypeOptions {
    * @return subBroadcast
   **/
   @ApiModelProperty(example = "true", value = "")
-  public Boolean getSubBroadcast() {
+  public Boolean isSubBroadcast() {
     return subBroadcast;
   }
 
@@ -111,6 +111,6 @@ public class ModelTypeOptions {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

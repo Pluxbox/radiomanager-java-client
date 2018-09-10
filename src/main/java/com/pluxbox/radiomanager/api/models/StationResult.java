@@ -89,6 +89,6 @@ public class StationResult {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

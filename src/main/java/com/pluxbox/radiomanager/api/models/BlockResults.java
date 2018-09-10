@@ -230,7 +230,7 @@ public class BlockResults {
 
   public BlockResults addResultsItem(BlockResult resultsItem) {
     if (this.results == null) {
-      this.results = new ArrayList<BlockResult>();
+      this.results = new ArrayList<>();
     }
     this.results.add(resultsItem);
     return this;
@@ -306,6 +306,6 @@ public class BlockResults {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

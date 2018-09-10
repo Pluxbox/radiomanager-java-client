@@ -63,7 +63,7 @@ public class Data {
 
   public Data addItemsItem(ImportItem itemsItem) {
     if (this.items == null) {
-      this.items = new ArrayList<ImportItem>();
+      this.items = new ArrayList<>();
     }
     this.items.add(itemsItem);
     return this;
@@ -123,6 +123,6 @@ public class Data {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

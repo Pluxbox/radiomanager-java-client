@@ -150,7 +150,7 @@ public class Campaign {
    * @return recommended
   **/
   @ApiModelProperty(example = "true", value = "")
-  public Boolean getRecommended() {
+  public Boolean isRecommended() {
     return recommended;
   }
 
@@ -227,6 +227,6 @@ public class Campaign {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

@@ -524,7 +524,7 @@ public class BroadcastEPGResult {
    * @return recommended
   **/
   @ApiModelProperty(example = "true", value = "")
-  public Boolean getRecommended() {
+  public Boolean isRecommended() {
     return recommended;
   }
 
@@ -560,7 +560,7 @@ public class BroadcastEPGResult {
    * @return published
   **/
   @ApiModelProperty(example = "true", value = "")
-  public Boolean getPublished() {
+  public Boolean isPublished() {
     return published;
   }
 
@@ -755,7 +755,7 @@ public class BroadcastEPGResult {
 
   public BroadcastEPGResult addPresentersItem(PresenterEPGResult presentersItem) {
     if (this.presenters == null) {
-      this.presenters = new ArrayList<PresenterEPGResult>();
+      this.presenters = new ArrayList<>();
     }
     this.presenters.add(presentersItem);
     return this;
@@ -895,6 +895,6 @@ public class BroadcastEPGResult {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

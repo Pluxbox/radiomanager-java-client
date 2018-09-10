@@ -67,14 +67,15 @@ public class StringApi {
      */
     public com.squareup.okhttp.Call getStringsByNameCall(String name, Boolean fullModel, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
-        
+
         // create path and map variables
         String localVarPath = "/strings/{name}"
             .replaceAll("\\{" + "name" + "\\}", apiClient.escapeString(name.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         if (fullModel != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "full_model", fullModel));
+        localVarQueryParams.addAll(apiClient.parameterToPair("full_model", fullModel));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -105,9 +106,9 @@ public class StringApi {
         }
 
         String[] localVarAuthNames = new String[] { "API Key" };
-        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
-    
+
     @SuppressWarnings("rawtypes")
     private com.squareup.okhttp.Call getStringsByNameValidateBeforeCall(String name, Boolean fullModel, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
@@ -121,14 +122,10 @@ public class StringApi {
             throw new ApiException("Missing the required parameter 'fullModel' when calling getStringsByName(Async)");
         }
         
-        
+
         com.squareup.okhttp.Call call = getStringsByNameCall(name, fullModel, progressListener, progressRequestListener);
         return call;
 
-        
-        
-        
-        
     }
 
     /**

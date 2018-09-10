@@ -129,7 +129,7 @@ public class CampaignOutputOnly {
 
   public CampaignOutputOnly addItemItem(Item itemItem) {
     if (this.item == null) {
-      this.item = new ArrayList<Item>();
+      this.item = new ArrayList<>();
     }
     this.item.add(itemItem);
     return this;
@@ -215,6 +215,6 @@ public class CampaignOutputOnly {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

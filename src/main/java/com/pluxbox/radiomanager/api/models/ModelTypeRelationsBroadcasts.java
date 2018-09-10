@@ -158,6 +158,6 @@ public class ModelTypeRelationsBroadcasts {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

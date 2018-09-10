@@ -43,7 +43,7 @@ public class ProgramInputOnly {
 
   public ProgramInputOnly addTagsItem(Integer tagsItem) {
     if (this.tags == null) {
-      this.tags = new ArrayList<Integer>();
+      this.tags = new ArrayList<>();
     }
     this.tags.add(tagsItem);
     return this;
@@ -69,7 +69,7 @@ public class ProgramInputOnly {
 
   public ProgramInputOnly addPresentersItem(Integer presentersItem) {
     if (this.presenters == null) {
-      this.presenters = new ArrayList<Integer>();
+      this.presenters = new ArrayList<>();
     }
     this.presenters.add(presentersItem);
     return this;
@@ -129,6 +129,6 @@ public class ProgramInputOnly {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

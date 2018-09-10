@@ -88,6 +88,6 @@ public class ItemRelationsContactsParams {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

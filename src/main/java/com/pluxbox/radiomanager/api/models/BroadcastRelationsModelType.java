@@ -158,6 +158,6 @@ public class BroadcastRelationsModelType {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

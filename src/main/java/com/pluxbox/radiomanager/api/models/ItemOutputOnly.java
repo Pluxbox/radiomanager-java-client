@@ -273,6 +273,6 @@ public class ItemOutputOnly {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

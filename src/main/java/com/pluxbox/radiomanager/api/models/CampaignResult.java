@@ -161,7 +161,7 @@ public class CampaignResult {
 
   public CampaignResult addItemItem(Item itemItem) {
     if (this.item == null) {
-      this.item = new ArrayList<Item>();
+      this.item = new ArrayList<>();
     }
     this.item.add(itemItem);
     return this;
@@ -298,7 +298,7 @@ public class CampaignResult {
    * @return recommended
   **/
   @ApiModelProperty(example = "true", value = "")
-  public Boolean getRecommended() {
+  public Boolean isRecommended() {
     return recommended;
   }
 
@@ -427,6 +427,6 @@ public class CampaignResult {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

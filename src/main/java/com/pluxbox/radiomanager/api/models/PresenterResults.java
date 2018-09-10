@@ -230,7 +230,7 @@ public class PresenterResults {
 
   public PresenterResults addResultsItem(PresenterResult resultsItem) {
     if (this.results == null) {
-      this.results = new ArrayList<PresenterResult>();
+      this.results = new ArrayList<>();
     }
     this.results.add(resultsItem);
     return this;
@@ -306,6 +306,6 @@ public class PresenterResults {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

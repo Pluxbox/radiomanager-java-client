@@ -111,6 +111,6 @@ public class Forbidden {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

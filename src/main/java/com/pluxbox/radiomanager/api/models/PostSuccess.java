@@ -111,6 +111,6 @@ public class PostSuccess {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

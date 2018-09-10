@@ -158,6 +158,6 @@ public class ModelTypeRelationsCampaigns {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

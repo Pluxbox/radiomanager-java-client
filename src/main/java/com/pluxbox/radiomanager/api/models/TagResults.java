@@ -137,7 +137,7 @@ public class TagResults {
 
   public TagResults addResultsItem(TagResult resultsItem) {
     if (this.results == null) {
-      this.results = new ArrayList<TagResult>();
+      this.results = new ArrayList<>();
     }
     this.results.add(resultsItem);
     return this;
@@ -211,6 +211,6 @@ public class TagResults {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 
