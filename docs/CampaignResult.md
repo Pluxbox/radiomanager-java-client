@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **updatedAt** | [**OffsetDateTime**](OffsetDateTime.md) |  | 
 **createdAt** | [**OffsetDateTime**](OffsetDateTime.md) |  | 
 **deletedAt** | [**OffsetDateTime**](OffsetDateTime.md) |  | 
-**item** | [**List&lt;Item&gt;**](Item.md) |  |  [optional]
+**item** | [**Item**](Item.md) |  |  [optional]
 **externalStationId** | **Long** |  |  [optional]
 **modelTypeId** | **Long** |  | 
 **fieldValues** | **Object** |  |  [optional]

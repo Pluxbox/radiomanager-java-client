@@ -35,6 +35,9 @@ public class Data {
   @SerializedName("start")
   private OffsetDateTime start = null;
 
+  @SerializedName("allow_playlist_past")
+  private Integer allowPlaylistPast = null;
+
   @SerializedName("items")
   private List<ImportItem> items = null;
 
@@ -54,6 +57,24 @@ public class Data {
 
   public void setStart(OffsetDateTime start) {
     this.start = start;
+  }
+
+  public Data allowPlaylistPast(Integer allowPlaylistPast) {
+    this.allowPlaylistPast = allowPlaylistPast;
+    return this;
+  }
+
+   /**
+   * Get allowPlaylistPast
+   * @return allowPlaylistPast
+  **/
+  @ApiModelProperty(example = "0", value = "")
+  public Integer getAllowPlaylistPast() {
+    return allowPlaylistPast;
+  }
+
+  public void setAllowPlaylistPast(Integer allowPlaylistPast) {
+    this.allowPlaylistPast = allowPlaylistPast;
   }
 
   public Data items(List<ImportItem> items) {
@@ -93,12 +114,13 @@ public class Data {
     }
     Data data = (Data) o;
     return Objects.equals(this.start, data.start) &&
+        Objects.equals(this.allowPlaylistPast, data.allowPlaylistPast) &&
         Objects.equals(this.items, data.items);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(start, items);
+    return Objects.hash(start, allowPlaylistPast, items);
   }
 
 
@@ -108,6 +130,7 @@ public class Data {
     sb.append("class Data {\n");
     
     sb.append("    start: ").append(toIndentedString(start)).append("\n");
+    sb.append("    allowPlaylistPast: ").append(toIndentedString(allowPlaylistPast)).append("\n");
     sb.append("    items: ").append(toIndentedString(items)).append("\n");
     sb.append("}");
     return sb.toString();

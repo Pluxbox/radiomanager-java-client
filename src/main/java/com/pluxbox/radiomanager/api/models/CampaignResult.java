@@ -29,8 +29,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * CampaignResult
@@ -50,7 +48,7 @@ public class CampaignResult {
   private OffsetDateTime deletedAt = null;
 
   @SerializedName("item")
-  private List<Item> item = null;
+  private Item item = null;
 
   @SerializedName("_external_station_id")
   private Long externalStationId = null;
@@ -154,16 +152,8 @@ public class CampaignResult {
     this.deletedAt = deletedAt;
   }
 
-  public CampaignResult item(List<Item> item) {
+  public CampaignResult item(Item item) {
     this.item = item;
-    return this;
-  }
-
-  public CampaignResult addItemItem(Item itemItem) {
-    if (this.item == null) {
-      this.item = new ArrayList<>();
-    }
-    this.item.add(itemItem);
     return this;
   }
 
@@ -172,11 +162,11 @@ public class CampaignResult {
    * @return item
   **/
   @ApiModelProperty(value = "")
-  public List<Item> getItem() {
+  public Item getItem() {
     return item;
   }
 
-  public void setItem(List<Item> item) {
+  public void setItem(Item item) {
     this.item = item;
   }
 
