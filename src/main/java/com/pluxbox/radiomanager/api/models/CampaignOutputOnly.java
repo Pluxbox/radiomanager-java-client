@@ -19,7 +19,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.pluxbox.radiomanager.api.models.Item;
+import com.pluxbox.radiomanager.api.models.CampaignTemplateItem;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -43,7 +43,7 @@ public class CampaignOutputOnly {
   private OffsetDateTime deletedAt = null;
 
   @SerializedName("item")
-  private Item item = null;
+  private CampaignTemplateItem item = null;
 
   @SerializedName("_external_station_id")
   private Long externalStationId = null;
@@ -120,7 +120,7 @@ public class CampaignOutputOnly {
     this.deletedAt = deletedAt;
   }
 
-  public CampaignOutputOnly item(Item item) {
+  public CampaignOutputOnly item(CampaignTemplateItem item) {
     this.item = item;
     return this;
   }
@@ -130,11 +130,11 @@ public class CampaignOutputOnly {
    * @return item
   **/
   @ApiModelProperty(value = "")
-  public Item getItem() {
+  public CampaignTemplateItem getItem() {
     return item;
   }
 
-  public void setItem(Item item) {
+  public void setItem(CampaignTemplateItem item) {
     this.item = item;
   }
 

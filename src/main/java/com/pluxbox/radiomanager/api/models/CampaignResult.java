@@ -24,7 +24,7 @@ import com.pluxbox.radiomanager.api.models.Campaign;
 import com.pluxbox.radiomanager.api.models.CampaignOutputOnly;
 import com.pluxbox.radiomanager.api.models.CampaignRelations;
 import com.pluxbox.radiomanager.api.models.CampaignRelationsItems;
-import com.pluxbox.radiomanager.api.models.Item;
+import com.pluxbox.radiomanager.api.models.CampaignTemplateItem;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -48,7 +48,7 @@ public class CampaignResult {
   private OffsetDateTime deletedAt = null;
 
   @SerializedName("item")
-  private Item item = null;
+  private CampaignTemplateItem item = null;
 
   @SerializedName("_external_station_id")
   private Long externalStationId = null;
@@ -152,7 +152,7 @@ public class CampaignResult {
     this.deletedAt = deletedAt;
   }
 
-  public CampaignResult item(Item item) {
+  public CampaignResult item(CampaignTemplateItem item) {
     this.item = item;
     return this;
   }
@@ -162,11 +162,11 @@ public class CampaignResult {
    * @return item
   **/
   @ApiModelProperty(value = "")
-  public Item getItem() {
+  public CampaignTemplateItem getItem() {
     return item;
   }
 
-  public void setItem(Item item) {
+  public void setItem(CampaignTemplateItem item) {
     this.item = item;
   }
 

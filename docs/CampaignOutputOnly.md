@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **updatedAt** | [**OffsetDateTime**](OffsetDateTime.md) |  | 
 **createdAt** | [**OffsetDateTime**](OffsetDateTime.md) |  | 
 **deletedAt** | [**OffsetDateTime**](OffsetDateTime.md) |  | 
-**item** | [**Item**](Item.md) |  |  [optional]
+**item** | [**CampaignTemplateItem**](CampaignTemplateItem.md) |  |  [optional]
 **externalStationId** | **Long** |  |  [optional]
 
 
