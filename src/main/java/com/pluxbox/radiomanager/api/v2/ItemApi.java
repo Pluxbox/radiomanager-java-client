@@ -29,6 +29,8 @@ import java.io.IOException;
 
 import com.pluxbox.radiomanager.api.models.Data;
 import com.pluxbox.radiomanager.api.models.Data1;
+import com.pluxbox.radiomanager.api.models.Data2;
+import com.pluxbox.radiomanager.api.models.Data3;
 import com.pluxbox.radiomanager.api.models.Forbidden;
 import com.pluxbox.radiomanager.api.models.ImportItem;
 import com.pluxbox.radiomanager.api.models.InlineResponse202;
@@ -1029,6 +1031,123 @@ public class ItemApi {
         return call;
     }
     /**
+     * Build call for playlistPostMerge
+     * @param data Data *(Optional)* (optional)
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     */
+    public com.squareup.okhttp.Call playlistPostMergeCall(Data2 data, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        Object localVarPostBody = data;
+
+        // create path and map variables
+        String localVarPath = "/items/playlist/merge";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+                @Override
+                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
+                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] { "API Key" };
+        return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call playlistPostMergeValidateBeforeCall(Data2 data, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+
+        com.squareup.okhttp.Call call = playlistPostMergeCall(data, progressListener, progressRequestListener);
+        return call;
+
+    }
+
+    /**
+     * Post a playlist, do not remove previously imported items
+     * Post a playlist, do not remove previously imported items
+     * @param data Data *(Optional)* (optional)
+     * @return InlineResponse202
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public InlineResponse202 playlistPostMerge(Data2 data) throws ApiException {
+        ApiResponse<InlineResponse202> resp = playlistPostMergeWithHttpInfo(data);
+        return resp.getData();
+    }
+
+    /**
+     * Post a playlist, do not remove previously imported items
+     * Post a playlist, do not remove previously imported items
+     * @param data Data *(Optional)* (optional)
+     * @return ApiResponse&lt;InlineResponse202&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<InlineResponse202> playlistPostMergeWithHttpInfo(Data2 data) throws ApiException {
+        com.squareup.okhttp.Call call = playlistPostMergeValidateBeforeCall(data, null, null);
+        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
+    }
+
+    /**
+     * Post a playlist, do not remove previously imported items (asynchronously)
+     * Post a playlist, do not remove previously imported items
+     * @param data Data *(Optional)* (optional)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     */
+    public com.squareup.okhttp.Call playlistPostMergeAsync(Data2 data, final ApiCallback<InlineResponse202> callback) throws ApiException {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        com.squareup.okhttp.Call call = playlistPostMergeValidateBeforeCall(data, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
+        return call;
+    }
+    /**
      * Build call for playlistPostStructure
      * @param data Data *(Optional)* (optional)
      * @param progressListener Progress listener
@@ -1259,6 +1378,123 @@ public class ItemApi {
 
         com.squareup.okhttp.Call call = playlistPostTimingValidateBeforeCall(data, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
+        return call;
+    }
+    /**
+     * Build call for stopCurrentItem
+     * @param data Data *(Optional)* (optional)
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     */
+    public com.squareup.okhttp.Call stopCurrentItemCall(Data3 data, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        Object localVarPostBody = data;
+
+        // create path and map variables
+        String localVarPath = "/items/stopcurrent";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+                @Override
+                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
+                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] { "API Key" };
+        return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call stopCurrentItemValidateBeforeCall(Data3 data, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+
+        com.squareup.okhttp.Call call = stopCurrentItemCall(data, progressListener, progressRequestListener);
+        return call;
+
+    }
+
+    /**
+     * Stop an Item
+     * Set a current playing or specific item on played
+     * @param data Data *(Optional)* (optional)
+     * @return Success
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public Success stopCurrentItem(Data3 data) throws ApiException {
+        ApiResponse<Success> resp = stopCurrentItemWithHttpInfo(data);
+        return resp.getData();
+    }
+
+    /**
+     * Stop an Item
+     * Set a current playing or specific item on played
+     * @param data Data *(Optional)* (optional)
+     * @return ApiResponse&lt;Success&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<Success> stopCurrentItemWithHttpInfo(Data3 data) throws ApiException {
+        com.squareup.okhttp.Call call = stopCurrentItemValidateBeforeCall(data, null, null);
+        Type localVarReturnType = new TypeToken<Success>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
+    }
+
+    /**
+     * Stop an Item (asynchronously)
+     * Set a current playing or specific item on played
+     * @param data Data *(Optional)* (optional)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     */
+    public com.squareup.okhttp.Call stopCurrentItemAsync(Data3 data, final ApiCallback<Success> callback) throws ApiException {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        com.squareup.okhttp.Call call = stopCurrentItemValidateBeforeCall(data, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<Success>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
