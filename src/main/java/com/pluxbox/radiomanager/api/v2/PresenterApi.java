@@ -72,11 +72,12 @@ public class PresenterApi {
      */
     public com.squareup.okhttp.Call createPresenterCall(PresenterDataInput data, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = data;
-        
+
         // create path and map variables
         String localVarPath = "/presenters";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -107,9 +108,9 @@ public class PresenterApi {
         }
 
         String[] localVarAuthNames = new String[] { "API Key" };
-        return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
-    
+
     @SuppressWarnings("rawtypes")
     private com.squareup.okhttp.Call createPresenterValidateBeforeCall(PresenterDataInput data, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
@@ -118,14 +119,10 @@ public class PresenterApi {
             throw new ApiException("Missing the required parameter 'data' when calling createPresenter(Async)");
         }
         
-        
+
         com.squareup.okhttp.Call call = createPresenterCall(data, progressListener, progressRequestListener);
         return call;
 
-        
-        
-        
-        
     }
 
     /**
@@ -197,12 +194,13 @@ public class PresenterApi {
      */
     public com.squareup.okhttp.Call deletePresenterByIdCall(Long id, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
-        
+
         // create path and map variables
         String localVarPath = "/presenters/{id}"
             .replaceAll("\\{" + "id" + "\\}", apiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -233,9 +231,9 @@ public class PresenterApi {
         }
 
         String[] localVarAuthNames = new String[] { "API Key" };
-        return apiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
-    
+
     @SuppressWarnings("rawtypes")
     private com.squareup.okhttp.Call deletePresenterByIdValidateBeforeCall(Long id, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
@@ -244,14 +242,10 @@ public class PresenterApi {
             throw new ApiException("Missing the required parameter 'id' when calling deletePresenterById(Async)");
         }
         
-        
+
         com.squareup.okhttp.Call call = deletePresenterByIdCall(id, progressListener, progressRequestListener);
         return call;
 
-        
-        
-        
-        
     }
 
     /**
@@ -324,14 +318,15 @@ public class PresenterApi {
      */
     public com.squareup.okhttp.Call getPresenterByIdCall(Long id, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
-        
+
         // create path and map variables
         String localVarPath = "/presenters/{id}"
             .replaceAll("\\{" + "id" + "\\}", apiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         if (externalStationId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "_external_station_id", externalStationId));
+        localVarQueryParams.addAll(apiClient.parameterToPair("_external_station_id", externalStationId));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -362,9 +357,9 @@ public class PresenterApi {
         }
 
         String[] localVarAuthNames = new String[] { "API Key" };
-        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
-    
+
     @SuppressWarnings("rawtypes")
     private com.squareup.okhttp.Call getPresenterByIdValidateBeforeCall(Long id, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
@@ -373,14 +368,10 @@ public class PresenterApi {
             throw new ApiException("Missing the required parameter 'id' when calling getPresenterById(Async)");
         }
         
-        
+
         com.squareup.okhttp.Call call = getPresenterByIdCall(id, externalStationId, progressListener, progressRequestListener);
         return call;
 
-        
-        
-        
-        
     }
 
     /**
@@ -462,27 +453,28 @@ public class PresenterApi {
      */
     public com.squareup.okhttp.Call listPresentersCall(Long page, Long programId, Long broadcastId, Long modelTypeId, Long limit, String orderBy, String orderDirection, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
-        
+
         // create path and map variables
         String localVarPath = "/presenters";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         if (page != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "page", page));
+        localVarQueryParams.addAll(apiClient.parameterToPair("page", page));
         if (programId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "program_id", programId));
+        localVarQueryParams.addAll(apiClient.parameterToPair("program_id", programId));
         if (broadcastId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "broadcast_id", broadcastId));
+        localVarQueryParams.addAll(apiClient.parameterToPair("broadcast_id", broadcastId));
         if (modelTypeId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "model_type_id", modelTypeId));
+        localVarQueryParams.addAll(apiClient.parameterToPair("model_type_id", modelTypeId));
         if (limit != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "limit", limit));
+        localVarQueryParams.addAll(apiClient.parameterToPair("limit", limit));
         if (orderBy != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "order-by", orderBy));
+        localVarQueryParams.addAll(apiClient.parameterToPair("order-by", orderBy));
         if (orderDirection != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "order-direction", orderDirection));
+        localVarQueryParams.addAll(apiClient.parameterToPair("order-direction", orderDirection));
         if (externalStationId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "_external_station_id", externalStationId));
+        localVarQueryParams.addAll(apiClient.parameterToPair("_external_station_id", externalStationId));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -513,20 +505,16 @@ public class PresenterApi {
         }
 
         String[] localVarAuthNames = new String[] { "API Key" };
-        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
-    
+
     @SuppressWarnings("rawtypes")
     private com.squareup.okhttp.Call listPresentersValidateBeforeCall(Long page, Long programId, Long broadcastId, Long modelTypeId, Long limit, String orderBy, String orderDirection, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
-        
+
         com.squareup.okhttp.Call call = listPresentersCall(page, programId, broadcastId, modelTypeId, limit, orderBy, orderDirection, externalStationId, progressListener, progressRequestListener);
         return call;
 
-        
-        
-        
-        
     }
 
     /**
@@ -620,12 +608,13 @@ public class PresenterApi {
      */
     public com.squareup.okhttp.Call updatePresenterByIDCall(Long id, PresenterDataInput data, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = data;
-        
+
         // create path and map variables
         String localVarPath = "/presenters/{id}"
             .replaceAll("\\{" + "id" + "\\}", apiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -656,9 +645,9 @@ public class PresenterApi {
         }
 
         String[] localVarAuthNames = new String[] { "API Key" };
-        return apiClient.buildCall(localVarPath, "PATCH", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "PATCH", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
-    
+
     @SuppressWarnings("rawtypes")
     private com.squareup.okhttp.Call updatePresenterByIDValidateBeforeCall(Long id, PresenterDataInput data, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
@@ -667,14 +656,10 @@ public class PresenterApi {
             throw new ApiException("Missing the required parameter 'id' when calling updatePresenterByID(Async)");
         }
         
-        
+
         com.squareup.okhttp.Call call = updatePresenterByIDCall(id, data, progressListener, progressRequestListener);
         return call;
 
-        
-        
-        
-        
     }
 
     /**

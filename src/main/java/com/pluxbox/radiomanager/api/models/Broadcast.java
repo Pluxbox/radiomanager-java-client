@@ -87,9 +87,9 @@ public class Broadcast {
   public enum RepetitionTypeEnum {
     _1_WEEK("1 week"),
     
-    _2_WEEKS("2 weeks"),
+    _2_WEEK("2 week"),
     
-    _4_WEEKS("4 weeks"),
+    _4_WEEK("4 week"),
     
     _1_MONTH("1 month");
 
@@ -390,7 +390,7 @@ public class Broadcast {
    * @return recommended
   **/
   @ApiModelProperty(example = "true", value = "")
-  public Boolean getRecommended() {
+  public Boolean isRecommended() {
     return recommended;
   }
 
@@ -426,7 +426,7 @@ public class Broadcast {
    * @return published
   **/
   @ApiModelProperty(example = "true", value = "")
-  public Boolean getPublished() {
+  public Boolean isPublished() {
     return published;
   }
 
@@ -531,7 +531,6 @@ public class Broadcast {
 
    /**
    * Get ptyCodeId
-   * minimum: 1
    * @return ptyCodeId
   **/
   @ApiModelProperty(example = "1", value = "")
@@ -624,6 +623,6 @@ public class Broadcast {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

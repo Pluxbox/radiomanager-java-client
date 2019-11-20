@@ -230,7 +230,7 @@ public class CampaignResults {
 
   public CampaignResults addResultsItem(CampaignResult resultsItem) {
     if (this.results == null) {
-      this.results = new ArrayList<CampaignResult>();
+      this.results = new ArrayList<>();
     }
     this.results.add(resultsItem);
     return this;
@@ -306,6 +306,6 @@ public class CampaignResults {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

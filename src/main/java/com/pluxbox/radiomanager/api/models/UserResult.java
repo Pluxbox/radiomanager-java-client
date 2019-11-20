@@ -205,7 +205,7 @@ public class UserResult {
    * @return active
   **/
   @ApiModelProperty(example = "true", value = "")
-  public Boolean getActive() {
+  public Boolean isActive() {
     return active;
   }
 
@@ -241,7 +241,7 @@ public class UserResult {
    * @return language
   **/
   @ApiModelProperty(example = "false", value = "")
-  public Boolean getLanguage() {
+  public Boolean isLanguage() {
     return language;
   }
 
@@ -274,7 +274,7 @@ public class UserResult {
 
   public UserResult addRolesItem(UserResultRoles rolesItem) {
     if (this.roles == null) {
-      this.roles = new ArrayList<UserResultRoles>();
+      this.roles = new ArrayList<>();
     }
     this.roles.add(rolesItem);
     return this;
@@ -354,6 +354,6 @@ public class UserResult {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

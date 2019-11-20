@@ -85,7 +85,7 @@ public class ItemInputOnly {
 
   public ItemInputOnly addContactsItem(Integer contactsItem) {
     if (this.contacts == null) {
-      this.contacts = new ArrayList<Integer>();
+      this.contacts = new ArrayList<>();
     }
     this.contacts.add(contactsItem);
     return this;
@@ -111,7 +111,7 @@ public class ItemInputOnly {
 
   public ItemInputOnly addTagsItem(Integer tagsItem) {
     if (this.tags == null) {
-      this.tags = new ArrayList<Integer>();
+      this.tags = new ArrayList<>();
     }
     this.tags.add(tagsItem);
     return this;
@@ -175,6 +175,6 @@ public class ItemInputOnly {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

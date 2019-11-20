@@ -70,14 +70,15 @@ public class BlockApi {
      */
     public com.squareup.okhttp.Call getBlockByIdCall(Long id, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
-        
+
         // create path and map variables
         String localVarPath = "/blocks/{id}"
             .replaceAll("\\{" + "id" + "\\}", apiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         if (externalStationId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "_external_station_id", externalStationId));
+        localVarQueryParams.addAll(apiClient.parameterToPair("_external_station_id", externalStationId));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -108,9 +109,9 @@ public class BlockApi {
         }
 
         String[] localVarAuthNames = new String[] { "API Key" };
-        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
-    
+
     @SuppressWarnings("rawtypes")
     private com.squareup.okhttp.Call getBlockByIdValidateBeforeCall(Long id, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
@@ -119,14 +120,10 @@ public class BlockApi {
             throw new ApiException("Missing the required parameter 'id' when calling getBlockById(Async)");
         }
         
-        
+
         com.squareup.okhttp.Call call = getBlockByIdCall(id, externalStationId, progressListener, progressRequestListener);
         return call;
 
-        
-        
-        
-        
     }
 
     /**
@@ -200,11 +197,12 @@ public class BlockApi {
      */
     public com.squareup.okhttp.Call getCurrentBlockCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
-        
+
         // create path and map variables
         String localVarPath = "/blocks/current";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -235,20 +233,16 @@ public class BlockApi {
         }
 
         String[] localVarAuthNames = new String[] { "API Key" };
-        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
-    
+
     @SuppressWarnings("rawtypes")
     private com.squareup.okhttp.Call getCurrentBlockValidateBeforeCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
-        
+
         com.squareup.okhttp.Call call = getCurrentBlockCall(progressListener, progressRequestListener);
         return call;
 
-        
-        
-        
-        
     }
 
     /**
@@ -316,11 +310,12 @@ public class BlockApi {
      */
     public com.squareup.okhttp.Call getNextBlockCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
-        
+
         // create path and map variables
         String localVarPath = "/blocks/next";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -351,20 +346,16 @@ public class BlockApi {
         }
 
         String[] localVarAuthNames = new String[] { "API Key" };
-        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
-    
+
     @SuppressWarnings("rawtypes")
     private com.squareup.okhttp.Call getNextBlockValidateBeforeCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
-        
+
         com.squareup.okhttp.Call call = getNextBlockCall(progressListener, progressRequestListener);
         return call;
 
-        
-        
-        
-        
     }
 
     /**
@@ -442,31 +433,32 @@ public class BlockApi {
      */
     public com.squareup.okhttp.Call listBlocksCall(Long page, Long broadcastId, Long itemId, Long programId, OffsetDateTime startMin, OffsetDateTime startMax, Long limit, String orderBy, String orderDirection, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
-        
+
         // create path and map variables
         String localVarPath = "/blocks";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         if (page != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "page", page));
+        localVarQueryParams.addAll(apiClient.parameterToPair("page", page));
         if (broadcastId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "broadcast_id", broadcastId));
+        localVarQueryParams.addAll(apiClient.parameterToPair("broadcast_id", broadcastId));
         if (itemId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "item_id", itemId));
+        localVarQueryParams.addAll(apiClient.parameterToPair("item_id", itemId));
         if (programId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "program_id", programId));
+        localVarQueryParams.addAll(apiClient.parameterToPair("program_id", programId));
         if (startMin != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "start-min", startMin));
+        localVarQueryParams.addAll(apiClient.parameterToPair("start-min", startMin));
         if (startMax != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "start-max", startMax));
+        localVarQueryParams.addAll(apiClient.parameterToPair("start-max", startMax));
         if (limit != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "limit", limit));
+        localVarQueryParams.addAll(apiClient.parameterToPair("limit", limit));
         if (orderBy != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "order-by", orderBy));
+        localVarQueryParams.addAll(apiClient.parameterToPair("order-by", orderBy));
         if (orderDirection != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "order-direction", orderDirection));
+        localVarQueryParams.addAll(apiClient.parameterToPair("order-direction", orderDirection));
         if (externalStationId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "_external_station_id", externalStationId));
+        localVarQueryParams.addAll(apiClient.parameterToPair("_external_station_id", externalStationId));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -497,20 +489,16 @@ public class BlockApi {
         }
 
         String[] localVarAuthNames = new String[] { "API Key" };
-        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
-    
+
     @SuppressWarnings("rawtypes")
     private com.squareup.okhttp.Call listBlocksValidateBeforeCall(Long page, Long broadcastId, Long itemId, Long programId, OffsetDateTime startMin, OffsetDateTime startMax, Long limit, String orderBy, String orderDirection, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
-        
+
         com.squareup.okhttp.Call call = listBlocksCall(page, broadcastId, itemId, programId, startMin, startMax, limit, orderBy, orderDirection, externalStationId, progressListener, progressRequestListener);
         return call;
 
-        
-        
-        
-        
     }
 
     /**

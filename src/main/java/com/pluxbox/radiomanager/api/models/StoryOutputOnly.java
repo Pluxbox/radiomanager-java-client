@@ -182,6 +182,6 @@ public class StoryOutputOnly {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

@@ -49,7 +49,7 @@ public class StoryRelations {
    * Get tags
    * @return tags
   **/
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
   public StoryRelationsTags getTags() {
     return tags;
   }
@@ -137,6 +137,6 @@ public class StoryRelations {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

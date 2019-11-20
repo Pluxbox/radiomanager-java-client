@@ -36,7 +36,7 @@ public class BroadcastEPGDay {
   private LocalDate day = null;
 
   @SerializedName("results")
-  private List<BroadcastEPGResult> results = new ArrayList<BroadcastEPGResult>();
+  private List<BroadcastEPGResult> results = new ArrayList<>();
 
   public BroadcastEPGDay day(LocalDate day) {
     this.day = day;
@@ -120,6 +120,6 @@ public class BroadcastEPGDay {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

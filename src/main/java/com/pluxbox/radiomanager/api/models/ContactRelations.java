@@ -49,7 +49,7 @@ public class ContactRelations {
    * Get tags
    * @return tags
   **/
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
   public ContactRelationsTags getTags() {
     return tags;
   }
@@ -137,6 +137,6 @@ public class ContactRelations {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

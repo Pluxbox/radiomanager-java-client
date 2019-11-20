@@ -19,6 +19,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.pluxbox.radiomanager.api.models.BroadcastRelationsGenre;
 import com.pluxbox.radiomanager.api.models.BroadcastRelationsModelType;
 import com.pluxbox.radiomanager.api.models.Program;
 import com.pluxbox.radiomanager.api.models.ProgramOutputOnly;
@@ -91,6 +92,9 @@ public class ProgramResult {
 
   @SerializedName("pty_code_id")
   private Long ptyCodeId = null;
+
+  @SerializedName("genre")
+  private BroadcastRelationsGenre genre = null;
 
   @SerializedName("items")
   private ProgramRelationsItems items = null;
@@ -264,7 +268,7 @@ public class ProgramResult {
    * @return disabled
   **/
   @ApiModelProperty(example = "false", value = "")
-  public Boolean getDisabled() {
+  public Boolean isDisabled() {
     return disabled;
   }
 
@@ -390,7 +394,7 @@ public class ProgramResult {
    * @return recommended
   **/
   @ApiModelProperty(example = "false", value = "")
-  public Boolean getRecommended() {
+  public Boolean isRecommended() {
     return recommended;
   }
 
@@ -432,6 +436,24 @@ public class ProgramResult {
 
   public void setPtyCodeId(Long ptyCodeId) {
     this.ptyCodeId = ptyCodeId;
+  }
+
+  public ProgramResult genre(BroadcastRelationsGenre genre) {
+    this.genre = genre;
+    return this;
+  }
+
+   /**
+   * Get genre
+   * @return genre
+  **/
+  @ApiModelProperty(value = "")
+  public BroadcastRelationsGenre getGenre() {
+    return genre;
+  }
+
+  public void setGenre(BroadcastRelationsGenre genre) {
+    this.genre = genre;
   }
 
   public ProgramResult items(ProgramRelationsItems items) {
@@ -570,6 +592,7 @@ public class ProgramResult {
         Objects.equals(this.recommended, programResult.recommended) &&
         Objects.equals(this.language, programResult.language) &&
         Objects.equals(this.ptyCodeId, programResult.ptyCodeId) &&
+        Objects.equals(this.genre, programResult.genre) &&
         Objects.equals(this.items, programResult.items) &&
         Objects.equals(this.blocks, programResult.blocks) &&
         Objects.equals(this.broadcasts, programResult.broadcasts) &&
@@ -580,7 +603,7 @@ public class ProgramResult {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, updatedAt, createdAt, deletedAt, externalStationId, modelTypeId, fieldValues, title, disabled, genreId, description, shortName, mediumName, website, email, recommended, language, ptyCodeId, items, blocks, broadcasts, presenters, tags, modelType);
+    return Objects.hash(id, updatedAt, createdAt, deletedAt, externalStationId, modelTypeId, fieldValues, title, disabled, genreId, description, shortName, mediumName, website, email, recommended, language, ptyCodeId, genre, items, blocks, broadcasts, presenters, tags, modelType);
   }
 
 
@@ -607,6 +630,7 @@ public class ProgramResult {
     sb.append("    recommended: ").append(toIndentedString(recommended)).append("\n");
     sb.append("    language: ").append(toIndentedString(language)).append("\n");
     sb.append("    ptyCodeId: ").append(toIndentedString(ptyCodeId)).append("\n");
+    sb.append("    genre: ").append(toIndentedString(genre)).append("\n");
     sb.append("    items: ").append(toIndentedString(items)).append("\n");
     sb.append("    blocks: ").append(toIndentedString(blocks)).append("\n");
     sb.append("    broadcasts: ").append(toIndentedString(broadcasts)).append("\n");
@@ -627,6 +651,6 @@ public class ProgramResult {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

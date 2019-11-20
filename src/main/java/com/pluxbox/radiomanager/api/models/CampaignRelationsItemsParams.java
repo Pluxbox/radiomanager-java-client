@@ -88,6 +88,6 @@ public class CampaignRelationsItemsParams {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

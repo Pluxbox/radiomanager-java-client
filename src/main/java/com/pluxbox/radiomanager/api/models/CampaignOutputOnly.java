@@ -19,13 +19,11 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.pluxbox.radiomanager.api.models.Item;
+import com.pluxbox.radiomanager.api.models.CampaignTemplateItem;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * CampaignOutputOnly
@@ -45,7 +43,7 @@ public class CampaignOutputOnly {
   private OffsetDateTime deletedAt = null;
 
   @SerializedName("item")
-  private List<Item> item = null;
+  private CampaignTemplateItem item = null;
 
   @SerializedName("_external_station_id")
   private Long externalStationId = null;
@@ -122,16 +120,8 @@ public class CampaignOutputOnly {
     this.deletedAt = deletedAt;
   }
 
-  public CampaignOutputOnly item(List<Item> item) {
+  public CampaignOutputOnly item(CampaignTemplateItem item) {
     this.item = item;
-    return this;
-  }
-
-  public CampaignOutputOnly addItemItem(Item itemItem) {
-    if (this.item == null) {
-      this.item = new ArrayList<Item>();
-    }
-    this.item.add(itemItem);
     return this;
   }
 
@@ -140,11 +130,11 @@ public class CampaignOutputOnly {
    * @return item
   **/
   @ApiModelProperty(value = "")
-  public List<Item> getItem() {
+  public CampaignTemplateItem getItem() {
     return item;
   }
 
-  public void setItem(List<Item> item) {
+  public void setItem(CampaignTemplateItem item) {
     this.item = item;
   }
 
@@ -215,6 +205,6 @@ public class CampaignOutputOnly {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

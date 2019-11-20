@@ -73,11 +73,12 @@ public class CampaignApi {
      */
     public com.squareup.okhttp.Call createCampaignCall(CampaignDataInput data, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = data;
-        
+
         // create path and map variables
         String localVarPath = "/campaigns";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -108,9 +109,9 @@ public class CampaignApi {
         }
 
         String[] localVarAuthNames = new String[] { "API Key" };
-        return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
-    
+
     @SuppressWarnings("rawtypes")
     private com.squareup.okhttp.Call createCampaignValidateBeforeCall(CampaignDataInput data, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
@@ -119,14 +120,10 @@ public class CampaignApi {
             throw new ApiException("Missing the required parameter 'data' when calling createCampaign(Async)");
         }
         
-        
+
         com.squareup.okhttp.Call call = createCampaignCall(data, progressListener, progressRequestListener);
         return call;
 
-        
-        
-        
-        
     }
 
     /**
@@ -198,12 +195,13 @@ public class CampaignApi {
      */
     public com.squareup.okhttp.Call deleteCampaignByIdCall(Long id, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
-        
+
         // create path and map variables
         String localVarPath = "/campaigns/{id}"
             .replaceAll("\\{" + "id" + "\\}", apiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -234,9 +232,9 @@ public class CampaignApi {
         }
 
         String[] localVarAuthNames = new String[] { "API Key" };
-        return apiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
-    
+
     @SuppressWarnings("rawtypes")
     private com.squareup.okhttp.Call deleteCampaignByIdValidateBeforeCall(Long id, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
@@ -245,14 +243,10 @@ public class CampaignApi {
             throw new ApiException("Missing the required parameter 'id' when calling deleteCampaignById(Async)");
         }
         
-        
+
         com.squareup.okhttp.Call call = deleteCampaignByIdCall(id, progressListener, progressRequestListener);
         return call;
 
-        
-        
-        
-        
     }
 
     /**
@@ -325,14 +319,15 @@ public class CampaignApi {
      */
     public com.squareup.okhttp.Call getCampaignByIdCall(Long id, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
-        
+
         // create path and map variables
         String localVarPath = "/campaigns/{id}"
             .replaceAll("\\{" + "id" + "\\}", apiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         if (externalStationId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "_external_station_id", externalStationId));
+        localVarQueryParams.addAll(apiClient.parameterToPair("_external_station_id", externalStationId));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -363,9 +358,9 @@ public class CampaignApi {
         }
 
         String[] localVarAuthNames = new String[] { "API Key" };
-        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
-    
+
     @SuppressWarnings("rawtypes")
     private com.squareup.okhttp.Call getCampaignByIdValidateBeforeCall(Long id, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
@@ -374,14 +369,10 @@ public class CampaignApi {
             throw new ApiException("Missing the required parameter 'id' when calling getCampaignById(Async)");
         }
         
-        
+
         com.squareup.okhttp.Call call = getCampaignByIdCall(id, externalStationId, progressListener, progressRequestListener);
         return call;
 
-        
-        
-        
-        
     }
 
     /**
@@ -464,29 +455,30 @@ public class CampaignApi {
      */
     public com.squareup.okhttp.Call listCampaignsCall(Long page, Long itemId, Long modelTypeId, OffsetDateTime startMin, OffsetDateTime startMax, Long limit, String orderBy, String orderDirection, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
-        
+
         // create path and map variables
         String localVarPath = "/campaigns";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         if (page != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "page", page));
+        localVarQueryParams.addAll(apiClient.parameterToPair("page", page));
         if (itemId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "item_id", itemId));
+        localVarQueryParams.addAll(apiClient.parameterToPair("item_id", itemId));
         if (modelTypeId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "model_type_id", modelTypeId));
+        localVarQueryParams.addAll(apiClient.parameterToPair("model_type_id", modelTypeId));
         if (startMin != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "start-min", startMin));
+        localVarQueryParams.addAll(apiClient.parameterToPair("start-min", startMin));
         if (startMax != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "start-max", startMax));
+        localVarQueryParams.addAll(apiClient.parameterToPair("start-max", startMax));
         if (limit != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "limit", limit));
+        localVarQueryParams.addAll(apiClient.parameterToPair("limit", limit));
         if (orderBy != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "order-by", orderBy));
+        localVarQueryParams.addAll(apiClient.parameterToPair("order-by", orderBy));
         if (orderDirection != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "order-direction", orderDirection));
+        localVarQueryParams.addAll(apiClient.parameterToPair("order-direction", orderDirection));
         if (externalStationId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "_external_station_id", externalStationId));
+        localVarQueryParams.addAll(apiClient.parameterToPair("_external_station_id", externalStationId));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -517,20 +509,16 @@ public class CampaignApi {
         }
 
         String[] localVarAuthNames = new String[] { "API Key" };
-        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
-    
+
     @SuppressWarnings("rawtypes")
     private com.squareup.okhttp.Call listCampaignsValidateBeforeCall(Long page, Long itemId, Long modelTypeId, OffsetDateTime startMin, OffsetDateTime startMax, Long limit, String orderBy, String orderDirection, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
-        
+
         com.squareup.okhttp.Call call = listCampaignsCall(page, itemId, modelTypeId, startMin, startMax, limit, orderBy, orderDirection, externalStationId, progressListener, progressRequestListener);
         return call;
 
-        
-        
-        
-        
     }
 
     /**
@@ -627,12 +615,13 @@ public class CampaignApi {
      */
     public com.squareup.okhttp.Call updateCampaignByIDCall(Long id, CampaignDataInput data, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = data;
-        
+
         // create path and map variables
         String localVarPath = "/campaigns/{id}"
             .replaceAll("\\{" + "id" + "\\}", apiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -663,9 +652,9 @@ public class CampaignApi {
         }
 
         String[] localVarAuthNames = new String[] { "API Key" };
-        return apiClient.buildCall(localVarPath, "PATCH", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "PATCH", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
-    
+
     @SuppressWarnings("rawtypes")
     private com.squareup.okhttp.Call updateCampaignByIDValidateBeforeCall(Long id, CampaignDataInput data, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
@@ -674,14 +663,10 @@ public class CampaignApi {
             throw new ApiException("Missing the required parameter 'id' when calling updateCampaignByID(Async)");
         }
         
-        
+
         com.squareup.okhttp.Call call = updateCampaignByIDCall(id, data, progressListener, progressRequestListener);
         return call;
 
-        
-        
-        
-        
     }
 
     /**

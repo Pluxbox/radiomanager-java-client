@@ -478,6 +478,6 @@ public class ModelTypeResult {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

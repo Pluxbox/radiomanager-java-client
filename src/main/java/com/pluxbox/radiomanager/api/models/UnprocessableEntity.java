@@ -31,7 +31,7 @@ import java.util.List;
 
 public class UnprocessableEntity {
   @SerializedName("errors")
-  private List<String> errors = new ArrayList<String>();
+  private List<String> errors = new ArrayList<>();
 
   public UnprocessableEntity errors(List<String> errors) {
     this.errors = errors;
@@ -95,6 +95,6 @@ public class UnprocessableEntity {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

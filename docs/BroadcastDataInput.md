@@ -35,8 +35,8 @@ Name | Type | Description | Notes
 Name | Value
 ---- | -----
 _1_WEEK | &quot;1 week&quot;
-_2_WEEKS | &quot;2 weeks&quot;
-_4_WEEKS | &quot;4 weeks&quot;
+_2_WEEK | &quot;2 week&quot;
+_4_WEEK | &quot;4 week&quot;
 _1_MONTH | &quot;1 month&quot;
 
 

@@ -34,7 +34,7 @@ public class InviteUserData {
   private String email = null;
 
   @SerializedName("role_ids")
-  private List<Integer> roleIds = new ArrayList<Integer>();
+  private List<Integer> roleIds = new ArrayList<>();
 
   public InviteUserData email(String email) {
     this.email = email;
@@ -118,6 +118,6 @@ public class InviteUserData {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

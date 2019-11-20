@@ -19,6 +19,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.pluxbox.radiomanager.api.models.StationResultStationStartDays;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -105,6 +106,15 @@ public class StationResultStation {
 
   @SerializedName("timezone")
   private String timezone = null;
+
+  @SerializedName("metadataradio_organisation")
+  private String metadataradioOrganisation = null;
+
+  @SerializedName("metadataradio_station_id")
+  private String metadataradioStationId = null;
+
+  @SerializedName("start_days")
+  private StationResultStationStartDays startDays = null;
 
   public StationResultStation id(Integer id) {
     this.id = id;
@@ -275,7 +285,7 @@ public class StationResultStation {
 
   public StationResultStation addKeywordsItem(String keywordsItem) {
     if (this.keywords == null) {
-      this.keywords = new ArrayList<String>();
+      this.keywords = new ArrayList<>();
     }
     this.keywords.add(keywordsItem);
     return this;
@@ -394,7 +404,7 @@ public class StationResultStation {
    * @return active
   **/
   @ApiModelProperty(example = "true", value = "")
-  public Boolean getActive() {
+  public Boolean isActive() {
     return active;
   }
 
@@ -564,6 +574,60 @@ public class StationResultStation {
     this.timezone = timezone;
   }
 
+  public StationResultStation metadataradioOrganisation(String metadataradioOrganisation) {
+    this.metadataradioOrganisation = metadataradioOrganisation;
+    return this;
+  }
+
+   /**
+   * Get metadataradioOrganisation
+   * @return metadataradioOrganisation
+  **/
+  @ApiModelProperty(example = "my organisation", value = "")
+  public String getMetadataradioOrganisation() {
+    return metadataradioOrganisation;
+  }
+
+  public void setMetadataradioOrganisation(String metadataradioOrganisation) {
+    this.metadataradioOrganisation = metadataradioOrganisation;
+  }
+
+  public StationResultStation metadataradioStationId(String metadataradioStationId) {
+    this.metadataradioStationId = metadataradioStationId;
+    return this;
+  }
+
+   /**
+   * Get metadataradioStationId
+   * @return metadataradioStationId
+  **/
+  @ApiModelProperty(example = "1", value = "")
+  public String getMetadataradioStationId() {
+    return metadataradioStationId;
+  }
+
+  public void setMetadataradioStationId(String metadataradioStationId) {
+    this.metadataradioStationId = metadataradioStationId;
+  }
+
+  public StationResultStation startDays(StationResultStationStartDays startDays) {
+    this.startDays = startDays;
+    return this;
+  }
+
+   /**
+   * Get startDays
+   * @return startDays
+  **/
+  @ApiModelProperty(value = "")
+  public StationResultStationStartDays getStartDays() {
+    return startDays;
+  }
+
+  public void setStartDays(StationResultStationStartDays startDays) {
+    this.startDays = startDays;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -598,12 +662,15 @@ public class StationResultStation {
         Objects.equals(this.ptyCode, stationResultStation.ptyCode) &&
         Objects.equals(this.ptyType, stationResultStation.ptyType) &&
         Objects.equals(this.stationKey, stationResultStation.stationKey) &&
-        Objects.equals(this.timezone, stationResultStation.timezone);
+        Objects.equals(this.timezone, stationResultStation.timezone) &&
+        Objects.equals(this.metadataradioOrganisation, stationResultStation.metadataradioOrganisation) &&
+        Objects.equals(this.metadataradioStationId, stationResultStation.metadataradioStationId) &&
+        Objects.equals(this.startDays, stationResultStation.startDays);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, createdAt, updatedAt, systemName, shortName, mediumName, website, email, keywords, description, sms, telephone, genreId, language, active, logoRectangle, logo128x128, logo320x320, logo600x600, payOff, ptyCode, ptyType, stationKey, timezone);
+    return Objects.hash(id, name, createdAt, updatedAt, systemName, shortName, mediumName, website, email, keywords, description, sms, telephone, genreId, language, active, logoRectangle, logo128x128, logo320x320, logo600x600, payOff, ptyCode, ptyType, stationKey, timezone, metadataradioOrganisation, metadataradioStationId, startDays);
   }
 
 
@@ -637,6 +704,9 @@ public class StationResultStation {
     sb.append("    ptyType: ").append(toIndentedString(ptyType)).append("\n");
     sb.append("    stationKey: ").append(toIndentedString(stationKey)).append("\n");
     sb.append("    timezone: ").append(toIndentedString(timezone)).append("\n");
+    sb.append("    metadataradioOrganisation: ").append(toIndentedString(metadataradioOrganisation)).append("\n");
+    sb.append("    metadataradioStationId: ").append(toIndentedString(metadataradioStationId)).append("\n");
+    sb.append("    startDays: ").append(toIndentedString(startDays)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -651,6 +721,6 @@ public class StationResultStation {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

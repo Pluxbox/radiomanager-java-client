@@ -21,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.pluxbox.radiomanager.api.models.BlockRelationsProgram;
 import com.pluxbox.radiomanager.api.models.BroadcastRelationsBlocks;
+import com.pluxbox.radiomanager.api.models.BroadcastRelationsGenre;
 import com.pluxbox.radiomanager.api.models.BroadcastRelationsItems;
 import com.pluxbox.radiomanager.api.models.BroadcastRelationsModelType;
 import com.pluxbox.radiomanager.api.models.BroadcastRelationsPresenters;
@@ -34,6 +35,9 @@ import java.io.IOException;
  */
 
 public class BroadcastRelations {
+  @SerializedName("genre")
+  private BroadcastRelationsGenre genre = null;
+
   @SerializedName("items")
   private BroadcastRelationsItems items = null;
 
@@ -51,6 +55,24 @@ public class BroadcastRelations {
 
   @SerializedName("model_type")
   private BroadcastRelationsModelType modelType = null;
+
+  public BroadcastRelations genre(BroadcastRelationsGenre genre) {
+    this.genre = genre;
+    return this;
+  }
+
+   /**
+   * Get genre
+   * @return genre
+  **/
+  @ApiModelProperty(value = "")
+  public BroadcastRelationsGenre getGenre() {
+    return genre;
+  }
+
+  public void setGenre(BroadcastRelationsGenre genre) {
+    this.genre = genre;
+  }
 
   public BroadcastRelations items(BroadcastRelationsItems items) {
     this.items = items;
@@ -170,7 +192,8 @@ public class BroadcastRelations {
       return false;
     }
     BroadcastRelations broadcastRelations = (BroadcastRelations) o;
-    return Objects.equals(this.items, broadcastRelations.items) &&
+    return Objects.equals(this.genre, broadcastRelations.genre) &&
+        Objects.equals(this.items, broadcastRelations.items) &&
         Objects.equals(this.blocks, broadcastRelations.blocks) &&
         Objects.equals(this.program, broadcastRelations.program) &&
         Objects.equals(this.tags, broadcastRelations.tags) &&
@@ -180,7 +203,7 @@ public class BroadcastRelations {
 
   @Override
   public int hashCode() {
-    return Objects.hash(items, blocks, program, tags, presenters, modelType);
+    return Objects.hash(genre, items, blocks, program, tags, presenters, modelType);
   }
 
 
@@ -189,6 +212,7 @@ public class BroadcastRelations {
     StringBuilder sb = new StringBuilder();
     sb.append("class BroadcastRelations {\n");
     
+    sb.append("    genre: ").append(toIndentedString(genre)).append("\n");
     sb.append("    items: ").append(toIndentedString(items)).append("\n");
     sb.append("    blocks: ").append(toIndentedString(blocks)).append("\n");
     sb.append("    program: ").append(toIndentedString(program)).append("\n");
@@ -209,6 +233,6 @@ public class BroadcastRelations {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

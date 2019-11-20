@@ -24,13 +24,11 @@ import com.pluxbox.radiomanager.api.models.Campaign;
 import com.pluxbox.radiomanager.api.models.CampaignOutputOnly;
 import com.pluxbox.radiomanager.api.models.CampaignRelations;
 import com.pluxbox.radiomanager.api.models.CampaignRelationsItems;
-import com.pluxbox.radiomanager.api.models.Item;
+import com.pluxbox.radiomanager.api.models.CampaignTemplateItem;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * CampaignResult
@@ -50,7 +48,7 @@ public class CampaignResult {
   private OffsetDateTime deletedAt = null;
 
   @SerializedName("item")
-  private List<Item> item = null;
+  private CampaignTemplateItem item = null;
 
   @SerializedName("_external_station_id")
   private Long externalStationId = null;
@@ -154,16 +152,8 @@ public class CampaignResult {
     this.deletedAt = deletedAt;
   }
 
-  public CampaignResult item(List<Item> item) {
+  public CampaignResult item(CampaignTemplateItem item) {
     this.item = item;
-    return this;
-  }
-
-  public CampaignResult addItemItem(Item itemItem) {
-    if (this.item == null) {
-      this.item = new ArrayList<Item>();
-    }
-    this.item.add(itemItem);
     return this;
   }
 
@@ -172,11 +162,11 @@ public class CampaignResult {
    * @return item
   **/
   @ApiModelProperty(value = "")
-  public List<Item> getItem() {
+  public CampaignTemplateItem getItem() {
     return item;
   }
 
-  public void setItem(List<Item> item) {
+  public void setItem(CampaignTemplateItem item) {
     this.item = item;
   }
 
@@ -298,7 +288,7 @@ public class CampaignResult {
    * @return recommended
   **/
   @ApiModelProperty(example = "true", value = "")
-  public Boolean getRecommended() {
+  public Boolean isRecommended() {
     return recommended;
   }
 
@@ -427,6 +417,6 @@ public class CampaignResult {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

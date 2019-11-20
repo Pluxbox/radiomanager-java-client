@@ -113,9 +113,9 @@ public class BroadcastEPGResult {
   public enum RepetitionTypeEnum {
     _1_WEEK("1 week"),
     
-    _2_WEEKS("2 weeks"),
+    _2_WEEK("2 week"),
     
-    _4_WEEKS("4 weeks"),
+    _4_WEEK("4 week"),
     
     _1_MONTH("1 month");
 
@@ -524,7 +524,7 @@ public class BroadcastEPGResult {
    * @return recommended
   **/
   @ApiModelProperty(example = "true", value = "")
-  public Boolean getRecommended() {
+  public Boolean isRecommended() {
     return recommended;
   }
 
@@ -560,7 +560,7 @@ public class BroadcastEPGResult {
    * @return published
   **/
   @ApiModelProperty(example = "true", value = "")
-  public Boolean getPublished() {
+  public Boolean isPublished() {
     return published;
   }
 
@@ -665,7 +665,6 @@ public class BroadcastEPGResult {
 
    /**
    * Get ptyCodeId
-   * minimum: 1
    * @return ptyCodeId
   **/
   @ApiModelProperty(example = "1", value = "")
@@ -756,7 +755,7 @@ public class BroadcastEPGResult {
 
   public BroadcastEPGResult addPresentersItem(PresenterEPGResult presentersItem) {
     if (this.presenters == null) {
-      this.presenters = new ArrayList<PresenterEPGResult>();
+      this.presenters = new ArrayList<>();
     }
     this.presenters.add(presentersItem);
     return this;
@@ -896,6 +895,6 @@ public class BroadcastEPGResult {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

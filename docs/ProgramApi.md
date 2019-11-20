@@ -180,7 +180,7 @@ Name | Type | Description  | Notes
 
 <a name="listPrograms"></a>
 # **listPrograms**
-> ProgramResults listPrograms(page, broadcastId, modelTypeId, tagId, presenterId, genreId, blockId, itemId, limit, orderBy, orderDirection, externalStationId)
+> ProgramResults listPrograms(page, broadcastId, modelTypeId, tagId, presenterId, genreId, blockId, itemId, disabled, limit, orderBy, orderDirection, externalStationId)
 
 Get all programs.
 
@@ -212,12 +212,13 @@ Long presenterId = 789L; // Long | Search on Presenter ID *(Optional)* `(Relatio
 Long genreId = 789L; // Long | Search on Genre ID *(Optional)*
 Long blockId = 789L; // Long | Search on Block ID *(Optional)* `(Relation)`
 Long itemId = 789L; // Long | Search on Item ID *(Optional)* `(Relation)`
+Integer disabled = 56; // Integer | Search on Disabled status *(Optional)*
 Long limit = 789L; // Long | Results per page *(Optional)*
 String orderBy = "orderBy_example"; // String | Field to order the results *(Optional)*
 String orderDirection = "orderDirection_example"; // String | Direction of ordering *(Optional)*
 Long externalStationId = 789L; // Long | Query on a different (content providing) station *(Optional)*
 try {
-    ProgramResults result = apiInstance.listPrograms(page, broadcastId, modelTypeId, tagId, presenterId, genreId, blockId, itemId, limit, orderBy, orderDirection, externalStationId);
+    ProgramResults result = apiInstance.listPrograms(page, broadcastId, modelTypeId, tagId, presenterId, genreId, blockId, itemId, disabled, limit, orderBy, orderDirection, externalStationId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling ProgramApi#listPrograms");
@@ -237,6 +238,7 @@ Name | Type | Description  | Notes
  **genreId** | **Long**| Search on Genre ID *(Optional)* | [optional]
  **blockId** | **Long**| Search on Block ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
  **itemId** | **Long**| Search on Item ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
+ **disabled** | **Integer**| Search on Disabled status *(Optional)* | [optional]
  **limit** | **Long**| Results per page *(Optional)* | [optional]
  **orderBy** | **String**| Field to order the results *(Optional)* | [optional]
  **orderDirection** | **String**| Direction of ordering *(Optional)* | [optional] [enum: asc, desc]

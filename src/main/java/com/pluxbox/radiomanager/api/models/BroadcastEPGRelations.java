@@ -133,7 +133,7 @@ public class BroadcastEPGRelations {
 
   public BroadcastEPGRelations addPresentersItem(PresenterEPGResult presentersItem) {
     if (this.presenters == null) {
-      this.presenters = new ArrayList<PresenterEPGResult>();
+      this.presenters = new ArrayList<>();
     }
     this.presenters.add(presentersItem);
     return this;
@@ -219,6 +219,6 @@ public class BroadcastEPGRelations {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

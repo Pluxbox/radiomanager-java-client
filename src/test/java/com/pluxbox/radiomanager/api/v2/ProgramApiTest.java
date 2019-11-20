@@ -107,11 +107,12 @@ public class ProgramApiTest {
         Long genreId = null;
         Long blockId = null;
         Long itemId = null;
+        Integer disabled = null;
         Long limit = null;
         String orderBy = null;
         String orderDirection = null;
         Long externalStationId = null;
-        ProgramResults response = api.listPrograms(page, broadcastId, modelTypeId, tagId, presenterId, genreId, blockId, itemId, limit, orderBy, orderDirection, externalStationId);
+        ProgramResults response = api.listPrograms(page, broadcastId, modelTypeId, tagId, presenterId, genreId, blockId, itemId, disabled, limit, orderBy, orderDirection, externalStationId);
 
         // TODO: test validations
     }

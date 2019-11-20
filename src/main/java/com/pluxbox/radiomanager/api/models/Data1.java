@@ -35,6 +35,9 @@ public class Data1 {
   @SerializedName("start")
   private OffsetDateTime start = null;
 
+  @SerializedName("allow_playlist_past")
+  private Integer allowPlaylistPast = null;
+
   @SerializedName("items")
   private List<ImportItem> items = null;
 
@@ -56,6 +59,24 @@ public class Data1 {
     this.start = start;
   }
 
+  public Data1 allowPlaylistPast(Integer allowPlaylistPast) {
+    this.allowPlaylistPast = allowPlaylistPast;
+    return this;
+  }
+
+   /**
+   * Get allowPlaylistPast
+   * @return allowPlaylistPast
+  **/
+  @ApiModelProperty(example = "0", value = "")
+  public Integer getAllowPlaylistPast() {
+    return allowPlaylistPast;
+  }
+
+  public void setAllowPlaylistPast(Integer allowPlaylistPast) {
+    this.allowPlaylistPast = allowPlaylistPast;
+  }
+
   public Data1 items(List<ImportItem> items) {
     this.items = items;
     return this;
@@ -63,7 +84,7 @@ public class Data1 {
 
   public Data1 addItemsItem(ImportItem itemsItem) {
     if (this.items == null) {
-      this.items = new ArrayList<ImportItem>();
+      this.items = new ArrayList<>();
     }
     this.items.add(itemsItem);
     return this;
@@ -93,12 +114,13 @@ public class Data1 {
     }
     Data1 data1 = (Data1) o;
     return Objects.equals(this.start, data1.start) &&
+        Objects.equals(this.allowPlaylistPast, data1.allowPlaylistPast) &&
         Objects.equals(this.items, data1.items);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(start, items);
+    return Objects.hash(start, allowPlaylistPast, items);
   }
 
 
@@ -108,6 +130,7 @@ public class Data1 {
     sb.append("class Data1 {\n");
     
     sb.append("    start: ").append(toIndentedString(start)).append("\n");
+    sb.append("    allowPlaylistPast: ").append(toIndentedString(allowPlaylistPast)).append("\n");
     sb.append("    items: ").append(toIndentedString(items)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -123,6 +146,6 @@ public class Data1 {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

@@ -158,6 +158,6 @@ public class BroadcastRelationsGenre {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

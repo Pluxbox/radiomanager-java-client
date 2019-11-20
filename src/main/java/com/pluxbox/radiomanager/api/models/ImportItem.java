@@ -182,7 +182,7 @@ public class ImportItem {
    * @return recommended
   **/
   @ApiModelProperty(example = "false", value = "")
-  public Boolean getRecommended() {
+  public Boolean isRecommended() {
     return recommended;
   }
 
@@ -200,7 +200,7 @@ public class ImportItem {
    * @return staticStart
   **/
   @ApiModelProperty(example = "false", value = "")
-  public Boolean getStaticStart() {
+  public Boolean isStaticStart() {
     return staticStart;
   }
 
@@ -233,7 +233,7 @@ public class ImportItem {
 
   public ImportItem addContactsItem(Integer contactsItem) {
     if (this.contacts == null) {
-      this.contacts = new ArrayList<Integer>();
+      this.contacts = new ArrayList<>();
     }
     this.contacts.add(contactsItem);
     return this;
@@ -259,7 +259,7 @@ public class ImportItem {
 
   public ImportItem addTagsItem(Integer tagsItem) {
     if (this.tags == null) {
-      this.tags = new ArrayList<Integer>();
+      this.tags = new ArrayList<>();
     }
     this.tags.add(tagsItem);
     return this;
@@ -337,6 +337,6 @@ public class ImportItem {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

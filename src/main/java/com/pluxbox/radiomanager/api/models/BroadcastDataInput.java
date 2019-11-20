@@ -91,9 +91,9 @@ public class BroadcastDataInput {
   public enum RepetitionTypeEnum {
     _1_WEEK("1 week"),
     
-    _2_WEEKS("2 weeks"),
+    _2_WEEK("2 week"),
     
-    _4_WEEKS("4 weeks"),
+    _4_WEEK("4 week"),
     
     _1_MONTH("1 month");
 
@@ -400,7 +400,7 @@ public class BroadcastDataInput {
    * @return recommended
   **/
   @ApiModelProperty(example = "true", value = "")
-  public Boolean getRecommended() {
+  public Boolean isRecommended() {
     return recommended;
   }
 
@@ -436,7 +436,7 @@ public class BroadcastDataInput {
    * @return published
   **/
   @ApiModelProperty(example = "true", value = "")
-  public Boolean getPublished() {
+  public Boolean isPublished() {
     return published;
   }
 
@@ -541,7 +541,6 @@ public class BroadcastDataInput {
 
    /**
    * Get ptyCodeId
-   * minimum: 1
    * @return ptyCodeId
   **/
   @ApiModelProperty(example = "1", value = "")
@@ -560,7 +559,7 @@ public class BroadcastDataInput {
 
   public BroadcastDataInput addTagsItem(Integer tagsItem) {
     if (this.tags == null) {
-      this.tags = new ArrayList<Integer>();
+      this.tags = new ArrayList<>();
     }
     this.tags.add(tagsItem);
     return this;
@@ -586,7 +585,7 @@ public class BroadcastDataInput {
 
   public BroadcastDataInput addPresentersItem(Integer presentersItem) {
     if (this.presenters == null) {
-      this.presenters = new ArrayList<Integer>();
+      this.presenters = new ArrayList<>();
     }
     this.presenters.add(presentersItem);
     return this;
@@ -690,6 +689,6 @@ public class BroadcastDataInput {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

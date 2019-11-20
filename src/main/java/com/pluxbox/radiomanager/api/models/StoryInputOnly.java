@@ -40,7 +40,7 @@ public class StoryInputOnly {
 
   public StoryInputOnly addTagsItem(Integer tagsItem) {
     if (this.tags == null) {
-      this.tags = new ArrayList<Integer>();
+      this.tags = new ArrayList<>();
     }
     this.tags.add(tagsItem);
     return this;
@@ -98,6 +98,6 @@ public class StoryInputOnly {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

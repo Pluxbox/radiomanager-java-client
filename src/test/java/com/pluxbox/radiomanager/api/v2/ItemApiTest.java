@@ -16,6 +16,8 @@ package com.pluxbox.radiomanager.api.v2;
 import com.pluxbox.radiomanager.api.invoker.ApiException;
 import com.pluxbox.radiomanager.api.models.Data;
 import com.pluxbox.radiomanager.api.models.Data1;
+import com.pluxbox.radiomanager.api.models.Data2;
+import com.pluxbox.radiomanager.api.models.Data3;
 import com.pluxbox.radiomanager.api.models.Forbidden;
 import com.pluxbox.radiomanager.api.models.ImportItem;
 import com.pluxbox.radiomanager.api.models.InlineResponse202;
@@ -110,6 +112,22 @@ public class ItemApiTest {
     }
     
     /**
+     * Get current Item
+     *
+     * Get current Item
+     *
+     * @throws ApiException
+     *          if the Api call fails
+     */
+    @Test
+    public void getCurrentItemTest() throws ApiException {
+        Boolean lastplayed = null;
+        ItemResult response = api.getCurrentItem(lastplayed);
+
+        // TODO: test validations
+    }
+    
+    /**
      * Get extended item details by ID.
      *
      * Read item by id.
@@ -147,6 +165,7 @@ public class ItemApiTest {
         Long userDraftId = null;
         Long stationDraftId = null;
         Long programId = null;
+        String externalId = null;
         OffsetDateTime startMin = null;
         OffsetDateTime startMax = null;
         Integer durationMin = null;
@@ -156,7 +175,23 @@ public class ItemApiTest {
         String orderBy = null;
         String orderDirection = null;
         Long externalStationId = null;
-        ItemResults response = api.listItems(page, blockId, broadcastId, modelTypeId, tagId, campaignId, contactId, programDraftId, userDraftId, stationDraftId, programId, startMin, startMax, durationMin, durationMax, status, limit, orderBy, orderDirection, externalStationId);
+        ItemResults response = api.listItems(page, blockId, broadcastId, modelTypeId, tagId, campaignId, contactId, programDraftId, userDraftId, stationDraftId, programId, externalId, startMin, startMax, durationMin, durationMax, status, limit, orderBy, orderDirection, externalStationId);
+
+        // TODO: test validations
+    }
+    
+    /**
+     * Post a playlist, do not remove previously imported items
+     *
+     * Post a playlist, do not remove previously imported items
+     *
+     * @throws ApiException
+     *          if the Api call fails
+     */
+    @Test
+    public void playlistPostMergeTest() throws ApiException {
+        Data2 data = null;
+        InlineResponse202 response = api.playlistPostMerge(data);
 
         // TODO: test validations
     }
@@ -189,6 +224,22 @@ public class ItemApiTest {
     public void playlistPostTimingTest() throws ApiException {
         Data data = null;
         InlineResponse202 response = api.playlistPostTiming(data);
+
+        // TODO: test validations
+    }
+    
+    /**
+     * Stop an Item
+     *
+     * Set a current playing or specific item on played
+     *
+     * @throws ApiException
+     *          if the Api call fails
+     */
+    @Test
+    public void stopCurrentItemTest() throws ApiException {
+        Data3 data = null;
+        Success response = api.stopCurrentItem(data);
 
         // TODO: test validations
     }

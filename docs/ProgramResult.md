@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **recommended** | **Boolean** |  |  [optional]
 **language** | **String** |  |  [optional]
 **ptyCodeId** | **Long** |  |  [optional]
+**genre** | [**BroadcastRelationsGenre**](BroadcastRelationsGenre.md) |  |  [optional]
 **items** | [**ProgramRelationsItems**](ProgramRelationsItems.md) |  |  [optional]
 **blocks** | [**ProgramRelationsBlocks**](ProgramRelationsBlocks.md) |  |  [optional]
 **broadcasts** | [**ProgramRelationsBroadcasts**](ProgramRelationsBroadcasts.md) |  |  [optional]

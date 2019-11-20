@@ -204,9 +204,9 @@ public class BroadcastApiTest {
     }
     
     /**
-     * Print Broadcast by id
+     * Print broadcast by id with template
      *
-     * Print Broadcast by id
+     * Print broadcast by id with template
      *
      * @throws ApiException
      *          if the Api call fails
@@ -214,10 +214,8 @@ public class BroadcastApiTest {
     @Test
     public void printBroadcastByIdTest() throws ApiException {
         Long id = null;
-        Long programId = null;
-        Long presenterId = null;
-        Long tagId = null;
-        EPGResults response = api.printBroadcastById(id, programId, presenterId, tagId);
+        Long templateId = null;
+        String response = api.printBroadcastById(id, templateId);
 
         // TODO: test validations
     }

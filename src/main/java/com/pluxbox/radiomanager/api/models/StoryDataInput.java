@@ -78,7 +78,7 @@ public class StoryDataInput {
    * @return recommended
   **/
   @ApiModelProperty(example = "true", value = "")
-  public Boolean getRecommended() {
+  public Boolean isRecommended() {
     return recommended;
   }
 
@@ -147,7 +147,7 @@ public class StoryDataInput {
 
   public StoryDataInput addTagsItem(Integer tagsItem) {
     if (this.tags == null) {
-      this.tags = new ArrayList<Integer>();
+      this.tags = new ArrayList<>();
     }
     this.tags.add(tagsItem);
     return this;
@@ -215,6 +215,6 @@ public class StoryDataInput {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

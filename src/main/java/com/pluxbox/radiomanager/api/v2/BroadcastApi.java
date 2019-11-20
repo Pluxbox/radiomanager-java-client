@@ -74,11 +74,12 @@ public class BroadcastApi {
      */
     public com.squareup.okhttp.Call createBroadcastCall(BroadcastDataInput data, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = data;
-        
+
         // create path and map variables
         String localVarPath = "/broadcasts";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -109,9 +110,9 @@ public class BroadcastApi {
         }
 
         String[] localVarAuthNames = new String[] { "API Key" };
-        return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
-    
+
     @SuppressWarnings("rawtypes")
     private com.squareup.okhttp.Call createBroadcastValidateBeforeCall(BroadcastDataInput data, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
@@ -120,14 +121,10 @@ public class BroadcastApi {
             throw new ApiException("Missing the required parameter 'data' when calling createBroadcast(Async)");
         }
         
-        
+
         com.squareup.okhttp.Call call = createBroadcastCall(data, progressListener, progressRequestListener);
         return call;
 
-        
-        
-        
-        
     }
 
     /**
@@ -199,12 +196,13 @@ public class BroadcastApi {
      */
     public com.squareup.okhttp.Call deleteBroadcastByIdCall(Long id, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
-        
+
         // create path and map variables
         String localVarPath = "/broadcasts/{id}"
             .replaceAll("\\{" + "id" + "\\}", apiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -235,9 +233,9 @@ public class BroadcastApi {
         }
 
         String[] localVarAuthNames = new String[] { "API Key" };
-        return apiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
-    
+
     @SuppressWarnings("rawtypes")
     private com.squareup.okhttp.Call deleteBroadcastByIdValidateBeforeCall(Long id, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
@@ -246,14 +244,10 @@ public class BroadcastApi {
             throw new ApiException("Missing the required parameter 'id' when calling deleteBroadcastById(Async)");
         }
         
-        
+
         com.squareup.okhttp.Call call = deleteBroadcastByIdCall(id, progressListener, progressRequestListener);
         return call;
 
-        
-        
-        
-        
     }
 
     /**
@@ -326,14 +320,15 @@ public class BroadcastApi {
      */
     public com.squareup.okhttp.Call getBroadcastByIdCall(Long id, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
-        
+
         // create path and map variables
         String localVarPath = "/broadcasts/{id}"
             .replaceAll("\\{" + "id" + "\\}", apiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         if (externalStationId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "_external_station_id", externalStationId));
+        localVarQueryParams.addAll(apiClient.parameterToPair("_external_station_id", externalStationId));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -364,9 +359,9 @@ public class BroadcastApi {
         }
 
         String[] localVarAuthNames = new String[] { "API Key" };
-        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
-    
+
     @SuppressWarnings("rawtypes")
     private com.squareup.okhttp.Call getBroadcastByIdValidateBeforeCall(Long id, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
@@ -375,14 +370,10 @@ public class BroadcastApi {
             throw new ApiException("Missing the required parameter 'id' when calling getBroadcastById(Async)");
         }
         
-        
+
         com.squareup.okhttp.Call call = getBroadcastByIdCall(id, externalStationId, progressListener, progressRequestListener);
         return call;
 
-        
-        
-        
-        
     }
 
     /**
@@ -457,13 +448,14 @@ public class BroadcastApi {
      */
     public com.squareup.okhttp.Call getCurrentBroadcastCall(Boolean withunpublished, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
-        
+
         // create path and map variables
         String localVarPath = "/broadcasts/current";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         if (withunpublished != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "withunpublished", withunpublished));
+        localVarQueryParams.addAll(apiClient.parameterToPair("withunpublished", withunpublished));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -494,20 +486,16 @@ public class BroadcastApi {
         }
 
         String[] localVarAuthNames = new String[] { "API Key" };
-        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
-    
+
     @SuppressWarnings("rawtypes")
     private com.squareup.okhttp.Call getCurrentBroadcastValidateBeforeCall(Boolean withunpublished, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
-        
+
         com.squareup.okhttp.Call call = getCurrentBroadcastCall(withunpublished, progressListener, progressRequestListener);
         return call;
 
-        
-        
-        
-        
     }
 
     /**
@@ -580,15 +568,16 @@ public class BroadcastApi {
      */
     public com.squareup.okhttp.Call getDailyEPGCall(OffsetDateTime date, Boolean withunpublished, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
-        
+
         // create path and map variables
         String localVarPath = "/broadcasts/epg/daily";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         if (date != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "date", date));
+        localVarQueryParams.addAll(apiClient.parameterToPair("date", date));
         if (withunpublished != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "withunpublished", withunpublished));
+        localVarQueryParams.addAll(apiClient.parameterToPair("withunpublished", withunpublished));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -619,20 +608,16 @@ public class BroadcastApi {
         }
 
         String[] localVarAuthNames = new String[] { "API Key" };
-        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
-    
+
     @SuppressWarnings("rawtypes")
     private com.squareup.okhttp.Call getDailyEPGValidateBeforeCall(OffsetDateTime date, Boolean withunpublished, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
-        
+
         com.squareup.okhttp.Call call = getDailyEPGCall(date, withunpublished, progressListener, progressRequestListener);
         return call;
 
-        
-        
-        
-        
     }
 
     /**
@@ -708,15 +693,16 @@ public class BroadcastApi {
      */
     public com.squareup.okhttp.Call getEPGByDateCall(OffsetDateTime date, Boolean withunpublished, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
-        
+
         // create path and map variables
         String localVarPath = "/broadcasts/epg";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         if (date != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "date", date));
+        localVarQueryParams.addAll(apiClient.parameterToPair("date", date));
         if (withunpublished != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "withunpublished", withunpublished));
+        localVarQueryParams.addAll(apiClient.parameterToPair("withunpublished", withunpublished));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -747,20 +733,16 @@ public class BroadcastApi {
         }
 
         String[] localVarAuthNames = new String[] { "API Key" };
-        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
-    
+
     @SuppressWarnings("rawtypes")
     private com.squareup.okhttp.Call getEPGByDateValidateBeforeCall(OffsetDateTime date, Boolean withunpublished, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
-        
+
         com.squareup.okhttp.Call call = getEPGByDateCall(date, withunpublished, progressListener, progressRequestListener);
         return call;
 
-        
-        
-        
-        
     }
 
     /**
@@ -835,13 +817,14 @@ public class BroadcastApi {
      */
     public com.squareup.okhttp.Call getNextBroadcastCall(Boolean withunpublished, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
-        
+
         // create path and map variables
         String localVarPath = "/broadcasts/next";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         if (withunpublished != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "withunpublished", withunpublished));
+        localVarQueryParams.addAll(apiClient.parameterToPair("withunpublished", withunpublished));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -872,20 +855,16 @@ public class BroadcastApi {
         }
 
         String[] localVarAuthNames = new String[] { "API Key" };
-        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
-    
+
     @SuppressWarnings("rawtypes")
     private com.squareup.okhttp.Call getNextBroadcastValidateBeforeCall(Boolean withunpublished, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
-        
+
         com.squareup.okhttp.Call call = getNextBroadcastCall(withunpublished, progressListener, progressRequestListener);
         return call;
 
-        
-        
-        
-        
     }
 
     /**
@@ -958,15 +937,16 @@ public class BroadcastApi {
      */
     public com.squareup.okhttp.Call getWeeklyEPGCall(String date, Boolean withunpublished, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
-        
+
         // create path and map variables
         String localVarPath = "/broadcasts/epg/weekly";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         if (date != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "date", date));
+        localVarQueryParams.addAll(apiClient.parameterToPair("date", date));
         if (withunpublished != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "withunpublished", withunpublished));
+        localVarQueryParams.addAll(apiClient.parameterToPair("withunpublished", withunpublished));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -997,20 +977,16 @@ public class BroadcastApi {
         }
 
         String[] localVarAuthNames = new String[] { "API Key" };
-        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
-    
+
     @SuppressWarnings("rawtypes")
     private com.squareup.okhttp.Call getWeeklyEPGValidateBeforeCall(String date, Boolean withunpublished, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
-        
+
         com.squareup.okhttp.Call call = getWeeklyEPGCall(date, withunpublished, progressListener, progressRequestListener);
         return call;
 
-        
-        
-        
-        
     }
 
     /**
@@ -1098,39 +1074,40 @@ public class BroadcastApi {
      */
     public com.squareup.okhttp.Call listBroadcastsCall(Long page, Long programId, Long blockId, Long modelTypeId, Long tagId, Long presenterId, Long genreId, Long itemId, OffsetDateTime startMin, OffsetDateTime startMax, Long limit, String orderBy, String orderDirection, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
-        
+
         // create path and map variables
         String localVarPath = "/broadcasts";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         if (page != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "page", page));
+        localVarQueryParams.addAll(apiClient.parameterToPair("page", page));
         if (programId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "program_id", programId));
+        localVarQueryParams.addAll(apiClient.parameterToPair("program_id", programId));
         if (blockId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "block_id", blockId));
+        localVarQueryParams.addAll(apiClient.parameterToPair("block_id", blockId));
         if (modelTypeId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "model_type_id", modelTypeId));
+        localVarQueryParams.addAll(apiClient.parameterToPair("model_type_id", modelTypeId));
         if (tagId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "tag_id", tagId));
+        localVarQueryParams.addAll(apiClient.parameterToPair("tag_id", tagId));
         if (presenterId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "presenter_id", presenterId));
+        localVarQueryParams.addAll(apiClient.parameterToPair("presenter_id", presenterId));
         if (genreId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "genre_id", genreId));
+        localVarQueryParams.addAll(apiClient.parameterToPair("genre_id", genreId));
         if (itemId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "item_id", itemId));
+        localVarQueryParams.addAll(apiClient.parameterToPair("item_id", itemId));
         if (startMin != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "start-min", startMin));
+        localVarQueryParams.addAll(apiClient.parameterToPair("start-min", startMin));
         if (startMax != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "start-max", startMax));
+        localVarQueryParams.addAll(apiClient.parameterToPair("start-max", startMax));
         if (limit != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "limit", limit));
+        localVarQueryParams.addAll(apiClient.parameterToPair("limit", limit));
         if (orderBy != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "order-by", orderBy));
+        localVarQueryParams.addAll(apiClient.parameterToPair("order-by", orderBy));
         if (orderDirection != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "order-direction", orderDirection));
+        localVarQueryParams.addAll(apiClient.parameterToPair("order-direction", orderDirection));
         if (externalStationId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "_external_station_id", externalStationId));
+        localVarQueryParams.addAll(apiClient.parameterToPair("_external_station_id", externalStationId));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -1161,20 +1138,16 @@ public class BroadcastApi {
         }
 
         String[] localVarAuthNames = new String[] { "API Key" };
-        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
-    
+
     @SuppressWarnings("rawtypes")
     private com.squareup.okhttp.Call listBroadcastsValidateBeforeCall(Long page, Long programId, Long blockId, Long modelTypeId, Long tagId, Long presenterId, Long genreId, Long itemId, OffsetDateTime startMin, OffsetDateTime startMax, Long limit, String orderBy, String orderDirection, Long externalStationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
-        
+
         com.squareup.okhttp.Call call = listBroadcastsCall(page, programId, blockId, modelTypeId, tagId, presenterId, genreId, itemId, startMin, startMax, limit, orderBy, orderDirection, externalStationId, progressListener, progressRequestListener);
         return call;
 
-        
-        
-        
-        
     }
 
     /**
@@ -1278,28 +1251,23 @@ public class BroadcastApi {
     /**
      * Build call for printBroadcastById
      * @param id ID of Broadcast **(Required)** (required)
-     * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param presenterId Search on Presenter ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param templateId Search on template ID *(Optional)* (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call printBroadcastByIdCall(Long id, Long programId, Long presenterId, Long tagId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call printBroadcastByIdCall(Long id, Long templateId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
-        
+
         // create path and map variables
         String localVarPath = "/broadcasts/print/{id}"
             .replaceAll("\\{" + "id" + "\\}", apiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        if (programId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "program_id", programId));
-        if (presenterId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "presenter_id", presenterId));
-        if (tagId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPairs("", "tag_id", tagId));
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        if (templateId != null)
+        localVarQueryParams.addAll(apiClient.parameterToPair("template_id", templateId));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -1330,70 +1298,60 @@ public class BroadcastApi {
         }
 
         String[] localVarAuthNames = new String[] { "API Key" };
-        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
-    
+
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call printBroadcastByIdValidateBeforeCall(Long id, Long programId, Long presenterId, Long tagId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call printBroadcastByIdValidateBeforeCall(Long id, Long templateId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         // verify the required parameter 'id' is set
         if (id == null) {
             throw new ApiException("Missing the required parameter 'id' when calling printBroadcastById(Async)");
         }
         
-        
-        com.squareup.okhttp.Call call = printBroadcastByIdCall(id, programId, presenterId, tagId, progressListener, progressRequestListener);
+
+        com.squareup.okhttp.Call call = printBroadcastByIdCall(id, templateId, progressListener, progressRequestListener);
         return call;
 
-        
-        
-        
-        
     }
 
     /**
-     * Print Broadcast by id
-     * Print Broadcast by id
+     * Print broadcast by id with template
+     * Print broadcast by id with template
      * @param id ID of Broadcast **(Required)** (required)
-     * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param presenterId Search on Presenter ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @return EPGResults
+     * @param templateId Search on template ID *(Optional)* (optional)
+     * @return String
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public EPGResults printBroadcastById(Long id, Long programId, Long presenterId, Long tagId) throws ApiException {
-        ApiResponse<EPGResults> resp = printBroadcastByIdWithHttpInfo(id, programId, presenterId, tagId);
+    public String printBroadcastById(Long id, Long templateId) throws ApiException {
+        ApiResponse<String> resp = printBroadcastByIdWithHttpInfo(id, templateId);
         return resp.getData();
     }
 
     /**
-     * Print Broadcast by id
-     * Print Broadcast by id
+     * Print broadcast by id with template
+     * Print broadcast by id with template
      * @param id ID of Broadcast **(Required)** (required)
-     * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param presenterId Search on Presenter ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @return ApiResponse&lt;EPGResults&gt;
+     * @param templateId Search on template ID *(Optional)* (optional)
+     * @return ApiResponse&lt;String&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<EPGResults> printBroadcastByIdWithHttpInfo(Long id, Long programId, Long presenterId, Long tagId) throws ApiException {
-        com.squareup.okhttp.Call call = printBroadcastByIdValidateBeforeCall(id, programId, presenterId, tagId, null, null);
-        Type localVarReturnType = new TypeToken<EPGResults>(){}.getType();
+    public ApiResponse<String> printBroadcastByIdWithHttpInfo(Long id, Long templateId) throws ApiException {
+        com.squareup.okhttp.Call call = printBroadcastByIdValidateBeforeCall(id, templateId, null, null);
+        Type localVarReturnType = new TypeToken<String>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
     /**
-     * Print Broadcast by id (asynchronously)
-     * Print Broadcast by id
+     * Print broadcast by id with template (asynchronously)
+     * Print broadcast by id with template
      * @param id ID of Broadcast **(Required)** (required)
-     * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param presenterId Search on Presenter ID *(Optional)* &#x60;(Relation)&#x60; (optional)
-     * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param templateId Search on template ID *(Optional)* (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call printBroadcastByIdAsync(Long id, Long programId, Long presenterId, Long tagId, final ApiCallback<EPGResults> callback) throws ApiException {
+    public com.squareup.okhttp.Call printBroadcastByIdAsync(Long id, Long templateId, final ApiCallback<String> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -1414,8 +1372,8 @@ public class BroadcastApi {
             };
         }
 
-        com.squareup.okhttp.Call call = printBroadcastByIdValidateBeforeCall(id, programId, presenterId, tagId, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<EPGResults>(){}.getType();
+        com.squareup.okhttp.Call call = printBroadcastByIdValidateBeforeCall(id, templateId, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<String>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -1430,12 +1388,13 @@ public class BroadcastApi {
      */
     public com.squareup.okhttp.Call updateBroadcastByIDCall(Long id, BroadcastDataInput data, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = data;
-        
+
         // create path and map variables
         String localVarPath = "/broadcasts/{id}"
             .replaceAll("\\{" + "id" + "\\}", apiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -1466,9 +1425,9 @@ public class BroadcastApi {
         }
 
         String[] localVarAuthNames = new String[] { "API Key" };
-        return apiClient.buildCall(localVarPath, "PATCH", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "PATCH", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
-    
+
     @SuppressWarnings("rawtypes")
     private com.squareup.okhttp.Call updateBroadcastByIDValidateBeforeCall(Long id, BroadcastDataInput data, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
@@ -1477,14 +1436,10 @@ public class BroadcastApi {
             throw new ApiException("Missing the required parameter 'id' when calling updateBroadcastByID(Async)");
         }
         
-        
+
         com.squareup.okhttp.Call call = updateBroadcastByIDCall(id, data, progressListener, progressRequestListener);
         return call;
 
-        
-        
-        
-        
     }
 
     /**

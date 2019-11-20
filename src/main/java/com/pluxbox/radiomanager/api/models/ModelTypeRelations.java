@@ -209,6 +209,6 @@ public class ModelTypeRelations {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 

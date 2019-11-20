@@ -332,7 +332,7 @@ public class ItemDataInput {
    * @return recommended
   **/
   @ApiModelProperty(example = "false", value = "")
-  public Boolean getRecommended() {
+  public Boolean isRecommended() {
     return recommended;
   }
 
@@ -404,7 +404,7 @@ public class ItemDataInput {
    * @return staticStart
   **/
   @ApiModelProperty(example = "false", value = "")
-  public Boolean getStaticStart() {
+  public Boolean isStaticStart() {
     return staticStart;
   }
 
@@ -473,7 +473,7 @@ public class ItemDataInput {
 
   public ItemDataInput addContactsItem(Integer contactsItem) {
     if (this.contacts == null) {
-      this.contacts = new ArrayList<Integer>();
+      this.contacts = new ArrayList<>();
     }
     this.contacts.add(contactsItem);
     return this;
@@ -499,7 +499,7 @@ public class ItemDataInput {
 
   public ItemDataInput addTagsItem(Integer tagsItem) {
     if (this.tags == null) {
-      this.tags = new ArrayList<Integer>();
+      this.tags = new ArrayList<>();
     }
     this.tags.add(tagsItem);
     return this;
@@ -595,6 +595,6 @@ public class ItemDataInput {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
+
 }
 
