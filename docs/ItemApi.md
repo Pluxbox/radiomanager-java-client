@@ -1,6 +1,6 @@
 # ItemApi
 
-All URIs are relative to *https://staging.radiomanager.io/api/v2*
+All URIs are relative to *https://radiomanager.io/api/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -29,28 +29,37 @@ Create item.
 ### Example
 ```java
 // Import classes:
-//import com.pluxbox.radiomanager.api.invoker.ApiClient;
-//import com.pluxbox.radiomanager.api.invoker.ApiException;
-//import com.pluxbox.radiomanager.api.invoker.Configuration;
-//import com.pluxbox.radiomanager.api.invoker.auth.*;
-//import com.pluxbox.radiomanager.api.v2.ItemApi;
+import com.pluxbox.radiomanager.api.invoker.ApiClient;
+import com.pluxbox.radiomanager.api.invoker.ApiException;
+import com.pluxbox.radiomanager.api.invoker.Configuration;
+import com.pluxbox.radiomanager.api.invoker.auth.*;
+import com.pluxbox.radiomanager.api.invoker.models.*;
+import radiomanager.ItemApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://radiomanager.io/api/v2");
+    
+    // Configure API key authorization: API-Key
+    ApiKeyAuth API-Key = (ApiKeyAuth) defaultClient.getAuthentication("API-Key");
+    API-Key.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //API-Key.setApiKeyPrefix("Token");
 
-// Configure API key authorization: API Key
-ApiKeyAuth API Key = (ApiKeyAuth) defaultClient.getAuthentication("API Key");
-API Key.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//API Key.setApiKeyPrefix("Token");
-
-ItemApi apiInstance = new ItemApi();
-ItemDataInput data = new ItemDataInput(); // ItemDataInput | Data *(Optional)*
-try {
-    PostSuccess result = apiInstance.createItem(data);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling ItemApi#createItem");
-    e.printStackTrace();
+    ItemApi apiInstance = new ItemApi(defaultClient);
+    ItemDataInput data = new ItemDataInput(); // ItemDataInput | Data *(Optional)*
+    try {
+      PostSuccess result = apiInstance.createItem(data);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ItemApi#createItem");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -66,12 +75,19 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[API Key](../README.md#API Key)
+[API-Key](../README.md#API-Key)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successfully created an item |  -  |
+**422** | Unprocessable Entity |  -  |
+**429** | Too Many Requests |  -  |
 
 <a name="currentItemPostStructure"></a>
 # **currentItemPostStructure**
@@ -84,28 +100,37 @@ Post a current playing item, keep structure
 ### Example
 ```java
 // Import classes:
-//import com.pluxbox.radiomanager.api.invoker.ApiClient;
-//import com.pluxbox.radiomanager.api.invoker.ApiException;
-//import com.pluxbox.radiomanager.api.invoker.Configuration;
-//import com.pluxbox.radiomanager.api.invoker.auth.*;
-//import com.pluxbox.radiomanager.api.v2.ItemApi;
+import com.pluxbox.radiomanager.api.invoker.ApiClient;
+import com.pluxbox.radiomanager.api.invoker.ApiException;
+import com.pluxbox.radiomanager.api.invoker.Configuration;
+import com.pluxbox.radiomanager.api.invoker.auth.*;
+import com.pluxbox.radiomanager.api.invoker.models.*;
+import radiomanager.ItemApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://radiomanager.io/api/v2");
+    
+    // Configure API key authorization: API-Key
+    ApiKeyAuth API-Key = (ApiKeyAuth) defaultClient.getAuthentication("API-Key");
+    API-Key.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //API-Key.setApiKeyPrefix("Token");
 
-// Configure API key authorization: API Key
-ApiKeyAuth API Key = (ApiKeyAuth) defaultClient.getAuthentication("API Key");
-API Key.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//API Key.setApiKeyPrefix("Token");
-
-ItemApi apiInstance = new ItemApi();
-ImportItem data = new ImportItem(); // ImportItem | Data *(Optional)*
-try {
-    Success result = apiInstance.currentItemPostStructure(data);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling ItemApi#currentItemPostStructure");
-    e.printStackTrace();
+    ItemApi apiInstance = new ItemApi(defaultClient);
+    ImportItem data = new ImportItem(); // ImportItem | Data *(Optional)*
+    try {
+      Success result = apiInstance.currentItemPostStructure(data);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ItemApi#currentItemPostStructure");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -121,12 +146,20 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[API Key](../README.md#API Key)
+[API-Key](../README.md#API-Key)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successfully posted current item |  -  |
+**403** | Forbidden |  -  |
+**422** | Unprocessable Entity |  -  |
+**429** | Too Many Requests |  -  |
 
 <a name="currentItemPostTiming"></a>
 # **currentItemPostTiming**
@@ -139,28 +172,37 @@ Post a current playing item
 ### Example
 ```java
 // Import classes:
-//import com.pluxbox.radiomanager.api.invoker.ApiClient;
-//import com.pluxbox.radiomanager.api.invoker.ApiException;
-//import com.pluxbox.radiomanager.api.invoker.Configuration;
-//import com.pluxbox.radiomanager.api.invoker.auth.*;
-//import com.pluxbox.radiomanager.api.v2.ItemApi;
+import com.pluxbox.radiomanager.api.invoker.ApiClient;
+import com.pluxbox.radiomanager.api.invoker.ApiException;
+import com.pluxbox.radiomanager.api.invoker.Configuration;
+import com.pluxbox.radiomanager.api.invoker.auth.*;
+import com.pluxbox.radiomanager.api.invoker.models.*;
+import radiomanager.ItemApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://radiomanager.io/api/v2");
+    
+    // Configure API key authorization: API-Key
+    ApiKeyAuth API-Key = (ApiKeyAuth) defaultClient.getAuthentication("API-Key");
+    API-Key.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //API-Key.setApiKeyPrefix("Token");
 
-// Configure API key authorization: API Key
-ApiKeyAuth API Key = (ApiKeyAuth) defaultClient.getAuthentication("API Key");
-API Key.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//API Key.setApiKeyPrefix("Token");
-
-ItemApi apiInstance = new ItemApi();
-ImportItem data = new ImportItem(); // ImportItem | Data *(Optional)*
-try {
-    Success result = apiInstance.currentItemPostTiming(data);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling ItemApi#currentItemPostTiming");
-    e.printStackTrace();
+    ItemApi apiInstance = new ItemApi(defaultClient);
+    ImportItem data = new ImportItem(); // ImportItem | Data *(Optional)*
+    try {
+      Success result = apiInstance.currentItemPostTiming(data);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ItemApi#currentItemPostTiming");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -176,12 +218,20 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[API Key](../README.md#API Key)
+[API-Key](../README.md#API-Key)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successfully posted current item |  -  |
+**403** | Forbidden |  -  |
+**422** | Unprocessable Entity |  -  |
+**429** | Too Many Requests |  -  |
 
 <a name="deleteItemById"></a>
 # **deleteItemById**
@@ -194,28 +244,37 @@ Delete item by id.
 ### Example
 ```java
 // Import classes:
-//import com.pluxbox.radiomanager.api.invoker.ApiClient;
-//import com.pluxbox.radiomanager.api.invoker.ApiException;
-//import com.pluxbox.radiomanager.api.invoker.Configuration;
-//import com.pluxbox.radiomanager.api.invoker.auth.*;
-//import com.pluxbox.radiomanager.api.v2.ItemApi;
+import com.pluxbox.radiomanager.api.invoker.ApiClient;
+import com.pluxbox.radiomanager.api.invoker.ApiException;
+import com.pluxbox.radiomanager.api.invoker.Configuration;
+import com.pluxbox.radiomanager.api.invoker.auth.*;
+import com.pluxbox.radiomanager.api.invoker.models.*;
+import radiomanager.ItemApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://radiomanager.io/api/v2");
+    
+    // Configure API key authorization: API-Key
+    ApiKeyAuth API-Key = (ApiKeyAuth) defaultClient.getAuthentication("API-Key");
+    API-Key.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //API-Key.setApiKeyPrefix("Token");
 
-// Configure API key authorization: API Key
-ApiKeyAuth API Key = (ApiKeyAuth) defaultClient.getAuthentication("API Key");
-API Key.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//API Key.setApiKeyPrefix("Token");
-
-ItemApi apiInstance = new ItemApi();
-Long id = 789L; // Long | ID of Item **(Required)**
-try {
-    Success result = apiInstance.deleteItemById(id);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling ItemApi#deleteItemById");
-    e.printStackTrace();
+    ItemApi apiInstance = new ItemApi(defaultClient);
+    Long id = 0lL; // Long | ID of Item **(Required)**
+    try {
+      Success result = apiInstance.deleteItemById(id);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ItemApi#deleteItemById");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -223,7 +282,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Long**| ID of Item **(Required)** |
+ **id** | **Long**| ID of Item **(Required)** | [default to 0l]
 
 ### Return type
 
@@ -231,12 +290,19 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[API Key](../README.md#API Key)
+[API-Key](../README.md#API-Key)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Item has been marked for deletion |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
 
 <a name="getCurrentItem"></a>
 # **getCurrentItem**
@@ -249,28 +315,37 @@ Get current Item
 ### Example
 ```java
 // Import classes:
-//import com.pluxbox.radiomanager.api.invoker.ApiClient;
-//import com.pluxbox.radiomanager.api.invoker.ApiException;
-//import com.pluxbox.radiomanager.api.invoker.Configuration;
-//import com.pluxbox.radiomanager.api.invoker.auth.*;
-//import com.pluxbox.radiomanager.api.v2.ItemApi;
+import com.pluxbox.radiomanager.api.invoker.ApiClient;
+import com.pluxbox.radiomanager.api.invoker.ApiException;
+import com.pluxbox.radiomanager.api.invoker.Configuration;
+import com.pluxbox.radiomanager.api.invoker.auth.*;
+import com.pluxbox.radiomanager.api.invoker.models.*;
+import radiomanager.ItemApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://radiomanager.io/api/v2");
+    
+    // Configure API key authorization: API-Key
+    ApiKeyAuth API-Key = (ApiKeyAuth) defaultClient.getAuthentication("API-Key");
+    API-Key.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //API-Key.setApiKeyPrefix("Token");
 
-// Configure API key authorization: API Key
-ApiKeyAuth API Key = (ApiKeyAuth) defaultClient.getAuthentication("API Key");
-API Key.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//API Key.setApiKeyPrefix("Token");
-
-ItemApi apiInstance = new ItemApi();
-Boolean lastplayed = true; // Boolean | Show last played item if there is no current item*(Optional)*
-try {
-    ItemResult result = apiInstance.getCurrentItem(lastplayed);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling ItemApi#getCurrentItem");
-    e.printStackTrace();
+    ItemApi apiInstance = new ItemApi(defaultClient);
+    Boolean lastplayed = true; // Boolean | Show last played item if there is no current item*(Optional)*
+    try {
+      ItemResult result = apiInstance.getCurrentItem(lastplayed);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ItemApi#getCurrentItem");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -286,12 +361,20 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[API Key](../README.md#API Key)
+[API-Key](../README.md#API-Key)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successfully got current item |  -  |
+**202** | Item has been marked for deletion |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
 
 <a name="getItemById"></a>
 # **getItemById**
@@ -304,29 +387,38 @@ Read item by id.
 ### Example
 ```java
 // Import classes:
-//import com.pluxbox.radiomanager.api.invoker.ApiClient;
-//import com.pluxbox.radiomanager.api.invoker.ApiException;
-//import com.pluxbox.radiomanager.api.invoker.Configuration;
-//import com.pluxbox.radiomanager.api.invoker.auth.*;
-//import com.pluxbox.radiomanager.api.v2.ItemApi;
+import com.pluxbox.radiomanager.api.invoker.ApiClient;
+import com.pluxbox.radiomanager.api.invoker.ApiException;
+import com.pluxbox.radiomanager.api.invoker.Configuration;
+import com.pluxbox.radiomanager.api.invoker.auth.*;
+import com.pluxbox.radiomanager.api.invoker.models.*;
+import radiomanager.ItemApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://radiomanager.io/api/v2");
+    
+    // Configure API key authorization: API-Key
+    ApiKeyAuth API-Key = (ApiKeyAuth) defaultClient.getAuthentication("API-Key");
+    API-Key.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //API-Key.setApiKeyPrefix("Token");
 
-// Configure API key authorization: API Key
-ApiKeyAuth API Key = (ApiKeyAuth) defaultClient.getAuthentication("API Key");
-API Key.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//API Key.setApiKeyPrefix("Token");
-
-ItemApi apiInstance = new ItemApi();
-Long id = 789L; // Long | ID of Item **(Required)**
-Long externalStationId = 789L; // Long | Query on a different (content providing) station *(Optional)*
-try {
-    ItemResult result = apiInstance.getItemById(id, externalStationId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling ItemApi#getItemById");
-    e.printStackTrace();
+    ItemApi apiInstance = new ItemApi(defaultClient);
+    Long id = 0lL; // Long | ID of Item **(Required)**
+    Long externalStationId = 56L; // Long | Query on a different (content providing) station *(Optional)*
+    try {
+      ItemResult result = apiInstance.getItemById(id, externalStationId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ItemApi#getItemById");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -334,7 +426,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Long**| ID of Item **(Required)** |
+ **id** | **Long**| ID of Item **(Required)** | [default to 0l]
  **externalStationId** | **Long**| Query on a different (content providing) station *(Optional)* | [optional]
 
 ### Return type
@@ -343,12 +435,20 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[API Key](../README.md#API Key)
+[API-Key](../README.md#API-Key)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successfully got an item by id |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
 
 <a name="listItems"></a>
 # **listItems**
@@ -361,48 +461,57 @@ Get a list of all the items currently in your station. This feature supports pag
 ### Example
 ```java
 // Import classes:
-//import com.pluxbox.radiomanager.api.invoker.ApiClient;
-//import com.pluxbox.radiomanager.api.invoker.ApiException;
-//import com.pluxbox.radiomanager.api.invoker.Configuration;
-//import com.pluxbox.radiomanager.api.invoker.auth.*;
-//import com.pluxbox.radiomanager.api.v2.ItemApi;
+import com.pluxbox.radiomanager.api.invoker.ApiClient;
+import com.pluxbox.radiomanager.api.invoker.ApiException;
+import com.pluxbox.radiomanager.api.invoker.Configuration;
+import com.pluxbox.radiomanager.api.invoker.auth.*;
+import com.pluxbox.radiomanager.api.invoker.models.*;
+import radiomanager.ItemApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://radiomanager.io/api/v2");
+    
+    // Configure API key authorization: API-Key
+    ApiKeyAuth API-Key = (ApiKeyAuth) defaultClient.getAuthentication("API-Key");
+    API-Key.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //API-Key.setApiKeyPrefix("Token");
 
-// Configure API key authorization: API Key
-ApiKeyAuth API Key = (ApiKeyAuth) defaultClient.getAuthentication("API Key");
-API Key.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//API Key.setApiKeyPrefix("Token");
-
-ItemApi apiInstance = new ItemApi();
-Long page = 789L; // Long | Current page *(Optional)*
-Long blockId = 789L; // Long | Search on Block ID *(Optional)* `(Relation)`
-Long broadcastId = 789L; // Long | Search on Broadcast ID *(Optional)* `(Relation)`
-Long modelTypeId = 789L; // Long | Search on ModelType ID *(Optional)* `(Relation)`
-Long tagId = 789L; // Long | Search on Tag ID *(Optional)* `(Relation)`
-Long campaignId = 789L; // Long | Search on Campaign ID *(Optional)* `(Relation)`
-Long contactId = 789L; // Long | Search on Contact ID *(Optional)* `(Relation)`
-Long programDraftId = 789L; // Long | Search on Program Draft ID *(Optional)*
-Long userDraftId = 789L; // Long | Search on User Draft ID *(Optional)*
-Long stationDraftId = 789L; // Long | Search on Station Draft ID *(Optional)*
-Long programId = 789L; // Long | Search on Program ID *(Optional)* `(Relation)`
-String externalId = "externalId_example"; // String | Search on External ID *(Optional)*
-OffsetDateTime startMin = new OffsetDateTime(); // OffsetDateTime | Minimum start date *(Optional)*
-OffsetDateTime startMax = new OffsetDateTime(); // OffsetDateTime | Maximum start date *(Optional)*
-Integer durationMin = 56; // Integer | Minimum duration (seconds) *(Optional)*
-Integer durationMax = 56; // Integer | Maximum duration (seconds) *(Optional)*
-String status = "status_example"; // String | Play Status of item *(Optional)*
-Long limit = 789L; // Long | Results per page *(Optional)*
-String orderBy = "orderBy_example"; // String | Field to order the results *(Optional)*
-String orderDirection = "orderDirection_example"; // String | Direction of ordering *(Optional)*
-Long externalStationId = 789L; // Long | Query on a different (content providing) station *(Optional)*
-try {
-    ItemResults result = apiInstance.listItems(page, blockId, broadcastId, modelTypeId, tagId, campaignId, contactId, programDraftId, userDraftId, stationDraftId, programId, externalId, startMin, startMax, durationMin, durationMax, status, limit, orderBy, orderDirection, externalStationId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling ItemApi#listItems");
-    e.printStackTrace();
+    ItemApi apiInstance = new ItemApi(defaultClient);
+    Long page = 56L; // Long | Current page *(Optional)*
+    Long blockId = 56L; // Long | Search on Block ID *(Optional)* `(Relation)`
+    Long broadcastId = 56L; // Long | Search on Broadcast ID *(Optional)* `(Relation)`
+    Long modelTypeId = 56L; // Long | Search on ModelType ID *(Optional)* `(Relation)`
+    Long tagId = 56L; // Long | Search on Tag ID *(Optional)* `(Relation)`
+    Long campaignId = 56L; // Long | Search on Campaign ID *(Optional)* `(Relation)`
+    Long contactId = 56L; // Long | Search on Contact ID *(Optional)* `(Relation)`
+    Long programDraftId = 56L; // Long | Search on Program Draft ID *(Optional)*
+    Long userDraftId = 56L; // Long | Search on User Draft ID *(Optional)*
+    Long stationDraftId = 56L; // Long | Search on Station Draft ID *(Optional)*
+    Long programId = 56L; // Long | Search on Program ID *(Optional)* `(Relation)`
+    String externalId = "externalId_example"; // String | Search on External ID *(Optional)*
+    OffsetDateTime startMin = new OffsetDateTime(); // OffsetDateTime | Minimum start date *(Optional)*
+    OffsetDateTime startMax = new OffsetDateTime(); // OffsetDateTime | Maximum start date *(Optional)*
+    Integer durationMin = 56; // Integer | Minimum duration (seconds) *(Optional)*
+    Integer durationMax = 56; // Integer | Maximum duration (seconds) *(Optional)*
+    String status = "status_example"; // String | Play Status of item *(Optional)*
+    Long limit = 56L; // Long | Results per page *(Optional)*
+    String orderBy = "orderBy_example"; // String | Field to order the results *(Optional)*
+    String orderDirection = "orderDirection_example"; // String | Direction of ordering *(Optional)*
+    Long externalStationId = 56L; // Long | Query on a different (content providing) station *(Optional)*
+    try {
+      ItemResults result = apiInstance.listItems(page, blockId, broadcastId, modelTypeId, tagId, campaignId, contactId, programDraftId, userDraftId, stationDraftId, programId, externalId, startMin, startMax, durationMin, durationMax, status, limit, orderBy, orderDirection, externalStationId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ItemApi#listItems");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -438,12 +547,21 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[API Key](../README.md#API Key)
+[API-Key](../README.md#API-Key)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successfully got all items |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**422** | Unprocessable Entity |  -  |
+**429** | Too Many Requests |  -  |
 
 <a name="playlistPostMerge"></a>
 # **playlistPostMerge**
@@ -456,28 +574,37 @@ Post a playlist, do not remove previously imported items
 ### Example
 ```java
 // Import classes:
-//import com.pluxbox.radiomanager.api.invoker.ApiClient;
-//import com.pluxbox.radiomanager.api.invoker.ApiException;
-//import com.pluxbox.radiomanager.api.invoker.Configuration;
-//import com.pluxbox.radiomanager.api.invoker.auth.*;
-//import com.pluxbox.radiomanager.api.v2.ItemApi;
+import com.pluxbox.radiomanager.api.invoker.ApiClient;
+import com.pluxbox.radiomanager.api.invoker.ApiException;
+import com.pluxbox.radiomanager.api.invoker.Configuration;
+import com.pluxbox.radiomanager.api.invoker.auth.*;
+import com.pluxbox.radiomanager.api.invoker.models.*;
+import radiomanager.ItemApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://radiomanager.io/api/v2");
+    
+    // Configure API key authorization: API-Key
+    ApiKeyAuth API-Key = (ApiKeyAuth) defaultClient.getAuthentication("API-Key");
+    API-Key.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //API-Key.setApiKeyPrefix("Token");
 
-// Configure API key authorization: API Key
-ApiKeyAuth API Key = (ApiKeyAuth) defaultClient.getAuthentication("API Key");
-API Key.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//API Key.setApiKeyPrefix("Token");
-
-ItemApi apiInstance = new ItemApi();
-Data2 data = new Data2(); // Data2 | Data *(Optional)*
-try {
-    InlineResponse202 result = apiInstance.playlistPostMerge(data);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling ItemApi#playlistPostMerge");
-    e.printStackTrace();
+    ItemApi apiInstance = new ItemApi(defaultClient);
+    InlineObject2 data = new InlineObject2(); // InlineObject2 | 
+    try {
+      InlineResponse202 result = apiInstance.playlistPostMerge(data);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ItemApi#playlistPostMerge");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -485,7 +612,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **data** | [**Data2**](Data2.md)| Data *(Optional)* | [optional]
+ **data** | [**InlineObject2**](InlineObject2.md)|  | [optional]
 
 ### Return type
 
@@ -493,12 +620,19 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[API Key](../README.md#API Key)
+[API-Key](../README.md#API-Key)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | success |  -  |
+**403** | Forbidden |  -  |
+**422** | Unprocessable Entity |  -  |
 
 <a name="playlistPostStructure"></a>
 # **playlistPostStructure**
@@ -511,28 +645,37 @@ Post a playlist, keep current structure
 ### Example
 ```java
 // Import classes:
-//import com.pluxbox.radiomanager.api.invoker.ApiClient;
-//import com.pluxbox.radiomanager.api.invoker.ApiException;
-//import com.pluxbox.radiomanager.api.invoker.Configuration;
-//import com.pluxbox.radiomanager.api.invoker.auth.*;
-//import com.pluxbox.radiomanager.api.v2.ItemApi;
+import com.pluxbox.radiomanager.api.invoker.ApiClient;
+import com.pluxbox.radiomanager.api.invoker.ApiException;
+import com.pluxbox.radiomanager.api.invoker.Configuration;
+import com.pluxbox.radiomanager.api.invoker.auth.*;
+import com.pluxbox.radiomanager.api.invoker.models.*;
+import radiomanager.ItemApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://radiomanager.io/api/v2");
+    
+    // Configure API key authorization: API-Key
+    ApiKeyAuth API-Key = (ApiKeyAuth) defaultClient.getAuthentication("API-Key");
+    API-Key.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //API-Key.setApiKeyPrefix("Token");
 
-// Configure API key authorization: API Key
-ApiKeyAuth API Key = (ApiKeyAuth) defaultClient.getAuthentication("API Key");
-API Key.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//API Key.setApiKeyPrefix("Token");
-
-ItemApi apiInstance = new ItemApi();
-Data1 data = new Data1(); // Data1 | Data *(Optional)*
-try {
-    InlineResponse202 result = apiInstance.playlistPostStructure(data);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling ItemApi#playlistPostStructure");
-    e.printStackTrace();
+    ItemApi apiInstance = new ItemApi(defaultClient);
+    InlineObject1 data = new InlineObject1(); // InlineObject1 | 
+    try {
+      InlineResponse202 result = apiInstance.playlistPostStructure(data);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ItemApi#playlistPostStructure");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -540,7 +683,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **data** | [**Data1**](Data1.md)| Data *(Optional)* | [optional]
+ **data** | [**InlineObject1**](InlineObject1.md)|  | [optional]
 
 ### Return type
 
@@ -548,12 +691,19 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[API Key](../README.md#API Key)
+[API-Key](../README.md#API-Key)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | success |  -  |
+**403** | Forbidden |  -  |
+**422** | Unprocessable Entity |  -  |
 
 <a name="playlistPostTiming"></a>
 # **playlistPostTiming**
@@ -566,28 +716,37 @@ Post a playlist
 ### Example
 ```java
 // Import classes:
-//import com.pluxbox.radiomanager.api.invoker.ApiClient;
-//import com.pluxbox.radiomanager.api.invoker.ApiException;
-//import com.pluxbox.radiomanager.api.invoker.Configuration;
-//import com.pluxbox.radiomanager.api.invoker.auth.*;
-//import com.pluxbox.radiomanager.api.v2.ItemApi;
+import com.pluxbox.radiomanager.api.invoker.ApiClient;
+import com.pluxbox.radiomanager.api.invoker.ApiException;
+import com.pluxbox.radiomanager.api.invoker.Configuration;
+import com.pluxbox.radiomanager.api.invoker.auth.*;
+import com.pluxbox.radiomanager.api.invoker.models.*;
+import radiomanager.ItemApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://radiomanager.io/api/v2");
+    
+    // Configure API key authorization: API-Key
+    ApiKeyAuth API-Key = (ApiKeyAuth) defaultClient.getAuthentication("API-Key");
+    API-Key.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //API-Key.setApiKeyPrefix("Token");
 
-// Configure API key authorization: API Key
-ApiKeyAuth API Key = (ApiKeyAuth) defaultClient.getAuthentication("API Key");
-API Key.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//API Key.setApiKeyPrefix("Token");
-
-ItemApi apiInstance = new ItemApi();
-Data data = new Data(); // Data | Data *(Optional)*
-try {
-    InlineResponse202 result = apiInstance.playlistPostTiming(data);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling ItemApi#playlistPostTiming");
-    e.printStackTrace();
+    ItemApi apiInstance = new ItemApi(defaultClient);
+    InlineObject data = new InlineObject(); // InlineObject | 
+    try {
+      InlineResponse202 result = apiInstance.playlistPostTiming(data);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ItemApi#playlistPostTiming");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -595,7 +754,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **data** | [**Data**](Data.md)| Data *(Optional)* | [optional]
+ **data** | [**InlineObject**](InlineObject.md)|  | [optional]
 
 ### Return type
 
@@ -603,12 +762,19 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[API Key](../README.md#API Key)
+[API-Key](../README.md#API-Key)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | success |  -  |
+**403** | Forbidden |  -  |
+**422** | Unprocessable Entity |  -  |
 
 <a name="stopCurrentItem"></a>
 # **stopCurrentItem**
@@ -621,28 +787,37 @@ Set a current playing or specific item on played
 ### Example
 ```java
 // Import classes:
-//import com.pluxbox.radiomanager.api.invoker.ApiClient;
-//import com.pluxbox.radiomanager.api.invoker.ApiException;
-//import com.pluxbox.radiomanager.api.invoker.Configuration;
-//import com.pluxbox.radiomanager.api.invoker.auth.*;
-//import com.pluxbox.radiomanager.api.v2.ItemApi;
+import com.pluxbox.radiomanager.api.invoker.ApiClient;
+import com.pluxbox.radiomanager.api.invoker.ApiException;
+import com.pluxbox.radiomanager.api.invoker.Configuration;
+import com.pluxbox.radiomanager.api.invoker.auth.*;
+import com.pluxbox.radiomanager.api.invoker.models.*;
+import radiomanager.ItemApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://radiomanager.io/api/v2");
+    
+    // Configure API key authorization: API-Key
+    ApiKeyAuth API-Key = (ApiKeyAuth) defaultClient.getAuthentication("API-Key");
+    API-Key.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //API-Key.setApiKeyPrefix("Token");
 
-// Configure API key authorization: API Key
-ApiKeyAuth API Key = (ApiKeyAuth) defaultClient.getAuthentication("API Key");
-API Key.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//API Key.setApiKeyPrefix("Token");
-
-ItemApi apiInstance = new ItemApi();
-Data3 data = new Data3(); // Data3 | Data *(Optional)*
-try {
-    Success result = apiInstance.stopCurrentItem(data);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling ItemApi#stopCurrentItem");
-    e.printStackTrace();
+    ItemApi apiInstance = new ItemApi(defaultClient);
+    InlineObject3 data = new InlineObject3(); // InlineObject3 | 
+    try {
+      Success result = apiInstance.stopCurrentItem(data);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ItemApi#stopCurrentItem");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -650,7 +825,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **data** | [**Data3**](Data3.md)| Data *(Optional)* | [optional]
+ **data** | [**InlineObject3**](InlineObject3.md)|  | [optional]
 
 ### Return type
 
@@ -658,12 +833,21 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[API Key](../README.md#API Key)
+[API-Key](../README.md#API-Key)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successfully stopped item |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**422** | Unprocessable Entity |  -  |
+**429** | Too Many Requests |  -  |
 
 <a name="updateItemById"></a>
 # **updateItemById**
@@ -676,29 +860,38 @@ Update item by id.
 ### Example
 ```java
 // Import classes:
-//import com.pluxbox.radiomanager.api.invoker.ApiClient;
-//import com.pluxbox.radiomanager.api.invoker.ApiException;
-//import com.pluxbox.radiomanager.api.invoker.Configuration;
-//import com.pluxbox.radiomanager.api.invoker.auth.*;
-//import com.pluxbox.radiomanager.api.v2.ItemApi;
+import com.pluxbox.radiomanager.api.invoker.ApiClient;
+import com.pluxbox.radiomanager.api.invoker.ApiException;
+import com.pluxbox.radiomanager.api.invoker.Configuration;
+import com.pluxbox.radiomanager.api.invoker.auth.*;
+import com.pluxbox.radiomanager.api.invoker.models.*;
+import radiomanager.ItemApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://radiomanager.io/api/v2");
+    
+    // Configure API key authorization: API-Key
+    ApiKeyAuth API-Key = (ApiKeyAuth) defaultClient.getAuthentication("API-Key");
+    API-Key.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //API-Key.setApiKeyPrefix("Token");
 
-// Configure API key authorization: API Key
-ApiKeyAuth API Key = (ApiKeyAuth) defaultClient.getAuthentication("API Key");
-API Key.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//API Key.setApiKeyPrefix("Token");
-
-ItemApi apiInstance = new ItemApi();
-Long id = 789L; // Long | ID of Item **(Required)**
-ItemDataInput data = new ItemDataInput(); // ItemDataInput | Data *(Optional)*
-try {
-    Success result = apiInstance.updateItemById(id, data);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling ItemApi#updateItemById");
-    e.printStackTrace();
+    ItemApi apiInstance = new ItemApi(defaultClient);
+    Long id = 0lL; // Long | ID of Item **(Required)**
+    ItemDataInput data = new ItemDataInput(); // ItemDataInput | Data *(Optional)*
+    try {
+      Success result = apiInstance.updateItemById(id, data);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ItemApi#updateItemById");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -706,7 +899,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Long**| ID of Item **(Required)** |
+ **id** | **Long**| ID of Item **(Required)** | [default to 0l]
  **data** | [**ItemDataInput**](ItemDataInput.md)| Data *(Optional)* | [optional]
 
 ### Return type
@@ -715,10 +908,19 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[API Key](../README.md#API Key)
+[API-Key](../README.md#API-Key)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successfully updated an item |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**422** | Unprocessable Entity |  -  |
+**429** | Too Many Requests |  -  |
 

@@ -1,11 +1,13 @@
 
+
 # ProgramDataInput
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **modelTypeId** | **Long** |  | 
-**fieldValues** | **Object** |  |  [optional]
+**fieldValues** | [**Object**](.md) |  |  [optional]
 **title** | **String** |  | 
 **disabled** | **Boolean** |  |  [optional]
 **genreId** | **Long** |  |  [optional]

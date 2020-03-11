@@ -1,7 +1,9 @@
 
+
 # ItemResult
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **Long** |  |  [optional]
@@ -16,7 +18,7 @@ Name | Type | Description | Notes
 **modelTypeId** | **Long** |  | 
 **blockId** | **Long** |  |  [optional]
 **externalId** | **String** |  |  [optional]
-**fieldValues** | **Object** |  |  [optional]
+**fieldValues** | [**Object**](.md) |  |  [optional]
 **title** | **String** |  |  [optional]
 **duration** | **Long** |  |  [optional]
 **start** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]
@@ -38,8 +40,9 @@ Name | Type | Description | Notes
 **modelType** | [**BroadcastRelationsModelType**](BroadcastRelationsModelType.md) |  |  [optional]
 
 
-<a name="StatusEnum"></a>
+
 ## Enum: StatusEnum
+
 Name | Value
 ---- | -----
 SCHEDULED | &quot;scheduled&quot;

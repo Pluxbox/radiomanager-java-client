@@ -1,11 +1,13 @@
 
+
 # PresenterEPGResult
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **modelTypeId** | **Long** |  | 
-**fieldValues** | **Object** |  |  [optional]
+**fieldValues** | [**Object**](.md) |  |  [optional]
 **firstname** | **String** |  |  [optional]
 **lastname** | **String** |  |  [optional]
 **active** | **Boolean** |  |  [optional]

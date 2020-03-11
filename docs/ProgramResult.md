@@ -1,7 +1,9 @@
 
+
 # ProgramResult
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **Long** |  | 
@@ -10,7 +12,7 @@ Name | Type | Description | Notes
 **deletedAt** | [**OffsetDateTime**](OffsetDateTime.md) |  | 
 **externalStationId** | **Long** |  |  [optional]
 **modelTypeId** | **Long** |  | 
-**fieldValues** | **Object** |  |  [optional]
+**fieldValues** | [**Object**](.md) |  |  [optional]
 **title** | **String** |  | 
 **disabled** | **Boolean** |  |  [optional]
 **genreId** | **Long** |  |  [optional]

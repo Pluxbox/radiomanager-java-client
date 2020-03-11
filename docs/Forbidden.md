@@ -1,7 +1,9 @@
 
+
 # Forbidden
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **error** | **String** | Given error, describes the problem. | 

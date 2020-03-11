@@ -1,7 +1,9 @@
 
+
 # ModelTypeResult
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **Long** |  | 
@@ -21,8 +23,9 @@ Name | Type | Description | Notes
 **externalStationId** | **Long** |  |  [optional]
 
 
-<a name="ModelEnum"></a>
+
 ## Enum: ModelEnum
+
 Name | Value
 ---- | -----
 BROADCAST | &quot;broadcast&quot;

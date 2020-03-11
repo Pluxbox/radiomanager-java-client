@@ -1,7 +1,9 @@
 
+
 # ReadOnly
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **error** | **String** | Given error (not formatted), describes the problem. | 

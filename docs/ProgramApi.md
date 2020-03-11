@@ -1,6 +1,6 @@
 # ProgramApi
 
-All URIs are relative to *https://staging.radiomanager.io/api/v2*
+All URIs are relative to *https://radiomanager.io/api/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -22,28 +22,37 @@ Create program.
 ### Example
 ```java
 // Import classes:
-//import com.pluxbox.radiomanager.api.invoker.ApiClient;
-//import com.pluxbox.radiomanager.api.invoker.ApiException;
-//import com.pluxbox.radiomanager.api.invoker.Configuration;
-//import com.pluxbox.radiomanager.api.invoker.auth.*;
-//import com.pluxbox.radiomanager.api.v2.ProgramApi;
+import com.pluxbox.radiomanager.api.invoker.ApiClient;
+import com.pluxbox.radiomanager.api.invoker.ApiException;
+import com.pluxbox.radiomanager.api.invoker.Configuration;
+import com.pluxbox.radiomanager.api.invoker.auth.*;
+import com.pluxbox.radiomanager.api.invoker.models.*;
+import radiomanager.ProgramApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://radiomanager.io/api/v2");
+    
+    // Configure API key authorization: API-Key
+    ApiKeyAuth API-Key = (ApiKeyAuth) defaultClient.getAuthentication("API-Key");
+    API-Key.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //API-Key.setApiKeyPrefix("Token");
 
-// Configure API key authorization: API Key
-ApiKeyAuth API Key = (ApiKeyAuth) defaultClient.getAuthentication("API Key");
-API Key.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//API Key.setApiKeyPrefix("Token");
-
-ProgramApi apiInstance = new ProgramApi();
-ProgramDataInput data = new ProgramDataInput(); // ProgramDataInput | Data **(Required)**
-try {
-    PostSuccess result = apiInstance.createProgram(data);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling ProgramApi#createProgram");
-    e.printStackTrace();
+    ProgramApi apiInstance = new ProgramApi(defaultClient);
+    ProgramDataInput data = new ProgramDataInput(); // ProgramDataInput | Data **(Required)**
+    try {
+      PostSuccess result = apiInstance.createProgram(data);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ProgramApi#createProgram");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -59,12 +68,21 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[API Key](../README.md#API Key)
+[API-Key](../README.md#API-Key)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successfully created a program |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**422** | Unprocessable Entity |  -  |
+**429** | Too Many Requests |  -  |
 
 <a name="deleteProgramById"></a>
 # **deleteProgramById**
@@ -77,28 +95,37 @@ Delete program by id
 ### Example
 ```java
 // Import classes:
-//import com.pluxbox.radiomanager.api.invoker.ApiClient;
-//import com.pluxbox.radiomanager.api.invoker.ApiException;
-//import com.pluxbox.radiomanager.api.invoker.Configuration;
-//import com.pluxbox.radiomanager.api.invoker.auth.*;
-//import com.pluxbox.radiomanager.api.v2.ProgramApi;
+import com.pluxbox.radiomanager.api.invoker.ApiClient;
+import com.pluxbox.radiomanager.api.invoker.ApiException;
+import com.pluxbox.radiomanager.api.invoker.Configuration;
+import com.pluxbox.radiomanager.api.invoker.auth.*;
+import com.pluxbox.radiomanager.api.invoker.models.*;
+import radiomanager.ProgramApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://radiomanager.io/api/v2");
+    
+    // Configure API key authorization: API-Key
+    ApiKeyAuth API-Key = (ApiKeyAuth) defaultClient.getAuthentication("API-Key");
+    API-Key.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //API-Key.setApiKeyPrefix("Token");
 
-// Configure API key authorization: API Key
-ApiKeyAuth API Key = (ApiKeyAuth) defaultClient.getAuthentication("API Key");
-API Key.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//API Key.setApiKeyPrefix("Token");
-
-ProgramApi apiInstance = new ProgramApi();
-Long id = 789L; // Long | ID of program **(Required)**
-try {
-    Success result = apiInstance.deleteProgramById(id);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling ProgramApi#deleteProgramById");
-    e.printStackTrace();
+    ProgramApi apiInstance = new ProgramApi(defaultClient);
+    Long id = 0lL; // Long | ID of program **(Required)**
+    try {
+      Success result = apiInstance.deleteProgramById(id);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ProgramApi#deleteProgramById");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -106,7 +133,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Long**| ID of program **(Required)** |
+ **id** | **Long**| ID of program **(Required)** | [default to 0l]
 
 ### Return type
 
@@ -114,12 +141,20 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[API Key](../README.md#API Key)
+[API-Key](../README.md#API-Key)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successfully deleted program by id |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
 
 <a name="getProgramById"></a>
 # **getProgramById**
@@ -132,29 +167,38 @@ Get program by id
 ### Example
 ```java
 // Import classes:
-//import com.pluxbox.radiomanager.api.invoker.ApiClient;
-//import com.pluxbox.radiomanager.api.invoker.ApiException;
-//import com.pluxbox.radiomanager.api.invoker.Configuration;
-//import com.pluxbox.radiomanager.api.invoker.auth.*;
-//import com.pluxbox.radiomanager.api.v2.ProgramApi;
+import com.pluxbox.radiomanager.api.invoker.ApiClient;
+import com.pluxbox.radiomanager.api.invoker.ApiException;
+import com.pluxbox.radiomanager.api.invoker.Configuration;
+import com.pluxbox.radiomanager.api.invoker.auth.*;
+import com.pluxbox.radiomanager.api.invoker.models.*;
+import radiomanager.ProgramApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://radiomanager.io/api/v2");
+    
+    // Configure API key authorization: API-Key
+    ApiKeyAuth API-Key = (ApiKeyAuth) defaultClient.getAuthentication("API-Key");
+    API-Key.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //API-Key.setApiKeyPrefix("Token");
 
-// Configure API key authorization: API Key
-ApiKeyAuth API Key = (ApiKeyAuth) defaultClient.getAuthentication("API Key");
-API Key.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//API Key.setApiKeyPrefix("Token");
-
-ProgramApi apiInstance = new ProgramApi();
-Long id = 789L; // Long | ID of Program **(Required)**
-Long externalStationId = 789L; // Long | Query on a different (content providing) station *(Optional)*
-try {
-    ProgramResult result = apiInstance.getProgramById(id, externalStationId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling ProgramApi#getProgramById");
-    e.printStackTrace();
+    ProgramApi apiInstance = new ProgramApi(defaultClient);
+    Long id = 0lL; // Long | ID of Program **(Required)**
+    Long externalStationId = 56L; // Long | Query on a different (content providing) station *(Optional)*
+    try {
+      ProgramResult result = apiInstance.getProgramById(id, externalStationId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ProgramApi#getProgramById");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -162,7 +206,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Long**| ID of Program **(Required)** |
+ **id** | **Long**| ID of Program **(Required)** | [default to 0l]
  **externalStationId** | **Long**| Query on a different (content providing) station *(Optional)* | [optional]
 
 ### Return type
@@ -171,16 +215,24 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[API Key](../README.md#API Key)
+[API-Key](../README.md#API-Key)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successfully got Program by id |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
 
 <a name="listPrograms"></a>
 # **listPrograms**
-> ProgramResults listPrograms(page, broadcastId, modelTypeId, tagId, presenterId, genreId, blockId, itemId, limit, orderBy, orderDirection, externalStationId)
+> ProgramResults listPrograms(page, broadcastId, modelTypeId, tagId, presenterId, genreId, blockId, itemId, disabled, limit, orderBy, orderDirection, externalStationId)
 
 Get all programs.
 
@@ -189,39 +241,49 @@ List all programs.
 ### Example
 ```java
 // Import classes:
-//import com.pluxbox.radiomanager.api.invoker.ApiClient;
-//import com.pluxbox.radiomanager.api.invoker.ApiException;
-//import com.pluxbox.radiomanager.api.invoker.Configuration;
-//import com.pluxbox.radiomanager.api.invoker.auth.*;
-//import com.pluxbox.radiomanager.api.v2.ProgramApi;
+import com.pluxbox.radiomanager.api.invoker.ApiClient;
+import com.pluxbox.radiomanager.api.invoker.ApiException;
+import com.pluxbox.radiomanager.api.invoker.Configuration;
+import com.pluxbox.radiomanager.api.invoker.auth.*;
+import com.pluxbox.radiomanager.api.invoker.models.*;
+import radiomanager.ProgramApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://radiomanager.io/api/v2");
+    
+    // Configure API key authorization: API-Key
+    ApiKeyAuth API-Key = (ApiKeyAuth) defaultClient.getAuthentication("API-Key");
+    API-Key.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //API-Key.setApiKeyPrefix("Token");
 
-// Configure API key authorization: API Key
-ApiKeyAuth API Key = (ApiKeyAuth) defaultClient.getAuthentication("API Key");
-API Key.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//API Key.setApiKeyPrefix("Token");
-
-ProgramApi apiInstance = new ProgramApi();
-Long page = 789L; // Long | Current page *(Optional)*
-Long broadcastId = 789L; // Long | Search on Broadcast ID *(Optional)* `(Relation)`
-Long modelTypeId = 789L; // Long | Search on ModelType ID *(Optional)* `(Relation)`
-Long tagId = 789L; // Long | Search on Tag ID *(Optional)* `(Relation)`
-Long presenterId = 789L; // Long | Search on Presenter ID *(Optional)* `(Relation)`
-Long genreId = 789L; // Long | Search on Genre ID *(Optional)*
-Long blockId = 789L; // Long | Search on Block ID *(Optional)* `(Relation)`
-Long itemId = 789L; // Long | Search on Item ID *(Optional)* `(Relation)`
-Long limit = 789L; // Long | Results per page *(Optional)*
-String orderBy = "orderBy_example"; // String | Field to order the results *(Optional)*
-String orderDirection = "orderDirection_example"; // String | Direction of ordering *(Optional)*
-Long externalStationId = 789L; // Long | Query on a different (content providing) station *(Optional)*
-try {
-    ProgramResults result = apiInstance.listPrograms(page, broadcastId, modelTypeId, tagId, presenterId, genreId, blockId, itemId, limit, orderBy, orderDirection, externalStationId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling ProgramApi#listPrograms");
-    e.printStackTrace();
+    ProgramApi apiInstance = new ProgramApi(defaultClient);
+    Long page = 56L; // Long | Current page *(Optional)*
+    Long broadcastId = 56L; // Long | Search on Broadcast ID *(Optional)* `(Relation)`
+    Long modelTypeId = 56L; // Long | Search on ModelType ID *(Optional)* `(Relation)`
+    Long tagId = 56L; // Long | Search on Tag ID *(Optional)* `(Relation)`
+    Long presenterId = 56L; // Long | Search on Presenter ID *(Optional)* `(Relation)`
+    Long genreId = 56L; // Long | Search on Genre ID *(Optional)*
+    Long blockId = 56L; // Long | Search on Block ID *(Optional)* `(Relation)`
+    Long itemId = 56L; // Long | Search on Item ID *(Optional)* `(Relation)`
+    Integer disabled = 56; // Integer | Search on Disabled status *(Optional)*
+    Long limit = 56L; // Long | Results per page *(Optional)*
+    String orderBy = "orderBy_example"; // String | Field to order the results *(Optional)*
+    String orderDirection = "orderDirection_example"; // String | Direction of ordering *(Optional)*
+    Long externalStationId = 56L; // Long | Query on a different (content providing) station *(Optional)*
+    try {
+      ProgramResults result = apiInstance.listPrograms(page, broadcastId, modelTypeId, tagId, presenterId, genreId, blockId, itemId, disabled, limit, orderBy, orderDirection, externalStationId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ProgramApi#listPrograms");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -237,6 +299,7 @@ Name | Type | Description  | Notes
  **genreId** | **Long**| Search on Genre ID *(Optional)* | [optional]
  **blockId** | **Long**| Search on Block ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
  **itemId** | **Long**| Search on Item ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
+ **disabled** | **Integer**| Search on Disabled status *(Optional)* | [optional]
  **limit** | **Long**| Results per page *(Optional)* | [optional]
  **orderBy** | **String**| Field to order the results *(Optional)* | [optional]
  **orderDirection** | **String**| Direction of ordering *(Optional)* | [optional] [enum: asc, desc]
@@ -248,12 +311,20 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[API Key](../README.md#API Key)
+[API-Key](../README.md#API-Key)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successfully got all programs |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
 
 <a name="updateProgramByID"></a>
 # **updateProgramByID**
@@ -266,29 +337,38 @@ Update program by id
 ### Example
 ```java
 // Import classes:
-//import com.pluxbox.radiomanager.api.invoker.ApiClient;
-//import com.pluxbox.radiomanager.api.invoker.ApiException;
-//import com.pluxbox.radiomanager.api.invoker.Configuration;
-//import com.pluxbox.radiomanager.api.invoker.auth.*;
-//import com.pluxbox.radiomanager.api.v2.ProgramApi;
+import com.pluxbox.radiomanager.api.invoker.ApiClient;
+import com.pluxbox.radiomanager.api.invoker.ApiException;
+import com.pluxbox.radiomanager.api.invoker.Configuration;
+import com.pluxbox.radiomanager.api.invoker.auth.*;
+import com.pluxbox.radiomanager.api.invoker.models.*;
+import radiomanager.ProgramApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://radiomanager.io/api/v2");
+    
+    // Configure API key authorization: API-Key
+    ApiKeyAuth API-Key = (ApiKeyAuth) defaultClient.getAuthentication("API-Key");
+    API-Key.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //API-Key.setApiKeyPrefix("Token");
 
-// Configure API key authorization: API Key
-ApiKeyAuth API Key = (ApiKeyAuth) defaultClient.getAuthentication("API Key");
-API Key.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//API Key.setApiKeyPrefix("Token");
-
-ProgramApi apiInstance = new ProgramApi();
-Long id = 789L; // Long | ID of Program **(Required)**
-ProgramDataInput data = new ProgramDataInput(); // ProgramDataInput | Data *(Optional)*
-try {
-    Success result = apiInstance.updateProgramByID(id, data);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling ProgramApi#updateProgramByID");
-    e.printStackTrace();
+    ProgramApi apiInstance = new ProgramApi(defaultClient);
+    Long id = 0lL; // Long | ID of Program **(Required)**
+    ProgramDataInput data = new ProgramDataInput(); // ProgramDataInput | Data *(Optional)*
+    try {
+      Success result = apiInstance.updateProgramByID(id, data);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ProgramApi#updateProgramByID");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -296,7 +376,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Long**| ID of Program **(Required)** |
+ **id** | **Long**| ID of Program **(Required)** | [default to 0l]
  **data** | [**ProgramDataInput**](ProgramDataInput.md)| Data *(Optional)* | [optional]
 
 ### Return type
@@ -305,10 +385,19 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[API Key](../README.md#API Key)
+[API-Key](../README.md#API-Key)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successfully updated Program by id |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**422** | Unprocessable Entity |  -  |
+**429** | Too Many Requests |  -  |
 

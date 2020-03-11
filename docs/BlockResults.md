@@ -1,7 +1,9 @@
 
+
 # BlockResults
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **currentPage** | **Long** |  |  [optional]

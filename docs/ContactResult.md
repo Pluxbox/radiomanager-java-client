@@ -1,7 +1,9 @@
 
+
 # ContactResult
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **Long** |  |  [optional]
@@ -10,7 +12,7 @@ Name | Type | Description | Notes
 **deletedAt** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]
 **externalStationId** | **Long** |  |  [optional]
 **modelTypeId** | **Long** |  | 
-**fieldValues** | **Object** |  |  [optional]
+**fieldValues** | [**Object**](.md) |  |  [optional]
 **email** | **String** |  |  [optional]
 **firstname** | **String** |  | 
 **lastname** | **String** |  | 

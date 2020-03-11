@@ -1,7 +1,9 @@
 
+
 # ItemInputOnly
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **previousId** | **Long** |  |  [optional]

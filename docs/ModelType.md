@@ -1,7 +1,9 @@
 
+
 # ModelType
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **Long** |  | 
@@ -14,8 +16,9 @@ Name | Type | Description | Notes
 **deletedAt** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]
 
 
-<a name="ModelEnum"></a>
+
 ## Enum: ModelEnum
+
 Name | Value
 ---- | -----
 BROADCAST | &quot;broadcast&quot;

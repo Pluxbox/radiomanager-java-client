@@ -1,17 +1,19 @@
 
+
 # TagResults
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**currentPage** | **Long** |  |  [optional]
-**from** | **Long** |  |  [optional]
-**lastPage** | **Long** |  |  [optional]
-**nextPageUrl** | **String** |  |  [optional]
-**path** | **String** |  |  [optional]
-**perPage** | **Long** |  |  [optional]
-**to** | **Long** |  |  [optional]
-**total** | **Long** |  |  [optional]
+**currentPage** | **Long** |  |  [optional] [readonly]
+**from** | **Long** |  |  [optional] [readonly]
+**lastPage** | **Long** |  |  [optional] [readonly]
+**nextPageUrl** | **String** |  |  [optional] [readonly]
+**path** | **String** |  |  [optional] [readonly]
+**perPage** | **Long** |  |  [optional] [readonly]
+**to** | **Long** |  |  [optional] [readonly]
+**total** | **Long** |  |  [optional] [readonly]
 **results** | [**List&lt;TagResult&gt;**](TagResult.md) |  |  [optional]
 
 

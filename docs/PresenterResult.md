@@ -1,7 +1,9 @@
 
+
 # PresenterResult
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **Long** |  | 
@@ -10,7 +12,7 @@ Name | Type | Description | Notes
 **deletedAt** | [**OffsetDateTime**](OffsetDateTime.md) |  | 
 **externalStationId** | **Long** |  |  [optional]
 **modelTypeId** | **Long** |  | 
-**fieldValues** | **Object** |  |  [optional]
+**fieldValues** | [**Object**](.md) |  |  [optional]
 **firstname** | **String** |  |  [optional]
 **lastname** | **String** |  |  [optional]
 **active** | **Boolean** |  |  [optional]

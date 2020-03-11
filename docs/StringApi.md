@@ -1,6 +1,6 @@
 # StringApi
 
-All URIs are relative to *https://staging.radiomanager.io/api/v2*
+All URIs are relative to *https://radiomanager.io/api/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -18,29 +18,38 @@ Get Strings (formatted)
 ### Example
 ```java
 // Import classes:
-//import com.pluxbox.radiomanager.api.invoker.ApiClient;
-//import com.pluxbox.radiomanager.api.invoker.ApiException;
-//import com.pluxbox.radiomanager.api.invoker.Configuration;
-//import com.pluxbox.radiomanager.api.invoker.auth.*;
-//import com.pluxbox.radiomanager.api.v2.StringApi;
+import com.pluxbox.radiomanager.api.invoker.ApiClient;
+import com.pluxbox.radiomanager.api.invoker.ApiException;
+import com.pluxbox.radiomanager.api.invoker.Configuration;
+import com.pluxbox.radiomanager.api.invoker.auth.*;
+import com.pluxbox.radiomanager.api.invoker.models.*;
+import radiomanager.StringApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://radiomanager.io/api/v2");
+    
+    // Configure API key authorization: API-Key
+    ApiKeyAuth API-Key = (ApiKeyAuth) defaultClient.getAuthentication("API-Key");
+    API-Key.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //API-Key.setApiKeyPrefix("Token");
 
-// Configure API key authorization: API Key
-ApiKeyAuth API Key = (ApiKeyAuth) defaultClient.getAuthentication("API Key");
-API Key.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//API Key.setApiKeyPrefix("Token");
-
-StringApi apiInstance = new StringApi();
-String name = "name_example"; // String | Name of Strings **(Required)**
-Boolean fullModel = true; // Boolean | Full model or content only **(Required)**
-try {
-    TextString result = apiInstance.getStringsByName(name, fullModel);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling StringApi#getStringsByName");
-    e.printStackTrace();
+    StringApi apiInstance = new StringApi(defaultClient);
+    String name = "name_example"; // String | Name of Strings **(Required)**
+    Boolean fullModel = true; // Boolean | Full model or content only **(Required)**
+    try {
+      TextString result = apiInstance.getStringsByName(name, fullModel);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling StringApi#getStringsByName");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -57,10 +66,17 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[API Key](../README.md#API Key)
+[API-Key](../README.md#API-Key)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successfully got Strings (formatted) |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
 

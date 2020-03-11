@@ -1,7 +1,9 @@
 
+
 # StoryResult
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **Long** |  |  [optional]
@@ -11,7 +13,7 @@ Name | Type | Description | Notes
 **externalStationId** | **Long** |  |  [optional]
 **modelTypeId** | **Long** |  | 
 **recommended** | **Boolean** |  |  [optional]
-**fieldValues** | **Object** |  |  [optional]
+**fieldValues** | [**Object**](.md) |  |  [optional]
 **name** | **String** |  | 
 **description** | **String** |  |  [optional]
 **tags** | [**StoryRelationsTags**](StoryRelationsTags.md) |  | 

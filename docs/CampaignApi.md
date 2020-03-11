@@ -1,6 +1,6 @@
 # CampaignApi
 
-All URIs are relative to *https://staging.radiomanager.io/api/v2*
+All URIs are relative to *https://radiomanager.io/api/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -22,28 +22,37 @@ Create campaign.
 ### Example
 ```java
 // Import classes:
-//import com.pluxbox.radiomanager.api.invoker.ApiClient;
-//import com.pluxbox.radiomanager.api.invoker.ApiException;
-//import com.pluxbox.radiomanager.api.invoker.Configuration;
-//import com.pluxbox.radiomanager.api.invoker.auth.*;
-//import com.pluxbox.radiomanager.api.v2.CampaignApi;
+import com.pluxbox.radiomanager.api.invoker.ApiClient;
+import com.pluxbox.radiomanager.api.invoker.ApiException;
+import com.pluxbox.radiomanager.api.invoker.Configuration;
+import com.pluxbox.radiomanager.api.invoker.auth.*;
+import com.pluxbox.radiomanager.api.invoker.models.*;
+import radiomanager.CampaignApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://radiomanager.io/api/v2");
+    
+    // Configure API key authorization: API-Key
+    ApiKeyAuth API-Key = (ApiKeyAuth) defaultClient.getAuthentication("API-Key");
+    API-Key.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //API-Key.setApiKeyPrefix("Token");
 
-// Configure API key authorization: API Key
-ApiKeyAuth API Key = (ApiKeyAuth) defaultClient.getAuthentication("API Key");
-API Key.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//API Key.setApiKeyPrefix("Token");
-
-CampaignApi apiInstance = new CampaignApi();
-CampaignDataInput data = new CampaignDataInput(); // CampaignDataInput | Data **(Required)**
-try {
-    PostSuccess result = apiInstance.createCampaign(data);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling CampaignApi#createCampaign");
-    e.printStackTrace();
+    CampaignApi apiInstance = new CampaignApi(defaultClient);
+    CampaignDataInput data = new CampaignDataInput(); // CampaignDataInput | Data **(Required)**
+    try {
+      PostSuccess result = apiInstance.createCampaign(data);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling CampaignApi#createCampaign");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -59,12 +68,21 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[API Key](../README.md#API Key)
+[API-Key](../README.md#API-Key)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successfully created a campaign |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**422** | Unprocessable Entity |  -  |
+**429** | Too Many Requests |  -  |
 
 <a name="deleteCampaignById"></a>
 # **deleteCampaignById**
@@ -77,28 +95,37 @@ Delete campaign by id
 ### Example
 ```java
 // Import classes:
-//import com.pluxbox.radiomanager.api.invoker.ApiClient;
-//import com.pluxbox.radiomanager.api.invoker.ApiException;
-//import com.pluxbox.radiomanager.api.invoker.Configuration;
-//import com.pluxbox.radiomanager.api.invoker.auth.*;
-//import com.pluxbox.radiomanager.api.v2.CampaignApi;
+import com.pluxbox.radiomanager.api.invoker.ApiClient;
+import com.pluxbox.radiomanager.api.invoker.ApiException;
+import com.pluxbox.radiomanager.api.invoker.Configuration;
+import com.pluxbox.radiomanager.api.invoker.auth.*;
+import com.pluxbox.radiomanager.api.invoker.models.*;
+import radiomanager.CampaignApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://radiomanager.io/api/v2");
+    
+    // Configure API key authorization: API-Key
+    ApiKeyAuth API-Key = (ApiKeyAuth) defaultClient.getAuthentication("API-Key");
+    API-Key.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //API-Key.setApiKeyPrefix("Token");
 
-// Configure API key authorization: API Key
-ApiKeyAuth API Key = (ApiKeyAuth) defaultClient.getAuthentication("API Key");
-API Key.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//API Key.setApiKeyPrefix("Token");
-
-CampaignApi apiInstance = new CampaignApi();
-Long id = 789L; // Long | ID of Campaign **(Required)**
-try {
-    Success result = apiInstance.deleteCampaignById(id);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling CampaignApi#deleteCampaignById");
-    e.printStackTrace();
+    CampaignApi apiInstance = new CampaignApi(defaultClient);
+    Long id = 0lL; // Long | ID of Campaign **(Required)**
+    try {
+      Success result = apiInstance.deleteCampaignById(id);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling CampaignApi#deleteCampaignById");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -106,7 +133,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Long**| ID of Campaign **(Required)** |
+ **id** | **Long**| ID of Campaign **(Required)** | [default to 0l]
 
 ### Return type
 
@@ -114,12 +141,20 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[API Key](../README.md#API Key)
+[API-Key](../README.md#API-Key)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successfully deleted Campaign by id |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
 
 <a name="getCampaignById"></a>
 # **getCampaignById**
@@ -132,29 +167,38 @@ Get campaign by id
 ### Example
 ```java
 // Import classes:
-//import com.pluxbox.radiomanager.api.invoker.ApiClient;
-//import com.pluxbox.radiomanager.api.invoker.ApiException;
-//import com.pluxbox.radiomanager.api.invoker.Configuration;
-//import com.pluxbox.radiomanager.api.invoker.auth.*;
-//import com.pluxbox.radiomanager.api.v2.CampaignApi;
+import com.pluxbox.radiomanager.api.invoker.ApiClient;
+import com.pluxbox.radiomanager.api.invoker.ApiException;
+import com.pluxbox.radiomanager.api.invoker.Configuration;
+import com.pluxbox.radiomanager.api.invoker.auth.*;
+import com.pluxbox.radiomanager.api.invoker.models.*;
+import radiomanager.CampaignApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://radiomanager.io/api/v2");
+    
+    // Configure API key authorization: API-Key
+    ApiKeyAuth API-Key = (ApiKeyAuth) defaultClient.getAuthentication("API-Key");
+    API-Key.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //API-Key.setApiKeyPrefix("Token");
 
-// Configure API key authorization: API Key
-ApiKeyAuth API Key = (ApiKeyAuth) defaultClient.getAuthentication("API Key");
-API Key.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//API Key.setApiKeyPrefix("Token");
-
-CampaignApi apiInstance = new CampaignApi();
-Long id = 789L; // Long | ID of Campaign **(Required)**
-Long externalStationId = 789L; // Long | Query on a different (content providing) station *(Optional)*
-try {
-    CampaignResult result = apiInstance.getCampaignById(id, externalStationId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling CampaignApi#getCampaignById");
-    e.printStackTrace();
+    CampaignApi apiInstance = new CampaignApi(defaultClient);
+    Long id = 0lL; // Long | ID of Campaign **(Required)**
+    Long externalStationId = 56L; // Long | Query on a different (content providing) station *(Optional)*
+    try {
+      CampaignResult result = apiInstance.getCampaignById(id, externalStationId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling CampaignApi#getCampaignById");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -162,7 +206,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Long**| ID of Campaign **(Required)** |
+ **id** | **Long**| ID of Campaign **(Required)** | [default to 0l]
  **externalStationId** | **Long**| Query on a different (content providing) station *(Optional)* | [optional]
 
 ### Return type
@@ -171,12 +215,20 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[API Key](../README.md#API Key)
+[API-Key](../README.md#API-Key)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successfully got Campaign by id |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
 
 <a name="listCampaigns"></a>
 # **listCampaigns**
@@ -189,36 +241,45 @@ List all campaigns.
 ### Example
 ```java
 // Import classes:
-//import com.pluxbox.radiomanager.api.invoker.ApiClient;
-//import com.pluxbox.radiomanager.api.invoker.ApiException;
-//import com.pluxbox.radiomanager.api.invoker.Configuration;
-//import com.pluxbox.radiomanager.api.invoker.auth.*;
-//import com.pluxbox.radiomanager.api.v2.CampaignApi;
+import com.pluxbox.radiomanager.api.invoker.ApiClient;
+import com.pluxbox.radiomanager.api.invoker.ApiException;
+import com.pluxbox.radiomanager.api.invoker.Configuration;
+import com.pluxbox.radiomanager.api.invoker.auth.*;
+import com.pluxbox.radiomanager.api.invoker.models.*;
+import radiomanager.CampaignApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://radiomanager.io/api/v2");
+    
+    // Configure API key authorization: API-Key
+    ApiKeyAuth API-Key = (ApiKeyAuth) defaultClient.getAuthentication("API-Key");
+    API-Key.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //API-Key.setApiKeyPrefix("Token");
 
-// Configure API key authorization: API Key
-ApiKeyAuth API Key = (ApiKeyAuth) defaultClient.getAuthentication("API Key");
-API Key.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//API Key.setApiKeyPrefix("Token");
-
-CampaignApi apiInstance = new CampaignApi();
-Long page = 789L; // Long | Current page *(Optional)*
-Long itemId = 789L; // Long | Search on Item ID *(Optional)* `(Relation)`
-Long modelTypeId = 789L; // Long | Search on ModelType ID *(Optional)* `(Relation)`
-OffsetDateTime startMin = new OffsetDateTime(); // OffsetDateTime | Minimum start date *(Optional)*
-OffsetDateTime startMax = new OffsetDateTime(); // OffsetDateTime | Maximum start date *(Optional)*
-Long limit = 789L; // Long | Results per page *(Optional)*
-String orderBy = "orderBy_example"; // String | Field to order the results *(Optional)*
-String orderDirection = "orderDirection_example"; // String | Direction of ordering *(Optional)*
-Long externalStationId = 789L; // Long | Query on a different (content providing) station *(Optional)*
-try {
-    CampaignResults result = apiInstance.listCampaigns(page, itemId, modelTypeId, startMin, startMax, limit, orderBy, orderDirection, externalStationId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling CampaignApi#listCampaigns");
-    e.printStackTrace();
+    CampaignApi apiInstance = new CampaignApi(defaultClient);
+    Long page = 56L; // Long | Current page *(Optional)*
+    Long itemId = 56L; // Long | Search on Item ID *(Optional)* `(Relation)`
+    Long modelTypeId = 56L; // Long | Search on ModelType ID *(Optional)* `(Relation)`
+    OffsetDateTime startMin = new OffsetDateTime(); // OffsetDateTime | Minimum start date *(Optional)*
+    OffsetDateTime startMax = new OffsetDateTime(); // OffsetDateTime | Maximum start date *(Optional)*
+    Long limit = 56L; // Long | Results per page *(Optional)*
+    String orderBy = "orderBy_example"; // String | Field to order the results *(Optional)*
+    String orderDirection = "orderDirection_example"; // String | Direction of ordering *(Optional)*
+    Long externalStationId = 56L; // Long | Query on a different (content providing) station *(Optional)*
+    try {
+      CampaignResults result = apiInstance.listCampaigns(page, itemId, modelTypeId, startMin, startMax, limit, orderBy, orderDirection, externalStationId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling CampaignApi#listCampaigns");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -242,12 +303,20 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[API Key](../README.md#API Key)
+[API-Key](../README.md#API-Key)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successfully got all campaigns |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
 
 <a name="updateCampaignByID"></a>
 # **updateCampaignByID**
@@ -260,29 +329,38 @@ Update campaign by id
 ### Example
 ```java
 // Import classes:
-//import com.pluxbox.radiomanager.api.invoker.ApiClient;
-//import com.pluxbox.radiomanager.api.invoker.ApiException;
-//import com.pluxbox.radiomanager.api.invoker.Configuration;
-//import com.pluxbox.radiomanager.api.invoker.auth.*;
-//import com.pluxbox.radiomanager.api.v2.CampaignApi;
+import com.pluxbox.radiomanager.api.invoker.ApiClient;
+import com.pluxbox.radiomanager.api.invoker.ApiException;
+import com.pluxbox.radiomanager.api.invoker.Configuration;
+import com.pluxbox.radiomanager.api.invoker.auth.*;
+import com.pluxbox.radiomanager.api.invoker.models.*;
+import radiomanager.CampaignApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://radiomanager.io/api/v2");
+    
+    // Configure API key authorization: API-Key
+    ApiKeyAuth API-Key = (ApiKeyAuth) defaultClient.getAuthentication("API-Key");
+    API-Key.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //API-Key.setApiKeyPrefix("Token");
 
-// Configure API key authorization: API Key
-ApiKeyAuth API Key = (ApiKeyAuth) defaultClient.getAuthentication("API Key");
-API Key.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//API Key.setApiKeyPrefix("Token");
-
-CampaignApi apiInstance = new CampaignApi();
-Long id = 789L; // Long | ID of Campaign **(Required)**
-CampaignDataInput data = new CampaignDataInput(); // CampaignDataInput | Data *(Optional)*
-try {
-    Success result = apiInstance.updateCampaignByID(id, data);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling CampaignApi#updateCampaignByID");
-    e.printStackTrace();
+    CampaignApi apiInstance = new CampaignApi(defaultClient);
+    Long id = 0lL; // Long | ID of Campaign **(Required)**
+    CampaignDataInput data = new CampaignDataInput(); // CampaignDataInput | Data *(Optional)*
+    try {
+      Success result = apiInstance.updateCampaignByID(id, data);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling CampaignApi#updateCampaignByID");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -290,7 +368,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Long**| ID of Campaign **(Required)** |
+ **id** | **Long**| ID of Campaign **(Required)** | [default to 0l]
  **data** | [**CampaignDataInput**](CampaignDataInput.md)| Data *(Optional)* | [optional]
 
 ### Return type
@@ -299,10 +377,19 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[API Key](../README.md#API Key)
+[API-Key](../README.md#API-Key)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successfully updated Campaign by ID |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**422** | Unprocessable Entity |  -  |
+**429** | Too Many Requests |  -  |
 

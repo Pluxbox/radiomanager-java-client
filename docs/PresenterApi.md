@@ -1,6 +1,6 @@
 # PresenterApi
 
-All URIs are relative to *https://staging.radiomanager.io/api/v2*
+All URIs are relative to *https://radiomanager.io/api/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -22,28 +22,37 @@ Create presenter.
 ### Example
 ```java
 // Import classes:
-//import com.pluxbox.radiomanager.api.invoker.ApiClient;
-//import com.pluxbox.radiomanager.api.invoker.ApiException;
-//import com.pluxbox.radiomanager.api.invoker.Configuration;
-//import com.pluxbox.radiomanager.api.invoker.auth.*;
-//import com.pluxbox.radiomanager.api.v2.PresenterApi;
+import com.pluxbox.radiomanager.api.invoker.ApiClient;
+import com.pluxbox.radiomanager.api.invoker.ApiException;
+import com.pluxbox.radiomanager.api.invoker.Configuration;
+import com.pluxbox.radiomanager.api.invoker.auth.*;
+import com.pluxbox.radiomanager.api.invoker.models.*;
+import radiomanager.PresenterApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://radiomanager.io/api/v2");
+    
+    // Configure API key authorization: API-Key
+    ApiKeyAuth API-Key = (ApiKeyAuth) defaultClient.getAuthentication("API-Key");
+    API-Key.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //API-Key.setApiKeyPrefix("Token");
 
-// Configure API key authorization: API Key
-ApiKeyAuth API Key = (ApiKeyAuth) defaultClient.getAuthentication("API Key");
-API Key.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//API Key.setApiKeyPrefix("Token");
-
-PresenterApi apiInstance = new PresenterApi();
-PresenterDataInput data = new PresenterDataInput(); // PresenterDataInput | Data **(Required)**
-try {
-    PostSuccess result = apiInstance.createPresenter(data);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling PresenterApi#createPresenter");
-    e.printStackTrace();
+    PresenterApi apiInstance = new PresenterApi(defaultClient);
+    PresenterDataInput data = new PresenterDataInput(); // PresenterDataInput | Data **(Required)**
+    try {
+      PostSuccess result = apiInstance.createPresenter(data);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PresenterApi#createPresenter");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -59,12 +68,21 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[API Key](../README.md#API Key)
+[API-Key](../README.md#API-Key)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successfully created a presenter |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**422** | Unprocessable Entity |  -  |
+**429** | Too Many Requests |  -  |
 
 <a name="deletePresenterById"></a>
 # **deletePresenterById**
@@ -77,28 +95,37 @@ Delete presenter by id
 ### Example
 ```java
 // Import classes:
-//import com.pluxbox.radiomanager.api.invoker.ApiClient;
-//import com.pluxbox.radiomanager.api.invoker.ApiException;
-//import com.pluxbox.radiomanager.api.invoker.Configuration;
-//import com.pluxbox.radiomanager.api.invoker.auth.*;
-//import com.pluxbox.radiomanager.api.v2.PresenterApi;
+import com.pluxbox.radiomanager.api.invoker.ApiClient;
+import com.pluxbox.radiomanager.api.invoker.ApiException;
+import com.pluxbox.radiomanager.api.invoker.Configuration;
+import com.pluxbox.radiomanager.api.invoker.auth.*;
+import com.pluxbox.radiomanager.api.invoker.models.*;
+import radiomanager.PresenterApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://radiomanager.io/api/v2");
+    
+    // Configure API key authorization: API-Key
+    ApiKeyAuth API-Key = (ApiKeyAuth) defaultClient.getAuthentication("API-Key");
+    API-Key.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //API-Key.setApiKeyPrefix("Token");
 
-// Configure API key authorization: API Key
-ApiKeyAuth API Key = (ApiKeyAuth) defaultClient.getAuthentication("API Key");
-API Key.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//API Key.setApiKeyPrefix("Token");
-
-PresenterApi apiInstance = new PresenterApi();
-Long id = 789L; // Long | id of presenter
-try {
-    Success result = apiInstance.deletePresenterById(id);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling PresenterApi#deletePresenterById");
-    e.printStackTrace();
+    PresenterApi apiInstance = new PresenterApi(defaultClient);
+    Long id = 0lL; // Long | id of presenter
+    try {
+      Success result = apiInstance.deletePresenterById(id);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PresenterApi#deletePresenterById");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -106,7 +133,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Long**| id of presenter |
+ **id** | **Long**| id of presenter | [default to 0l]
 
 ### Return type
 
@@ -114,12 +141,20 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[API Key](../README.md#API Key)
+[API-Key](../README.md#API-Key)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successfully deleted presenter by id |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
 
 <a name="getPresenterById"></a>
 # **getPresenterById**
@@ -132,29 +167,38 @@ Get presenter by id
 ### Example
 ```java
 // Import classes:
-//import com.pluxbox.radiomanager.api.invoker.ApiClient;
-//import com.pluxbox.radiomanager.api.invoker.ApiException;
-//import com.pluxbox.radiomanager.api.invoker.Configuration;
-//import com.pluxbox.radiomanager.api.invoker.auth.*;
-//import com.pluxbox.radiomanager.api.v2.PresenterApi;
+import com.pluxbox.radiomanager.api.invoker.ApiClient;
+import com.pluxbox.radiomanager.api.invoker.ApiException;
+import com.pluxbox.radiomanager.api.invoker.Configuration;
+import com.pluxbox.radiomanager.api.invoker.auth.*;
+import com.pluxbox.radiomanager.api.invoker.models.*;
+import radiomanager.PresenterApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://radiomanager.io/api/v2");
+    
+    // Configure API key authorization: API-Key
+    ApiKeyAuth API-Key = (ApiKeyAuth) defaultClient.getAuthentication("API-Key");
+    API-Key.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //API-Key.setApiKeyPrefix("Token");
 
-// Configure API key authorization: API Key
-ApiKeyAuth API Key = (ApiKeyAuth) defaultClient.getAuthentication("API Key");
-API Key.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//API Key.setApiKeyPrefix("Token");
-
-PresenterApi apiInstance = new PresenterApi();
-Long id = 789L; // Long | id of Presenter
-Long externalStationId = 789L; // Long | Query on a different (content providing) station *(Optional)*
-try {
-    PresenterResult result = apiInstance.getPresenterById(id, externalStationId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling PresenterApi#getPresenterById");
-    e.printStackTrace();
+    PresenterApi apiInstance = new PresenterApi(defaultClient);
+    Long id = 0lL; // Long | id of Presenter
+    Long externalStationId = 56L; // Long | Query on a different (content providing) station *(Optional)*
+    try {
+      PresenterResult result = apiInstance.getPresenterById(id, externalStationId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PresenterApi#getPresenterById");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -162,7 +206,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Long**| id of Presenter |
+ **id** | **Long**| id of Presenter | [default to 0l]
  **externalStationId** | **Long**| Query on a different (content providing) station *(Optional)* | [optional]
 
 ### Return type
@@ -171,12 +215,20 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[API Key](../README.md#API Key)
+[API-Key](../README.md#API-Key)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successfully got Presenter by id |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
 
 <a name="listPresenters"></a>
 # **listPresenters**
@@ -189,35 +241,44 @@ List all presenters.
 ### Example
 ```java
 // Import classes:
-//import com.pluxbox.radiomanager.api.invoker.ApiClient;
-//import com.pluxbox.radiomanager.api.invoker.ApiException;
-//import com.pluxbox.radiomanager.api.invoker.Configuration;
-//import com.pluxbox.radiomanager.api.invoker.auth.*;
-//import com.pluxbox.radiomanager.api.v2.PresenterApi;
+import com.pluxbox.radiomanager.api.invoker.ApiClient;
+import com.pluxbox.radiomanager.api.invoker.ApiException;
+import com.pluxbox.radiomanager.api.invoker.Configuration;
+import com.pluxbox.radiomanager.api.invoker.auth.*;
+import com.pluxbox.radiomanager.api.invoker.models.*;
+import radiomanager.PresenterApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://radiomanager.io/api/v2");
+    
+    // Configure API key authorization: API-Key
+    ApiKeyAuth API-Key = (ApiKeyAuth) defaultClient.getAuthentication("API-Key");
+    API-Key.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //API-Key.setApiKeyPrefix("Token");
 
-// Configure API key authorization: API Key
-ApiKeyAuth API Key = (ApiKeyAuth) defaultClient.getAuthentication("API Key");
-API Key.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//API Key.setApiKeyPrefix("Token");
-
-PresenterApi apiInstance = new PresenterApi();
-Long page = 789L; // Long | Current page *(Optional)*
-Long programId = 789L; // Long | Search on Program ID *(Optional)* `(Relation)`
-Long broadcastId = 789L; // Long | Search on Broadcast ID *(Optional)* `(Relation)`
-Long modelTypeId = 789L; // Long | Search on ModelType ID (Optional)
-Long limit = 789L; // Long | Results per page *(Optional)*
-String orderBy = "orderBy_example"; // String | Field to order the results *(Optional)*
-String orderDirection = "orderDirection_example"; // String | Direction of ordering *(Optional)*
-Long externalStationId = 789L; // Long | Query on a different (content providing) station *(Optional)*
-try {
-    PresenterResults result = apiInstance.listPresenters(page, programId, broadcastId, modelTypeId, limit, orderBy, orderDirection, externalStationId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling PresenterApi#listPresenters");
-    e.printStackTrace();
+    PresenterApi apiInstance = new PresenterApi(defaultClient);
+    Long page = 56L; // Long | Current page *(Optional)*
+    Long programId = 56L; // Long | Search on Program ID *(Optional)* `(Relation)`
+    Long broadcastId = 56L; // Long | Search on Broadcast ID *(Optional)* `(Relation)`
+    Long modelTypeId = 56L; // Long | Search on ModelType ID (Optional)
+    Long limit = 56L; // Long | Results per page *(Optional)*
+    String orderBy = "orderBy_example"; // String | Field to order the results *(Optional)*
+    String orderDirection = "orderDirection_example"; // String | Direction of ordering *(Optional)*
+    Long externalStationId = 56L; // Long | Query on a different (content providing) station *(Optional)*
+    try {
+      PresenterResults result = apiInstance.listPresenters(page, programId, broadcastId, modelTypeId, limit, orderBy, orderDirection, externalStationId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PresenterApi#listPresenters");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -240,12 +301,20 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[API Key](../README.md#API Key)
+[API-Key](../README.md#API-Key)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successfully got all presenters |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
 
 <a name="updatePresenterByID"></a>
 # **updatePresenterByID**
@@ -258,29 +327,38 @@ Update presenter by id
 ### Example
 ```java
 // Import classes:
-//import com.pluxbox.radiomanager.api.invoker.ApiClient;
-//import com.pluxbox.radiomanager.api.invoker.ApiException;
-//import com.pluxbox.radiomanager.api.invoker.Configuration;
-//import com.pluxbox.radiomanager.api.invoker.auth.*;
-//import com.pluxbox.radiomanager.api.v2.PresenterApi;
+import com.pluxbox.radiomanager.api.invoker.ApiClient;
+import com.pluxbox.radiomanager.api.invoker.ApiException;
+import com.pluxbox.radiomanager.api.invoker.Configuration;
+import com.pluxbox.radiomanager.api.invoker.auth.*;
+import com.pluxbox.radiomanager.api.invoker.models.*;
+import radiomanager.PresenterApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://radiomanager.io/api/v2");
+    
+    // Configure API key authorization: API-Key
+    ApiKeyAuth API-Key = (ApiKeyAuth) defaultClient.getAuthentication("API-Key");
+    API-Key.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //API-Key.setApiKeyPrefix("Token");
 
-// Configure API key authorization: API Key
-ApiKeyAuth API Key = (ApiKeyAuth) defaultClient.getAuthentication("API Key");
-API Key.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//API Key.setApiKeyPrefix("Token");
-
-PresenterApi apiInstance = new PresenterApi();
-Long id = 789L; // Long | id of Presenter
-PresenterDataInput data = new PresenterDataInput(); // PresenterDataInput | Data *(Optional)*
-try {
-    Success result = apiInstance.updatePresenterByID(id, data);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling PresenterApi#updatePresenterByID");
-    e.printStackTrace();
+    PresenterApi apiInstance = new PresenterApi(defaultClient);
+    Long id = 0lL; // Long | id of Presenter
+    PresenterDataInput data = new PresenterDataInput(); // PresenterDataInput | Data *(Optional)*
+    try {
+      Success result = apiInstance.updatePresenterByID(id, data);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PresenterApi#updatePresenterByID");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -288,7 +366,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Long**| id of Presenter |
+ **id** | **Long**| id of Presenter | [default to 0l]
  **data** | [**PresenterDataInput**](PresenterDataInput.md)| Data *(Optional)* | [optional]
 
 ### Return type
@@ -297,10 +375,19 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[API Key](../README.md#API Key)
+[API-Key](../README.md#API-Key)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successfully updated Presenter by id |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**422** | Unprocessable Entity |  -  |
+**429** | Too Many Requests |  -  |
 

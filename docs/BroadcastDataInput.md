@@ -1,13 +1,15 @@
 
+
 # BroadcastDataInput
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **programId** | **Long** |  |  [optional]
 **modelTypeId** | **Long** |  |  [optional]
 **stationId** | **Long** |  |  [optional]
-**fieldValues** | **Object** |  |  [optional]
+**fieldValues** | [**Object**](.md) |  |  [optional]
 **title** | **String** |  |  [optional]
 **start** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]
 **stop** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]
@@ -30,13 +32,14 @@ Name | Type | Description | Notes
 **presenters** | **List&lt;Integer&gt;** |  |  [optional]
 
 
-<a name="RepetitionTypeEnum"></a>
+
 ## Enum: RepetitionTypeEnum
+
 Name | Value
 ---- | -----
 _1_WEEK | &quot;1 week&quot;
-_2_WEEKS | &quot;2 weeks&quot;
-_4_WEEKS | &quot;4 weeks&quot;
+_2_WEEK | &quot;2 week&quot;
+_4_WEEK | &quot;4 week&quot;
 _1_MONTH | &quot;1 month&quot;
 
 
