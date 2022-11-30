@@ -1,6 +1,6 @@
 /*
  * RadioManager
- * RadioManager
+ * This OpenAPI 3 Document describes the functionality of the API v2 of RadioManager. Note that no rights can be derived from this Document and the true functionality of the API might differ.
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@pluxbox.com
@@ -24,10 +24,31 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.pluxbox.radiomanager.api.invoker.JSON;
+
 /**
  * CampaignTemplateItemAllOf
  */
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class CampaignTemplateItemAllOf {
   public static final String SERIALIZED_NAME_MODEL_TYPE_ID = "model_type_id";
   @SerializedName(SERIALIZED_NAME_MODEL_TYPE_ID)
@@ -61,6 +82,8 @@ public class CampaignTemplateItemAllOf {
   @SerializedName(SERIALIZED_NAME_DELTAS)
   private Object deltas;
 
+  public CampaignTemplateItemAllOf() {
+  }
 
   public CampaignTemplateItemAllOf modelTypeId(Long modelTypeId) {
     
@@ -246,8 +269,9 @@ public class CampaignTemplateItemAllOf {
   }
 
 
+
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -270,7 +294,6 @@ public class CampaignTemplateItemAllOf {
     return Objects.hash(modelTypeId, externalId, fieldValues, title, duration, recommended, staticStart, deltas);
   }
 
-
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -291,12 +314,108 @@ public class CampaignTemplateItemAllOf {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("model_type_id");
+    openapiFields.add("external_id");
+    openapiFields.add("field_values");
+    openapiFields.add("title");
+    openapiFields.add("duration");
+    openapiFields.add("recommended");
+    openapiFields.add("static_start");
+    openapiFields.add("_deltas");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to CampaignTemplateItemAllOf
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (!CampaignTemplateItemAllOf.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+          throw new IllegalArgumentException(String.format("The required field(s) %s in CampaignTemplateItemAllOf is not found in the empty JSON string", CampaignTemplateItemAllOf.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!CampaignTemplateItemAllOf.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `CampaignTemplateItemAllOf` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+      if ((jsonObj.get("external_id") != null && !jsonObj.get("external_id").isJsonNull()) && !jsonObj.get("external_id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `external_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("external_id").toString()));
+      }
+      if ((jsonObj.get("title") != null && !jsonObj.get("title").isJsonNull()) && !jsonObj.get("title").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `title` to be a primitive type in the JSON string but got `%s`", jsonObj.get("title").toString()));
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!CampaignTemplateItemAllOf.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'CampaignTemplateItemAllOf' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<CampaignTemplateItemAllOf> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(CampaignTemplateItemAllOf.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<CampaignTemplateItemAllOf>() {
+           @Override
+           public void write(JsonWriter out, CampaignTemplateItemAllOf value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public CampaignTemplateItemAllOf read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of CampaignTemplateItemAllOf given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of CampaignTemplateItemAllOf
+  * @throws IOException if the JSON string is invalid with respect to CampaignTemplateItemAllOf
+  */
+  public static CampaignTemplateItemAllOf fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, CampaignTemplateItemAllOf.class);
+  }
+
+ /**
+  * Convert an instance of CampaignTemplateItemAllOf to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

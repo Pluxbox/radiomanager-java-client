@@ -1,6 +1,6 @@
 /*
  * RadioManager
- * RadioManager
+ * This OpenAPI 3 Document describes the functionality of the API v2 of RadioManager. Note that no rights can be derived from this Document and the true functionality of the API might differ.
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@pluxbox.com
@@ -21,9 +21,6 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.pluxbox.radiomanager.api.models.BroadcastRelationsModelType;
-import com.pluxbox.radiomanager.api.models.Campaign;
-import com.pluxbox.radiomanager.api.models.CampaignOutputOnly;
-import com.pluxbox.radiomanager.api.models.CampaignRelations;
 import com.pluxbox.radiomanager.api.models.CampaignRelationsItems;
 import com.pluxbox.radiomanager.api.models.CampaignTemplateItem;
 import io.swagger.annotations.ApiModel;
@@ -31,10 +28,31 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.pluxbox.radiomanager.api.invoker.JSON;
+
 /**
  * CampaignResult
  */
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class CampaignResult {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -54,7 +72,7 @@ public class CampaignResult {
 
   public static final String SERIALIZED_NAME_ITEM = "item";
   @SerializedName(SERIALIZED_NAME_ITEM)
-  private CampaignTemplateItem item = null;
+  private CampaignTemplateItem item;
 
   public static final String SERIALIZED_NAME_EXTERNAL_STATION_ID = "_external_station_id";
   @SerializedName(SERIALIZED_NAME_EXTERNAL_STATION_ID)
@@ -96,6 +114,8 @@ public class CampaignResult {
   @SerializedName(SERIALIZED_NAME_MODEL_TYPE)
   private BroadcastRelationsModelType modelType;
 
+  public CampaignResult() {
+  }
 
   public CampaignResult id(Long id) {
     
@@ -107,6 +127,7 @@ public class CampaignResult {
    * Get id
    * @return id
   **/
+  @javax.annotation.Nonnull
   @ApiModelProperty(example = "1", required = true, value = "")
 
   public Long getId() {
@@ -129,6 +150,7 @@ public class CampaignResult {
    * Get updatedAt
    * @return updatedAt
   **/
+  @javax.annotation.Nonnull
   @ApiModelProperty(example = "2016-01-11T22:01:11+02:00", required = true, value = "")
 
   public OffsetDateTime getUpdatedAt() {
@@ -151,6 +173,7 @@ public class CampaignResult {
    * Get createdAt
    * @return createdAt
   **/
+  @javax.annotation.Nonnull
   @ApiModelProperty(example = "2016-01-11T22:01:11+02:00", required = true, value = "")
 
   public OffsetDateTime getCreatedAt() {
@@ -173,6 +196,7 @@ public class CampaignResult {
    * Get deletedAt
    * @return deletedAt
   **/
+  @javax.annotation.Nonnull
   @ApiModelProperty(example = "2016-01-11T22:01:11+02:00", required = true, value = "")
 
   public OffsetDateTime getDeletedAt() {
@@ -241,6 +265,7 @@ public class CampaignResult {
    * Get modelTypeId
    * @return modelTypeId
   **/
+  @javax.annotation.Nonnull
   @ApiModelProperty(example = "1", required = true, value = "")
 
   public Long getModelTypeId() {
@@ -309,6 +334,7 @@ public class CampaignResult {
    * Get start
    * @return start
   **/
+  @javax.annotation.Nonnull
   @ApiModelProperty(example = "2016-01-11T22:01:11+02:00", required = true, value = "")
 
   public OffsetDateTime getStart() {
@@ -331,6 +357,7 @@ public class CampaignResult {
    * Get stop
    * @return stop
   **/
+  @javax.annotation.Nonnull
   @ApiModelProperty(example = "2016-01-11T22:01:11+02:00", required = true, value = "")
 
   public OffsetDateTime getStop() {
@@ -435,8 +462,9 @@ public class CampaignResult {
   }
 
 
+
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -466,7 +494,6 @@ public class CampaignResult {
     return Objects.hash(id, updatedAt, createdAt, deletedAt, item, externalStationId, modelTypeId, fieldValues, title, start, stop, recommended, description, items, modelType);
   }
 
-
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -494,12 +521,141 @@ public class CampaignResult {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("id");
+    openapiFields.add("updated_at");
+    openapiFields.add("created_at");
+    openapiFields.add("deleted_at");
+    openapiFields.add("item");
+    openapiFields.add("_external_station_id");
+    openapiFields.add("model_type_id");
+    openapiFields.add("field_values");
+    openapiFields.add("title");
+    openapiFields.add("start");
+    openapiFields.add("stop");
+    openapiFields.add("recommended");
+    openapiFields.add("description");
+    openapiFields.add("items");
+    openapiFields.add("model_type");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("id");
+    openapiRequiredFields.add("updated_at");
+    openapiRequiredFields.add("created_at");
+    openapiRequiredFields.add("deleted_at");
+    openapiRequiredFields.add("model_type_id");
+    openapiRequiredFields.add("start");
+    openapiRequiredFields.add("stop");
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to CampaignResult
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (!CampaignResult.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+          throw new IllegalArgumentException(String.format("The required field(s) %s in CampaignResult is not found in the empty JSON string", CampaignResult.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!CampaignResult.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `CampaignResult` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : CampaignResult.openapiRequiredFields) {
+        if (jsonObj.get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        }
+      }
+      // validate the optional field `item`
+      if (jsonObj.get("item") != null && !jsonObj.get("item").isJsonNull()) {
+        CampaignTemplateItem.validateJsonObject(jsonObj.getAsJsonObject("item"));
+      }
+      if ((jsonObj.get("title") != null && !jsonObj.get("title").isJsonNull()) && !jsonObj.get("title").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `title` to be a primitive type in the JSON string but got `%s`", jsonObj.get("title").toString()));
+      }
+      if ((jsonObj.get("description") != null && !jsonObj.get("description").isJsonNull()) && !jsonObj.get("description").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `description` to be a primitive type in the JSON string but got `%s`", jsonObj.get("description").toString()));
+      }
+      // validate the optional field `items`
+      if (jsonObj.get("items") != null && !jsonObj.get("items").isJsonNull()) {
+        CampaignRelationsItems.validateJsonObject(jsonObj.getAsJsonObject("items"));
+      }
+      // validate the optional field `model_type`
+      if (jsonObj.get("model_type") != null && !jsonObj.get("model_type").isJsonNull()) {
+        BroadcastRelationsModelType.validateJsonObject(jsonObj.getAsJsonObject("model_type"));
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!CampaignResult.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'CampaignResult' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<CampaignResult> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(CampaignResult.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<CampaignResult>() {
+           @Override
+           public void write(JsonWriter out, CampaignResult value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public CampaignResult read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of CampaignResult given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of CampaignResult
+  * @throws IOException if the JSON string is invalid with respect to CampaignResult
+  */
+  public static CampaignResult fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, CampaignResult.class);
+  }
+
+ /**
+  * Convert an instance of CampaignResult to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

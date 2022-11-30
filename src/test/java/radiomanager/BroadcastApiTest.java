@@ -1,6 +1,6 @@
 /*
  * RadioManager
- * RadioManager
+ * This OpenAPI 3 Document describes the functionality of the API v2 of RadioManager. Note that no rights can be derived from this Document and the true functionality of the API might differ.
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@pluxbox.com
@@ -16,17 +16,22 @@ package radiomanager;
 import com.pluxbox.radiomanager.api.invoker.ApiException;
 import com.pluxbox.radiomanager.api.models.BroadcastDataInput;
 import com.pluxbox.radiomanager.api.models.BroadcastResult;
-import com.pluxbox.radiomanager.api.models.BroadcastResults;
 import com.pluxbox.radiomanager.api.models.EPGResults;
-import com.pluxbox.radiomanager.api.models.Forbidden;
-import com.pluxbox.radiomanager.api.models.NotFound;
+import com.pluxbox.radiomanager.api.models.InlineResponse2001;
+import com.pluxbox.radiomanager.api.models.InlineResponse2002;
+import com.pluxbox.radiomanager.api.models.InlineResponse2003;
+import com.pluxbox.radiomanager.api.models.InlineResponse202;
+import com.pluxbox.radiomanager.api.models.InlineResponse400;
+import com.pluxbox.radiomanager.api.models.InlineResponse401;
+import com.pluxbox.radiomanager.api.models.InlineResponse403;
+import com.pluxbox.radiomanager.api.models.InlineResponse404;
+import com.pluxbox.radiomanager.api.models.InlineResponse422;
+import com.pluxbox.radiomanager.api.models.InlineResponse429;
+import com.pluxbox.radiomanager.api.models.InlineResponse500;
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
-import com.pluxbox.radiomanager.api.models.PostSuccess;
-import com.pluxbox.radiomanager.api.models.Success;
-import com.pluxbox.radiomanager.api.models.TooManyRequests;
-import com.pluxbox.radiomanager.api.models.UnprocessableEntity;
-import org.junit.Test;
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,205 +41,184 @@ import java.util.Map;
 /**
  * API tests for BroadcastApi
  */
-@Ignore
+@Disabled
 public class BroadcastApiTest {
 
     private final BroadcastApi api = new BroadcastApi();
 
-    
     /**
      * Create broadcast.
      *
      * Create broadcast.
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void createBroadcastTest() throws ApiException {
-        BroadcastDataInput data = null;
-        PostSuccess response = api.createBroadcast(data);
-
+        BroadcastDataInput broadcastDataInput = null;
+        InlineResponse2002 response = api.createBroadcast(broadcastDataInput);
         // TODO: test validations
     }
-    
+
     /**
      * Delete broadcast by id
      *
      * Delete broadcast by id
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void deleteBroadcastByIdTest() throws ApiException {
         Long id = null;
-        Success response = api.deleteBroadcastById(id);
-
+        InlineResponse202 response = api.deleteBroadcastById(id);
         // TODO: test validations
     }
-    
+
     /**
      * Get broadcast by id
      *
      * Get broadcast by id
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void getBroadcastByIdTest() throws ApiException {
         Long id = null;
         Long externalStationId = null;
         BroadcastResult response = api.getBroadcastById(id, externalStationId);
-
         // TODO: test validations
     }
-    
+
     /**
      * Get current Broadcast
      *
-     * Get current Broadcast
+     * Get currently playing Broadcast
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void getCurrentBroadcastTest() throws ApiException {
         Boolean withunpublished = null;
         BroadcastResult response = api.getCurrentBroadcast(withunpublished);
-
         // TODO: test validations
     }
-    
+
     /**
      * Get daily EPG
      *
-     * Get current Broadcast
+     * Get a list of broadcasts as Programming guide for 1 day
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void getDailyEPGTest() throws ApiException {
         OffsetDateTime date = null;
         Boolean withunpublished = null;
         EPGResults response = api.getDailyEPG(date, withunpublished);
-
         // TODO: test validations
     }
-    
+
     /**
      * Get EPG by date
      *
-     * Get EPG by date
+     * Get a list of broadcasts as Programming guide, seperated per day
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void getEPGByDateTest() throws ApiException {
         OffsetDateTime date = null;
         Boolean withunpublished = null;
         EPGResults response = api.getEPGByDate(date, withunpublished);
-
         // TODO: test validations
     }
-    
+
     /**
      * Get next Broadcast
      *
-     * Get next Broadcast
+     * Get currently upcoming Broadcast
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void getNextBroadcastTest() throws ApiException {
         Boolean withunpublished = null;
         BroadcastResult response = api.getNextBroadcast(withunpublished);
-
         // TODO: test validations
     }
-    
+
     /**
      * Get weekly EPG
      *
-     * Get weekly EPG
+     * Get a list of broadcasts as Programming guide for 7 days, seperated per day
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void getWeeklyEPGTest() throws ApiException {
-        String date = null;
+        LocalDate date = null;
         Boolean withunpublished = null;
         EPGResults response = api.getWeeklyEPG(date, withunpublished);
-
         // TODO: test validations
     }
-    
+
     /**
      * Get all broadcasts.
      *
      * List all broadcasts.
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void listBroadcastsTest() throws ApiException {
-        Long page = null;
         Long programId = null;
         Long blockId = null;
         Long modelTypeId = null;
         Long tagId = null;
         Long presenterId = null;
         Long genreId = null;
+        Long groupId = null;
         Long itemId = null;
+        Long plannedInEpg = null;
         OffsetDateTime startMin = null;
         OffsetDateTime startMax = null;
+        Long page = null;
         Long limit = null;
         String orderBy = null;
         String orderDirection = null;
         Long externalStationId = null;
-        BroadcastResults response = api.listBroadcasts(page, programId, blockId, modelTypeId, tagId, presenterId, genreId, itemId, startMin, startMax, limit, orderBy, orderDirection, externalStationId);
-
+        InlineResponse2001 response = api.listBroadcasts(programId, blockId, modelTypeId, tagId, presenterId, genreId, groupId, itemId, plannedInEpg, startMin, startMax, page, limit, orderBy, orderDirection, externalStationId);
         // TODO: test validations
     }
-    
+
     /**
      * Print broadcast by id with template
      *
-     * Print broadcast by id with template
+     * Download a rundown in printable format as HTML inside the JSON repsonse
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void printBroadcastByIdTest() throws ApiException {
         Long id = null;
         Long templateId = null;
-        String response = api.printBroadcastById(id, templateId);
-
+        InlineResponse2003 response = api.printBroadcastById(id, templateId);
         // TODO: test validations
     }
-    
+
     /**
      * Update broadcast by id
      *
      * Update broadcast by id
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void updateBroadcastByIDTest() throws ApiException {
         Long id = null;
-        BroadcastDataInput data = null;
-        Success response = api.updateBroadcastByID(id, data);
-
+        BroadcastDataInput broadcastDataInput = null;
+        InlineResponse202 response = api.updateBroadcastByID(id, broadcastDataInput);
         // TODO: test validations
     }
-    
+
 }

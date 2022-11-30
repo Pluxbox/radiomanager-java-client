@@ -2,11 +2,12 @@
 
 # TagRelationsBroadcastsParams
 
+
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**tagId** | **Integer** |  |  [optional]
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**tagId** | **Integer** |  |  [optional] |
 
 
 

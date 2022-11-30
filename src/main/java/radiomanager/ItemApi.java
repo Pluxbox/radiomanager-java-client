@@ -1,6 +1,6 @@
 /*
  * RadioManager
- * RadioManager
+ * This OpenAPI 3 Document describes the functionality of the API v2 of RadioManager. Note that no rights can be derived from this Document and the true functionality of the API might differ.
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@pluxbox.com
@@ -27,32 +27,37 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
-import com.pluxbox.radiomanager.api.models.Forbidden;
 import com.pluxbox.radiomanager.api.models.ImportItem;
-import com.pluxbox.radiomanager.api.models.ImportItemAllOf;
-import com.pluxbox.radiomanager.api.models.InlineObject;
-import com.pluxbox.radiomanager.api.models.InlineObject1;
-import com.pluxbox.radiomanager.api.models.InlineObject2;
-import com.pluxbox.radiomanager.api.models.InlineObject3;
+import com.pluxbox.radiomanager.api.models.InlineResponse2002;
+import com.pluxbox.radiomanager.api.models.InlineResponse2008;
 import com.pluxbox.radiomanager.api.models.InlineResponse202;
+import com.pluxbox.radiomanager.api.models.InlineResponse2021;
+import com.pluxbox.radiomanager.api.models.InlineResponse400;
+import com.pluxbox.radiomanager.api.models.InlineResponse401;
+import com.pluxbox.radiomanager.api.models.InlineResponse403;
+import com.pluxbox.radiomanager.api.models.InlineResponse404;
+import com.pluxbox.radiomanager.api.models.InlineResponse422;
+import com.pluxbox.radiomanager.api.models.InlineResponse429;
+import com.pluxbox.radiomanager.api.models.InlineResponse500;
 import com.pluxbox.radiomanager.api.models.ItemDataInput;
 import com.pluxbox.radiomanager.api.models.ItemResult;
-import com.pluxbox.radiomanager.api.models.ItemResults;
-import com.pluxbox.radiomanager.api.models.NotFound;
+import com.pluxbox.radiomanager.api.models.ItemsStopcurrentBody;
 import java.time.OffsetDateTime;
-import com.pluxbox.radiomanager.api.models.PostSuccess;
-import com.pluxbox.radiomanager.api.models.Success;
-import com.pluxbox.radiomanager.api.models.TooManyRequests;
-import com.pluxbox.radiomanager.api.models.UnprocessableEntity;
+import com.pluxbox.radiomanager.api.models.PlaylistMergeBody;
+import com.pluxbox.radiomanager.api.models.PlaylistStructureBody;
+import com.pluxbox.radiomanager.api.models.PlaylistTimingBody;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.ws.rs.core.GenericType;
 
 public class ItemApi {
     private ApiClient localVarApiClient;
+    private int localHostIndex;
+    private String localCustomBaseUrl;
 
     public ItemApi() {
         this(Configuration.getDefaultApiClient());
@@ -70,22 +75,56 @@ public class ItemApi {
         this.localVarApiClient = apiClient;
     }
 
+    public int getHostIndex() {
+        return localHostIndex;
+    }
+
+    public void setHostIndex(int hostIndex) {
+        this.localHostIndex = hostIndex;
+    }
+
+    public String getCustomBaseUrl() {
+        return localCustomBaseUrl;
+    }
+
+    public void setCustomBaseUrl(String customBaseUrl) {
+        this.localCustomBaseUrl = customBaseUrl;
+    }
+
     /**
      * Build call for createItem
-     * @param data Data *(Optional)* (optional)
+     * @param itemDataInput Data **(Required)** (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully created an item </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Post Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call createItemCall(ItemDataInput data, final ApiCallback _callback) throws ApiException {
-        Object localVarPostBody = data;
+    public okhttp3.Call createItemCall(ItemDataInput itemDataInput, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = itemDataInput;
 
         // create path and map variables
         String localVarPath = "/items";
@@ -95,6 +134,7 @@ public class ItemApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -107,99 +147,135 @@ public class ItemApi {
             "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call createItemValidateBeforeCall(ItemDataInput data, final ApiCallback _callback) throws ApiException {
-        
+    private okhttp3.Call createItemValidateBeforeCall(ItemDataInput itemDataInput, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'itemDataInput' is set
+        if (itemDataInput == null) {
+            throw new ApiException("Missing the required parameter 'itemDataInput' when calling createItem(Async)");
+        }
 
-        okhttp3.Call localVarCall = createItemCall(data, _callback);
-        return localVarCall;
+        return createItemCall(itemDataInput, _callback);
 
     }
 
     /**
      * Create an new item.
      * Create item.
-     * @param data Data *(Optional)* (optional)
-     * @return PostSuccess
+     * @param itemDataInput Data **(Required)** (required)
+     * @return InlineResponse2002
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully created an item </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Post Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public PostSuccess createItem(ItemDataInput data) throws ApiException {
-        ApiResponse<PostSuccess> localVarResp = createItemWithHttpInfo(data);
+    public InlineResponse2002 createItem(ItemDataInput itemDataInput) throws ApiException {
+        ApiResponse<InlineResponse2002> localVarResp = createItemWithHttpInfo(itemDataInput);
         return localVarResp.getData();
     }
 
     /**
      * Create an new item.
      * Create item.
-     * @param data Data *(Optional)* (optional)
-     * @return ApiResponse&lt;PostSuccess&gt;
+     * @param itemDataInput Data **(Required)** (required)
+     * @return ApiResponse&lt;InlineResponse2002&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully created an item </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Post Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<PostSuccess> createItemWithHttpInfo(ItemDataInput data) throws ApiException {
-        okhttp3.Call localVarCall = createItemValidateBeforeCall(data, null);
-        Type localVarReturnType = new TypeToken<PostSuccess>(){}.getType();
+    public ApiResponse<InlineResponse2002> createItemWithHttpInfo(ItemDataInput itemDataInput) throws ApiException {
+        okhttp3.Call localVarCall = createItemValidateBeforeCall(itemDataInput, null);
+        Type localVarReturnType = new TypeToken<InlineResponse2002>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * Create an new item. (asynchronously)
      * Create item.
-     * @param data Data *(Optional)* (optional)
+     * @param itemDataInput Data **(Required)** (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully created an item </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Post Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call createItemAsync(ItemDataInput data, final ApiCallback<PostSuccess> _callback) throws ApiException {
+    public okhttp3.Call createItemAsync(ItemDataInput itemDataInput, final ApiCallback<InlineResponse2002> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = createItemValidateBeforeCall(data, _callback);
-        Type localVarReturnType = new TypeToken<PostSuccess>(){}.getType();
+        okhttp3.Call localVarCall = createItemValidateBeforeCall(itemDataInput, _callback);
+        Type localVarReturnType = new TypeToken<InlineResponse2002>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for currentItemPostStructure
-     * @param data Data *(Optional)* (optional)
+     * @param importItem Data **(Required)** (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully posted current item </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully started playing current item </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call currentItemPostStructureCall(ImportItem data, final ApiCallback _callback) throws ApiException {
-        Object localVarPostBody = data;
+    public okhttp3.Call currentItemPostStructureCall(ImportItem importItem, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = importItem;
 
         // create path and map variables
         String localVarPath = "/items/current/structure";
@@ -209,6 +285,7 @@ public class ItemApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -221,102 +298,135 @@ public class ItemApi {
             "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call currentItemPostStructureValidateBeforeCall(ImportItem data, final ApiCallback _callback) throws ApiException {
-        
+    private okhttp3.Call currentItemPostStructureValidateBeforeCall(ImportItem importItem, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'importItem' is set
+        if (importItem == null) {
+            throw new ApiException("Missing the required parameter 'importItem' when calling currentItemPostStructure(Async)");
+        }
 
-        okhttp3.Call localVarCall = currentItemPostStructureCall(data, _callback);
-        return localVarCall;
+        return currentItemPostStructureCall(importItem, _callback);
 
     }
 
     /**
      * Post a current playing item, keep structure
-     * Post a current playing item, keep structure
-     * @param data Data *(Optional)* (optional)
-     * @return Success
+     * Post current playing Item. Can be existing Item referenced by external_id. When Items are moved, this function **will attempt to** keep Items&#39; ModelType structure in rundown.
+     * @param importItem Data **(Required)** (required)
+     * @return ItemResult
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully posted current item </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully started playing current item </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public Success currentItemPostStructure(ImportItem data) throws ApiException {
-        ApiResponse<Success> localVarResp = currentItemPostStructureWithHttpInfo(data);
+    public ItemResult currentItemPostStructure(ImportItem importItem) throws ApiException {
+        ApiResponse<ItemResult> localVarResp = currentItemPostStructureWithHttpInfo(importItem);
         return localVarResp.getData();
     }
 
     /**
      * Post a current playing item, keep structure
-     * Post a current playing item, keep structure
-     * @param data Data *(Optional)* (optional)
-     * @return ApiResponse&lt;Success&gt;
+     * Post current playing Item. Can be existing Item referenced by external_id. When Items are moved, this function **will attempt to** keep Items&#39; ModelType structure in rundown.
+     * @param importItem Data **(Required)** (required)
+     * @return ApiResponse&lt;ItemResult&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully posted current item </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully started playing current item </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Success> currentItemPostStructureWithHttpInfo(ImportItem data) throws ApiException {
-        okhttp3.Call localVarCall = currentItemPostStructureValidateBeforeCall(data, null);
-        Type localVarReturnType = new TypeToken<Success>(){}.getType();
+    public ApiResponse<ItemResult> currentItemPostStructureWithHttpInfo(ImportItem importItem) throws ApiException {
+        okhttp3.Call localVarCall = currentItemPostStructureValidateBeforeCall(importItem, null);
+        Type localVarReturnType = new TypeToken<ItemResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * Post a current playing item, keep structure (asynchronously)
-     * Post a current playing item, keep structure
-     * @param data Data *(Optional)* (optional)
+     * Post current playing Item. Can be existing Item referenced by external_id. When Items are moved, this function **will attempt to** keep Items&#39; ModelType structure in rundown.
+     * @param importItem Data **(Required)** (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully posted current item </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully started playing current item </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call currentItemPostStructureAsync(ImportItem data, final ApiCallback<Success> _callback) throws ApiException {
+    public okhttp3.Call currentItemPostStructureAsync(ImportItem importItem, final ApiCallback<ItemResult> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = currentItemPostStructureValidateBeforeCall(data, _callback);
-        Type localVarReturnType = new TypeToken<Success>(){}.getType();
+        okhttp3.Call localVarCall = currentItemPostStructureValidateBeforeCall(importItem, _callback);
+        Type localVarReturnType = new TypeToken<ItemResult>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for currentItemPostTiming
-     * @param data Data *(Optional)* (optional)
+     * @param importItem Data **(Required)** (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully posted current item </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully started playing current item </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call currentItemPostTimingCall(ImportItem data, final ApiCallback _callback) throws ApiException {
-        Object localVarPostBody = data;
+    public okhttp3.Call currentItemPostTimingCall(ImportItem importItem, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = importItem;
 
         // create path and map variables
         String localVarPath = "/items/current/timing";
@@ -326,6 +436,7 @@ public class ItemApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -338,82 +449,98 @@ public class ItemApi {
             "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call currentItemPostTimingValidateBeforeCall(ImportItem data, final ApiCallback _callback) throws ApiException {
-        
+    private okhttp3.Call currentItemPostTimingValidateBeforeCall(ImportItem importItem, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'importItem' is set
+        if (importItem == null) {
+            throw new ApiException("Missing the required parameter 'importItem' when calling currentItemPostTiming(Async)");
+        }
 
-        okhttp3.Call localVarCall = currentItemPostTimingCall(data, _callback);
-        return localVarCall;
+        return currentItemPostTimingCall(importItem, _callback);
 
     }
 
     /**
-     * Post a current playing item
-     * Post a current playing item
-     * @param data Data *(Optional)* (optional)
-     * @return Success
+     * Post current playing Item
+     * Post current playing Item. Can be existing Item referenced by external_id. When Items are moved, this function **will not keep** Items&#39; ModelType structure in rundown.
+     * @param importItem Data **(Required)** (required)
+     * @return ItemResult
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully posted current item </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully started playing current item </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public Success currentItemPostTiming(ImportItem data) throws ApiException {
-        ApiResponse<Success> localVarResp = currentItemPostTimingWithHttpInfo(data);
+    public ItemResult currentItemPostTiming(ImportItem importItem) throws ApiException {
+        ApiResponse<ItemResult> localVarResp = currentItemPostTimingWithHttpInfo(importItem);
         return localVarResp.getData();
     }
 
     /**
-     * Post a current playing item
-     * Post a current playing item
-     * @param data Data *(Optional)* (optional)
-     * @return ApiResponse&lt;Success&gt;
+     * Post current playing Item
+     * Post current playing Item. Can be existing Item referenced by external_id. When Items are moved, this function **will not keep** Items&#39; ModelType structure in rundown.
+     * @param importItem Data **(Required)** (required)
+     * @return ApiResponse&lt;ItemResult&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully posted current item </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully started playing current item </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Success> currentItemPostTimingWithHttpInfo(ImportItem data) throws ApiException {
-        okhttp3.Call localVarCall = currentItemPostTimingValidateBeforeCall(data, null);
-        Type localVarReturnType = new TypeToken<Success>(){}.getType();
+    public ApiResponse<ItemResult> currentItemPostTimingWithHttpInfo(ImportItem importItem) throws ApiException {
+        okhttp3.Call localVarCall = currentItemPostTimingValidateBeforeCall(importItem, null);
+        Type localVarReturnType = new TypeToken<ItemResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     * Post a current playing item (asynchronously)
-     * Post a current playing item
-     * @param data Data *(Optional)* (optional)
+     * Post current playing Item (asynchronously)
+     * Post current playing Item. Can be existing Item referenced by external_id. When Items are moved, this function **will not keep** Items&#39; ModelType structure in rundown.
+     * @param importItem Data **(Required)** (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully posted current item </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully started playing current item </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call currentItemPostTimingAsync(ImportItem data, final ApiCallback<Success> _callback) throws ApiException {
+    public okhttp3.Call currentItemPostTimingAsync(ImportItem importItem, final ApiCallback<ItemResult> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = currentItemPostTimingValidateBeforeCall(data, _callback);
-        Type localVarReturnType = new TypeToken<Success>(){}.getType();
+        okhttp3.Call localVarCall = currentItemPostTimingValidateBeforeCall(importItem, _callback);
+        Type localVarReturnType = new TypeToken<ItemResult>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -427,22 +554,41 @@ public class ItemApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 202 </td><td> Item has been marked for deletion </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call deleteItemByIdCall(Long id, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
         String localVarPath = "/items/{id}"
-            .replaceAll("\\{" + "id" + "\\}", localVarApiClient.escapeString(id.toString()));
+            .replace("{" + "id" + "}", localVarApiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -452,26 +598,24 @@ public class ItemApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call deleteItemByIdValidateBeforeCall(Long id, final ApiCallback _callback) throws ApiException {
-        
         // verify the required parameter 'id' is set
         if (id == null) {
             throw new ApiException("Missing the required parameter 'id' when calling deleteItemById(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = deleteItemByIdCall(id, _callback);
-        return localVarCall;
+        return deleteItemByIdCall(id, _callback);
 
     }
 
@@ -479,39 +623,46 @@ public class ItemApi {
      * Delete item by ID.
      * Delete item by id.
      * @param id ID of Item **(Required)** (required)
-     * @return Success
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 202 </td><td> Item has been marked for deletion </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public Success deleteItemById(Long id) throws ApiException {
-        ApiResponse<Success> localVarResp = deleteItemByIdWithHttpInfo(id);
-        return localVarResp.getData();
+    public void deleteItemById(Long id) throws ApiException {
+        deleteItemByIdWithHttpInfo(id);
     }
 
     /**
      * Delete item by ID.
      * Delete item by id.
      * @param id ID of Item **(Required)** (required)
-     * @return ApiResponse&lt;Success&gt;
+     * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 202 </td><td> Item has been marked for deletion </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Success> deleteItemByIdWithHttpInfo(Long id) throws ApiException {
+    public ApiResponse<Void> deleteItemByIdWithHttpInfo(Long id) throws ApiException {
         okhttp3.Call localVarCall = deleteItemByIdValidateBeforeCall(id, null);
-        Type localVarReturnType = new TypeToken<Success>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
+        return localVarApiClient.execute(localVarCall);
     }
 
     /**
@@ -525,15 +676,19 @@ public class ItemApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 202 </td><td> Item has been marked for deletion </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call deleteItemByIdAsync(Long id, final ApiCallback<Success> _callback) throws ApiException {
+    public okhttp3.Call deleteItemByIdAsync(Long id, final ApiCallback<Void> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = deleteItemByIdValidateBeforeCall(id, _callback);
-        Type localVarReturnType = new TypeToken<Success>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
     /**
@@ -546,12 +701,29 @@ public class ItemApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got current item </td><td>  -  </td></tr>
-        <tr><td> 202 </td><td> Item has been marked for deletion </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call getCurrentItemCall(Boolean lastplayed, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -559,13 +731,14 @@ public class ItemApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         if (lastplayed != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("lastplayed", lastplayed));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -575,21 +748,19 @@ public class ItemApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call getCurrentItemValidateBeforeCall(Boolean lastplayed, final ApiCallback _callback) throws ApiException {
-        
-
-        okhttp3.Call localVarCall = getCurrentItemCall(lastplayed, _callback);
-        return localVarCall;
+        return getCurrentItemCall(lastplayed, _callback);
 
     }
 
@@ -603,9 +774,13 @@ public class ItemApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got current item </td><td>  -  </td></tr>
-        <tr><td> 202 </td><td> Item has been marked for deletion </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
     public ItemResult getCurrentItem(Boolean lastplayed) throws ApiException {
@@ -623,9 +798,13 @@ public class ItemApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got current item </td><td>  -  </td></tr>
-        <tr><td> 202 </td><td> Item has been marked for deletion </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<ItemResult> getCurrentItemWithHttpInfo(Boolean lastplayed) throws ApiException {
@@ -645,9 +824,13 @@ public class ItemApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got current item </td><td>  -  </td></tr>
-        <tr><td> 202 </td><td> Item has been marked for deletion </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call getCurrentItemAsync(Boolean lastplayed, final ApiCallback<ItemResult> _callback) throws ApiException {
@@ -668,27 +851,45 @@ public class ItemApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got an item by id </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call getItemByIdCall(Long id, Long externalStationId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
         String localVarPath = "/items/{id}"
-            .replaceAll("\\{" + "id" + "\\}", localVarApiClient.escapeString(id.toString()));
+            .replace("{" + "id" + "}", localVarApiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         if (externalStationId != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("_external_station_id", externalStationId));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -698,26 +899,24 @@ public class ItemApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call getItemByIdValidateBeforeCall(Long id, Long externalStationId, final ApiCallback _callback) throws ApiException {
-        
         // verify the required parameter 'id' is set
         if (id == null) {
             throw new ApiException("Missing the required parameter 'id' when calling getItemById(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = getItemByIdCall(id, externalStationId, _callback);
-        return localVarCall;
+        return getItemByIdCall(id, externalStationId, _callback);
 
     }
 
@@ -732,9 +931,13 @@ public class ItemApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got an item by id </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
     public ItemResult getItemById(Long id, Long externalStationId) throws ApiException {
@@ -753,9 +956,13 @@ public class ItemApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got an item by id </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<ItemResult> getItemByIdWithHttpInfo(Long id, Long externalStationId) throws ApiException {
@@ -776,9 +983,13 @@ public class ItemApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got an item by id </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call getItemByIdAsync(Long id, Long externalStationId, final ApiCallback<ItemResult> _callback) throws ApiException {
@@ -790,7 +1001,6 @@ public class ItemApi {
     }
     /**
      * Build call for listItems
-     * @param page Current page *(Optional)* (optional)
      * @param blockId Search on Block ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param broadcastId Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param modelTypeId Search on ModelType ID *(Optional)* &#x60;(Relation)&#x60; (optional)
@@ -802,11 +1012,12 @@ public class ItemApi {
      * @param stationDraftId Search on Station Draft ID *(Optional)* (optional)
      * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param externalId Search on External ID *(Optional)* (optional)
-     * @param startMin Minimum start date *(Optional)* (optional)
-     * @param startMax Maximum start date *(Optional)* (optional)
      * @param durationMin Minimum duration (seconds) *(Optional)* (optional)
      * @param durationMax Maximum duration (seconds) *(Optional)* (optional)
      * @param status Play Status of item *(Optional)* (optional)
+     * @param startMin Minimum start date *(Optional)* (optional)
+     * @param startMax Maximum start date *(Optional)* (optional)
+     * @param page Current page *(Optional)* (optional, default to 1)
      * @param limit Results per page *(Optional)* (optional)
      * @param orderBy Field to order the results *(Optional)* (optional)
      * @param orderDirection Direction of ordering *(Optional)* (optional)
@@ -818,13 +1029,29 @@ public class ItemApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got all items </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call listItemsCall(Long page, Long blockId, Long broadcastId, Long modelTypeId, Long tagId, Long campaignId, Long contactId, Long programDraftId, Long userDraftId, Long stationDraftId, Long programId, String externalId, OffsetDateTime startMin, OffsetDateTime startMax, Integer durationMin, Integer durationMax, String status, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call listItemsCall(Long blockId, Long broadcastId, Long modelTypeId, Long tagId, Long campaignId, Long contactId, Long programDraftId, Long userDraftId, Long stationDraftId, Long programId, String externalId, Integer durationMin, Integer durationMax, String status, OffsetDateTime startMin, OffsetDateTime startMax, Long page, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -832,9 +1059,9 @@ public class ItemApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        if (page != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
-        }
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
         if (blockId != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("block_id", blockId));
@@ -880,14 +1107,6 @@ public class ItemApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("external_id", externalId));
         }
 
-        if (startMin != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("start-min", startMin));
-        }
-
-        if (startMax != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("start-max", startMax));
-        }
-
         if (durationMin != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("duration-min", durationMin));
         }
@@ -898,6 +1117,18 @@ public class ItemApi {
 
         if (status != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("status", status));
+        }
+
+        if (startMin != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("start-min", startMin));
+        }
+
+        if (startMax != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("start-max", startMax));
+        }
+
+        if (page != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
         }
 
         if (limit != null) {
@@ -916,9 +1147,6 @@ public class ItemApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("_external_station_id", externalStationId));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -928,28 +1156,25 @@ public class ItemApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call listItemsValidateBeforeCall(Long page, Long blockId, Long broadcastId, Long modelTypeId, Long tagId, Long campaignId, Long contactId, Long programDraftId, Long userDraftId, Long stationDraftId, Long programId, String externalId, OffsetDateTime startMin, OffsetDateTime startMax, Integer durationMin, Integer durationMax, String status, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback _callback) throws ApiException {
-        
-
-        okhttp3.Call localVarCall = listItemsCall(page, blockId, broadcastId, modelTypeId, tagId, campaignId, contactId, programDraftId, userDraftId, stationDraftId, programId, externalId, startMin, startMax, durationMin, durationMax, status, limit, orderBy, orderDirection, externalStationId, _callback);
-        return localVarCall;
+    private okhttp3.Call listItemsValidateBeforeCall(Long blockId, Long broadcastId, Long modelTypeId, Long tagId, Long campaignId, Long contactId, Long programDraftId, Long userDraftId, Long stationDraftId, Long programId, String externalId, Integer durationMin, Integer durationMax, String status, OffsetDateTime startMin, OffsetDateTime startMax, Long page, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback _callback) throws ApiException {
+        return listItemsCall(blockId, broadcastId, modelTypeId, tagId, campaignId, contactId, programDraftId, userDraftId, stationDraftId, programId, externalId, durationMin, durationMax, status, startMin, startMax, page, limit, orderBy, orderDirection, externalStationId, _callback);
 
     }
 
     /**
      * Get a list of all the items currently in your station.
      * Get a list of all the items currently in your station. This feature supports pagination and will give a maximum results of 50 items back.
-     * @param page Current page *(Optional)* (optional)
      * @param blockId Search on Block ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param broadcastId Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param modelTypeId Search on ModelType ID *(Optional)* &#x60;(Relation)&#x60; (optional)
@@ -961,36 +1186,39 @@ public class ItemApi {
      * @param stationDraftId Search on Station Draft ID *(Optional)* (optional)
      * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param externalId Search on External ID *(Optional)* (optional)
-     * @param startMin Minimum start date *(Optional)* (optional)
-     * @param startMax Maximum start date *(Optional)* (optional)
      * @param durationMin Minimum duration (seconds) *(Optional)* (optional)
      * @param durationMax Maximum duration (seconds) *(Optional)* (optional)
      * @param status Play Status of item *(Optional)* (optional)
+     * @param startMin Minimum start date *(Optional)* (optional)
+     * @param startMax Maximum start date *(Optional)* (optional)
+     * @param page Current page *(Optional)* (optional, default to 1)
      * @param limit Results per page *(Optional)* (optional)
      * @param orderBy Field to order the results *(Optional)* (optional)
      * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
-     * @return ItemResults
+     * @return InlineResponse2008
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got all items </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ItemResults listItems(Long page, Long blockId, Long broadcastId, Long modelTypeId, Long tagId, Long campaignId, Long contactId, Long programDraftId, Long userDraftId, Long stationDraftId, Long programId, String externalId, OffsetDateTime startMin, OffsetDateTime startMax, Integer durationMin, Integer durationMax, String status, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
-        ApiResponse<ItemResults> localVarResp = listItemsWithHttpInfo(page, blockId, broadcastId, modelTypeId, tagId, campaignId, contactId, programDraftId, userDraftId, stationDraftId, programId, externalId, startMin, startMax, durationMin, durationMax, status, limit, orderBy, orderDirection, externalStationId);
+    public InlineResponse2008 listItems(Long blockId, Long broadcastId, Long modelTypeId, Long tagId, Long campaignId, Long contactId, Long programDraftId, Long userDraftId, Long stationDraftId, Long programId, String externalId, Integer durationMin, Integer durationMax, String status, OffsetDateTime startMin, OffsetDateTime startMax, Long page, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
+        ApiResponse<InlineResponse2008> localVarResp = listItemsWithHttpInfo(blockId, broadcastId, modelTypeId, tagId, campaignId, contactId, programDraftId, userDraftId, stationDraftId, programId, externalId, durationMin, durationMax, status, startMin, startMax, page, limit, orderBy, orderDirection, externalStationId);
         return localVarResp.getData();
     }
 
     /**
      * Get a list of all the items currently in your station.
      * Get a list of all the items currently in your station. This feature supports pagination and will give a maximum results of 50 items back.
-     * @param page Current page *(Optional)* (optional)
      * @param blockId Search on Block ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param broadcastId Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param modelTypeId Search on ModelType ID *(Optional)* &#x60;(Relation)&#x60; (optional)
@@ -1002,37 +1230,40 @@ public class ItemApi {
      * @param stationDraftId Search on Station Draft ID *(Optional)* (optional)
      * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param externalId Search on External ID *(Optional)* (optional)
-     * @param startMin Minimum start date *(Optional)* (optional)
-     * @param startMax Maximum start date *(Optional)* (optional)
      * @param durationMin Minimum duration (seconds) *(Optional)* (optional)
      * @param durationMax Maximum duration (seconds) *(Optional)* (optional)
      * @param status Play Status of item *(Optional)* (optional)
+     * @param startMin Minimum start date *(Optional)* (optional)
+     * @param startMax Maximum start date *(Optional)* (optional)
+     * @param page Current page *(Optional)* (optional, default to 1)
      * @param limit Results per page *(Optional)* (optional)
      * @param orderBy Field to order the results *(Optional)* (optional)
      * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
-     * @return ApiResponse&lt;ItemResults&gt;
+     * @return ApiResponse&lt;InlineResponse2008&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got all items </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ItemResults> listItemsWithHttpInfo(Long page, Long blockId, Long broadcastId, Long modelTypeId, Long tagId, Long campaignId, Long contactId, Long programDraftId, Long userDraftId, Long stationDraftId, Long programId, String externalId, OffsetDateTime startMin, OffsetDateTime startMax, Integer durationMin, Integer durationMax, String status, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
-        okhttp3.Call localVarCall = listItemsValidateBeforeCall(page, blockId, broadcastId, modelTypeId, tagId, campaignId, contactId, programDraftId, userDraftId, stationDraftId, programId, externalId, startMin, startMax, durationMin, durationMax, status, limit, orderBy, orderDirection, externalStationId, null);
-        Type localVarReturnType = new TypeToken<ItemResults>(){}.getType();
+    public ApiResponse<InlineResponse2008> listItemsWithHttpInfo(Long blockId, Long broadcastId, Long modelTypeId, Long tagId, Long campaignId, Long contactId, Long programDraftId, Long userDraftId, Long stationDraftId, Long programId, String externalId, Integer durationMin, Integer durationMax, String status, OffsetDateTime startMin, OffsetDateTime startMax, Long page, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
+        okhttp3.Call localVarCall = listItemsValidateBeforeCall(blockId, broadcastId, modelTypeId, tagId, campaignId, contactId, programDraftId, userDraftId, stationDraftId, programId, externalId, durationMin, durationMax, status, startMin, startMax, page, limit, orderBy, orderDirection, externalStationId, null);
+        Type localVarReturnType = new TypeToken<InlineResponse2008>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * Get a list of all the items currently in your station. (asynchronously)
      * Get a list of all the items currently in your station. This feature supports pagination and will give a maximum results of 50 items back.
-     * @param page Current page *(Optional)* (optional)
      * @param blockId Search on Block ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param broadcastId Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param modelTypeId Search on ModelType ID *(Optional)* &#x60;(Relation)&#x60; (optional)
@@ -1044,11 +1275,12 @@ public class ItemApi {
      * @param stationDraftId Search on Station Draft ID *(Optional)* (optional)
      * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param externalId Search on External ID *(Optional)* (optional)
-     * @param startMin Minimum start date *(Optional)* (optional)
-     * @param startMax Maximum start date *(Optional)* (optional)
      * @param durationMin Minimum duration (seconds) *(Optional)* (optional)
      * @param durationMax Maximum duration (seconds) *(Optional)* (optional)
      * @param status Play Status of item *(Optional)* (optional)
+     * @param startMin Minimum start date *(Optional)* (optional)
+     * @param startMax Maximum start date *(Optional)* (optional)
+     * @param page Current page *(Optional)* (optional, default to 1)
      * @param limit Results per page *(Optional)* (optional)
      * @param orderBy Field to order the results *(Optional)* (optional)
      * @param orderDirection Direction of ordering *(Optional)* (optional)
@@ -1060,35 +1292,56 @@ public class ItemApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got all items </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call listItemsAsync(Long page, Long blockId, Long broadcastId, Long modelTypeId, Long tagId, Long campaignId, Long contactId, Long programDraftId, Long userDraftId, Long stationDraftId, Long programId, String externalId, OffsetDateTime startMin, OffsetDateTime startMax, Integer durationMin, Integer durationMax, String status, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback<ItemResults> _callback) throws ApiException {
+    public okhttp3.Call listItemsAsync(Long blockId, Long broadcastId, Long modelTypeId, Long tagId, Long campaignId, Long contactId, Long programDraftId, Long userDraftId, Long stationDraftId, Long programId, String externalId, Integer durationMin, Integer durationMax, String status, OffsetDateTime startMin, OffsetDateTime startMax, Long page, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback<InlineResponse2008> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = listItemsValidateBeforeCall(page, blockId, broadcastId, modelTypeId, tagId, campaignId, contactId, programDraftId, userDraftId, stationDraftId, programId, externalId, startMin, startMax, durationMin, durationMax, status, limit, orderBy, orderDirection, externalStationId, _callback);
-        Type localVarReturnType = new TypeToken<ItemResults>(){}.getType();
+        okhttp3.Call localVarCall = listItemsValidateBeforeCall(blockId, broadcastId, modelTypeId, tagId, campaignId, contactId, programDraftId, userDraftId, stationDraftId, programId, externalId, durationMin, durationMax, status, startMin, startMax, page, limit, orderBy, orderDirection, externalStationId, _callback);
+        Type localVarReturnType = new TypeToken<InlineResponse2008>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for playlistPostMerge
-     * @param data  (optional)
+     * @param playlistMergeBody Data *(Required)* (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 202 </td><td> success </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> Successfully posted Playlist, will be processed </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call playlistPostMergeCall(InlineObject2 data, final ApiCallback _callback) throws ApiException {
-        Object localVarPostBody = data;
+    public okhttp3.Call playlistPostMergeCall(PlaylistMergeBody playlistMergeBody, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = playlistMergeBody;
 
         // create path and map variables
         String localVarPath = "/items/playlist/merge";
@@ -1098,6 +1351,7 @@ public class ItemApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -1110,98 +1364,135 @@ public class ItemApi {
             "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call playlistPostMergeValidateBeforeCall(InlineObject2 data, final ApiCallback _callback) throws ApiException {
-        
+    private okhttp3.Call playlistPostMergeValidateBeforeCall(PlaylistMergeBody playlistMergeBody, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'playlistMergeBody' is set
+        if (playlistMergeBody == null) {
+            throw new ApiException("Missing the required parameter 'playlistMergeBody' when calling playlistPostMerge(Async)");
+        }
 
-        okhttp3.Call localVarCall = playlistPostMergeCall(data, _callback);
-        return localVarCall;
+        return playlistPostMergeCall(playlistMergeBody, _callback);
 
     }
 
     /**
      * Post a playlist, do not remove previously imported items
-     * Post a playlist, do not remove previously imported items
-     * @param data  (optional)
-     * @return InlineResponse202
+     * Post a playlist with &#39;keep structure&#39; method, but do not remove previously imported items
+     * @param playlistMergeBody Data *(Required)* (required)
+     * @return InlineResponse2021
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 202 </td><td> success </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> Successfully posted Playlist, will be processed </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public InlineResponse202 playlistPostMerge(InlineObject2 data) throws ApiException {
-        ApiResponse<InlineResponse202> localVarResp = playlistPostMergeWithHttpInfo(data);
+    public InlineResponse2021 playlistPostMerge(PlaylistMergeBody playlistMergeBody) throws ApiException {
+        ApiResponse<InlineResponse2021> localVarResp = playlistPostMergeWithHttpInfo(playlistMergeBody);
         return localVarResp.getData();
     }
 
     /**
      * Post a playlist, do not remove previously imported items
-     * Post a playlist, do not remove previously imported items
-     * @param data  (optional)
-     * @return ApiResponse&lt;InlineResponse202&gt;
+     * Post a playlist with &#39;keep structure&#39; method, but do not remove previously imported items
+     * @param playlistMergeBody Data *(Required)* (required)
+     * @return ApiResponse&lt;InlineResponse2021&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 202 </td><td> success </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> Successfully posted Playlist, will be processed </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<InlineResponse202> playlistPostMergeWithHttpInfo(InlineObject2 data) throws ApiException {
-        okhttp3.Call localVarCall = playlistPostMergeValidateBeforeCall(data, null);
-        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
+    public ApiResponse<InlineResponse2021> playlistPostMergeWithHttpInfo(PlaylistMergeBody playlistMergeBody) throws ApiException {
+        okhttp3.Call localVarCall = playlistPostMergeValidateBeforeCall(playlistMergeBody, null);
+        Type localVarReturnType = new TypeToken<InlineResponse2021>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * Post a playlist, do not remove previously imported items (asynchronously)
-     * Post a playlist, do not remove previously imported items
-     * @param data  (optional)
+     * Post a playlist with &#39;keep structure&#39; method, but do not remove previously imported items
+     * @param playlistMergeBody Data *(Required)* (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 202 </td><td> success </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> Successfully posted Playlist, will be processed </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call playlistPostMergeAsync(InlineObject2 data, final ApiCallback<InlineResponse202> _callback) throws ApiException {
+    public okhttp3.Call playlistPostMergeAsync(PlaylistMergeBody playlistMergeBody, final ApiCallback<InlineResponse2021> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = playlistPostMergeValidateBeforeCall(data, _callback);
-        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
+        okhttp3.Call localVarCall = playlistPostMergeValidateBeforeCall(playlistMergeBody, _callback);
+        Type localVarReturnType = new TypeToken<InlineResponse2021>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for playlistPostStructure
-     * @param data  (optional)
+     * @param playlistStructureBody Data *(Required)* (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 202 </td><td> success </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> Successfully posted Playlist, will be processed </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call playlistPostStructureCall(InlineObject1 data, final ApiCallback _callback) throws ApiException {
-        Object localVarPostBody = data;
+    public okhttp3.Call playlistPostStructureCall(PlaylistStructureBody playlistStructureBody, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = playlistStructureBody;
 
         // create path and map variables
         String localVarPath = "/items/playlist/structure";
@@ -1211,6 +1502,7 @@ public class ItemApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -1223,98 +1515,135 @@ public class ItemApi {
             "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call playlistPostStructureValidateBeforeCall(InlineObject1 data, final ApiCallback _callback) throws ApiException {
-        
+    private okhttp3.Call playlistPostStructureValidateBeforeCall(PlaylistStructureBody playlistStructureBody, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'playlistStructureBody' is set
+        if (playlistStructureBody == null) {
+            throw new ApiException("Missing the required parameter 'playlistStructureBody' when calling playlistPostStructure(Async)");
+        }
 
-        okhttp3.Call localVarCall = playlistPostStructureCall(data, _callback);
-        return localVarCall;
+        return playlistPostStructureCall(playlistStructureBody, _callback);
 
     }
 
     /**
      * Post a playlist, keep current structure
-     * Post a playlist, keep current structure
-     * @param data  (optional)
-     * @return InlineResponse202
+     * Post a playlist for a block. Existing Items can referenced by external_id. When Items are moved, this function **will attempt to** keep Items&#39; ModelType structure in rundown.
+     * @param playlistStructureBody Data *(Required)* (required)
+     * @return InlineResponse2021
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 202 </td><td> success </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> Successfully posted Playlist, will be processed </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public InlineResponse202 playlistPostStructure(InlineObject1 data) throws ApiException {
-        ApiResponse<InlineResponse202> localVarResp = playlistPostStructureWithHttpInfo(data);
+    public InlineResponse2021 playlistPostStructure(PlaylistStructureBody playlistStructureBody) throws ApiException {
+        ApiResponse<InlineResponse2021> localVarResp = playlistPostStructureWithHttpInfo(playlistStructureBody);
         return localVarResp.getData();
     }
 
     /**
      * Post a playlist, keep current structure
-     * Post a playlist, keep current structure
-     * @param data  (optional)
-     * @return ApiResponse&lt;InlineResponse202&gt;
+     * Post a playlist for a block. Existing Items can referenced by external_id. When Items are moved, this function **will attempt to** keep Items&#39; ModelType structure in rundown.
+     * @param playlistStructureBody Data *(Required)* (required)
+     * @return ApiResponse&lt;InlineResponse2021&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 202 </td><td> success </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> Successfully posted Playlist, will be processed </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<InlineResponse202> playlistPostStructureWithHttpInfo(InlineObject1 data) throws ApiException {
-        okhttp3.Call localVarCall = playlistPostStructureValidateBeforeCall(data, null);
-        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
+    public ApiResponse<InlineResponse2021> playlistPostStructureWithHttpInfo(PlaylistStructureBody playlistStructureBody) throws ApiException {
+        okhttp3.Call localVarCall = playlistPostStructureValidateBeforeCall(playlistStructureBody, null);
+        Type localVarReturnType = new TypeToken<InlineResponse2021>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * Post a playlist, keep current structure (asynchronously)
-     * Post a playlist, keep current structure
-     * @param data  (optional)
+     * Post a playlist for a block. Existing Items can referenced by external_id. When Items are moved, this function **will attempt to** keep Items&#39; ModelType structure in rundown.
+     * @param playlistStructureBody Data *(Required)* (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 202 </td><td> success </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> Successfully posted Playlist, will be processed </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call playlistPostStructureAsync(InlineObject1 data, final ApiCallback<InlineResponse202> _callback) throws ApiException {
+    public okhttp3.Call playlistPostStructureAsync(PlaylistStructureBody playlistStructureBody, final ApiCallback<InlineResponse2021> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = playlistPostStructureValidateBeforeCall(data, _callback);
-        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
+        okhttp3.Call localVarCall = playlistPostStructureValidateBeforeCall(playlistStructureBody, _callback);
+        Type localVarReturnType = new TypeToken<InlineResponse2021>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for playlistPostTiming
-     * @param data  (optional)
+     * @param playlistTimingBody Data *(Required)* (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 202 </td><td> success </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> Successfully posted Playlist, will be processed </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call playlistPostTimingCall(InlineObject data, final ApiCallback _callback) throws ApiException {
-        Object localVarPostBody = data;
+    public okhttp3.Call playlistPostTimingCall(PlaylistTimingBody playlistTimingBody, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = playlistTimingBody;
 
         // create path and map variables
         String localVarPath = "/items/playlist/timing";
@@ -1324,6 +1653,7 @@ public class ItemApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -1336,100 +1666,135 @@ public class ItemApi {
             "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call playlistPostTimingValidateBeforeCall(InlineObject data, final ApiCallback _callback) throws ApiException {
-        
+    private okhttp3.Call playlistPostTimingValidateBeforeCall(PlaylistTimingBody playlistTimingBody, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'playlistTimingBody' is set
+        if (playlistTimingBody == null) {
+            throw new ApiException("Missing the required parameter 'playlistTimingBody' when calling playlistPostTiming(Async)");
+        }
 
-        okhttp3.Call localVarCall = playlistPostTimingCall(data, _callback);
-        return localVarCall;
+        return playlistPostTimingCall(playlistTimingBody, _callback);
 
     }
 
     /**
      * Post a playlist
-     * Post a playlist
-     * @param data  (optional)
-     * @return InlineResponse202
+     * Post a playlist for a block. Existing Items can referenced by external_id. When Items are moved, this function **will not** keep Items&#39; ModelType structure in rundown.
+     * @param playlistTimingBody Data *(Required)* (required)
+     * @return InlineResponse2021
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 202 </td><td> success </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> Successfully posted Playlist, will be processed </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public InlineResponse202 playlistPostTiming(InlineObject data) throws ApiException {
-        ApiResponse<InlineResponse202> localVarResp = playlistPostTimingWithHttpInfo(data);
+    public InlineResponse2021 playlistPostTiming(PlaylistTimingBody playlistTimingBody) throws ApiException {
+        ApiResponse<InlineResponse2021> localVarResp = playlistPostTimingWithHttpInfo(playlistTimingBody);
         return localVarResp.getData();
     }
 
     /**
      * Post a playlist
-     * Post a playlist
-     * @param data  (optional)
-     * @return ApiResponse&lt;InlineResponse202&gt;
+     * Post a playlist for a block. Existing Items can referenced by external_id. When Items are moved, this function **will not** keep Items&#39; ModelType structure in rundown.
+     * @param playlistTimingBody Data *(Required)* (required)
+     * @return ApiResponse&lt;InlineResponse2021&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 202 </td><td> success </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> Successfully posted Playlist, will be processed </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<InlineResponse202> playlistPostTimingWithHttpInfo(InlineObject data) throws ApiException {
-        okhttp3.Call localVarCall = playlistPostTimingValidateBeforeCall(data, null);
-        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
+    public ApiResponse<InlineResponse2021> playlistPostTimingWithHttpInfo(PlaylistTimingBody playlistTimingBody) throws ApiException {
+        okhttp3.Call localVarCall = playlistPostTimingValidateBeforeCall(playlistTimingBody, null);
+        Type localVarReturnType = new TypeToken<InlineResponse2021>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * Post a playlist (asynchronously)
-     * Post a playlist
-     * @param data  (optional)
+     * Post a playlist for a block. Existing Items can referenced by external_id. When Items are moved, this function **will not** keep Items&#39; ModelType structure in rundown.
+     * @param playlistTimingBody Data *(Required)* (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 202 </td><td> success </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> Successfully posted Playlist, will be processed </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call playlistPostTimingAsync(InlineObject data, final ApiCallback<InlineResponse202> _callback) throws ApiException {
+    public okhttp3.Call playlistPostTimingAsync(PlaylistTimingBody playlistTimingBody, final ApiCallback<InlineResponse2021> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = playlistPostTimingValidateBeforeCall(data, _callback);
-        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
+        okhttp3.Call localVarCall = playlistPostTimingValidateBeforeCall(playlistTimingBody, _callback);
+        Type localVarReturnType = new TypeToken<InlineResponse2021>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for stopCurrentItem
-     * @param data  (optional)
+     * @param itemsStopcurrentBody Data *(Optional)* (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully stopped item </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call stopCurrentItemCall(InlineObject3 data, final ApiCallback _callback) throws ApiException {
-        Object localVarPostBody = data;
+    public okhttp3.Call stopCurrentItemCall(ItemsStopcurrentBody itemsStopcurrentBody, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = itemsStopcurrentBody;
 
         // create path and map variables
         String localVarPath = "/items/stopcurrent";
@@ -1439,6 +1804,7 @@ public class ItemApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -1451,117 +1817,142 @@ public class ItemApi {
             "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call stopCurrentItemValidateBeforeCall(InlineObject3 data, final ApiCallback _callback) throws ApiException {
-        
-
-        okhttp3.Call localVarCall = stopCurrentItemCall(data, _callback);
-        return localVarCall;
+    private okhttp3.Call stopCurrentItemValidateBeforeCall(ItemsStopcurrentBody itemsStopcurrentBody, final ApiCallback _callback) throws ApiException {
+        return stopCurrentItemCall(itemsStopcurrentBody, _callback);
 
     }
 
     /**
      * Stop an Item
      * Set a current playing or specific item on played
-     * @param data  (optional)
-     * @return Success
+     * @param itemsStopcurrentBody Data *(Optional)* (optional)
+     * @return InlineResponse202
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully stopped item </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public Success stopCurrentItem(InlineObject3 data) throws ApiException {
-        ApiResponse<Success> localVarResp = stopCurrentItemWithHttpInfo(data);
+    public InlineResponse202 stopCurrentItem(ItemsStopcurrentBody itemsStopcurrentBody) throws ApiException {
+        ApiResponse<InlineResponse202> localVarResp = stopCurrentItemWithHttpInfo(itemsStopcurrentBody);
         return localVarResp.getData();
     }
 
     /**
      * Stop an Item
      * Set a current playing or specific item on played
-     * @param data  (optional)
-     * @return ApiResponse&lt;Success&gt;
+     * @param itemsStopcurrentBody Data *(Optional)* (optional)
+     * @return ApiResponse&lt;InlineResponse202&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully stopped item </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Success> stopCurrentItemWithHttpInfo(InlineObject3 data) throws ApiException {
-        okhttp3.Call localVarCall = stopCurrentItemValidateBeforeCall(data, null);
-        Type localVarReturnType = new TypeToken<Success>(){}.getType();
+    public ApiResponse<InlineResponse202> stopCurrentItemWithHttpInfo(ItemsStopcurrentBody itemsStopcurrentBody) throws ApiException {
+        okhttp3.Call localVarCall = stopCurrentItemValidateBeforeCall(itemsStopcurrentBody, null);
+        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * Stop an Item (asynchronously)
      * Set a current playing or specific item on played
-     * @param data  (optional)
+     * @param itemsStopcurrentBody Data *(Optional)* (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully stopped item </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call stopCurrentItemAsync(InlineObject3 data, final ApiCallback<Success> _callback) throws ApiException {
+    public okhttp3.Call stopCurrentItemAsync(ItemsStopcurrentBody itemsStopcurrentBody, final ApiCallback<InlineResponse202> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = stopCurrentItemValidateBeforeCall(data, _callback);
-        Type localVarReturnType = new TypeToken<Success>(){}.getType();
+        okhttp3.Call localVarCall = stopCurrentItemValidateBeforeCall(itemsStopcurrentBody, _callback);
+        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for updateItemById
      * @param id ID of Item **(Required)** (required)
-     * @param data Data *(Optional)* (optional)
+     * @param itemDataInput Data *(Optional)* (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully updated an item </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call updateItemByIdCall(Long id, ItemDataInput data, final ApiCallback _callback) throws ApiException {
-        Object localVarPostBody = data;
+    public okhttp3.Call updateItemByIdCall(Long id, ItemDataInput itemDataInput, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = itemDataInput;
 
         // create path and map variables
         String localVarPath = "/items/{id}"
-            .replaceAll("\\{" + "id" + "\\}", localVarApiClient.escapeString(id.toString()));
+            .replace("{" + "id" + "}", localVarApiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -1574,23 +1965,27 @@ public class ItemApi {
             "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "PATCH", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "PATCH", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call updateItemByIdValidateBeforeCall(Long id, ItemDataInput data, final ApiCallback _callback) throws ApiException {
-        
+    private okhttp3.Call updateItemByIdValidateBeforeCall(Long id, ItemDataInput itemDataInput, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'id' is set
         if (id == null) {
             throw new ApiException("Missing the required parameter 'id' when calling updateItemById(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = updateItemByIdCall(id, data, _callback);
-        return localVarCall;
+        // verify the required parameter 'itemDataInput' is set
+        if (itemDataInput == null) {
+            throw new ApiException("Missing the required parameter 'itemDataInput' when calling updateItemById(Async)");
+        }
+
+        return updateItemByIdCall(id, itemDataInput, _callback);
 
     }
 
@@ -1598,21 +1993,24 @@ public class ItemApi {
      * Update extended item details by ID.
      * Update item by id.
      * @param id ID of Item **(Required)** (required)
-     * @param data Data *(Optional)* (optional)
-     * @return Success
+     * @param itemDataInput Data *(Optional)* (required)
+     * @return InlineResponse202
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully updated an item </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public Success updateItemById(Long id, ItemDataInput data) throws ApiException {
-        ApiResponse<Success> localVarResp = updateItemByIdWithHttpInfo(id, data);
+    public InlineResponse202 updateItemById(Long id, ItemDataInput itemDataInput) throws ApiException {
+        ApiResponse<InlineResponse202> localVarResp = updateItemByIdWithHttpInfo(id, itemDataInput);
         return localVarResp.getData();
     }
 
@@ -1620,22 +2018,25 @@ public class ItemApi {
      * Update extended item details by ID.
      * Update item by id.
      * @param id ID of Item **(Required)** (required)
-     * @param data Data *(Optional)* (optional)
-     * @return ApiResponse&lt;Success&gt;
+     * @param itemDataInput Data *(Optional)* (required)
+     * @return ApiResponse&lt;InlineResponse202&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully updated an item </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Success> updateItemByIdWithHttpInfo(Long id, ItemDataInput data) throws ApiException {
-        okhttp3.Call localVarCall = updateItemByIdValidateBeforeCall(id, data, null);
-        Type localVarReturnType = new TypeToken<Success>(){}.getType();
+    public ApiResponse<InlineResponse202> updateItemByIdWithHttpInfo(Long id, ItemDataInput itemDataInput) throws ApiException {
+        okhttp3.Call localVarCall = updateItemByIdValidateBeforeCall(id, itemDataInput, null);
+        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -1643,24 +2044,27 @@ public class ItemApi {
      * Update extended item details by ID. (asynchronously)
      * Update item by id.
      * @param id ID of Item **(Required)** (required)
-     * @param data Data *(Optional)* (optional)
+     * @param itemDataInput Data *(Optional)* (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully updated an item </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call updateItemByIdAsync(Long id, ItemDataInput data, final ApiCallback<Success> _callback) throws ApiException {
+    public okhttp3.Call updateItemByIdAsync(Long id, ItemDataInput itemDataInput, final ApiCallback<InlineResponse202> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = updateItemByIdValidateBeforeCall(id, data, _callback);
-        Type localVarReturnType = new TypeToken<Success>(){}.getType();
+        okhttp3.Call localVarCall = updateItemByIdValidateBeforeCall(id, itemDataInput, _callback);
+        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

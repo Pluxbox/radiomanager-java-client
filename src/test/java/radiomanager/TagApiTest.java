@@ -1,6 +1,6 @@
 /*
  * RadioManager
- * RadioManager
+ * This OpenAPI 3 Document describes the functionality of the API v2 of RadioManager. Note that no rights can be derived from this Document and the true functionality of the API might differ.
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@pluxbox.com
@@ -14,18 +14,20 @@
 package radiomanager;
 
 import com.pluxbox.radiomanager.api.invoker.ApiException;
-import com.pluxbox.radiomanager.api.models.Forbidden;
-import com.pluxbox.radiomanager.api.models.NotFound;
-import com.pluxbox.radiomanager.api.models.PostSuccess;
-import com.pluxbox.radiomanager.api.models.Success;
-import com.pluxbox.radiomanager.api.models.Tag;
+import com.pluxbox.radiomanager.api.models.InlineResponse20012;
+import com.pluxbox.radiomanager.api.models.InlineResponse2002;
+import com.pluxbox.radiomanager.api.models.InlineResponse202;
+import com.pluxbox.radiomanager.api.models.InlineResponse400;
+import com.pluxbox.radiomanager.api.models.InlineResponse401;
+import com.pluxbox.radiomanager.api.models.InlineResponse403;
+import com.pluxbox.radiomanager.api.models.InlineResponse404;
+import com.pluxbox.radiomanager.api.models.InlineResponse422;
+import com.pluxbox.radiomanager.api.models.InlineResponse429;
+import com.pluxbox.radiomanager.api.models.InlineResponse500;
 import com.pluxbox.radiomanager.api.models.TagDataInput;
 import com.pluxbox.radiomanager.api.models.TagResult;
-import com.pluxbox.radiomanager.api.models.TagResults;
-import com.pluxbox.radiomanager.api.models.TooManyRequests;
-import com.pluxbox.radiomanager.api.models.UnprocessableEntity;
-import org.junit.Test;
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,100 +37,88 @@ import java.util.Map;
 /**
  * API tests for TagApi
  */
-@Ignore
+@Disabled
 public class TagApiTest {
 
     private final TagApi api = new TagApi();
 
-    
     /**
      * Create tag.
      *
      * Create tag.
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void createTagTest() throws ApiException {
-        TagDataInput data = null;
-        PostSuccess response = api.createTag(data);
-
+        TagDataInput tagDataInput = null;
+        InlineResponse2002 response = api.createTag(tagDataInput);
         // TODO: test validations
     }
-    
+
     /**
      * Delete tag by id
      *
      * Delete tag by id
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void deleteTagByIdTest() throws ApiException {
         Long id = null;
-        Success response = api.deleteTagById(id);
-
+        InlineResponse202 response = api.deleteTagById(id);
         // TODO: test validations
     }
-    
+
     /**
      * Get tags by id
      *
      * Get tags by id
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void getTagByIdTest() throws ApiException {
         Long id = null;
-        Long externalStationId = null;
-        TagResult response = api.getTagById(id, externalStationId);
-
+        TagResult response = api.getTagById(id);
         // TODO: test validations
     }
-    
+
     /**
      * Get a list of all the tags currently in your station.
      *
      * Get a list of all the tags currently in your station. This feature supports pagination and will give a maximum results of 50 tags back.
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void listTagsTest() throws ApiException {
-        Long page = null;
         Long programId = null;
         Long itemId = null;
         Long broadcastId = null;
         Long contactId = null;
+        Long page = null;
         Long limit = null;
         String orderBy = null;
         String orderDirection = null;
         Long externalStationId = null;
-        TagResults response = api.listTags(page, programId, itemId, broadcastId, contactId, limit, orderBy, orderDirection, externalStationId);
-
+        InlineResponse20012 response = api.listTags(programId, itemId, broadcastId, contactId, page, limit, orderBy, orderDirection, externalStationId);
         // TODO: test validations
     }
-    
+
     /**
      * Update tag by id
      *
      * Update tag by id
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void updateTagByIDTest() throws ApiException {
         Long id = null;
-        TagDataInput data = null;
-        Success response = api.updateTagByID(id, data);
-
+        TagDataInput tagDataInput = null;
+        InlineResponse202 response = api.updateTagByID(id, tagDataInput);
         // TODO: test validations
     }
-    
+
 }

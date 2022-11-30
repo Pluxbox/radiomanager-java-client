@@ -1,6 +1,6 @@
 /*
  * RadioManager
- * RadioManager
+ * This OpenAPI 3 Document describes the functionality of the API v2 of RadioManager. Note that no rights can be derived from this Document and the true functionality of the API might differ.
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@pluxbox.com
@@ -24,10 +24,31 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.pluxbox.radiomanager.api.invoker.JSON;
+
 /**
  * Program
  */
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class Program {
   public static final String SERIALIZED_NAME_MODEL_TYPE_ID = "model_type_id";
   @SerializedName(SERIALIZED_NAME_MODEL_TYPE_ID)
@@ -48,6 +69,10 @@ public class Program {
   public static final String SERIALIZED_NAME_GENRE_ID = "genre_id";
   @SerializedName(SERIALIZED_NAME_GENRE_ID)
   private Long genreId;
+
+  public static final String SERIALIZED_NAME_GROUP_ID = "group_id";
+  @SerializedName(SERIALIZED_NAME_GROUP_ID)
+  private Long groupId;
 
   public static final String SERIALIZED_NAME_DESCRIPTION = "description";
   @SerializedName(SERIALIZED_NAME_DESCRIPTION)
@@ -81,6 +106,8 @@ public class Program {
   @SerializedName(SERIALIZED_NAME_PTY_CODE_ID)
   private Long ptyCodeId;
 
+  public Program() {
+  }
 
   public Program modelTypeId(Long modelTypeId) {
     
@@ -92,6 +119,7 @@ public class Program {
    * Get modelTypeId
    * @return modelTypeId
   **/
+  @javax.annotation.Nonnull
   @ApiModelProperty(example = "1", required = true, value = "")
 
   public Long getModelTypeId() {
@@ -137,6 +165,7 @@ public class Program {
    * Get title
    * @return title
   **/
+  @javax.annotation.Nonnull
   @ApiModelProperty(example = "FooBar", required = true, value = "")
 
   public String getTitle() {
@@ -195,6 +224,29 @@ public class Program {
   }
 
 
+  public Program groupId(Long groupId) {
+    
+    this.groupId = groupId;
+    return this;
+  }
+
+   /**
+   * Get groupId
+   * @return groupId
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "1", value = "")
+
+  public Long getGroupId() {
+    return groupId;
+  }
+
+
+  public void setGroupId(Long groupId) {
+    this.groupId = groupId;
+  }
+
+
   public Program description(String description) {
     
     this.description = description;
@@ -206,7 +258,7 @@ public class Program {
    * @return description
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "", value = "")
 
   public String getDescription() {
     return description;
@@ -379,8 +431,9 @@ public class Program {
   }
 
 
+
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -393,6 +446,7 @@ public class Program {
         Objects.equals(this.title, program.title) &&
         Objects.equals(this.disabled, program.disabled) &&
         Objects.equals(this.genreId, program.genreId) &&
+        Objects.equals(this.groupId, program.groupId) &&
         Objects.equals(this.description, program.description) &&
         Objects.equals(this.shortName, program.shortName) &&
         Objects.equals(this.mediumName, program.mediumName) &&
@@ -405,9 +459,8 @@ public class Program {
 
   @Override
   public int hashCode() {
-    return Objects.hash(modelTypeId, fieldValues, title, disabled, genreId, description, shortName, mediumName, website, email, recommended, language, ptyCodeId);
+    return Objects.hash(modelTypeId, fieldValues, title, disabled, genreId, groupId, description, shortName, mediumName, website, email, recommended, language, ptyCodeId);
   }
-
 
   @Override
   public String toString() {
@@ -418,6 +471,7 @@ public class Program {
     sb.append("    title: ").append(toIndentedString(title)).append("\n");
     sb.append("    disabled: ").append(toIndentedString(disabled)).append("\n");
     sb.append("    genreId: ").append(toIndentedString(genreId)).append("\n");
+    sb.append("    groupId: ").append(toIndentedString(groupId)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    shortName: ").append(toIndentedString(shortName)).append("\n");
     sb.append("    mediumName: ").append(toIndentedString(mediumName)).append("\n");
@@ -434,12 +488,138 @@ public class Program {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("model_type_id");
+    openapiFields.add("field_values");
+    openapiFields.add("title");
+    openapiFields.add("disabled");
+    openapiFields.add("genre_id");
+    openapiFields.add("group_id");
+    openapiFields.add("description");
+    openapiFields.add("short_name");
+    openapiFields.add("medium_name");
+    openapiFields.add("website");
+    openapiFields.add("email");
+    openapiFields.add("recommended");
+    openapiFields.add("language");
+    openapiFields.add("pty_code_id");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("model_type_id");
+    openapiRequiredFields.add("title");
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to Program
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (!Program.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+          throw new IllegalArgumentException(String.format("The required field(s) %s in Program is not found in the empty JSON string", Program.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!Program.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `Program` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : Program.openapiRequiredFields) {
+        if (jsonObj.get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        }
+      }
+      if (!jsonObj.get("title").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `title` to be a primitive type in the JSON string but got `%s`", jsonObj.get("title").toString()));
+      }
+      if ((jsonObj.get("description") != null && !jsonObj.get("description").isJsonNull()) && !jsonObj.get("description").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `description` to be a primitive type in the JSON string but got `%s`", jsonObj.get("description").toString()));
+      }
+      if ((jsonObj.get("short_name") != null && !jsonObj.get("short_name").isJsonNull()) && !jsonObj.get("short_name").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `short_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("short_name").toString()));
+      }
+      if ((jsonObj.get("medium_name") != null && !jsonObj.get("medium_name").isJsonNull()) && !jsonObj.get("medium_name").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `medium_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("medium_name").toString()));
+      }
+      if ((jsonObj.get("website") != null && !jsonObj.get("website").isJsonNull()) && !jsonObj.get("website").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `website` to be a primitive type in the JSON string but got `%s`", jsonObj.get("website").toString()));
+      }
+      if ((jsonObj.get("email") != null && !jsonObj.get("email").isJsonNull()) && !jsonObj.get("email").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `email` to be a primitive type in the JSON string but got `%s`", jsonObj.get("email").toString()));
+      }
+      if ((jsonObj.get("language") != null && !jsonObj.get("language").isJsonNull()) && !jsonObj.get("language").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `language` to be a primitive type in the JSON string but got `%s`", jsonObj.get("language").toString()));
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!Program.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'Program' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<Program> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(Program.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<Program>() {
+           @Override
+           public void write(JsonWriter out, Program value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public Program read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of Program given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of Program
+  * @throws IOException if the JSON string is invalid with respect to Program
+  */
+  public static Program fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, Program.class);
+  }
+
+ /**
+  * Convert an instance of Program to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

@@ -3,7 +3,7 @@
 RadioManager
 - API version: 2.0
 
-RadioManager
+This OpenAPI 3 Document describes the functionality of the API v2 of RadioManager. Note that no rights can be derived from this Document and the true functionality of the API might differ.
 
   For more information, please visit [https://pluxbox.com](https://pluxbox.com)
 
@@ -14,7 +14,7 @@ RadioManager
 
 Building the API client library requires:
 1. Java 1.8+
-2. Maven/Gradle
+2. Maven (3.8.3+)/Gradle (7.2+)
 
 ## Installation
 
@@ -50,7 +50,14 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "com.pluxbox.radiomanager:API:1.0.0"
+  repositories {
+    mavenCentral()     // Needed if the 'API' jar has been published to maven central.
+    mavenLocal()       // Needed if the 'API' jar has been published to the local maven repo.
+  }
+
+  dependencies {
+     implementation "com.pluxbox.radiomanager:API:1.0.0"
+  }
 ```
 
 ### Others
@@ -92,7 +99,7 @@ public class Example {
     //API-Key.setApiKeyPrefix("Token");
 
     BlockApi apiInstance = new BlockApi(defaultClient);
-    Long id = 0lL; // Long | ID of Block **(Required)**
+    Long id = 56L; // Long | ID of Block **(Required)**
     Long externalStationId = 56L; // Long | Query on a different (content providing) station *(Optional)*
     try {
       BlockResult result = apiInstance.getBlockById(id, externalStationId);
@@ -142,9 +149,11 @@ Class | Method | HTTP request | Description
 *ContactApi* | [**updateContactByID**](docs/ContactApi.md#updateContactByID) | **PATCH** /contacts/{id} | Update contact by id
 *GenreApi* | [**getGenreById**](docs/GenreApi.md#getGenreById) | **GET** /genres/{id} | Get genre by id
 *GenreApi* | [**listGenres**](docs/GenreApi.md#listGenres) | **GET** /genres | List all genres.
+*GroupApi* | [**getGroupById**](docs/GroupApi.md#getGroupById) | **GET** /groups/{id} | Get group by id
+*GroupApi* | [**listGroups**](docs/GroupApi.md#listGroups) | **GET** /groups | Get all groups.
 *ItemApi* | [**createItem**](docs/ItemApi.md#createItem) | **POST** /items | Create an new item.
 *ItemApi* | [**currentItemPostStructure**](docs/ItemApi.md#currentItemPostStructure) | **POST** /items/current/structure | Post a current playing item, keep structure
-*ItemApi* | [**currentItemPostTiming**](docs/ItemApi.md#currentItemPostTiming) | **POST** /items/current/timing | Post a current playing item
+*ItemApi* | [**currentItemPostTiming**](docs/ItemApi.md#currentItemPostTiming) | **POST** /items/current/timing | Post current playing Item
 *ItemApi* | [**deleteItemById**](docs/ItemApi.md#deleteItemById) | **DELETE** /items/{id} | Delete item by ID.
 *ItemApi* | [**getCurrentItem**](docs/ItemApi.md#getCurrentItem) | **GET** /items/current | Get current Item
 *ItemApi* | [**getItemById**](docs/ItemApi.md#getItemById) | **GET** /items/{id} | Get extended item details by ID.
@@ -167,22 +176,17 @@ Class | Method | HTTP request | Description
 *ProgramApi* | [**listPrograms**](docs/ProgramApi.md#listPrograms) | **GET** /programs | Get all programs.
 *ProgramApi* | [**updateProgramByID**](docs/ProgramApi.md#updateProgramByID) | **PATCH** /programs/{id} | Update program by id
 *StationApi* | [**getStation**](docs/StationApi.md#getStation) | **GET** /station | Get own station only
-*StoryApi* | [**createStory**](docs/StoryApi.md#createStory) | **POST** /stories | Create story.
-*StoryApi* | [**deleteStoryById**](docs/StoryApi.md#deleteStoryById) | **DELETE** /stories/{id} | Delete story by id
-*StoryApi* | [**getStoryById**](docs/StoryApi.md#getStoryById) | **GET** /stories/{id} | Get story by id
-*StoryApi* | [**listStories**](docs/StoryApi.md#listStories) | **GET** /stories | Get all stories.
-*StoryApi* | [**updateStoryByID**](docs/StoryApi.md#updateStoryByID) | **PATCH** /stories/{id} | Update story by id
 *StringApi* | [**getStringsByName**](docs/StringApi.md#getStringsByName) | **GET** /strings/{name} | Get Strings (formatted)
 *TagApi* | [**createTag**](docs/TagApi.md#createTag) | **POST** /tags | Create tag.
 *TagApi* | [**deleteTagById**](docs/TagApi.md#deleteTagById) | **DELETE** /tags/{id} | Delete tag by id
 *TagApi* | [**getTagById**](docs/TagApi.md#getTagById) | **GET** /tags/{id} | Get tags by id
 *TagApi* | [**listTags**](docs/TagApi.md#listTags) | **GET** /tags | Get a list of all the tags currently in your station.
 *TagApi* | [**updateTagByID**](docs/TagApi.md#updateTagByID) | **PATCH** /tags/{id} | Update tag by id
-*UserApi* | [**deleteUserById**](docs/UserApi.md#deleteUserById) | **DELETE** /users/{id} | Remove user from station by Id
+*UserApi* | [**deleteUserById**](docs/UserApi.md#deleteUserById) | **DELETE** /users/{id} | Remove User from station by Id
 *UserApi* | [**getUserById**](docs/UserApi.md#getUserById) | **GET** /users/{id} | Get user by id
 *UserApi* | [**inviteUserByMail**](docs/UserApi.md#inviteUserByMail) | **POST** /users/invite | Invite user by mail
 *UserApi* | [**listUsers**](docs/UserApi.md#listUsers) | **GET** /users | Get all users.
-*VisualSlideApi* | [**getVisualSlide**](docs/VisualSlideApi.md#getVisualSlide) | **GET** /visual | Get Visual Slide Image as Base64
+*VisualSlideApi* | [**getVisualSlide**](docs/VisualSlideApi.md#getVisualSlide) | **GET** /visual | Get Visual Slide Image
 
 
 ## Documentation for Models
@@ -195,7 +199,6 @@ Class | Method | HTTP request | Description
  - [BlockRelationsItemsParams](docs/BlockRelationsItemsParams.md)
  - [BlockRelationsProgram](docs/BlockRelationsProgram.md)
  - [BlockResult](docs/BlockResult.md)
- - [BlockResults](docs/BlockResults.md)
  - [Broadcast](docs/Broadcast.md)
  - [BroadcastDataInput](docs/BroadcastDataInput.md)
  - [BroadcastEPGDay](docs/BroadcastEPGDay.md)
@@ -206,13 +209,13 @@ Class | Method | HTTP request | Description
  - [BroadcastRelations](docs/BroadcastRelations.md)
  - [BroadcastRelationsBlocks](docs/BroadcastRelationsBlocks.md)
  - [BroadcastRelationsGenre](docs/BroadcastRelationsGenre.md)
+ - [BroadcastRelationsGroup](docs/BroadcastRelationsGroup.md)
  - [BroadcastRelationsItems](docs/BroadcastRelationsItems.md)
  - [BroadcastRelationsItemsParams](docs/BroadcastRelationsItemsParams.md)
  - [BroadcastRelationsModelType](docs/BroadcastRelationsModelType.md)
  - [BroadcastRelationsPresenters](docs/BroadcastRelationsPresenters.md)
  - [BroadcastRelationsTags](docs/BroadcastRelationsTags.md)
  - [BroadcastResult](docs/BroadcastResult.md)
- - [BroadcastResults](docs/BroadcastResults.md)
  - [Campaign](docs/Campaign.md)
  - [CampaignDataInput](docs/CampaignDataInput.md)
  - [CampaignOutputOnly](docs/CampaignOutputOnly.md)
@@ -220,7 +223,6 @@ Class | Method | HTTP request | Description
  - [CampaignRelationsItems](docs/CampaignRelationsItems.md)
  - [CampaignRelationsItemsParams](docs/CampaignRelationsItemsParams.md)
  - [CampaignResult](docs/CampaignResult.md)
- - [CampaignResults](docs/CampaignResults.md)
  - [CampaignTemplateItem](docs/CampaignTemplateItem.md)
  - [CampaignTemplateItemAllOf](docs/CampaignTemplateItemAllOf.md)
  - [Contact](docs/Contact.md)
@@ -231,9 +233,7 @@ Class | Method | HTTP request | Description
  - [ContactRelationsTags](docs/ContactRelationsTags.md)
  - [ContactRelationsTagsParams](docs/ContactRelationsTagsParams.md)
  - [ContactResult](docs/ContactResult.md)
- - [ContactResults](docs/ContactResults.md)
  - [EPGResults](docs/EPGResults.md)
- - [Forbidden](docs/Forbidden.md)
  - [Genre](docs/Genre.md)
  - [GenreOutputOnly](docs/GenreOutputOnly.md)
  - [GenreRelations](docs/GenreRelations.md)
@@ -241,15 +241,40 @@ Class | Method | HTTP request | Description
  - [GenreRelationsBroadcastsParams](docs/GenreRelationsBroadcastsParams.md)
  - [GenreRelationsPrograms](docs/GenreRelationsPrograms.md)
  - [GenreResult](docs/GenreResult.md)
- - [GenreResults](docs/GenreResults.md)
+ - [Group](docs/Group.md)
+ - [GroupDataInput](docs/GroupDataInput.md)
+ - [GroupOutputOnly](docs/GroupOutputOnly.md)
+ - [GroupRelations](docs/GroupRelations.md)
+ - [GroupRelationsBroadcasts](docs/GroupRelationsBroadcasts.md)
+ - [GroupRelationsPrograms](docs/GroupRelationsPrograms.md)
+ - [GroupRelationsUsers](docs/GroupRelationsUsers.md)
+ - [GroupRelationsUsersParams](docs/GroupRelationsUsersParams.md)
+ - [GroupResult](docs/GroupResult.md)
  - [ImportItem](docs/ImportItem.md)
  - [ImportItemAllOf](docs/ImportItemAllOf.md)
- - [InlineObject](docs/InlineObject.md)
- - [InlineObject1](docs/InlineObject1.md)
- - [InlineObject2](docs/InlineObject2.md)
- - [InlineObject3](docs/InlineObject3.md)
+ - [InlineResponse200](docs/InlineResponse200.md)
+ - [InlineResponse2001](docs/InlineResponse2001.md)
+ - [InlineResponse20010](docs/InlineResponse20010.md)
+ - [InlineResponse20011](docs/InlineResponse20011.md)
+ - [InlineResponse20012](docs/InlineResponse20012.md)
+ - [InlineResponse20013](docs/InlineResponse20013.md)
+ - [InlineResponse2002](docs/InlineResponse2002.md)
+ - [InlineResponse2003](docs/InlineResponse2003.md)
+ - [InlineResponse2004](docs/InlineResponse2004.md)
+ - [InlineResponse2005](docs/InlineResponse2005.md)
+ - [InlineResponse2006](docs/InlineResponse2006.md)
+ - [InlineResponse2007](docs/InlineResponse2007.md)
+ - [InlineResponse2008](docs/InlineResponse2008.md)
+ - [InlineResponse2009](docs/InlineResponse2009.md)
  - [InlineResponse202](docs/InlineResponse202.md)
- - [InternalServerError](docs/InternalServerError.md)
+ - [InlineResponse2021](docs/InlineResponse2021.md)
+ - [InlineResponse400](docs/InlineResponse400.md)
+ - [InlineResponse401](docs/InlineResponse401.md)
+ - [InlineResponse403](docs/InlineResponse403.md)
+ - [InlineResponse404](docs/InlineResponse404.md)
+ - [InlineResponse422](docs/InlineResponse422.md)
+ - [InlineResponse429](docs/InlineResponse429.md)
+ - [InlineResponse500](docs/InlineResponse500.md)
  - [InviteUserData](docs/InviteUserData.md)
  - [Item](docs/Item.md)
  - [ItemAllOf](docs/ItemAllOf.md)
@@ -264,7 +289,7 @@ Class | Method | HTTP request | Description
  - [ItemRelationsProgram](docs/ItemRelationsProgram.md)
  - [ItemRelationsTags](docs/ItemRelationsTags.md)
  - [ItemResult](docs/ItemResult.md)
- - [ItemResults](docs/ItemResults.md)
+ - [ItemsStopcurrentBody](docs/ItemsStopcurrentBody.md)
  - [ModelType](docs/ModelType.md)
  - [ModelTypeOptions](docs/ModelTypeOptions.md)
  - [ModelTypeOutputOnly](docs/ModelTypeOutputOnly.md)
@@ -277,19 +302,20 @@ Class | Method | HTTP request | Description
  - [ModelTypeRelationsPresenters](docs/ModelTypeRelationsPresenters.md)
  - [ModelTypeRelationsPrograms](docs/ModelTypeRelationsPrograms.md)
  - [ModelTypeResult](docs/ModelTypeResult.md)
- - [ModelTypeResults](docs/ModelTypeResults.md)
- - [NotFound](docs/NotFound.md)
- - [PostSuccess](docs/PostSuccess.md)
+ - [OrderDirection](docs/OrderDirection.md)
+ - [PlaylistMergeBody](docs/PlaylistMergeBody.md)
+ - [PlaylistStructureBody](docs/PlaylistStructureBody.md)
+ - [PlaylistTimingBody](docs/PlaylistTimingBody.md)
  - [Presenter](docs/Presenter.md)
  - [PresenterDataInput](docs/PresenterDataInput.md)
  - [PresenterEPGResult](docs/PresenterEPGResult.md)
  - [PresenterOutputOnly](docs/PresenterOutputOnly.md)
  - [PresenterRelations](docs/PresenterRelations.md)
  - [PresenterRelationsBroadcasts](docs/PresenterRelationsBroadcasts.md)
+ - [PresenterRelationsModelType](docs/PresenterRelationsModelType.md)
  - [PresenterRelationsPrograms](docs/PresenterRelationsPrograms.md)
  - [PresenterRelationsProgramsParams](docs/PresenterRelationsProgramsParams.md)
  - [PresenterResult](docs/PresenterResult.md)
- - [PresenterResults](docs/PresenterResults.md)
  - [Program](docs/Program.md)
  - [ProgramDataInput](docs/ProgramDataInput.md)
  - [ProgramInputOnly](docs/ProgramInputOnly.md)
@@ -303,24 +329,9 @@ Class | Method | HTTP request | Description
  - [ProgramRelationsPresenters](docs/ProgramRelationsPresenters.md)
  - [ProgramRelationsTags](docs/ProgramRelationsTags.md)
  - [ProgramResult](docs/ProgramResult.md)
- - [ProgramResults](docs/ProgramResults.md)
- - [ReadOnly](docs/ReadOnly.md)
- - [RelationsPlaceholder](docs/RelationsPlaceholder.md)
  - [StationResult](docs/StationResult.md)
  - [StationResultStation](docs/StationResultStation.md)
  - [StationResultStationStartDays](docs/StationResultStationStartDays.md)
- - [Story](docs/Story.md)
- - [StoryDataInput](docs/StoryDataInput.md)
- - [StoryInputOnly](docs/StoryInputOnly.md)
- - [StoryInputOnlyAllOf](docs/StoryInputOnlyAllOf.md)
- - [StoryOutputOnly](docs/StoryOutputOnly.md)
- - [StoryRelations](docs/StoryRelations.md)
- - [StoryRelationsItems](docs/StoryRelationsItems.md)
- - [StoryRelationsTags](docs/StoryRelationsTags.md)
- - [StoryRelationsTagsParams](docs/StoryRelationsTagsParams.md)
- - [StoryResult](docs/StoryResult.md)
- - [StoryResults](docs/StoryResults.md)
- - [Success](docs/Success.md)
  - [Tag](docs/Tag.md)
  - [TagDataInput](docs/TagDataInput.md)
  - [TagOutputOnly](docs/TagOutputOnly.md)
@@ -331,14 +342,13 @@ Class | Method | HTTP request | Description
  - [TagRelationsItems](docs/TagRelationsItems.md)
  - [TagRelationsPrograms](docs/TagRelationsPrograms.md)
  - [TagResult](docs/TagResult.md)
- - [TagResults](docs/TagResults.md)
  - [TextString](docs/TextString.md)
- - [TooManyRequests](docs/TooManyRequests.md)
- - [UnprocessableEntity](docs/UnprocessableEntity.md)
+ - [UnusedBooleanParameter](docs/UnusedBooleanParameter.md)
  - [UserResult](docs/UserResult.md)
+ - [UserResultGroups](docs/UserResultGroups.md)
+ - [UserResultParams](docs/UserResultParams.md)
  - [UserResultRoles](docs/UserResultRoles.md)
  - [UserResultSettings](docs/UserResultSettings.md)
- - [UserResults](docs/UserResults.md)
  - [VisualResult](docs/VisualResult.md)
 
 

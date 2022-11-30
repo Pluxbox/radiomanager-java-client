@@ -1,6 +1,6 @@
 /*
  * RadioManager
- * RadioManager
+ * This OpenAPI 3 Document describes the functionality of the API v2 of RadioManager. Note that no rights can be derived from this Document and the true functionality of the API might differ.
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@pluxbox.com
@@ -27,10 +27,31 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.pluxbox.radiomanager.api.invoker.JSON;
+
 /**
  * ImportItemAllOf
  */
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class ImportItemAllOf {
   public static final String SERIALIZED_NAME_MODEL_TYPE_ID = "model_type_id";
   @SerializedName(SERIALIZED_NAME_MODEL_TYPE_ID)
@@ -76,6 +97,12 @@ public class ImportItemAllOf {
   @SerializedName(SERIALIZED_NAME_TAGS)
   private List<Integer> tags = null;
 
+  public static final String SERIALIZED_NAME_BROADCAST_ID = "broadcast_id";
+  @SerializedName(SERIALIZED_NAME_BROADCAST_ID)
+  private Integer broadcastId;
+
+  public ImportItemAllOf() {
+  }
 
   public ImportItemAllOf modelTypeId(Long modelTypeId) {
     
@@ -87,6 +114,7 @@ public class ImportItemAllOf {
    * Get modelTypeId
    * @return modelTypeId
   **/
+  @javax.annotation.Nonnull
   @ApiModelProperty(example = "14", required = true, value = "")
 
   public Long getModelTypeId() {
@@ -109,6 +137,7 @@ public class ImportItemAllOf {
    * Get externalId
    * @return externalId
   **/
+  @javax.annotation.Nonnull
   @ApiModelProperty(example = "0", required = true, value = "")
 
   public String getExternalId() {
@@ -344,8 +373,32 @@ public class ImportItemAllOf {
   }
 
 
+  public ImportItemAllOf broadcastId(Integer broadcastId) {
+    
+    this.broadcastId = broadcastId;
+    return this;
+  }
+
+   /**
+   * Get broadcastId
+   * @return broadcastId
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "1", value = "")
+
+  public Integer getBroadcastId() {
+    return broadcastId;
+  }
+
+
+  public void setBroadcastId(Integer broadcastId) {
+    this.broadcastId = broadcastId;
+  }
+
+
+
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -363,14 +416,14 @@ public class ImportItemAllOf {
         Objects.equals(this.staticStart, importItemAllOf.staticStart) &&
         Objects.equals(this.details, importItemAllOf.details) &&
         Objects.equals(this.contacts, importItemAllOf.contacts) &&
-        Objects.equals(this.tags, importItemAllOf.tags);
+        Objects.equals(this.tags, importItemAllOf.tags) &&
+        Objects.equals(this.broadcastId, importItemAllOf.broadcastId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(modelTypeId, externalId, fieldValues, title, duration, start, recommended, staticStart, details, contacts, tags);
+    return Objects.hash(modelTypeId, externalId, fieldValues, title, duration, start, recommended, staticStart, details, contacts, tags, broadcastId);
   }
-
 
   @Override
   public String toString() {
@@ -387,6 +440,7 @@ public class ImportItemAllOf {
     sb.append("    details: ").append(toIndentedString(details)).append("\n");
     sb.append("    contacts: ").append(toIndentedString(contacts)).append("\n");
     sb.append("    tags: ").append(toIndentedString(tags)).append("\n");
+    sb.append("    broadcastId: ").append(toIndentedString(broadcastId)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -395,12 +449,132 @@ public class ImportItemAllOf {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("model_type_id");
+    openapiFields.add("external_id");
+    openapiFields.add("field_values");
+    openapiFields.add("title");
+    openapiFields.add("duration");
+    openapiFields.add("start");
+    openapiFields.add("recommended");
+    openapiFields.add("static_start");
+    openapiFields.add("details");
+    openapiFields.add("contacts");
+    openapiFields.add("tags");
+    openapiFields.add("broadcast_id");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("model_type_id");
+    openapiRequiredFields.add("external_id");
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to ImportItemAllOf
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (!ImportItemAllOf.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+          throw new IllegalArgumentException(String.format("The required field(s) %s in ImportItemAllOf is not found in the empty JSON string", ImportItemAllOf.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!ImportItemAllOf.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ImportItemAllOf` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : ImportItemAllOf.openapiRequiredFields) {
+        if (jsonObj.get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        }
+      }
+      if (!jsonObj.get("external_id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `external_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("external_id").toString()));
+      }
+      if ((jsonObj.get("title") != null && !jsonObj.get("title").isJsonNull()) && !jsonObj.get("title").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `title` to be a primitive type in the JSON string but got `%s`", jsonObj.get("title").toString()));
+      }
+      if ((jsonObj.get("details") != null && !jsonObj.get("details").isJsonNull()) && !jsonObj.get("details").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `details` to be a primitive type in the JSON string but got `%s`", jsonObj.get("details").toString()));
+      }
+      // ensure the optional json data is an array if present
+      if (jsonObj.get("contacts") != null && !jsonObj.get("contacts").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `contacts` to be an array in the JSON string but got `%s`", jsonObj.get("contacts").toString()));
+      }
+      // ensure the optional json data is an array if present
+      if (jsonObj.get("tags") != null && !jsonObj.get("tags").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `tags` to be an array in the JSON string but got `%s`", jsonObj.get("tags").toString()));
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!ImportItemAllOf.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'ImportItemAllOf' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<ImportItemAllOf> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(ImportItemAllOf.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<ImportItemAllOf>() {
+           @Override
+           public void write(JsonWriter out, ImportItemAllOf value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public ImportItemAllOf read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of ImportItemAllOf given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of ImportItemAllOf
+  * @throws IOException if the JSON string is invalid with respect to ImportItemAllOf
+  */
+  public static ImportItemAllOf fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, ImportItemAllOf.class);
+  }
+
+ /**
+  * Convert an instance of ImportItemAllOf to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

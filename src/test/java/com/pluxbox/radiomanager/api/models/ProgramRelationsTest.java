@@ -1,6 +1,6 @@
 /*
  * RadioManager
- * RadioManager
+ * This OpenAPI 3 Document describes the functionality of the API v2 of RadioManager. Note that no rights can be derived from this Document and the true functionality of the API might differ.
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@pluxbox.com
@@ -19,6 +19,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.pluxbox.radiomanager.api.models.BroadcastRelationsGenre;
+import com.pluxbox.radiomanager.api.models.BroadcastRelationsGroup;
 import com.pluxbox.radiomanager.api.models.BroadcastRelationsModelType;
 import com.pluxbox.radiomanager.api.models.ProgramRelationsBlocks;
 import com.pluxbox.radiomanager.api.models.ProgramRelationsBroadcasts;
@@ -28,9 +29,8 @@ import com.pluxbox.radiomanager.api.models.ProgramRelationsTags;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 
 /**
@@ -101,6 +101,14 @@ public class ProgramRelationsTest {
     @Test
     public void modelTypeTest() {
         // TODO: test modelType
+    }
+
+    /**
+     * Test the property 'group'
+     */
+    @Test
+    public void groupTest() {
+        // TODO: test group
     }
 
 }

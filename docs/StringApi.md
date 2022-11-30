@@ -2,9 +2,9 @@
 
 All URIs are relative to *https://radiomanager.io/api/v2*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**getStringsByName**](StringApi.md#getStringsByName) | **GET** /strings/{name} | Get Strings (formatted)
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**getStringsByName**](StringApi.md#getStringsByName) | **GET** /strings/{name} | Get Strings (formatted) |
 
 
 <a name="getStringsByName"></a>
@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 Get Strings (formatted)
 
-Get Strings (formatted)
+Get RadioText/DAB String for publication based on String Templates
 
 ### Example
 ```java
@@ -37,8 +37,8 @@ public class Example {
     //API-Key.setApiKeyPrefix("Token");
 
     StringApi apiInstance = new StringApi(defaultClient);
-    String name = "name_example"; // String | Name of Strings **(Required)**
-    Boolean fullModel = true; // Boolean | Full model or content only **(Required)**
+    String name = "name_example"; // String | Name of String Template **(Required)**
+    Boolean fullModel = true; // Boolean | Full model or content only **(Optional)**
     try {
       TextString result = apiInstance.getStringsByName(name, fullModel);
       System.out.println(result);
@@ -55,10 +55,10 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | **String**| Name of Strings **(Required)** |
- **fullModel** | **Boolean**| Full model or content only **(Required)** | [default to true]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **name** | **String**| Name of String Template **(Required)** | |
+| **fullModel** | **Boolean**| Full model or content only **(Optional)** | [optional] |
 
 ### Return type
 
@@ -76,7 +76,11 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully got Strings (formatted) |  -  |
-**404** | Not Found |  -  |
-**429** | Too Many Requests |  -  |
+| **200** | Successfully got Strings (formatted) |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **404** | Not Found |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
 

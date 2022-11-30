@@ -1,6 +1,6 @@
 /*
  * RadioManager
- * RadioManager
+ * This OpenAPI 3 Document describes the functionality of the API v2 of RadioManager. Note that no rights can be derived from this Document and the true functionality of the API might differ.
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@pluxbox.com
@@ -15,36 +15,297 @@ package com.pluxbox.radiomanager.api.models;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.pluxbox.radiomanager.api.models.CampaignTemplateItemAllOf;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.pluxbox.radiomanager.api.invoker.JSON;
 
 /**
  * CampaignTemplateItem
  */
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+public class CampaignTemplateItem {
+  public static final String SERIALIZED_NAME_MODEL_TYPE_ID = "model_type_id";
+  @SerializedName(SERIALIZED_NAME_MODEL_TYPE_ID)
+  private Long modelTypeId;
 
-public class CampaignTemplateItem extends CampaignTemplateItemAllOf {
+  public static final String SERIALIZED_NAME_EXTERNAL_ID = "external_id";
+  @SerializedName(SERIALIZED_NAME_EXTERNAL_ID)
+  private String externalId;
+
+  public static final String SERIALIZED_NAME_FIELD_VALUES = "field_values";
+  @SerializedName(SERIALIZED_NAME_FIELD_VALUES)
+  private Object fieldValues;
+
+  public static final String SERIALIZED_NAME_TITLE = "title";
+  @SerializedName(SERIALIZED_NAME_TITLE)
+  private String title;
+
+  public static final String SERIALIZED_NAME_DURATION = "duration";
+  @SerializedName(SERIALIZED_NAME_DURATION)
+  private Long duration;
+
+  public static final String SERIALIZED_NAME_RECOMMENDED = "recommended";
+  @SerializedName(SERIALIZED_NAME_RECOMMENDED)
+  private Boolean recommended;
+
+  public static final String SERIALIZED_NAME_STATIC_START = "static_start";
+  @SerializedName(SERIALIZED_NAME_STATIC_START)
+  private Boolean staticStart;
+
+  public static final String SERIALIZED_NAME_DELTAS = "_deltas";
+  @SerializedName(SERIALIZED_NAME_DELTAS)
+  private Object deltas;
+
+  public CampaignTemplateItem() {
+  }
+
+  public CampaignTemplateItem modelTypeId(Long modelTypeId) {
+    
+    this.modelTypeId = modelTypeId;
+    return this;
+  }
+
+   /**
+   * Get modelTypeId
+   * @return modelTypeId
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "14", value = "")
+
+  public Long getModelTypeId() {
+    return modelTypeId;
+  }
+
+
+  public void setModelTypeId(Long modelTypeId) {
+    this.modelTypeId = modelTypeId;
+  }
+
+
+  public CampaignTemplateItem externalId(String externalId) {
+    
+    this.externalId = externalId;
+    return this;
+  }
+
+   /**
+   * Get externalId
+   * @return externalId
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "0", value = "")
+
+  public String getExternalId() {
+    return externalId;
+  }
+
+
+  public void setExternalId(String externalId) {
+    this.externalId = externalId;
+  }
+
+
+  public CampaignTemplateItem fieldValues(Object fieldValues) {
+    
+    this.fieldValues = fieldValues;
+    return this;
+  }
+
+   /**
+   * Get fieldValues
+   * @return fieldValues
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public Object getFieldValues() {
+    return fieldValues;
+  }
+
+
+  public void setFieldValues(Object fieldValues) {
+    this.fieldValues = fieldValues;
+  }
+
+
+  public CampaignTemplateItem title(String title) {
+    
+    this.title = title;
+    return this;
+  }
+
+   /**
+   * Get title
+   * @return title
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "FooBar Show", value = "")
+
+  public String getTitle() {
+    return title;
+  }
+
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
+
+  public CampaignTemplateItem duration(Long duration) {
+    
+    this.duration = duration;
+    return this;
+  }
+
+   /**
+   * Get duration
+   * @return duration
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "120", value = "")
+
+  public Long getDuration() {
+    return duration;
+  }
+
+
+  public void setDuration(Long duration) {
+    this.duration = duration;
+  }
+
+
+  public CampaignTemplateItem recommended(Boolean recommended) {
+    
+    this.recommended = recommended;
+    return this;
+  }
+
+   /**
+   * Get recommended
+   * @return recommended
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "false", value = "")
+
+  public Boolean getRecommended() {
+    return recommended;
+  }
+
+
+  public void setRecommended(Boolean recommended) {
+    this.recommended = recommended;
+  }
+
+
+  public CampaignTemplateItem staticStart(Boolean staticStart) {
+    
+    this.staticStart = staticStart;
+    return this;
+  }
+
+   /**
+   * Get staticStart
+   * @return staticStart
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "false", value = "")
+
+  public Boolean getStaticStart() {
+    return staticStart;
+  }
+
+
+  public void setStaticStart(Boolean staticStart) {
+    this.staticStart = staticStart;
+  }
+
+
+  public CampaignTemplateItem deltas(Object deltas) {
+    
+    this.deltas = deltas;
+    return this;
+  }
+
+   /**
+   * Get deltas
+   * @return deltas
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public Object getDeltas() {
+    return deltas;
+  }
+
+
+  public void setDeltas(Object deltas) {
+    this.deltas = deltas;
+  }
+
+
 
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    return super.equals(o);
+    CampaignTemplateItem campaignTemplateItem = (CampaignTemplateItem) o;
+    return Objects.equals(this.modelTypeId, campaignTemplateItem.modelTypeId) &&
+        Objects.equals(this.externalId, campaignTemplateItem.externalId) &&
+        Objects.equals(this.fieldValues, campaignTemplateItem.fieldValues) &&
+        Objects.equals(this.title, campaignTemplateItem.title) &&
+        Objects.equals(this.duration, campaignTemplateItem.duration) &&
+        Objects.equals(this.recommended, campaignTemplateItem.recommended) &&
+        Objects.equals(this.staticStart, campaignTemplateItem.staticStart) &&
+        Objects.equals(this.deltas, campaignTemplateItem.deltas);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode());
+    return Objects.hash(modelTypeId, externalId, fieldValues, title, duration, recommended, staticStart, deltas);
   }
-
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class CampaignTemplateItem {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
+    sb.append("    modelTypeId: ").append(toIndentedString(modelTypeId)).append("\n");
+    sb.append("    externalId: ").append(toIndentedString(externalId)).append("\n");
+    sb.append("    fieldValues: ").append(toIndentedString(fieldValues)).append("\n");
+    sb.append("    title: ").append(toIndentedString(title)).append("\n");
+    sb.append("    duration: ").append(toIndentedString(duration)).append("\n");
+    sb.append("    recommended: ").append(toIndentedString(recommended)).append("\n");
+    sb.append("    staticStart: ").append(toIndentedString(staticStart)).append("\n");
+    sb.append("    deltas: ").append(toIndentedString(deltas)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -53,12 +314,108 @@ public class CampaignTemplateItem extends CampaignTemplateItemAllOf {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("model_type_id");
+    openapiFields.add("external_id");
+    openapiFields.add("field_values");
+    openapiFields.add("title");
+    openapiFields.add("duration");
+    openapiFields.add("recommended");
+    openapiFields.add("static_start");
+    openapiFields.add("_deltas");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to CampaignTemplateItem
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (!CampaignTemplateItem.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+          throw new IllegalArgumentException(String.format("The required field(s) %s in CampaignTemplateItem is not found in the empty JSON string", CampaignTemplateItem.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!CampaignTemplateItem.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `CampaignTemplateItem` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+      if ((jsonObj.get("external_id") != null && !jsonObj.get("external_id").isJsonNull()) && !jsonObj.get("external_id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `external_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("external_id").toString()));
+      }
+      if ((jsonObj.get("title") != null && !jsonObj.get("title").isJsonNull()) && !jsonObj.get("title").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `title` to be a primitive type in the JSON string but got `%s`", jsonObj.get("title").toString()));
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!CampaignTemplateItem.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'CampaignTemplateItem' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<CampaignTemplateItem> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(CampaignTemplateItem.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<CampaignTemplateItem>() {
+           @Override
+           public void write(JsonWriter out, CampaignTemplateItem value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public CampaignTemplateItem read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of CampaignTemplateItem given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of CampaignTemplateItem
+  * @throws IOException if the JSON string is invalid with respect to CampaignTemplateItem
+  */
+  public static CampaignTemplateItem fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, CampaignTemplateItem.class);
+  }
+
+ /**
+  * Convert an instance of CampaignTemplateItem to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

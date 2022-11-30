@@ -2,18 +2,18 @@
 
 All URIs are relative to *https://radiomanager.io/api/v2*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**createTag**](TagApi.md#createTag) | **POST** /tags | Create tag.
-[**deleteTagById**](TagApi.md#deleteTagById) | **DELETE** /tags/{id} | Delete tag by id
-[**getTagById**](TagApi.md#getTagById) | **GET** /tags/{id} | Get tags by id
-[**listTags**](TagApi.md#listTags) | **GET** /tags | Get a list of all the tags currently in your station.
-[**updateTagByID**](TagApi.md#updateTagByID) | **PATCH** /tags/{id} | Update tag by id
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**createTag**](TagApi.md#createTag) | **POST** /tags | Create tag. |
+| [**deleteTagById**](TagApi.md#deleteTagById) | **DELETE** /tags/{id} | Delete tag by id |
+| [**getTagById**](TagApi.md#getTagById) | **GET** /tags/{id} | Get tags by id |
+| [**listTags**](TagApi.md#listTags) | **GET** /tags | Get a list of all the tags currently in your station. |
+| [**updateTagByID**](TagApi.md#updateTagByID) | **PATCH** /tags/{id} | Update tag by id |
 
 
 <a name="createTag"></a>
 # **createTag**
-> PostSuccess createTag(data)
+> InlineResponse2002 createTag(tagDataInput)
 
 Create tag.
 
@@ -41,9 +41,9 @@ public class Example {
     //API-Key.setApiKeyPrefix("Token");
 
     TagApi apiInstance = new TagApi(defaultClient);
-    TagDataInput data = new TagDataInput(); // TagDataInput | Data **(Required)**
+    TagDataInput tagDataInput = new TagDataInput(); // TagDataInput | Data **(Required)**
     try {
-      PostSuccess result = apiInstance.createTag(data);
+      InlineResponse2002 result = apiInstance.createTag(tagDataInput);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling TagApi#createTag");
@@ -58,13 +58,13 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **data** | [**TagDataInput**](TagDataInput.md)| Data **(Required)** |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **tagDataInput** | [**TagDataInput**](TagDataInput.md)| Data **(Required)** | |
 
 ### Return type
 
-[**PostSuccess**](PostSuccess.md)
+[**InlineResponse2002**](InlineResponse2002.md)
 
 ### Authorization
 
@@ -78,15 +78,18 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully created a tag |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
+| **200** | Post Request Succesful |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
 
 <a name="deleteTagById"></a>
 # **deleteTagById**
-> Success deleteTagById(id)
+> InlineResponse202 deleteTagById(id)
 
 Delete tag by id
 
@@ -114,9 +117,9 @@ public class Example {
     //API-Key.setApiKeyPrefix("Token");
 
     TagApi apiInstance = new TagApi(defaultClient);
-    Long id = 0lL; // Long | ID of Tag **(Required)**
+    Long id = 56L; // Long | ID of Tag **(Required)**
     try {
-      Success result = apiInstance.deleteTagById(id);
+      InlineResponse202 result = apiInstance.deleteTagById(id);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling TagApi#deleteTagById");
@@ -131,13 +134,13 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **Long**| ID of Tag **(Required)** | [default to 0l]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | **Long**| ID of Tag **(Required)** | |
 
 ### Return type
 
-[**Success**](Success.md)
+[**InlineResponse202**](InlineResponse202.md)
 
 ### Authorization
 
@@ -151,14 +154,18 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully deleted Tag by id |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**429** | Too Many Requests |  -  |
+| **202** | Request Succesful |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
 
 <a name="getTagById"></a>
 # **getTagById**
-> TagResult getTagById(id, externalStationId)
+> TagResult getTagById(id)
 
 Get tags by id
 
@@ -186,10 +193,9 @@ public class Example {
     //API-Key.setApiKeyPrefix("Token");
 
     TagApi apiInstance = new TagApi(defaultClient);
-    Long id = 0lL; // Long | ID of Tag **(Required)**
-    Long externalStationId = 56L; // Long | Query on a different (content providing) station *(Optional)*
+    Long id = 56L; // Long | ID of Tag **(Required)**
     try {
-      TagResult result = apiInstance.getTagById(id, externalStationId);
+      TagResult result = apiInstance.getTagById(id);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling TagApi#getTagById");
@@ -204,10 +210,9 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **Long**| ID of Tag **(Required)** | [default to 0l]
- **externalStationId** | **Long**| Query on a different (content providing) station *(Optional)* | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | **Long**| ID of Tag **(Required)** | |
 
 ### Return type
 
@@ -225,14 +230,18 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully got Tag by ID |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**429** | Too Many Requests |  -  |
+| **200** | Successfully got Tag by id |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
 
 <a name="listTags"></a>
 # **listTags**
-> TagResults listTags(page, programId, itemId, broadcastId, contactId, limit, orderBy, orderDirection, externalStationId)
+> InlineResponse20012 listTags(programId, itemId, broadcastId, contactId, page, limit, orderBy, orderDirection, externalStationId)
 
 Get a list of all the tags currently in your station.
 
@@ -260,17 +269,17 @@ public class Example {
     //API-Key.setApiKeyPrefix("Token");
 
     TagApi apiInstance = new TagApi(defaultClient);
-    Long page = 56L; // Long | Current page *(Optional)*
     Long programId = 56L; // Long | Search on Program ID *(Optional)* `(Relation)`
     Long itemId = 56L; // Long | Search on Item ID *(Optional)* `(Relation)`
     Long broadcastId = 56L; // Long | Search on Broadcast ID *(Optional)* `(Relation)`
     Long contactId = 56L; // Long | Search on Contact ID *(Optional)* `(Relation)`
+    Long page = 1L; // Long | Current page *(Optional)*
     Long limit = 56L; // Long | Results per page *(Optional)*
     String orderBy = "orderBy_example"; // String | Field to order the results *(Optional)*
-    String orderDirection = "orderDirection_example"; // String | Direction of ordering *(Optional)*
+    String orderDirection = "asc"; // String | Direction of ordering *(Optional)*
     Long externalStationId = 56L; // Long | Query on a different (content providing) station *(Optional)*
     try {
-      TagResults result = apiInstance.listTags(page, programId, itemId, broadcastId, contactId, limit, orderBy, orderDirection, externalStationId);
+      InlineResponse20012 result = apiInstance.listTags(programId, itemId, broadcastId, contactId, page, limit, orderBy, orderDirection, externalStationId);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling TagApi#listTags");
@@ -285,21 +294,21 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **page** | **Long**| Current page *(Optional)* | [optional]
- **programId** | **Long**| Search on Program ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
- **itemId** | **Long**| Search on Item ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
- **broadcastId** | **Long**| Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
- **contactId** | **Long**| Search on Contact ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
- **limit** | **Long**| Results per page *(Optional)* | [optional]
- **orderBy** | **String**| Field to order the results *(Optional)* | [optional]
- **orderDirection** | **String**| Direction of ordering *(Optional)* | [optional] [enum: asc, desc]
- **externalStationId** | **Long**| Query on a different (content providing) station *(Optional)* | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **programId** | **Long**| Search on Program ID *(Optional)* &#x60;(Relation)&#x60; | [optional] |
+| **itemId** | **Long**| Search on Item ID *(Optional)* &#x60;(Relation)&#x60; | [optional] |
+| **broadcastId** | **Long**| Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; | [optional] |
+| **contactId** | **Long**| Search on Contact ID *(Optional)* &#x60;(Relation)&#x60; | [optional] |
+| **page** | **Long**| Current page *(Optional)* | [optional] [default to 1] |
+| **limit** | **Long**| Results per page *(Optional)* | [optional] |
+| **orderBy** | **String**| Field to order the results *(Optional)* | [optional] |
+| **orderDirection** | **String**| Direction of ordering *(Optional)* | [optional] [enum: asc, desc] |
+| **externalStationId** | **Long**| Query on a different (content providing) station *(Optional)* | [optional] |
 
 ### Return type
 
-[**TagResults**](TagResults.md)
+[**InlineResponse20012**](InlineResponse20012.md)
 
 ### Authorization
 
@@ -313,14 +322,18 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully got all tags |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**429** | Too Many Requests |  -  |
+| **200** | Successfully got all Tags |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
 
 <a name="updateTagByID"></a>
 # **updateTagByID**
-> Success updateTagByID(id, data)
+> InlineResponse202 updateTagByID(id, tagDataInput)
 
 Update tag by id
 
@@ -348,10 +361,10 @@ public class Example {
     //API-Key.setApiKeyPrefix("Token");
 
     TagApi apiInstance = new TagApi(defaultClient);
-    Long id = 0lL; // Long | ID of Tag **(Required)**
-    TagDataInput data = new TagDataInput(); // TagDataInput | Data *(Optional)*
+    Long id = 56L; // Long | ID of Tag **(Required)**
+    TagDataInput tagDataInput = new TagDataInput(); // TagDataInput | Data *(Optional)*
     try {
-      Success result = apiInstance.updateTagByID(id, data);
+      InlineResponse202 result = apiInstance.updateTagByID(id, tagDataInput);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling TagApi#updateTagByID");
@@ -366,14 +379,14 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **Long**| ID of Tag **(Required)** | [default to 0l]
- **data** | [**TagDataInput**](TagDataInput.md)| Data *(Optional)* | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | **Long**| ID of Tag **(Required)** | |
+| **tagDataInput** | [**TagDataInput**](TagDataInput.md)| Data *(Optional)* | |
 
 ### Return type
 
-[**Success**](Success.md)
+[**InlineResponse202**](InlineResponse202.md)
 
 ### Authorization
 
@@ -387,9 +400,12 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully updated Tag by id |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
+| **200** | Request Succesful |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
 

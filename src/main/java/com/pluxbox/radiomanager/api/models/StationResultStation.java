@@ -1,6 +1,6 @@
 /*
  * RadioManager
- * RadioManager
+ * This OpenAPI 3 Document describes the functionality of the API v2 of RadioManager. Note that no rights can be derived from this Document and the true functionality of the API might differ.
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@pluxbox.com
@@ -28,10 +28,31 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.pluxbox.radiomanager.api.invoker.JSON;
+
 /**
  * StationResultStation
  */
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class StationResultStation {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -145,6 +166,8 @@ public class StationResultStation {
   @SerializedName(SERIALIZED_NAME_START_DAYS)
   private StationResultStationStartDays startDays;
 
+  public StationResultStation() {
+  }
 
   public StationResultStation id(Integer id) {
     
@@ -798,8 +821,9 @@ public class StationResultStation {
   }
 
 
+
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -842,7 +866,6 @@ public class StationResultStation {
     return Objects.hash(id, name, createdAt, updatedAt, systemName, shortName, mediumName, website, email, keywords, description, sms, telephone, genreId, language, active, logoRectangle, logo128x128, logo320x320, logo600x600, payOff, ptyCode, ptyType, stationKey, timezone, metadataradioOrganisation, metadataradioStationId, startDays);
   }
 
-
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -883,12 +906,190 @@ public class StationResultStation {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("id");
+    openapiFields.add("name");
+    openapiFields.add("created_at");
+    openapiFields.add("updated_at");
+    openapiFields.add("system_name");
+    openapiFields.add("short_name");
+    openapiFields.add("medium_name");
+    openapiFields.add("website");
+    openapiFields.add("email");
+    openapiFields.add("keywords");
+    openapiFields.add("description");
+    openapiFields.add("sms");
+    openapiFields.add("telephone");
+    openapiFields.add("genre_id");
+    openapiFields.add("language");
+    openapiFields.add("active");
+    openapiFields.add("logo_rectangle");
+    openapiFields.add("logo_128x128");
+    openapiFields.add("logo_320x320");
+    openapiFields.add("logo_600x600");
+    openapiFields.add("pay_off");
+    openapiFields.add("pty_code");
+    openapiFields.add("pty_type");
+    openapiFields.add("station_key");
+    openapiFields.add("timezone");
+    openapiFields.add("metadataradio_organisation");
+    openapiFields.add("metadataradio_station_id");
+    openapiFields.add("start_days");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to StationResultStation
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (!StationResultStation.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+          throw new IllegalArgumentException(String.format("The required field(s) %s in StationResultStation is not found in the empty JSON string", StationResultStation.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!StationResultStation.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `StationResultStation` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+      if ((jsonObj.get("name") != null && !jsonObj.get("name").isJsonNull()) && !jsonObj.get("name").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
+      }
+      if ((jsonObj.get("system_name") != null && !jsonObj.get("system_name").isJsonNull()) && !jsonObj.get("system_name").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `system_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("system_name").toString()));
+      }
+      if ((jsonObj.get("short_name") != null && !jsonObj.get("short_name").isJsonNull()) && !jsonObj.get("short_name").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `short_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("short_name").toString()));
+      }
+      if ((jsonObj.get("medium_name") != null && !jsonObj.get("medium_name").isJsonNull()) && !jsonObj.get("medium_name").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `medium_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("medium_name").toString()));
+      }
+      if ((jsonObj.get("website") != null && !jsonObj.get("website").isJsonNull()) && !jsonObj.get("website").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `website` to be a primitive type in the JSON string but got `%s`", jsonObj.get("website").toString()));
+      }
+      if ((jsonObj.get("email") != null && !jsonObj.get("email").isJsonNull()) && !jsonObj.get("email").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `email` to be a primitive type in the JSON string but got `%s`", jsonObj.get("email").toString()));
+      }
+      // ensure the optional json data is an array if present
+      if (jsonObj.get("keywords") != null && !jsonObj.get("keywords").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `keywords` to be an array in the JSON string but got `%s`", jsonObj.get("keywords").toString()));
+      }
+      if ((jsonObj.get("description") != null && !jsonObj.get("description").isJsonNull()) && !jsonObj.get("description").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `description` to be a primitive type in the JSON string but got `%s`", jsonObj.get("description").toString()));
+      }
+      if ((jsonObj.get("sms") != null && !jsonObj.get("sms").isJsonNull()) && !jsonObj.get("sms").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `sms` to be a primitive type in the JSON string but got `%s`", jsonObj.get("sms").toString()));
+      }
+      if ((jsonObj.get("telephone") != null && !jsonObj.get("telephone").isJsonNull()) && !jsonObj.get("telephone").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `telephone` to be a primitive type in the JSON string but got `%s`", jsonObj.get("telephone").toString()));
+      }
+      if ((jsonObj.get("language") != null && !jsonObj.get("language").isJsonNull()) && !jsonObj.get("language").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `language` to be a primitive type in the JSON string but got `%s`", jsonObj.get("language").toString()));
+      }
+      if ((jsonObj.get("logo_rectangle") != null && !jsonObj.get("logo_rectangle").isJsonNull()) && !jsonObj.get("logo_rectangle").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `logo_rectangle` to be a primitive type in the JSON string but got `%s`", jsonObj.get("logo_rectangle").toString()));
+      }
+      if ((jsonObj.get("logo_128x128") != null && !jsonObj.get("logo_128x128").isJsonNull()) && !jsonObj.get("logo_128x128").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `logo_128x128` to be a primitive type in the JSON string but got `%s`", jsonObj.get("logo_128x128").toString()));
+      }
+      if ((jsonObj.get("logo_320x320") != null && !jsonObj.get("logo_320x320").isJsonNull()) && !jsonObj.get("logo_320x320").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `logo_320x320` to be a primitive type in the JSON string but got `%s`", jsonObj.get("logo_320x320").toString()));
+      }
+      if ((jsonObj.get("logo_600x600") != null && !jsonObj.get("logo_600x600").isJsonNull()) && !jsonObj.get("logo_600x600").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `logo_600x600` to be a primitive type in the JSON string but got `%s`", jsonObj.get("logo_600x600").toString()));
+      }
+      if ((jsonObj.get("pay_off") != null && !jsonObj.get("pay_off").isJsonNull()) && !jsonObj.get("pay_off").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `pay_off` to be a primitive type in the JSON string but got `%s`", jsonObj.get("pay_off").toString()));
+      }
+      if ((jsonObj.get("pty_type") != null && !jsonObj.get("pty_type").isJsonNull()) && !jsonObj.get("pty_type").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `pty_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("pty_type").toString()));
+      }
+      if ((jsonObj.get("station_key") != null && !jsonObj.get("station_key").isJsonNull()) && !jsonObj.get("station_key").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `station_key` to be a primitive type in the JSON string but got `%s`", jsonObj.get("station_key").toString()));
+      }
+      if ((jsonObj.get("timezone") != null && !jsonObj.get("timezone").isJsonNull()) && !jsonObj.get("timezone").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `timezone` to be a primitive type in the JSON string but got `%s`", jsonObj.get("timezone").toString()));
+      }
+      if ((jsonObj.get("metadataradio_organisation") != null && !jsonObj.get("metadataradio_organisation").isJsonNull()) && !jsonObj.get("metadataradio_organisation").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `metadataradio_organisation` to be a primitive type in the JSON string but got `%s`", jsonObj.get("metadataradio_organisation").toString()));
+      }
+      if ((jsonObj.get("metadataradio_station_id") != null && !jsonObj.get("metadataradio_station_id").isJsonNull()) && !jsonObj.get("metadataradio_station_id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `metadataradio_station_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("metadataradio_station_id").toString()));
+      }
+      // validate the optional field `start_days`
+      if (jsonObj.get("start_days") != null && !jsonObj.get("start_days").isJsonNull()) {
+        StationResultStationStartDays.validateJsonObject(jsonObj.getAsJsonObject("start_days"));
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!StationResultStation.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'StationResultStation' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<StationResultStation> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(StationResultStation.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<StationResultStation>() {
+           @Override
+           public void write(JsonWriter out, StationResultStation value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public StationResultStation read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of StationResultStation given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of StationResultStation
+  * @throws IOException if the JSON string is invalid with respect to StationResultStation
+  */
+  public static StationResultStation fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, StationResultStation.class);
+  }
+
+ /**
+  * Convert an instance of StationResultStation to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

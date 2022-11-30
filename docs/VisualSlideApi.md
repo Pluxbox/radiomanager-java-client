@@ -2,18 +2,18 @@
 
 All URIs are relative to *https://radiomanager.io/api/v2*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**getVisualSlide**](VisualSlideApi.md#getVisualSlide) | **GET** /visual | Get Visual Slide Image as Base64
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**getVisualSlide**](VisualSlideApi.md#getVisualSlide) | **GET** /visual | Get Visual Slide Image |
 
 
 <a name="getVisualSlide"></a>
 # **getVisualSlide**
 > VisualResult getVisualSlide()
 
-Get Visual Slide Image as Base64
+Get Visual Slide Image
 
-Get Visual Slide Image as Base64
+Get VisualRadio Image as PNG for publication Base64 encoded inside a JSON object
 
 ### Example
 ```java
@@ -70,7 +70,9 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Image as Base64 |  -  |
-**404** | Not Found |  -  |
-**429** | Too Many Requests |  -  |
+| **200** | Image as Base64 |  -  |
+| **401** | Unauthorized |  -  |
+| **404** | Not Found |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
 

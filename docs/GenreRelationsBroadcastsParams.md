@@ -2,11 +2,12 @@
 
 # GenreRelationsBroadcastsParams
 
+
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**genreId** | **Integer** |  |  [optional]
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**genreId** | **Integer** |  |  [optional] |
 
 
 

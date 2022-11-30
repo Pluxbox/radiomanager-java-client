@@ -1,6 +1,6 @@
 /*
  * RadioManager
- * RadioManager
+ * This OpenAPI 3 Document describes the functionality of the API v2 of RadioManager. Note that no rights can be derived from this Document and the true functionality of the API might differ.
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@pluxbox.com
@@ -20,8 +20,6 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.pluxbox.radiomanager.api.models.Broadcast;
-import com.pluxbox.radiomanager.api.models.BroadcastInputOnly;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -29,10 +27,31 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.pluxbox.radiomanager.api.invoker.JSON;
+
 /**
  * BroadcastDataInput
  */
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class BroadcastDataInput {
   public static final String SERIALIZED_NAME_PROGRAM_ID = "program_id";
   @SerializedName(SERIALIZED_NAME_PROGRAM_ID)
@@ -173,6 +192,14 @@ public class BroadcastDataInput {
   @SerializedName(SERIALIZED_NAME_PTY_CODE_ID)
   private Long ptyCodeId;
 
+  public static final String SERIALIZED_NAME_PLANNED_IN_EPG = "planned_in_epg";
+  @SerializedName(SERIALIZED_NAME_PLANNED_IN_EPG)
+  private Integer plannedInEpg;
+
+  public static final String SERIALIZED_NAME_GROUP_ID = "group_id";
+  @SerializedName(SERIALIZED_NAME_GROUP_ID)
+  private Long groupId;
+
   public static final String SERIALIZED_NAME_TAGS = "tags";
   @SerializedName(SERIALIZED_NAME_TAGS)
   private List<Integer> tags = null;
@@ -181,6 +208,8 @@ public class BroadcastDataInput {
   @SerializedName(SERIALIZED_NAME_PRESENTERS)
   private List<Integer> presenters = null;
 
+  public BroadcastDataInput() {
+  }
 
   public BroadcastDataInput programId(Long programId) {
     
@@ -688,6 +717,52 @@ public class BroadcastDataInput {
   }
 
 
+  public BroadcastDataInput plannedInEpg(Integer plannedInEpg) {
+    
+    this.plannedInEpg = plannedInEpg;
+    return this;
+  }
+
+   /**
+   * Get plannedInEpg
+   * @return plannedInEpg
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public Integer getPlannedInEpg() {
+    return plannedInEpg;
+  }
+
+
+  public void setPlannedInEpg(Integer plannedInEpg) {
+    this.plannedInEpg = plannedInEpg;
+  }
+
+
+  public BroadcastDataInput groupId(Long groupId) {
+    
+    this.groupId = groupId;
+    return this;
+  }
+
+   /**
+   * Get groupId
+   * @return groupId
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "1", value = "")
+
+  public Long getGroupId() {
+    return groupId;
+  }
+
+
+  public void setGroupId(Long groupId) {
+    this.groupId = groupId;
+  }
+
+
   public BroadcastDataInput tags(List<Integer> tags) {
     
     this.tags = tags;
@@ -750,8 +825,9 @@ public class BroadcastDataInput {
   }
 
 
+
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -781,15 +857,16 @@ public class BroadcastDataInput {
         Objects.equals(this.repetitionStart, broadcastDataInput.repetitionStart) &&
         Objects.equals(this.repetitionDays, broadcastDataInput.repetitionDays) &&
         Objects.equals(this.ptyCodeId, broadcastDataInput.ptyCodeId) &&
+        Objects.equals(this.plannedInEpg, broadcastDataInput.plannedInEpg) &&
+        Objects.equals(this.groupId, broadcastDataInput.groupId) &&
         Objects.equals(this.tags, broadcastDataInput.tags) &&
         Objects.equals(this.presenters, broadcastDataInput.presenters);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(programId, modelTypeId, stationId, fieldValues, title, start, stop, genreId, description, shortName, mediumName, website, email, recommended, language, published, repetitionUid, repetitionType, repetitionEnd, repetitionStart, repetitionDays, ptyCodeId, tags, presenters);
+    return Objects.hash(programId, modelTypeId, stationId, fieldValues, title, start, stop, genreId, description, shortName, mediumName, website, email, recommended, language, published, repetitionUid, repetitionType, repetitionEnd, repetitionStart, repetitionDays, ptyCodeId, plannedInEpg, groupId, tags, presenters);
   }
-
 
   @Override
   public String toString() {
@@ -817,6 +894,8 @@ public class BroadcastDataInput {
     sb.append("    repetitionStart: ").append(toIndentedString(repetitionStart)).append("\n");
     sb.append("    repetitionDays: ").append(toIndentedString(repetitionDays)).append("\n");
     sb.append("    ptyCodeId: ").append(toIndentedString(ptyCodeId)).append("\n");
+    sb.append("    plannedInEpg: ").append(toIndentedString(plannedInEpg)).append("\n");
+    sb.append("    groupId: ").append(toIndentedString(groupId)).append("\n");
     sb.append("    tags: ").append(toIndentedString(tags)).append("\n");
     sb.append("    presenters: ").append(toIndentedString(presenters)).append("\n");
     sb.append("}");
@@ -827,12 +906,158 @@ public class BroadcastDataInput {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("program_id");
+    openapiFields.add("model_type_id");
+    openapiFields.add("station_id");
+    openapiFields.add("field_values");
+    openapiFields.add("title");
+    openapiFields.add("start");
+    openapiFields.add("stop");
+    openapiFields.add("genre_id");
+    openapiFields.add("description");
+    openapiFields.add("short_name");
+    openapiFields.add("medium_name");
+    openapiFields.add("website");
+    openapiFields.add("email");
+    openapiFields.add("recommended");
+    openapiFields.add("language");
+    openapiFields.add("published");
+    openapiFields.add("repetition_uid");
+    openapiFields.add("repetition_type");
+    openapiFields.add("repetition_end");
+    openapiFields.add("repetition_start");
+    openapiFields.add("repetition_days");
+    openapiFields.add("pty_code_id");
+    openapiFields.add("planned_in_epg");
+    openapiFields.add("group_id");
+    openapiFields.add("tags");
+    openapiFields.add("presenters");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to BroadcastDataInput
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (!BroadcastDataInput.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+          throw new IllegalArgumentException(String.format("The required field(s) %s in BroadcastDataInput is not found in the empty JSON string", BroadcastDataInput.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!BroadcastDataInput.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `BroadcastDataInput` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+      if ((jsonObj.get("title") != null && !jsonObj.get("title").isJsonNull()) && !jsonObj.get("title").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `title` to be a primitive type in the JSON string but got `%s`", jsonObj.get("title").toString()));
+      }
+      if ((jsonObj.get("description") != null && !jsonObj.get("description").isJsonNull()) && !jsonObj.get("description").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `description` to be a primitive type in the JSON string but got `%s`", jsonObj.get("description").toString()));
+      }
+      if ((jsonObj.get("short_name") != null && !jsonObj.get("short_name").isJsonNull()) && !jsonObj.get("short_name").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `short_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("short_name").toString()));
+      }
+      if ((jsonObj.get("medium_name") != null && !jsonObj.get("medium_name").isJsonNull()) && !jsonObj.get("medium_name").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `medium_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("medium_name").toString()));
+      }
+      if ((jsonObj.get("website") != null && !jsonObj.get("website").isJsonNull()) && !jsonObj.get("website").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `website` to be a primitive type in the JSON string but got `%s`", jsonObj.get("website").toString()));
+      }
+      if ((jsonObj.get("email") != null && !jsonObj.get("email").isJsonNull()) && !jsonObj.get("email").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `email` to be a primitive type in the JSON string but got `%s`", jsonObj.get("email").toString()));
+      }
+      if ((jsonObj.get("language") != null && !jsonObj.get("language").isJsonNull()) && !jsonObj.get("language").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `language` to be a primitive type in the JSON string but got `%s`", jsonObj.get("language").toString()));
+      }
+      if ((jsonObj.get("repetition_uid") != null && !jsonObj.get("repetition_uid").isJsonNull()) && !jsonObj.get("repetition_uid").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `repetition_uid` to be a primitive type in the JSON string but got `%s`", jsonObj.get("repetition_uid").toString()));
+      }
+      if ((jsonObj.get("repetition_type") != null && !jsonObj.get("repetition_type").isJsonNull()) && !jsonObj.get("repetition_type").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `repetition_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("repetition_type").toString()));
+      }
+      if ((jsonObj.get("repetition_days") != null && !jsonObj.get("repetition_days").isJsonNull()) && !jsonObj.get("repetition_days").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `repetition_days` to be a primitive type in the JSON string but got `%s`", jsonObj.get("repetition_days").toString()));
+      }
+      // ensure the optional json data is an array if present
+      if (jsonObj.get("tags") != null && !jsonObj.get("tags").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `tags` to be an array in the JSON string but got `%s`", jsonObj.get("tags").toString()));
+      }
+      // ensure the optional json data is an array if present
+      if (jsonObj.get("presenters") != null && !jsonObj.get("presenters").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `presenters` to be an array in the JSON string but got `%s`", jsonObj.get("presenters").toString()));
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!BroadcastDataInput.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'BroadcastDataInput' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<BroadcastDataInput> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(BroadcastDataInput.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<BroadcastDataInput>() {
+           @Override
+           public void write(JsonWriter out, BroadcastDataInput value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public BroadcastDataInput read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of BroadcastDataInput given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of BroadcastDataInput
+  * @throws IOException if the JSON string is invalid with respect to BroadcastDataInput
+  */
+  public static BroadcastDataInput fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, BroadcastDataInput.class);
+  }
+
+ /**
+  * Convert an instance of BroadcastDataInput to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

@@ -2,9 +2,9 @@
 
 All URIs are relative to *https://radiomanager.io/api/v2*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**getStation**](StationApi.md#getStation) | **GET** /station | Get own station only
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**getStation**](StationApi.md#getStation) | **GET** /station | Get own station only |
 
 
 <a name="getStation"></a>
@@ -70,7 +70,10 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Station |  -  |
-**404** | Not Found |  -  |
-**429** | Too Many Requests |  -  |
+| **200** | Your Station |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
 

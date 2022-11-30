@@ -1,6 +1,6 @@
 /*
  * RadioManager
- * RadioManager
+ * This OpenAPI 3 Document describes the functionality of the API v2 of RadioManager. Note that no rights can be derived from this Document and the true functionality of the API might differ.
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@pluxbox.com
@@ -27,26 +27,31 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
-import com.pluxbox.radiomanager.api.models.Campaign;
 import com.pluxbox.radiomanager.api.models.CampaignDataInput;
 import com.pluxbox.radiomanager.api.models.CampaignResult;
-import com.pluxbox.radiomanager.api.models.CampaignResults;
-import com.pluxbox.radiomanager.api.models.Forbidden;
-import com.pluxbox.radiomanager.api.models.NotFound;
+import com.pluxbox.radiomanager.api.models.InlineResponse2002;
+import com.pluxbox.radiomanager.api.models.InlineResponse2004;
+import com.pluxbox.radiomanager.api.models.InlineResponse202;
+import com.pluxbox.radiomanager.api.models.InlineResponse400;
+import com.pluxbox.radiomanager.api.models.InlineResponse401;
+import com.pluxbox.radiomanager.api.models.InlineResponse403;
+import com.pluxbox.radiomanager.api.models.InlineResponse404;
+import com.pluxbox.radiomanager.api.models.InlineResponse422;
+import com.pluxbox.radiomanager.api.models.InlineResponse429;
+import com.pluxbox.radiomanager.api.models.InlineResponse500;
 import java.time.OffsetDateTime;
-import com.pluxbox.radiomanager.api.models.PostSuccess;
-import com.pluxbox.radiomanager.api.models.Success;
-import com.pluxbox.radiomanager.api.models.TooManyRequests;
-import com.pluxbox.radiomanager.api.models.UnprocessableEntity;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.ws.rs.core.GenericType;
 
 public class CampaignApi {
     private ApiClient localVarApiClient;
+    private int localHostIndex;
+    private String localCustomBaseUrl;
 
     public CampaignApi() {
         this(Configuration.getDefaultApiClient());
@@ -64,24 +69,56 @@ public class CampaignApi {
         this.localVarApiClient = apiClient;
     }
 
+    public int getHostIndex() {
+        return localHostIndex;
+    }
+
+    public void setHostIndex(int hostIndex) {
+        this.localHostIndex = hostIndex;
+    }
+
+    public String getCustomBaseUrl() {
+        return localCustomBaseUrl;
+    }
+
+    public void setCustomBaseUrl(String customBaseUrl) {
+        this.localCustomBaseUrl = customBaseUrl;
+    }
+
     /**
      * Build call for createCampaign
-     * @param data Data **(Required)** (required)
+     * @param campaignDataInput Data **(Required)** (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully created a campaign </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Post Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call createCampaignCall(CampaignDataInput data, final ApiCallback _callback) throws ApiException {
-        Object localVarPostBody = data;
+    public okhttp3.Call createCampaignCall(CampaignDataInput campaignDataInput, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = campaignDataInput;
 
         // create path and map variables
         String localVarPath = "/campaigns";
@@ -91,6 +128,7 @@ public class CampaignApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -103,90 +141,98 @@ public class CampaignApi {
             "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call createCampaignValidateBeforeCall(CampaignDataInput data, final ApiCallback _callback) throws ApiException {
-        
-        // verify the required parameter 'data' is set
-        if (data == null) {
-            throw new ApiException("Missing the required parameter 'data' when calling createCampaign(Async)");
+    private okhttp3.Call createCampaignValidateBeforeCall(CampaignDataInput campaignDataInput, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'campaignDataInput' is set
+        if (campaignDataInput == null) {
+            throw new ApiException("Missing the required parameter 'campaignDataInput' when calling createCampaign(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = createCampaignCall(data, _callback);
-        return localVarCall;
+        return createCampaignCall(campaignDataInput, _callback);
 
     }
 
     /**
      * Create campaign.
      * Create campaign.
-     * @param data Data **(Required)** (required)
-     * @return PostSuccess
+     * @param campaignDataInput Data **(Required)** (required)
+     * @return InlineResponse2002
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully created a campaign </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Post Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public PostSuccess createCampaign(CampaignDataInput data) throws ApiException {
-        ApiResponse<PostSuccess> localVarResp = createCampaignWithHttpInfo(data);
+    public InlineResponse2002 createCampaign(CampaignDataInput campaignDataInput) throws ApiException {
+        ApiResponse<InlineResponse2002> localVarResp = createCampaignWithHttpInfo(campaignDataInput);
         return localVarResp.getData();
     }
 
     /**
      * Create campaign.
      * Create campaign.
-     * @param data Data **(Required)** (required)
-     * @return ApiResponse&lt;PostSuccess&gt;
+     * @param campaignDataInput Data **(Required)** (required)
+     * @return ApiResponse&lt;InlineResponse2002&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully created a campaign </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Post Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<PostSuccess> createCampaignWithHttpInfo(CampaignDataInput data) throws ApiException {
-        okhttp3.Call localVarCall = createCampaignValidateBeforeCall(data, null);
-        Type localVarReturnType = new TypeToken<PostSuccess>(){}.getType();
+    public ApiResponse<InlineResponse2002> createCampaignWithHttpInfo(CampaignDataInput campaignDataInput) throws ApiException {
+        okhttp3.Call localVarCall = createCampaignValidateBeforeCall(campaignDataInput, null);
+        Type localVarReturnType = new TypeToken<InlineResponse2002>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * Create campaign. (asynchronously)
      * Create campaign.
-     * @param data Data **(Required)** (required)
+     * @param campaignDataInput Data **(Required)** (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully created a campaign </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Post Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call createCampaignAsync(CampaignDataInput data, final ApiCallback<PostSuccess> _callback) throws ApiException {
+    public okhttp3.Call createCampaignAsync(CampaignDataInput campaignDataInput, final ApiCallback<InlineResponse2002> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = createCampaignValidateBeforeCall(data, _callback);
-        Type localVarReturnType = new TypeToken<PostSuccess>(){}.getType();
+        okhttp3.Call localVarCall = createCampaignValidateBeforeCall(campaignDataInput, _callback);
+        Type localVarReturnType = new TypeToken<InlineResponse2002>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -199,24 +245,42 @@ public class CampaignApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully deleted Campaign by id </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call deleteCampaignByIdCall(Long id, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
         String localVarPath = "/campaigns/{id}"
-            .replaceAll("\\{" + "id" + "\\}", localVarApiClient.escapeString(id.toString()));
+            .replace("{" + "id" + "}", localVarApiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -226,26 +290,24 @@ public class CampaignApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call deleteCampaignByIdValidateBeforeCall(Long id, final ApiCallback _callback) throws ApiException {
-        
         // verify the required parameter 'id' is set
         if (id == null) {
             throw new ApiException("Missing the required parameter 'id' when calling deleteCampaignById(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = deleteCampaignByIdCall(id, _callback);
-        return localVarCall;
+        return deleteCampaignByIdCall(id, _callback);
 
     }
 
@@ -253,19 +315,23 @@ public class CampaignApi {
      * Delete campaign by id
      * Delete campaign by id
      * @param id ID of Campaign **(Required)** (required)
-     * @return Success
+     * @return InlineResponse202
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully deleted Campaign by id </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public Success deleteCampaignById(Long id) throws ApiException {
-        ApiResponse<Success> localVarResp = deleteCampaignByIdWithHttpInfo(id);
+    public InlineResponse202 deleteCampaignById(Long id) throws ApiException {
+        ApiResponse<InlineResponse202> localVarResp = deleteCampaignByIdWithHttpInfo(id);
         return localVarResp.getData();
     }
 
@@ -273,20 +339,24 @@ public class CampaignApi {
      * Delete campaign by id
      * Delete campaign by id
      * @param id ID of Campaign **(Required)** (required)
-     * @return ApiResponse&lt;Success&gt;
+     * @return ApiResponse&lt;InlineResponse202&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully deleted Campaign by id </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Success> deleteCampaignByIdWithHttpInfo(Long id) throws ApiException {
+    public ApiResponse<InlineResponse202> deleteCampaignByIdWithHttpInfo(Long id) throws ApiException {
         okhttp3.Call localVarCall = deleteCampaignByIdValidateBeforeCall(id, null);
-        Type localVarReturnType = new TypeToken<Success>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -300,23 +370,26 @@ public class CampaignApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully deleted Campaign by id </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call deleteCampaignByIdAsync(Long id, final ApiCallback<Success> _callback) throws ApiException {
+    public okhttp3.Call deleteCampaignByIdAsync(Long id, final ApiCallback<InlineResponse202> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = deleteCampaignByIdValidateBeforeCall(id, _callback);
-        Type localVarReturnType = new TypeToken<Success>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for getCampaignById
      * @param id ID of Campaign **(Required)** (required)
-     * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -324,27 +397,41 @@ public class CampaignApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got Campaign by id </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getCampaignByIdCall(Long id, Long externalStationId, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getCampaignByIdCall(Long id, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
         String localVarPath = "/campaigns/{id}"
-            .replaceAll("\\{" + "id" + "\\}", localVarApiClient.escapeString(id.toString()));
+            .replace("{" + "id" + "}", localVarApiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        if (externalStationId != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("_external_station_id", externalStationId));
-        }
-
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -354,26 +441,24 @@ public class CampaignApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getCampaignByIdValidateBeforeCall(Long id, Long externalStationId, final ApiCallback _callback) throws ApiException {
-        
+    private okhttp3.Call getCampaignByIdValidateBeforeCall(Long id, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'id' is set
         if (id == null) {
             throw new ApiException("Missing the required parameter 'id' when calling getCampaignById(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = getCampaignByIdCall(id, externalStationId, _callback);
-        return localVarCall;
+        return getCampaignByIdCall(id, _callback);
 
     }
 
@@ -381,20 +466,23 @@ public class CampaignApi {
      * Get campaign by id
      * Get campaign by id
      * @param id ID of Campaign **(Required)** (required)
-     * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @return CampaignResult
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got Campaign by id </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public CampaignResult getCampaignById(Long id, Long externalStationId) throws ApiException {
-        ApiResponse<CampaignResult> localVarResp = getCampaignByIdWithHttpInfo(id, externalStationId);
+    public CampaignResult getCampaignById(Long id) throws ApiException {
+        ApiResponse<CampaignResult> localVarResp = getCampaignByIdWithHttpInfo(id);
         return localVarResp.getData();
     }
 
@@ -402,20 +490,23 @@ public class CampaignApi {
      * Get campaign by id
      * Get campaign by id
      * @param id ID of Campaign **(Required)** (required)
-     * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @return ApiResponse&lt;CampaignResult&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got Campaign by id </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<CampaignResult> getCampaignByIdWithHttpInfo(Long id, Long externalStationId) throws ApiException {
-        okhttp3.Call localVarCall = getCampaignByIdValidateBeforeCall(id, externalStationId, null);
+    public ApiResponse<CampaignResult> getCampaignByIdWithHttpInfo(Long id) throws ApiException {
+        okhttp3.Call localVarCall = getCampaignByIdValidateBeforeCall(id, null);
         Type localVarReturnType = new TypeToken<CampaignResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -424,7 +515,6 @@ public class CampaignApi {
      * Get campaign by id (asynchronously)
      * Get campaign by id
      * @param id ID of Campaign **(Required)** (required)
-     * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -432,25 +522,29 @@ public class CampaignApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got Campaign by id </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getCampaignByIdAsync(Long id, Long externalStationId, final ApiCallback<CampaignResult> _callback) throws ApiException {
+    public okhttp3.Call getCampaignByIdAsync(Long id, final ApiCallback<CampaignResult> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = getCampaignByIdValidateBeforeCall(id, externalStationId, _callback);
+        okhttp3.Call localVarCall = getCampaignByIdValidateBeforeCall(id, _callback);
         Type localVarReturnType = new TypeToken<CampaignResult>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for listCampaigns
-     * @param page Current page *(Optional)* (optional)
      * @param itemId Search on Item ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param modelTypeId Search on ModelType ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param startMin Minimum start date *(Optional)* (optional)
      * @param startMax Maximum start date *(Optional)* (optional)
+     * @param page Current page *(Optional)* (optional, default to 1)
      * @param limit Results per page *(Optional)* (optional)
      * @param orderBy Field to order the results *(Optional)* (optional)
      * @param orderDirection Direction of ordering *(Optional)* (optional)
@@ -462,12 +556,29 @@ public class CampaignApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got all campaigns </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call listCampaignsCall(Long page, Long itemId, Long modelTypeId, OffsetDateTime startMin, OffsetDateTime startMax, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call listCampaignsCall(Long itemId, Long modelTypeId, OffsetDateTime startMin, OffsetDateTime startMax, Long page, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -475,9 +586,9 @@ public class CampaignApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        if (page != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
-        }
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
         if (itemId != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("item_id", itemId));
@@ -493,6 +604,10 @@ public class CampaignApi {
 
         if (startMax != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("start-max", startMax));
+        }
+
+        if (page != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
         }
 
         if (limit != null) {
@@ -511,9 +626,6 @@ public class CampaignApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("_external_station_id", externalStationId));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -523,89 +635,95 @@ public class CampaignApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call listCampaignsValidateBeforeCall(Long page, Long itemId, Long modelTypeId, OffsetDateTime startMin, OffsetDateTime startMax, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback _callback) throws ApiException {
-        
-
-        okhttp3.Call localVarCall = listCampaignsCall(page, itemId, modelTypeId, startMin, startMax, limit, orderBy, orderDirection, externalStationId, _callback);
-        return localVarCall;
+    private okhttp3.Call listCampaignsValidateBeforeCall(Long itemId, Long modelTypeId, OffsetDateTime startMin, OffsetDateTime startMax, Long page, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback _callback) throws ApiException {
+        return listCampaignsCall(itemId, modelTypeId, startMin, startMax, page, limit, orderBy, orderDirection, externalStationId, _callback);
 
     }
 
     /**
      * Get all campaigns.
      * List all campaigns.
-     * @param page Current page *(Optional)* (optional)
      * @param itemId Search on Item ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param modelTypeId Search on ModelType ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param startMin Minimum start date *(Optional)* (optional)
      * @param startMax Maximum start date *(Optional)* (optional)
+     * @param page Current page *(Optional)* (optional, default to 1)
      * @param limit Results per page *(Optional)* (optional)
      * @param orderBy Field to order the results *(Optional)* (optional)
      * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
-     * @return CampaignResults
+     * @return InlineResponse2004
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got all campaigns </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public CampaignResults listCampaigns(Long page, Long itemId, Long modelTypeId, OffsetDateTime startMin, OffsetDateTime startMax, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
-        ApiResponse<CampaignResults> localVarResp = listCampaignsWithHttpInfo(page, itemId, modelTypeId, startMin, startMax, limit, orderBy, orderDirection, externalStationId);
+    public InlineResponse2004 listCampaigns(Long itemId, Long modelTypeId, OffsetDateTime startMin, OffsetDateTime startMax, Long page, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
+        ApiResponse<InlineResponse2004> localVarResp = listCampaignsWithHttpInfo(itemId, modelTypeId, startMin, startMax, page, limit, orderBy, orderDirection, externalStationId);
         return localVarResp.getData();
     }
 
     /**
      * Get all campaigns.
      * List all campaigns.
-     * @param page Current page *(Optional)* (optional)
      * @param itemId Search on Item ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param modelTypeId Search on ModelType ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param startMin Minimum start date *(Optional)* (optional)
      * @param startMax Maximum start date *(Optional)* (optional)
+     * @param page Current page *(Optional)* (optional, default to 1)
      * @param limit Results per page *(Optional)* (optional)
      * @param orderBy Field to order the results *(Optional)* (optional)
      * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
-     * @return ApiResponse&lt;CampaignResults&gt;
+     * @return ApiResponse&lt;InlineResponse2004&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got all campaigns </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<CampaignResults> listCampaignsWithHttpInfo(Long page, Long itemId, Long modelTypeId, OffsetDateTime startMin, OffsetDateTime startMax, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
-        okhttp3.Call localVarCall = listCampaignsValidateBeforeCall(page, itemId, modelTypeId, startMin, startMax, limit, orderBy, orderDirection, externalStationId, null);
-        Type localVarReturnType = new TypeToken<CampaignResults>(){}.getType();
+    public ApiResponse<InlineResponse2004> listCampaignsWithHttpInfo(Long itemId, Long modelTypeId, OffsetDateTime startMin, OffsetDateTime startMax, Long page, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
+        okhttp3.Call localVarCall = listCampaignsValidateBeforeCall(itemId, modelTypeId, startMin, startMax, page, limit, orderBy, orderDirection, externalStationId, null);
+        Type localVarReturnType = new TypeToken<InlineResponse2004>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * Get all campaigns. (asynchronously)
      * List all campaigns.
-     * @param page Current page *(Optional)* (optional)
      * @param itemId Search on Item ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param modelTypeId Search on ModelType ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param startMin Minimum start date *(Optional)* (optional)
      * @param startMax Maximum start date *(Optional)* (optional)
+     * @param page Current page *(Optional)* (optional, default to 1)
      * @param limit Results per page *(Optional)* (optional)
      * @param orderBy Field to order the results *(Optional)* (optional)
      * @param orderDirection Direction of ordering *(Optional)* (optional)
@@ -617,47 +735,68 @@ public class CampaignApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got all campaigns </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call listCampaignsAsync(Long page, Long itemId, Long modelTypeId, OffsetDateTime startMin, OffsetDateTime startMax, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback<CampaignResults> _callback) throws ApiException {
+    public okhttp3.Call listCampaignsAsync(Long itemId, Long modelTypeId, OffsetDateTime startMin, OffsetDateTime startMax, Long page, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback<InlineResponse2004> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = listCampaignsValidateBeforeCall(page, itemId, modelTypeId, startMin, startMax, limit, orderBy, orderDirection, externalStationId, _callback);
-        Type localVarReturnType = new TypeToken<CampaignResults>(){}.getType();
+        okhttp3.Call localVarCall = listCampaignsValidateBeforeCall(itemId, modelTypeId, startMin, startMax, page, limit, orderBy, orderDirection, externalStationId, _callback);
+        Type localVarReturnType = new TypeToken<InlineResponse2004>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for updateCampaignByID
      * @param id ID of Campaign **(Required)** (required)
-     * @param data Data *(Optional)* (optional)
+     * @param campaignDataInput Data **(Optional)** (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully updated Campaign by ID </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call updateCampaignByIDCall(Long id, CampaignDataInput data, final ApiCallback _callback) throws ApiException {
-        Object localVarPostBody = data;
+    public okhttp3.Call updateCampaignByIDCall(Long id, CampaignDataInput campaignDataInput, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = campaignDataInput;
 
         // create path and map variables
         String localVarPath = "/campaigns/{id}"
-            .replaceAll("\\{" + "id" + "\\}", localVarApiClient.escapeString(id.toString()));
+            .replace("{" + "id" + "}", localVarApiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -670,23 +809,27 @@ public class CampaignApi {
             "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "PATCH", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "PATCH", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call updateCampaignByIDValidateBeforeCall(Long id, CampaignDataInput data, final ApiCallback _callback) throws ApiException {
-        
+    private okhttp3.Call updateCampaignByIDValidateBeforeCall(Long id, CampaignDataInput campaignDataInput, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'id' is set
         if (id == null) {
             throw new ApiException("Missing the required parameter 'id' when calling updateCampaignByID(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = updateCampaignByIDCall(id, data, _callback);
-        return localVarCall;
+        // verify the required parameter 'campaignDataInput' is set
+        if (campaignDataInput == null) {
+            throw new ApiException("Missing the required parameter 'campaignDataInput' when calling updateCampaignByID(Async)");
+        }
+
+        return updateCampaignByIDCall(id, campaignDataInput, _callback);
 
     }
 
@@ -694,21 +837,24 @@ public class CampaignApi {
      * Update campaign by id
      * Update campaign by id
      * @param id ID of Campaign **(Required)** (required)
-     * @param data Data *(Optional)* (optional)
-     * @return Success
+     * @param campaignDataInput Data **(Optional)** (required)
+     * @return InlineResponse202
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully updated Campaign by ID </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public Success updateCampaignByID(Long id, CampaignDataInput data) throws ApiException {
-        ApiResponse<Success> localVarResp = updateCampaignByIDWithHttpInfo(id, data);
+    public InlineResponse202 updateCampaignByID(Long id, CampaignDataInput campaignDataInput) throws ApiException {
+        ApiResponse<InlineResponse202> localVarResp = updateCampaignByIDWithHttpInfo(id, campaignDataInput);
         return localVarResp.getData();
     }
 
@@ -716,22 +862,25 @@ public class CampaignApi {
      * Update campaign by id
      * Update campaign by id
      * @param id ID of Campaign **(Required)** (required)
-     * @param data Data *(Optional)* (optional)
-     * @return ApiResponse&lt;Success&gt;
+     * @param campaignDataInput Data **(Optional)** (required)
+     * @return ApiResponse&lt;InlineResponse202&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully updated Campaign by ID </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Success> updateCampaignByIDWithHttpInfo(Long id, CampaignDataInput data) throws ApiException {
-        okhttp3.Call localVarCall = updateCampaignByIDValidateBeforeCall(id, data, null);
-        Type localVarReturnType = new TypeToken<Success>(){}.getType();
+    public ApiResponse<InlineResponse202> updateCampaignByIDWithHttpInfo(Long id, CampaignDataInput campaignDataInput) throws ApiException {
+        okhttp3.Call localVarCall = updateCampaignByIDValidateBeforeCall(id, campaignDataInput, null);
+        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -739,24 +888,27 @@ public class CampaignApi {
      * Update campaign by id (asynchronously)
      * Update campaign by id
      * @param id ID of Campaign **(Required)** (required)
-     * @param data Data *(Optional)* (optional)
+     * @param campaignDataInput Data **(Optional)** (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully updated Campaign by ID </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call updateCampaignByIDAsync(Long id, CampaignDataInput data, final ApiCallback<Success> _callback) throws ApiException {
+    public okhttp3.Call updateCampaignByIDAsync(Long id, CampaignDataInput campaignDataInput, final ApiCallback<InlineResponse202> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = updateCampaignByIDValidateBeforeCall(id, data, _callback);
-        Type localVarReturnType = new TypeToken<Success>(){}.getType();
+        okhttp3.Call localVarCall = updateCampaignByIDValidateBeforeCall(id, campaignDataInput, _callback);
+        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

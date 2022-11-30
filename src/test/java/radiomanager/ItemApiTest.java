@@ -1,6 +1,6 @@
 /*
  * RadioManager
- * RadioManager
+ * This OpenAPI 3 Document describes the functionality of the API v2 of RadioManager. Note that no rights can be derived from this Document and the true functionality of the API might differ.
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@pluxbox.com
@@ -14,25 +14,27 @@
 package radiomanager;
 
 import com.pluxbox.radiomanager.api.invoker.ApiException;
-import com.pluxbox.radiomanager.api.models.Forbidden;
 import com.pluxbox.radiomanager.api.models.ImportItem;
-import com.pluxbox.radiomanager.api.models.ImportItemAllOf;
-import com.pluxbox.radiomanager.api.models.InlineObject;
-import com.pluxbox.radiomanager.api.models.InlineObject1;
-import com.pluxbox.radiomanager.api.models.InlineObject2;
-import com.pluxbox.radiomanager.api.models.InlineObject3;
+import com.pluxbox.radiomanager.api.models.InlineResponse2002;
+import com.pluxbox.radiomanager.api.models.InlineResponse2008;
 import com.pluxbox.radiomanager.api.models.InlineResponse202;
+import com.pluxbox.radiomanager.api.models.InlineResponse2021;
+import com.pluxbox.radiomanager.api.models.InlineResponse400;
+import com.pluxbox.radiomanager.api.models.InlineResponse401;
+import com.pluxbox.radiomanager.api.models.InlineResponse403;
+import com.pluxbox.radiomanager.api.models.InlineResponse404;
+import com.pluxbox.radiomanager.api.models.InlineResponse422;
+import com.pluxbox.radiomanager.api.models.InlineResponse429;
+import com.pluxbox.radiomanager.api.models.InlineResponse500;
 import com.pluxbox.radiomanager.api.models.ItemDataInput;
 import com.pluxbox.radiomanager.api.models.ItemResult;
-import com.pluxbox.radiomanager.api.models.ItemResults;
-import com.pluxbox.radiomanager.api.models.NotFound;
+import com.pluxbox.radiomanager.api.models.ItemsStopcurrentBody;
 import java.time.OffsetDateTime;
-import com.pluxbox.radiomanager.api.models.PostSuccess;
-import com.pluxbox.radiomanager.api.models.Success;
-import com.pluxbox.radiomanager.api.models.TooManyRequests;
-import com.pluxbox.radiomanager.api.models.UnprocessableEntity;
-import org.junit.Test;
-import org.junit.Ignore;
+import com.pluxbox.radiomanager.api.models.PlaylistMergeBody;
+import com.pluxbox.radiomanager.api.models.PlaylistStructureBody;
+import com.pluxbox.radiomanager.api.models.PlaylistTimingBody;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,120 +44,105 @@ import java.util.Map;
 /**
  * API tests for ItemApi
  */
-@Ignore
+@Disabled
 public class ItemApiTest {
 
     private final ItemApi api = new ItemApi();
 
-    
     /**
      * Create an new item.
      *
      * Create item.
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void createItemTest() throws ApiException {
-        ItemDataInput data = null;
-        PostSuccess response = api.createItem(data);
-
+        ItemDataInput itemDataInput = null;
+        InlineResponse2002 response = api.createItem(itemDataInput);
         // TODO: test validations
     }
-    
+
     /**
      * Post a current playing item, keep structure
      *
-     * Post a current playing item, keep structure
+     * Post current playing Item. Can be existing Item referenced by external_id. When Items are moved, this function **will attempt to** keep Items&#39; ModelType structure in rundown.
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void currentItemPostStructureTest() throws ApiException {
-        ImportItem data = null;
-        Success response = api.currentItemPostStructure(data);
-
+        ImportItem importItem = null;
+        ItemResult response = api.currentItemPostStructure(importItem);
         // TODO: test validations
     }
-    
+
     /**
-     * Post a current playing item
+     * Post current playing Item
      *
-     * Post a current playing item
+     * Post current playing Item. Can be existing Item referenced by external_id. When Items are moved, this function **will not keep** Items&#39; ModelType structure in rundown.
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void currentItemPostTimingTest() throws ApiException {
-        ImportItem data = null;
-        Success response = api.currentItemPostTiming(data);
-
+        ImportItem importItem = null;
+        ItemResult response = api.currentItemPostTiming(importItem);
         // TODO: test validations
     }
-    
+
     /**
      * Delete item by ID.
      *
      * Delete item by id.
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void deleteItemByIdTest() throws ApiException {
         Long id = null;
-        Success response = api.deleteItemById(id);
-
+        api.deleteItemById(id);
         // TODO: test validations
     }
-    
+
     /**
      * Get current Item
      *
      * Get current Item
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void getCurrentItemTest() throws ApiException {
         Boolean lastplayed = null;
         ItemResult response = api.getCurrentItem(lastplayed);
-
         // TODO: test validations
     }
-    
+
     /**
      * Get extended item details by ID.
      *
      * Read item by id.
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void getItemByIdTest() throws ApiException {
         Long id = null;
         Long externalStationId = null;
         ItemResult response = api.getItemById(id, externalStationId);
-
         // TODO: test validations
     }
-    
+
     /**
      * Get a list of all the items currently in your station.
      *
      * Get a list of all the items currently in your station. This feature supports pagination and will give a maximum results of 50 items back.
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void listItemsTest() throws ApiException {
-        Long page = null;
         Long blockId = null;
         Long broadcastId = null;
         Long modelTypeId = null;
@@ -167,99 +154,89 @@ public class ItemApiTest {
         Long stationDraftId = null;
         Long programId = null;
         String externalId = null;
-        OffsetDateTime startMin = null;
-        OffsetDateTime startMax = null;
         Integer durationMin = null;
         Integer durationMax = null;
         String status = null;
+        OffsetDateTime startMin = null;
+        OffsetDateTime startMax = null;
+        Long page = null;
         Long limit = null;
         String orderBy = null;
         String orderDirection = null;
         Long externalStationId = null;
-        ItemResults response = api.listItems(page, blockId, broadcastId, modelTypeId, tagId, campaignId, contactId, programDraftId, userDraftId, stationDraftId, programId, externalId, startMin, startMax, durationMin, durationMax, status, limit, orderBy, orderDirection, externalStationId);
-
+        InlineResponse2008 response = api.listItems(blockId, broadcastId, modelTypeId, tagId, campaignId, contactId, programDraftId, userDraftId, stationDraftId, programId, externalId, durationMin, durationMax, status, startMin, startMax, page, limit, orderBy, orderDirection, externalStationId);
         // TODO: test validations
     }
-    
+
     /**
      * Post a playlist, do not remove previously imported items
      *
-     * Post a playlist, do not remove previously imported items
+     * Post a playlist with &#39;keep structure&#39; method, but do not remove previously imported items
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void playlistPostMergeTest() throws ApiException {
-        InlineObject2 data = null;
-        InlineResponse202 response = api.playlistPostMerge(data);
-
+        PlaylistMergeBody playlistMergeBody = null;
+        InlineResponse2021 response = api.playlistPostMerge(playlistMergeBody);
         // TODO: test validations
     }
-    
+
     /**
      * Post a playlist, keep current structure
      *
-     * Post a playlist, keep current structure
+     * Post a playlist for a block. Existing Items can referenced by external_id. When Items are moved, this function **will attempt to** keep Items&#39; ModelType structure in rundown.
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void playlistPostStructureTest() throws ApiException {
-        InlineObject1 data = null;
-        InlineResponse202 response = api.playlistPostStructure(data);
-
+        PlaylistStructureBody playlistStructureBody = null;
+        InlineResponse2021 response = api.playlistPostStructure(playlistStructureBody);
         // TODO: test validations
     }
-    
+
     /**
      * Post a playlist
      *
-     * Post a playlist
+     * Post a playlist for a block. Existing Items can referenced by external_id. When Items are moved, this function **will not** keep Items&#39; ModelType structure in rundown.
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void playlistPostTimingTest() throws ApiException {
-        InlineObject data = null;
-        InlineResponse202 response = api.playlistPostTiming(data);
-
+        PlaylistTimingBody playlistTimingBody = null;
+        InlineResponse2021 response = api.playlistPostTiming(playlistTimingBody);
         // TODO: test validations
     }
-    
+
     /**
      * Stop an Item
      *
      * Set a current playing or specific item on played
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void stopCurrentItemTest() throws ApiException {
-        InlineObject3 data = null;
-        Success response = api.stopCurrentItem(data);
-
+        ItemsStopcurrentBody itemsStopcurrentBody = null;
+        InlineResponse202 response = api.stopCurrentItem(itemsStopcurrentBody);
         // TODO: test validations
     }
-    
+
     /**
      * Update extended item details by ID.
      *
      * Update item by id.
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void updateItemByIdTest() throws ApiException {
         Long id = null;
-        ItemDataInput data = null;
-        Success response = api.updateItemById(id, data);
-
+        ItemDataInput itemDataInput = null;
+        InlineResponse202 response = api.updateItemById(id, itemDataInput);
         // TODO: test validations
     }
-    
+
 }

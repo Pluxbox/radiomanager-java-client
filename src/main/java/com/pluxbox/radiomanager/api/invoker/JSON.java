@@ -1,6 +1,6 @@
 /*
  * RadioManager
- * RadioManager
+ * This OpenAPI 3 Document describes the functionality of the API v2 of RadioManager. Note that no rights can be derived from this Document and the true functionality of the API might differ.
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@pluxbox.com
@@ -24,7 +24,6 @@ import com.google.gson.JsonElement;
 import io.gsonfire.GsonFireBuilder;
 import io.gsonfire.TypeSelector;
 
-import com.pluxbox.radiomanager.api.models.*;
 import okio.ByteString;
 
 import java.io.IOException;
@@ -41,15 +40,22 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.HashMap;
 
+/*
+ * A JSON utility class
+ *
+ * NOTE: in the future, this class may be converted to static, which may break
+ *       backward-compatibility
+ */
 public class JSON {
-    private Gson gson;
-    private boolean isLenientOnJson = false;
-    private DateTypeAdapter dateTypeAdapter = new DateTypeAdapter();
-    private SqlDateTypeAdapter sqlDateTypeAdapter = new SqlDateTypeAdapter();
-    private OffsetDateTimeTypeAdapter offsetDateTimeTypeAdapter = new OffsetDateTimeTypeAdapter();
-    private LocalDateTypeAdapter localDateTypeAdapter = new LocalDateTypeAdapter();
-    private ByteArrayAdapter byteArrayAdapter = new ByteArrayAdapter();
+    private static Gson gson;
+    private static boolean isLenientOnJson = false;
+    private static DateTypeAdapter dateTypeAdapter = new DateTypeAdapter();
+    private static SqlDateTypeAdapter sqlDateTypeAdapter = new SqlDateTypeAdapter();
+    private static OffsetDateTimeTypeAdapter offsetDateTimeTypeAdapter = new OffsetDateTimeTypeAdapter();
+    private static LocalDateTypeAdapter localDateTypeAdapter = new LocalDateTypeAdapter();
+    private static ByteArrayAdapter byteArrayAdapter = new ByteArrayAdapter();
 
+    @SuppressWarnings("unchecked")
     public static GsonBuilder createGson() {
         GsonFireBuilder fireBuilder = new GsonFireBuilder()
         ;
@@ -65,22 +71,187 @@ public class JSON {
         return element.getAsString();
     }
 
+    /**
+     * Returns the Java class that implements the OpenAPI schema for the specified discriminator value.
+     *
+     * @param classByDiscriminatorValue The map of discriminator values to Java classes.
+     * @param discriminatorValue The value of the OpenAPI discriminator in the input data.
+     * @return The Java class that implements the OpenAPI schema
+     */
     private static Class getClassByDiscriminator(Map classByDiscriminatorValue, String discriminatorValue) {
-        Class clazz = (Class) classByDiscriminatorValue.get(discriminatorValue.toUpperCase(Locale.ROOT));
+        Class clazz = (Class) classByDiscriminatorValue.get(discriminatorValue);
         if (null == clazz) {
             throw new IllegalArgumentException("cannot determine model class of name: <" + discriminatorValue + ">");
         }
         return clazz;
     }
 
-    public JSON() {
-        gson = createGson()
-            .registerTypeAdapter(Date.class, dateTypeAdapter)
-            .registerTypeAdapter(java.sql.Date.class, sqlDateTypeAdapter)
-            .registerTypeAdapter(OffsetDateTime.class, offsetDateTimeTypeAdapter)
-            .registerTypeAdapter(LocalDate.class, localDateTypeAdapter)
-            .registerTypeAdapter(byte[].class, byteArrayAdapter)
-            .create();
+    {
+        GsonBuilder gsonBuilder = createGson();
+        gsonBuilder.registerTypeAdapter(Date.class, dateTypeAdapter);
+        gsonBuilder.registerTypeAdapter(java.sql.Date.class, sqlDateTypeAdapter);
+        gsonBuilder.registerTypeAdapter(OffsetDateTime.class, offsetDateTimeTypeAdapter);
+        gsonBuilder.registerTypeAdapter(LocalDate.class, localDateTypeAdapter);
+        gsonBuilder.registerTypeAdapter(byte[].class, byteArrayAdapter);
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.Block.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.BlockRelations.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.BlockRelationsBroadcast.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.BlockRelationsBroadcastParams.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.BlockRelationsItems.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.BlockRelationsItemsParams.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.BlockRelationsProgram.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.BlockResult.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.Broadcast.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.BroadcastDataInput.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.BroadcastEPGDay.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.BroadcastEPGRelations.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.BroadcastEPGResult.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.BroadcastInputOnly.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.BroadcastOutputOnly.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.BroadcastRelations.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.BroadcastRelationsBlocks.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.BroadcastRelationsGenre.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.BroadcastRelationsGroup.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.BroadcastRelationsItems.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.BroadcastRelationsItemsParams.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.BroadcastRelationsModelType.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.BroadcastRelationsPresenters.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.BroadcastRelationsTags.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.BroadcastResult.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.Campaign.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.CampaignDataInput.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.CampaignOutputOnly.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.CampaignRelations.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.CampaignRelationsItems.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.CampaignRelationsItemsParams.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.CampaignResult.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.CampaignTemplateItem.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.CampaignTemplateItemAllOf.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.Contact.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ContactDataInput.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ContactOutputOnly.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ContactRelations.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ContactRelationsItems.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ContactRelationsTags.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ContactRelationsTagsParams.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ContactResult.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.EPGResults.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.Genre.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.GenreOutputOnly.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.GenreRelations.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.GenreRelationsBroadcasts.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.GenreRelationsBroadcastsParams.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.GenreRelationsPrograms.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.GenreResult.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.Group.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.GroupDataInput.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.GroupOutputOnly.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.GroupRelations.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.GroupRelationsBroadcasts.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.GroupRelationsPrograms.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.GroupRelationsUsers.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.GroupRelationsUsersParams.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.GroupResult.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ImportItem.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ImportItemAllOf.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.InlineResponse200.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.InlineResponse2001.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.InlineResponse20010.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.InlineResponse20011.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.InlineResponse20012.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.InlineResponse20013.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.InlineResponse2002.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.InlineResponse2003.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.InlineResponse2004.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.InlineResponse2005.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.InlineResponse2006.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.InlineResponse2007.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.InlineResponse2008.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.InlineResponse2009.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.InlineResponse202.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.InlineResponse2021.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.InlineResponse400.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.InlineResponse401.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.InlineResponse403.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.InlineResponse404.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.InlineResponse422.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.InlineResponse429.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.InlineResponse500.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.InviteUserData.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.Item.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ItemAllOf.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ItemDataInput.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ItemInputOnly.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ItemOutputOnly.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ItemRelations.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ItemRelationsBlock.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ItemRelationsCampaign.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ItemRelationsContacts.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ItemRelationsContactsParams.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ItemRelationsProgram.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ItemRelationsTags.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ItemResult.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ItemsStopcurrentBody.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ModelType.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ModelTypeOptions.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ModelTypeOutputOnly.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ModelTypeRelations.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ModelTypeRelationsBroadcasts.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ModelTypeRelationsCampaigns.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ModelTypeRelationsCampaignsParams.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ModelTypeRelationsContacts.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ModelTypeRelationsItems.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ModelTypeRelationsPresenters.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ModelTypeRelationsPrograms.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ModelTypeResult.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.PlaylistMergeBody.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.PlaylistStructureBody.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.PlaylistTimingBody.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.Presenter.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.PresenterDataInput.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.PresenterEPGResult.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.PresenterOutputOnly.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.PresenterRelations.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.PresenterRelationsBroadcasts.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.PresenterRelationsModelType.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.PresenterRelationsPrograms.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.PresenterRelationsProgramsParams.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.PresenterResult.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.Program.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ProgramDataInput.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ProgramInputOnly.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ProgramInputOnlyAllOf.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ProgramOutputOnly.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ProgramRelations.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ProgramRelationsBlocks.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ProgramRelationsBroadcasts.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ProgramRelationsItems.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ProgramRelationsItemsParams.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ProgramRelationsPresenters.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ProgramRelationsTags.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.ProgramResult.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.StationResult.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.StationResultStation.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.StationResultStationStartDays.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.Tag.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.TagDataInput.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.TagOutputOnly.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.TagRelations.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.TagRelationsBroadcasts.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.TagRelationsBroadcastsParams.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.TagRelationsContacts.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.TagRelationsItems.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.TagRelationsPrograms.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.TagResult.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.TextString.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.UnusedBooleanParameter.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.UserResult.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.UserResultGroups.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.UserResultParams.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.UserResultRoles.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.UserResultSettings.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.pluxbox.radiomanager.api.models.VisualResult.CustomTypeAdapterFactory());
+        gson = gsonBuilder.create();
     }
 
     /**
@@ -88,7 +259,7 @@ public class JSON {
      *
      * @return Gson
      */
-    public Gson getGson() {
+    public static Gson getGson() {
         return gson;
     }
 
@@ -96,16 +267,13 @@ public class JSON {
      * Set Gson.
      *
      * @param gson Gson
-     * @return JSON
      */
-    public JSON setGson(Gson gson) {
-        this.gson = gson;
-        return this;
+    public static void setGson(Gson gson) {
+        JSON.gson = gson;
     }
 
-    public JSON setLenientOnJson(boolean lenientOnJson) {
+    public static void setLenientOnJson(boolean lenientOnJson) {
         isLenientOnJson = lenientOnJson;
-        return this;
     }
 
     /**
@@ -114,7 +282,7 @@ public class JSON {
      * @param obj Object
      * @return String representation of the JSON
      */
-    public String serialize(Object obj) {
+    public static String serialize(Object obj) {
         return gson.toJson(obj);
     }
 
@@ -127,7 +295,7 @@ public class JSON {
      * @return The deserialized Java object
      */
     @SuppressWarnings("unchecked")
-    public <T> T deserialize(String body, Type returnType) {
+    public static <T> T deserialize(String body, Type returnType) {
         try {
             if (isLenientOnJson) {
                 JsonReader jsonReader = new JsonReader(new StringReader(body));
@@ -151,7 +319,7 @@ public class JSON {
     /**
      * Gson TypeAdapter for Byte Array type
      */
-    public class ByteArrayAdapter extends TypeAdapter<byte[]> {
+    public static class ByteArrayAdapter extends TypeAdapter<byte[]> {
 
         @Override
         public void write(JsonWriter out, byte[] value) throws IOException {
@@ -223,7 +391,7 @@ public class JSON {
     /**
      * Gson TypeAdapter for JSR310 LocalDate type
      */
-    public class LocalDateTypeAdapter extends TypeAdapter<LocalDate> {
+    public static class LocalDateTypeAdapter extends TypeAdapter<LocalDate> {
 
         private DateTimeFormatter formatter;
 
@@ -261,14 +429,12 @@ public class JSON {
         }
     }
 
-    public JSON setOffsetDateTimeFormat(DateTimeFormatter dateFormat) {
+    public static void setOffsetDateTimeFormat(DateTimeFormatter dateFormat) {
         offsetDateTimeTypeAdapter.setFormat(dateFormat);
-        return this;
     }
 
-    public JSON setLocalDateFormat(DateTimeFormatter dateFormat) {
+    public static void setLocalDateFormat(DateTimeFormatter dateFormat) {
         localDateTypeAdapter.setFormat(dateFormat);
-        return this;
     }
 
     /**
@@ -382,14 +548,11 @@ public class JSON {
         }
     }
 
-    public JSON setDateFormat(DateFormat dateFormat) {
+    public static void setDateFormat(DateFormat dateFormat) {
         dateTypeAdapter.setFormat(dateFormat);
-        return this;
     }
 
-    public JSON setSqlDateFormat(DateFormat dateFormat) {
+    public static void setSqlDateFormat(DateFormat dateFormat) {
         sqlDateTypeAdapter.setFormat(dateFormat);
-        return this;
     }
-
 }

@@ -1,6 +1,6 @@
 /*
  * RadioManager
- * RadioManager
+ * This OpenAPI 3 Document describes the functionality of the API v2 of RadioManager. Note that no rights can be derived from this Document and the true functionality of the API might differ.
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@pluxbox.com
@@ -22,9 +22,6 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.pluxbox.radiomanager.api.models.BlockRelationsBroadcast;
 import com.pluxbox.radiomanager.api.models.BroadcastRelationsModelType;
-import com.pluxbox.radiomanager.api.models.Item;
-import com.pluxbox.radiomanager.api.models.ItemOutputOnly;
-import com.pluxbox.radiomanager.api.models.ItemRelations;
 import com.pluxbox.radiomanager.api.models.ItemRelationsBlock;
 import com.pluxbox.radiomanager.api.models.ItemRelationsCampaign;
 import com.pluxbox.radiomanager.api.models.ItemRelationsContacts;
@@ -35,10 +32,31 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.pluxbox.radiomanager.api.invoker.JSON;
+
 /**
  * ItemResult
  */
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class ItemResult {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -217,6 +235,8 @@ public class ItemResult {
   @SerializedName(SERIALIZED_NAME_MODEL_TYPE)
   private BroadcastRelationsModelType modelType;
 
+  public ItemResult() {
+  }
 
   public ItemResult id(Long id) {
     
@@ -435,6 +455,7 @@ public class ItemResult {
    * Get modelTypeId
    * @return modelTypeId
   **/
+  @javax.annotation.Nonnull
   @ApiModelProperty(example = "14", required = true, value = "")
 
   public Long getModelTypeId() {
@@ -953,8 +974,9 @@ public class ItemResult {
   }
 
 
+
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -1001,7 +1023,6 @@ public class ItemResult {
     return Objects.hash(id, updatedAt, createdAt, deletedAt, dataModified, order, templateblockId, templateitemId, externalStationId, modelTypeId, blockId, externalId, fieldValues, title, duration, start, status, _import, campaignId, recommended, stationDraftId, programDraftId, userDraftId, staticStart, details, block, broadcast, program, contacts, tags, campaign, modelType);
   }
 
-
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -1046,12 +1067,174 @@ public class ItemResult {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("id");
+    openapiFields.add("updated_at");
+    openapiFields.add("created_at");
+    openapiFields.add("deleted_at");
+    openapiFields.add("data_modified");
+    openapiFields.add("order");
+    openapiFields.add("templateblock_id");
+    openapiFields.add("templateitem_id");
+    openapiFields.add("_external_station_id");
+    openapiFields.add("model_type_id");
+    openapiFields.add("block_id");
+    openapiFields.add("external_id");
+    openapiFields.add("field_values");
+    openapiFields.add("title");
+    openapiFields.add("duration");
+    openapiFields.add("start");
+    openapiFields.add("status");
+    openapiFields.add("import");
+    openapiFields.add("campaign_id");
+    openapiFields.add("recommended");
+    openapiFields.add("station_draft_id");
+    openapiFields.add("program_draft_id");
+    openapiFields.add("user_draft_id");
+    openapiFields.add("static_start");
+    openapiFields.add("details");
+    openapiFields.add("block");
+    openapiFields.add("broadcast");
+    openapiFields.add("program");
+    openapiFields.add("contacts");
+    openapiFields.add("tags");
+    openapiFields.add("campaign");
+    openapiFields.add("model_type");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("model_type_id");
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to ItemResult
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (!ItemResult.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+          throw new IllegalArgumentException(String.format("The required field(s) %s in ItemResult is not found in the empty JSON string", ItemResult.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!ItemResult.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ItemResult` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : ItemResult.openapiRequiredFields) {
+        if (jsonObj.get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        }
+      }
+      if ((jsonObj.get("external_id") != null && !jsonObj.get("external_id").isJsonNull()) && !jsonObj.get("external_id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `external_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("external_id").toString()));
+      }
+      if ((jsonObj.get("title") != null && !jsonObj.get("title").isJsonNull()) && !jsonObj.get("title").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `title` to be a primitive type in the JSON string but got `%s`", jsonObj.get("title").toString()));
+      }
+      if ((jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) && !jsonObj.get("status").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
+      }
+      if ((jsonObj.get("details") != null && !jsonObj.get("details").isJsonNull()) && !jsonObj.get("details").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `details` to be a primitive type in the JSON string but got `%s`", jsonObj.get("details").toString()));
+      }
+      // validate the optional field `block`
+      if (jsonObj.get("block") != null && !jsonObj.get("block").isJsonNull()) {
+        ItemRelationsBlock.validateJsonObject(jsonObj.getAsJsonObject("block"));
+      }
+      // validate the optional field `broadcast`
+      if (jsonObj.get("broadcast") != null && !jsonObj.get("broadcast").isJsonNull()) {
+        BlockRelationsBroadcast.validateJsonObject(jsonObj.getAsJsonObject("broadcast"));
+      }
+      // validate the optional field `program`
+      if (jsonObj.get("program") != null && !jsonObj.get("program").isJsonNull()) {
+        ItemRelationsProgram.validateJsonObject(jsonObj.getAsJsonObject("program"));
+      }
+      // validate the optional field `contacts`
+      if (jsonObj.get("contacts") != null && !jsonObj.get("contacts").isJsonNull()) {
+        ItemRelationsContacts.validateJsonObject(jsonObj.getAsJsonObject("contacts"));
+      }
+      // validate the optional field `tags`
+      if (jsonObj.get("tags") != null && !jsonObj.get("tags").isJsonNull()) {
+        ItemRelationsTags.validateJsonObject(jsonObj.getAsJsonObject("tags"));
+      }
+      // validate the optional field `campaign`
+      if (jsonObj.get("campaign") != null && !jsonObj.get("campaign").isJsonNull()) {
+        ItemRelationsCampaign.validateJsonObject(jsonObj.getAsJsonObject("campaign"));
+      }
+      // validate the optional field `model_type`
+      if (jsonObj.get("model_type") != null && !jsonObj.get("model_type").isJsonNull()) {
+        BroadcastRelationsModelType.validateJsonObject(jsonObj.getAsJsonObject("model_type"));
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!ItemResult.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'ItemResult' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<ItemResult> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(ItemResult.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<ItemResult>() {
+           @Override
+           public void write(JsonWriter out, ItemResult value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public ItemResult read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of ItemResult given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of ItemResult
+  * @throws IOException if the JSON string is invalid with respect to ItemResult
+  */
+  public static ItemResult fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, ItemResult.class);
+  }
+
+ /**
+  * Convert an instance of ItemResult to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

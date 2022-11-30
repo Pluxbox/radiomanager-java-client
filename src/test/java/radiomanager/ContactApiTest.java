@@ -1,6 +1,6 @@
 /*
  * RadioManager
- * RadioManager
+ * This OpenAPI 3 Document describes the functionality of the API v2 of RadioManager. Note that no rights can be derived from this Document and the true functionality of the API might differ.
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@pluxbox.com
@@ -14,18 +14,20 @@
 package radiomanager;
 
 import com.pluxbox.radiomanager.api.invoker.ApiException;
-import com.pluxbox.radiomanager.api.models.Contact;
 import com.pluxbox.radiomanager.api.models.ContactDataInput;
 import com.pluxbox.radiomanager.api.models.ContactResult;
-import com.pluxbox.radiomanager.api.models.ContactResults;
-import com.pluxbox.radiomanager.api.models.Forbidden;
-import com.pluxbox.radiomanager.api.models.NotFound;
-import com.pluxbox.radiomanager.api.models.PostSuccess;
-import com.pluxbox.radiomanager.api.models.Success;
-import com.pluxbox.radiomanager.api.models.TooManyRequests;
-import com.pluxbox.radiomanager.api.models.UnprocessableEntity;
-import org.junit.Test;
-import org.junit.Ignore;
+import com.pluxbox.radiomanager.api.models.InlineResponse2002;
+import com.pluxbox.radiomanager.api.models.InlineResponse2005;
+import com.pluxbox.radiomanager.api.models.InlineResponse202;
+import com.pluxbox.radiomanager.api.models.InlineResponse400;
+import com.pluxbox.radiomanager.api.models.InlineResponse401;
+import com.pluxbox.radiomanager.api.models.InlineResponse403;
+import com.pluxbox.radiomanager.api.models.InlineResponse404;
+import com.pluxbox.radiomanager.api.models.InlineResponse422;
+import com.pluxbox.radiomanager.api.models.InlineResponse429;
+import com.pluxbox.radiomanager.api.models.InlineResponse500;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,99 +37,88 @@ import java.util.Map;
 /**
  * API tests for ContactApi
  */
-@Ignore
+@Disabled
 public class ContactApiTest {
 
     private final ContactApi api = new ContactApi();
 
-    
     /**
      * Create contact.
      *
      * Create contact.
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void createContactTest() throws ApiException {
-        ContactDataInput data = null;
-        PostSuccess response = api.createContact(data);
-
+        ContactDataInput contactDataInput = null;
+        InlineResponse2002 response = api.createContact(contactDataInput);
         // TODO: test validations
     }
-    
+
     /**
      * Delete contact by id
      *
      * Delete contact by id
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void deleteContactByIdTest() throws ApiException {
         Long id = null;
-        Success response = api.deleteContactById(id);
-
+        InlineResponse202 response = api.deleteContactById(id);
         // TODO: test validations
     }
-    
+
     /**
      * Get contact by id
      *
      * Get contact by id
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void getContactByIdTest() throws ApiException {
         Long id = null;
         Long externalStationId = null;
         ContactResult response = api.getContactById(id, externalStationId);
-
         // TODO: test validations
     }
-    
+
     /**
      * Get all contacts.
      *
      * List all contacts.
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void listContactsTest() throws ApiException {
-        Long page = null;
         Long itemId = null;
         Long modelTypeId = null;
         Long tagId = null;
+        Long page = null;
         Long limit = null;
         String orderBy = null;
         String orderDirection = null;
         Long externalStationId = null;
-        ContactResults response = api.listContacts(page, itemId, modelTypeId, tagId, limit, orderBy, orderDirection, externalStationId);
-
+        InlineResponse2005 response = api.listContacts(itemId, modelTypeId, tagId, page, limit, orderBy, orderDirection, externalStationId);
         // TODO: test validations
     }
-    
+
     /**
      * Update contact by id
      *
      * Update contact by id
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void updateContactByIDTest() throws ApiException {
         Long id = null;
-        ContactDataInput data = null;
-        Success response = api.updateContactByID(id, data);
-
+        ContactDataInput contactDataInput = null;
+        InlineResponse202 response = api.updateContactByID(id, contactDataInput);
         // TODO: test validations
     }
-    
+
 }

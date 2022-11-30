@@ -1,6 +1,6 @@
 /*
  * RadioManager
- * RadioManager
+ * This OpenAPI 3 Document describes the functionality of the API v2 of RadioManager. Note that no rights can be derived from this Document and the true functionality of the API might differ.
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@pluxbox.com
@@ -14,16 +14,19 @@
 package radiomanager;
 
 import com.pluxbox.radiomanager.api.invoker.ApiException;
-import com.pluxbox.radiomanager.api.models.Forbidden;
+import com.pluxbox.radiomanager.api.models.InlineResponse20013;
+import com.pluxbox.radiomanager.api.models.InlineResponse202;
+import com.pluxbox.radiomanager.api.models.InlineResponse400;
+import com.pluxbox.radiomanager.api.models.InlineResponse401;
+import com.pluxbox.radiomanager.api.models.InlineResponse403;
+import com.pluxbox.radiomanager.api.models.InlineResponse404;
+import com.pluxbox.radiomanager.api.models.InlineResponse422;
+import com.pluxbox.radiomanager.api.models.InlineResponse429;
+import com.pluxbox.radiomanager.api.models.InlineResponse500;
 import com.pluxbox.radiomanager.api.models.InviteUserData;
-import com.pluxbox.radiomanager.api.models.NotFound;
-import com.pluxbox.radiomanager.api.models.Success;
-import com.pluxbox.radiomanager.api.models.TooManyRequests;
-import com.pluxbox.radiomanager.api.models.UnprocessableEntity;
 import com.pluxbox.radiomanager.api.models.UserResult;
-import com.pluxbox.radiomanager.api.models.UserResults;
-import org.junit.Test;
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,78 +36,70 @@ import java.util.Map;
 /**
  * API tests for UserApi
  */
-@Ignore
+@Disabled
 public class UserApiTest {
 
     private final UserApi api = new UserApi();
 
-    
     /**
-     * Remove user from station by Id
+     * Remove User from station by Id
      *
-     * Remove user from station by Id
+     * Remove User from station by Id, will not actually delete a User record
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void deleteUserByIdTest() throws ApiException {
         Long id = null;
-        Success response = api.deleteUserById(id);
-
+        InlineResponse202 response = api.deleteUserById(id);
         // TODO: test validations
     }
-    
+
     /**
      * Get user by id
      *
      * Get user by id
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void getUserByIdTest() throws ApiException {
         Long id = null;
         UserResult response = api.getUserById(id);
-
         // TODO: test validations
     }
-    
+
     /**
      * Invite user by mail
      *
      * Invite user by mail
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void inviteUserByMailTest() throws ApiException {
-        InviteUserData data = null;
-        Object response = api.inviteUserByMail(data);
-
+        InviteUserData inviteUserData = null;
+        InlineResponse202 response = api.inviteUserByMail(inviteUserData);
         // TODO: test validations
     }
-    
+
     /**
      * Get all users.
      *
      * List all users.
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void listUsersTest() throws ApiException {
-        Long page = null;
         Long roleId = null;
+        Long groupId = null;
+        Long page = null;
         Long limit = null;
         String orderBy = null;
         String orderDirection = null;
-        UserResults response = api.listUsers(page, roleId, limit, orderBy, orderDirection);
-
+        InlineResponse20013 response = api.listUsers(roleId, groupId, page, limit, orderBy, orderDirection);
         // TODO: test validations
     }
-    
+
 }

@@ -1,6 +1,6 @@
 /*
  * RadioManager
- * RadioManager
+ * This OpenAPI 3 Document describes the functionality of the API v2 of RadioManager. Note that no rights can be derived from this Document and the true functionality of the API might differ.
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@pluxbox.com
@@ -27,25 +27,30 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
-import com.pluxbox.radiomanager.api.models.Forbidden;
-import com.pluxbox.radiomanager.api.models.NotFound;
-import com.pluxbox.radiomanager.api.models.PostSuccess;
-import com.pluxbox.radiomanager.api.models.Success;
-import com.pluxbox.radiomanager.api.models.Tag;
+import com.pluxbox.radiomanager.api.models.InlineResponse20012;
+import com.pluxbox.radiomanager.api.models.InlineResponse2002;
+import com.pluxbox.radiomanager.api.models.InlineResponse202;
+import com.pluxbox.radiomanager.api.models.InlineResponse400;
+import com.pluxbox.radiomanager.api.models.InlineResponse401;
+import com.pluxbox.radiomanager.api.models.InlineResponse403;
+import com.pluxbox.radiomanager.api.models.InlineResponse404;
+import com.pluxbox.radiomanager.api.models.InlineResponse422;
+import com.pluxbox.radiomanager.api.models.InlineResponse429;
+import com.pluxbox.radiomanager.api.models.InlineResponse500;
 import com.pluxbox.radiomanager.api.models.TagDataInput;
 import com.pluxbox.radiomanager.api.models.TagResult;
-import com.pluxbox.radiomanager.api.models.TagResults;
-import com.pluxbox.radiomanager.api.models.TooManyRequests;
-import com.pluxbox.radiomanager.api.models.UnprocessableEntity;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.ws.rs.core.GenericType;
 
 public class TagApi {
     private ApiClient localVarApiClient;
+    private int localHostIndex;
+    private String localCustomBaseUrl;
 
     public TagApi() {
         this(Configuration.getDefaultApiClient());
@@ -63,24 +68,56 @@ public class TagApi {
         this.localVarApiClient = apiClient;
     }
 
+    public int getHostIndex() {
+        return localHostIndex;
+    }
+
+    public void setHostIndex(int hostIndex) {
+        this.localHostIndex = hostIndex;
+    }
+
+    public String getCustomBaseUrl() {
+        return localCustomBaseUrl;
+    }
+
+    public void setCustomBaseUrl(String customBaseUrl) {
+        this.localCustomBaseUrl = customBaseUrl;
+    }
+
     /**
      * Build call for createTag
-     * @param data Data **(Required)** (required)
+     * @param tagDataInput Data **(Required)** (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully created a tag </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Post Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call createTagCall(TagDataInput data, final ApiCallback _callback) throws ApiException {
-        Object localVarPostBody = data;
+    public okhttp3.Call createTagCall(TagDataInput tagDataInput, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = tagDataInput;
 
         // create path and map variables
         String localVarPath = "/tags";
@@ -90,6 +127,7 @@ public class TagApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -102,90 +140,98 @@ public class TagApi {
             "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call createTagValidateBeforeCall(TagDataInput data, final ApiCallback _callback) throws ApiException {
-        
-        // verify the required parameter 'data' is set
-        if (data == null) {
-            throw new ApiException("Missing the required parameter 'data' when calling createTag(Async)");
+    private okhttp3.Call createTagValidateBeforeCall(TagDataInput tagDataInput, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'tagDataInput' is set
+        if (tagDataInput == null) {
+            throw new ApiException("Missing the required parameter 'tagDataInput' when calling createTag(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = createTagCall(data, _callback);
-        return localVarCall;
+        return createTagCall(tagDataInput, _callback);
 
     }
 
     /**
      * Create tag.
      * Create tag.
-     * @param data Data **(Required)** (required)
-     * @return PostSuccess
+     * @param tagDataInput Data **(Required)** (required)
+     * @return InlineResponse2002
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully created a tag </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Post Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public PostSuccess createTag(TagDataInput data) throws ApiException {
-        ApiResponse<PostSuccess> localVarResp = createTagWithHttpInfo(data);
+    public InlineResponse2002 createTag(TagDataInput tagDataInput) throws ApiException {
+        ApiResponse<InlineResponse2002> localVarResp = createTagWithHttpInfo(tagDataInput);
         return localVarResp.getData();
     }
 
     /**
      * Create tag.
      * Create tag.
-     * @param data Data **(Required)** (required)
-     * @return ApiResponse&lt;PostSuccess&gt;
+     * @param tagDataInput Data **(Required)** (required)
+     * @return ApiResponse&lt;InlineResponse2002&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully created a tag </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Post Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<PostSuccess> createTagWithHttpInfo(TagDataInput data) throws ApiException {
-        okhttp3.Call localVarCall = createTagValidateBeforeCall(data, null);
-        Type localVarReturnType = new TypeToken<PostSuccess>(){}.getType();
+    public ApiResponse<InlineResponse2002> createTagWithHttpInfo(TagDataInput tagDataInput) throws ApiException {
+        okhttp3.Call localVarCall = createTagValidateBeforeCall(tagDataInput, null);
+        Type localVarReturnType = new TypeToken<InlineResponse2002>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * Create tag. (asynchronously)
      * Create tag.
-     * @param data Data **(Required)** (required)
+     * @param tagDataInput Data **(Required)** (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully created a tag </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Post Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call createTagAsync(TagDataInput data, final ApiCallback<PostSuccess> _callback) throws ApiException {
+    public okhttp3.Call createTagAsync(TagDataInput tagDataInput, final ApiCallback<InlineResponse2002> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = createTagValidateBeforeCall(data, _callback);
-        Type localVarReturnType = new TypeToken<PostSuccess>(){}.getType();
+        okhttp3.Call localVarCall = createTagValidateBeforeCall(tagDataInput, _callback);
+        Type localVarReturnType = new TypeToken<InlineResponse2002>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -198,24 +244,42 @@ public class TagApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully deleted Tag by id </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call deleteTagByIdCall(Long id, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
         String localVarPath = "/tags/{id}"
-            .replaceAll("\\{" + "id" + "\\}", localVarApiClient.escapeString(id.toString()));
+            .replace("{" + "id" + "}", localVarApiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -225,26 +289,24 @@ public class TagApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call deleteTagByIdValidateBeforeCall(Long id, final ApiCallback _callback) throws ApiException {
-        
         // verify the required parameter 'id' is set
         if (id == null) {
             throw new ApiException("Missing the required parameter 'id' when calling deleteTagById(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = deleteTagByIdCall(id, _callback);
-        return localVarCall;
+        return deleteTagByIdCall(id, _callback);
 
     }
 
@@ -252,19 +314,23 @@ public class TagApi {
      * Delete tag by id
      * Delete tag by id
      * @param id ID of Tag **(Required)** (required)
-     * @return Success
+     * @return InlineResponse202
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully deleted Tag by id </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public Success deleteTagById(Long id) throws ApiException {
-        ApiResponse<Success> localVarResp = deleteTagByIdWithHttpInfo(id);
+    public InlineResponse202 deleteTagById(Long id) throws ApiException {
+        ApiResponse<InlineResponse202> localVarResp = deleteTagByIdWithHttpInfo(id);
         return localVarResp.getData();
     }
 
@@ -272,20 +338,24 @@ public class TagApi {
      * Delete tag by id
      * Delete tag by id
      * @param id ID of Tag **(Required)** (required)
-     * @return ApiResponse&lt;Success&gt;
+     * @return ApiResponse&lt;InlineResponse202&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully deleted Tag by id </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Success> deleteTagByIdWithHttpInfo(Long id) throws ApiException {
+    public ApiResponse<InlineResponse202> deleteTagByIdWithHttpInfo(Long id) throws ApiException {
         okhttp3.Call localVarCall = deleteTagByIdValidateBeforeCall(id, null);
-        Type localVarReturnType = new TypeToken<Success>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -299,51 +369,68 @@ public class TagApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully deleted Tag by id </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call deleteTagByIdAsync(Long id, final ApiCallback<Success> _callback) throws ApiException {
+    public okhttp3.Call deleteTagByIdAsync(Long id, final ApiCallback<InlineResponse202> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = deleteTagByIdValidateBeforeCall(id, _callback);
-        Type localVarReturnType = new TypeToken<Success>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for getTagById
      * @param id ID of Tag **(Required)** (required)
-     * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully got Tag by ID </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully got Tag by id </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getTagByIdCall(Long id, Long externalStationId, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getTagByIdCall(Long id, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
         String localVarPath = "/tags/{id}"
-            .replaceAll("\\{" + "id" + "\\}", localVarApiClient.escapeString(id.toString()));
+            .replace("{" + "id" + "}", localVarApiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        if (externalStationId != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("_external_station_id", externalStationId));
-        }
-
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -353,26 +440,24 @@ public class TagApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getTagByIdValidateBeforeCall(Long id, Long externalStationId, final ApiCallback _callback) throws ApiException {
-        
+    private okhttp3.Call getTagByIdValidateBeforeCall(Long id, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'id' is set
         if (id == null) {
             throw new ApiException("Missing the required parameter 'id' when calling getTagById(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = getTagByIdCall(id, externalStationId, _callback);
-        return localVarCall;
+        return getTagByIdCall(id, _callback);
 
     }
 
@@ -380,20 +465,23 @@ public class TagApi {
      * Get tags by id
      * Get tags by id
      * @param id ID of Tag **(Required)** (required)
-     * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @return TagResult
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully got Tag by ID </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully got Tag by id </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public TagResult getTagById(Long id, Long externalStationId) throws ApiException {
-        ApiResponse<TagResult> localVarResp = getTagByIdWithHttpInfo(id, externalStationId);
+    public TagResult getTagById(Long id) throws ApiException {
+        ApiResponse<TagResult> localVarResp = getTagByIdWithHttpInfo(id);
         return localVarResp.getData();
     }
 
@@ -401,20 +489,23 @@ public class TagApi {
      * Get tags by id
      * Get tags by id
      * @param id ID of Tag **(Required)** (required)
-     * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @return ApiResponse&lt;TagResult&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully got Tag by ID </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully got Tag by id </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<TagResult> getTagByIdWithHttpInfo(Long id, Long externalStationId) throws ApiException {
-        okhttp3.Call localVarCall = getTagByIdValidateBeforeCall(id, externalStationId, null);
+    public ApiResponse<TagResult> getTagByIdWithHttpInfo(Long id) throws ApiException {
+        okhttp3.Call localVarCall = getTagByIdValidateBeforeCall(id, null);
         Type localVarReturnType = new TypeToken<TagResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -423,33 +514,36 @@ public class TagApi {
      * Get tags by id (asynchronously)
      * Get tags by id
      * @param id ID of Tag **(Required)** (required)
-     * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully got Tag by ID </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully got Tag by id </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getTagByIdAsync(Long id, Long externalStationId, final ApiCallback<TagResult> _callback) throws ApiException {
+    public okhttp3.Call getTagByIdAsync(Long id, final ApiCallback<TagResult> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = getTagByIdValidateBeforeCall(id, externalStationId, _callback);
+        okhttp3.Call localVarCall = getTagByIdValidateBeforeCall(id, _callback);
         Type localVarReturnType = new TypeToken<TagResult>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for listTags
-     * @param page Current page *(Optional)* (optional)
      * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param itemId Search on Item ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param broadcastId Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param contactId Search on Contact ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param page Current page *(Optional)* (optional, default to 1)
      * @param limit Results per page *(Optional)* (optional)
      * @param orderBy Field to order the results *(Optional)* (optional)
      * @param orderDirection Direction of ordering *(Optional)* (optional)
@@ -460,13 +554,30 @@ public class TagApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully got all tags </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully got all Tags </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call listTagsCall(Long page, Long programId, Long itemId, Long broadcastId, Long contactId, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call listTagsCall(Long programId, Long itemId, Long broadcastId, Long contactId, Long page, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -474,9 +585,9 @@ public class TagApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        if (page != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
-        }
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
         if (programId != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("program_id", programId));
@@ -492,6 +603,10 @@ public class TagApi {
 
         if (contactId != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("contact_id", contactId));
+        }
+
+        if (page != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
         }
 
         if (limit != null) {
@@ -510,9 +625,6 @@ public class TagApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("_external_station_id", externalStationId));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -522,89 +634,95 @@ public class TagApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call listTagsValidateBeforeCall(Long page, Long programId, Long itemId, Long broadcastId, Long contactId, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback _callback) throws ApiException {
-        
-
-        okhttp3.Call localVarCall = listTagsCall(page, programId, itemId, broadcastId, contactId, limit, orderBy, orderDirection, externalStationId, _callback);
-        return localVarCall;
+    private okhttp3.Call listTagsValidateBeforeCall(Long programId, Long itemId, Long broadcastId, Long contactId, Long page, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback _callback) throws ApiException {
+        return listTagsCall(programId, itemId, broadcastId, contactId, page, limit, orderBy, orderDirection, externalStationId, _callback);
 
     }
 
     /**
      * Get a list of all the tags currently in your station.
      * Get a list of all the tags currently in your station. This feature supports pagination and will give a maximum results of 50 tags back.
-     * @param page Current page *(Optional)* (optional)
      * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param itemId Search on Item ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param broadcastId Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param contactId Search on Contact ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param page Current page *(Optional)* (optional, default to 1)
      * @param limit Results per page *(Optional)* (optional)
      * @param orderBy Field to order the results *(Optional)* (optional)
      * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
-     * @return TagResults
+     * @return InlineResponse20012
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully got all tags </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully got all Tags </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public TagResults listTags(Long page, Long programId, Long itemId, Long broadcastId, Long contactId, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
-        ApiResponse<TagResults> localVarResp = listTagsWithHttpInfo(page, programId, itemId, broadcastId, contactId, limit, orderBy, orderDirection, externalStationId);
+    public InlineResponse20012 listTags(Long programId, Long itemId, Long broadcastId, Long contactId, Long page, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
+        ApiResponse<InlineResponse20012> localVarResp = listTagsWithHttpInfo(programId, itemId, broadcastId, contactId, page, limit, orderBy, orderDirection, externalStationId);
         return localVarResp.getData();
     }
 
     /**
      * Get a list of all the tags currently in your station.
      * Get a list of all the tags currently in your station. This feature supports pagination and will give a maximum results of 50 tags back.
-     * @param page Current page *(Optional)* (optional)
      * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param itemId Search on Item ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param broadcastId Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param contactId Search on Contact ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param page Current page *(Optional)* (optional, default to 1)
      * @param limit Results per page *(Optional)* (optional)
      * @param orderBy Field to order the results *(Optional)* (optional)
      * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
-     * @return ApiResponse&lt;TagResults&gt;
+     * @return ApiResponse&lt;InlineResponse20012&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully got all tags </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully got all Tags </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<TagResults> listTagsWithHttpInfo(Long page, Long programId, Long itemId, Long broadcastId, Long contactId, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
-        okhttp3.Call localVarCall = listTagsValidateBeforeCall(page, programId, itemId, broadcastId, contactId, limit, orderBy, orderDirection, externalStationId, null);
-        Type localVarReturnType = new TypeToken<TagResults>(){}.getType();
+    public ApiResponse<InlineResponse20012> listTagsWithHttpInfo(Long programId, Long itemId, Long broadcastId, Long contactId, Long page, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
+        okhttp3.Call localVarCall = listTagsValidateBeforeCall(programId, itemId, broadcastId, contactId, page, limit, orderBy, orderDirection, externalStationId, null);
+        Type localVarReturnType = new TypeToken<InlineResponse20012>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * Get a list of all the tags currently in your station. (asynchronously)
      * Get a list of all the tags currently in your station. This feature supports pagination and will give a maximum results of 50 tags back.
-     * @param page Current page *(Optional)* (optional)
      * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param itemId Search on Item ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param broadcastId Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param contactId Search on Contact ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param page Current page *(Optional)* (optional, default to 1)
      * @param limit Results per page *(Optional)* (optional)
      * @param orderBy Field to order the results *(Optional)* (optional)
      * @param orderDirection Direction of ordering *(Optional)* (optional)
@@ -615,48 +733,69 @@ public class TagApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully got all tags </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully got all Tags </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call listTagsAsync(Long page, Long programId, Long itemId, Long broadcastId, Long contactId, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback<TagResults> _callback) throws ApiException {
+    public okhttp3.Call listTagsAsync(Long programId, Long itemId, Long broadcastId, Long contactId, Long page, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback<InlineResponse20012> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = listTagsValidateBeforeCall(page, programId, itemId, broadcastId, contactId, limit, orderBy, orderDirection, externalStationId, _callback);
-        Type localVarReturnType = new TypeToken<TagResults>(){}.getType();
+        okhttp3.Call localVarCall = listTagsValidateBeforeCall(programId, itemId, broadcastId, contactId, page, limit, orderBy, orderDirection, externalStationId, _callback);
+        Type localVarReturnType = new TypeToken<InlineResponse20012>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for updateTagByID
      * @param id ID of Tag **(Required)** (required)
-     * @param data Data *(Optional)* (optional)
+     * @param tagDataInput Data *(Optional)* (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully updated Tag by id </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call updateTagByIDCall(Long id, TagDataInput data, final ApiCallback _callback) throws ApiException {
-        Object localVarPostBody = data;
+    public okhttp3.Call updateTagByIDCall(Long id, TagDataInput tagDataInput, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = tagDataInput;
 
         // create path and map variables
         String localVarPath = "/tags/{id}"
-            .replaceAll("\\{" + "id" + "\\}", localVarApiClient.escapeString(id.toString()));
+            .replace("{" + "id" + "}", localVarApiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -669,23 +808,27 @@ public class TagApi {
             "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "PATCH", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "PATCH", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call updateTagByIDValidateBeforeCall(Long id, TagDataInput data, final ApiCallback _callback) throws ApiException {
-        
+    private okhttp3.Call updateTagByIDValidateBeforeCall(Long id, TagDataInput tagDataInput, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'id' is set
         if (id == null) {
             throw new ApiException("Missing the required parameter 'id' when calling updateTagByID(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = updateTagByIDCall(id, data, _callback);
-        return localVarCall;
+        // verify the required parameter 'tagDataInput' is set
+        if (tagDataInput == null) {
+            throw new ApiException("Missing the required parameter 'tagDataInput' when calling updateTagByID(Async)");
+        }
+
+        return updateTagByIDCall(id, tagDataInput, _callback);
 
     }
 
@@ -693,21 +836,24 @@ public class TagApi {
      * Update tag by id
      * Update tag by id
      * @param id ID of Tag **(Required)** (required)
-     * @param data Data *(Optional)* (optional)
-     * @return Success
+     * @param tagDataInput Data *(Optional)* (required)
+     * @return InlineResponse202
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully updated Tag by id </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public Success updateTagByID(Long id, TagDataInput data) throws ApiException {
-        ApiResponse<Success> localVarResp = updateTagByIDWithHttpInfo(id, data);
+    public InlineResponse202 updateTagByID(Long id, TagDataInput tagDataInput) throws ApiException {
+        ApiResponse<InlineResponse202> localVarResp = updateTagByIDWithHttpInfo(id, tagDataInput);
         return localVarResp.getData();
     }
 
@@ -715,22 +861,25 @@ public class TagApi {
      * Update tag by id
      * Update tag by id
      * @param id ID of Tag **(Required)** (required)
-     * @param data Data *(Optional)* (optional)
-     * @return ApiResponse&lt;Success&gt;
+     * @param tagDataInput Data *(Optional)* (required)
+     * @return ApiResponse&lt;InlineResponse202&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully updated Tag by id </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Success> updateTagByIDWithHttpInfo(Long id, TagDataInput data) throws ApiException {
-        okhttp3.Call localVarCall = updateTagByIDValidateBeforeCall(id, data, null);
-        Type localVarReturnType = new TypeToken<Success>(){}.getType();
+    public ApiResponse<InlineResponse202> updateTagByIDWithHttpInfo(Long id, TagDataInput tagDataInput) throws ApiException {
+        okhttp3.Call localVarCall = updateTagByIDValidateBeforeCall(id, tagDataInput, null);
+        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -738,24 +887,27 @@ public class TagApi {
      * Update tag by id (asynchronously)
      * Update tag by id
      * @param id ID of Tag **(Required)** (required)
-     * @param data Data *(Optional)* (optional)
+     * @param tagDataInput Data *(Optional)* (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully updated Tag by id </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call updateTagByIDAsync(Long id, TagDataInput data, final ApiCallback<Success> _callback) throws ApiException {
+    public okhttp3.Call updateTagByIDAsync(Long id, TagDataInput tagDataInput, final ApiCallback<InlineResponse202> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = updateTagByIDValidateBeforeCall(id, data, _callback);
-        Type localVarReturnType = new TypeToken<Success>(){}.getType();
+        okhttp3.Call localVarCall = updateTagByIDValidateBeforeCall(id, tagDataInput, _callback);
+        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

@@ -2,12 +2,12 @@
 
 All URIs are relative to *https://radiomanager.io/api/v2*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**getBlockById**](BlockApi.md#getBlockById) | **GET** /blocks/{id} | Get block by id
-[**getCurrentBlock**](BlockApi.md#getCurrentBlock) | **GET** /blocks/current | Get current Block
-[**getNextBlock**](BlockApi.md#getNextBlock) | **GET** /blocks/next | Get upcoming Block
-[**listBlocks**](BlockApi.md#listBlocks) | **GET** /blocks | Get a list of all blocks currently in your station.
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**getBlockById**](BlockApi.md#getBlockById) | **GET** /blocks/{id} | Get block by id |
+| [**getCurrentBlock**](BlockApi.md#getCurrentBlock) | **GET** /blocks/current | Get current Block |
+| [**getNextBlock**](BlockApi.md#getNextBlock) | **GET** /blocks/next | Get upcoming Block |
+| [**listBlocks**](BlockApi.md#listBlocks) | **GET** /blocks | Get a list of all blocks currently in your station. |
 
 
 <a name="getBlockById"></a>
@@ -40,7 +40,7 @@ public class Example {
     //API-Key.setApiKeyPrefix("Token");
 
     BlockApi apiInstance = new BlockApi(defaultClient);
-    Long id = 0lL; // Long | ID of Block **(Required)**
+    Long id = 56L; // Long | ID of Block **(Required)**
     Long externalStationId = 56L; // Long | Query on a different (content providing) station *(Optional)*
     try {
       BlockResult result = apiInstance.getBlockById(id, externalStationId);
@@ -58,10 +58,10 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **Long**| ID of Block **(Required)** | [default to 0l]
- **externalStationId** | **Long**| Query on a different (content providing) station *(Optional)* | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | **Long**| ID of Block **(Required)** | |
+| **externalStationId** | **Long**| Query on a different (content providing) station *(Optional)* | [optional] |
 
 ### Return type
 
@@ -79,10 +79,14 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully got Block by id |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**429** | Too Many Requests |  -  |
+| **200** | Successfully got Block by id |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
 
 <a name="getCurrentBlock"></a>
 # **getCurrentBlock**
@@ -90,7 +94,7 @@ Name | Type | Description  | Notes
 
 Get current Block
 
-Get current Block
+Get currently playing Block
 
 ### Example
 ```java
@@ -147,10 +151,14 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully got current Block |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**429** | Too Many Requests |  -  |
+| **200** | Successfully got current Block |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
 
 <a name="getNextBlock"></a>
 # **getNextBlock**
@@ -158,7 +166,7 @@ This endpoint does not need any parameter.
 
 Get upcoming Block
 
-Get upcoming Block
+Get currently upcoming Block
 
 ### Example
 ```java
@@ -215,14 +223,18 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully got upcoming Block |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**429** | Too Many Requests |  -  |
+| **200** | Successfully got upcoming Block |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
 
 <a name="listBlocks"></a>
 # **listBlocks**
-> BlockResults listBlocks(page, broadcastId, itemId, programId, startMin, startMax, limit, orderBy, orderDirection, externalStationId)
+> InlineResponse200 listBlocks(broadcastId, itemId, programId, startMin, startMax, page, limit, orderBy, orderDirection, externalStationId)
 
 Get a list of all blocks currently in your station.
 
@@ -250,18 +262,18 @@ public class Example {
     //API-Key.setApiKeyPrefix("Token");
 
     BlockApi apiInstance = new BlockApi(defaultClient);
-    Long page = 1lL; // Long | Current page *(Optional)*
     Long broadcastId = 56L; // Long | Search on Broadcast ID *(Optional)* `(Relation)`
     Long itemId = 56L; // Long | Search on Item ID *(Optional)* `(Relation)`
     Long programId = 56L; // Long | Search on Program ID *(Optional)* `(Relation)`
-    OffsetDateTime startMin = new OffsetDateTime(); // OffsetDateTime | Minimum start date *(Optional)*
-    OffsetDateTime startMax = new OffsetDateTime(); // OffsetDateTime | Maximum start date *(Optional)*
+    OffsetDateTime startMin = OffsetDateTime.now(); // OffsetDateTime | Minimum start date *(Optional)*
+    OffsetDateTime startMax = OffsetDateTime.now(); // OffsetDateTime | Maximum start date *(Optional)*
+    Long page = 1L; // Long | Current page *(Optional)*
     Long limit = 56L; // Long | Results per page *(Optional)*
     String orderBy = "orderBy_example"; // String | Field to order the results *(Optional)*
-    String orderDirection = "orderDirection_example"; // String | Direction of ordering *(Optional)*
+    String orderDirection = "asc"; // String | Direction of ordering *(Optional)*
     Long externalStationId = 56L; // Long | Query on a different (content providing) station *(Optional)*
     try {
-      BlockResults result = apiInstance.listBlocks(page, broadcastId, itemId, programId, startMin, startMax, limit, orderBy, orderDirection, externalStationId);
+      InlineResponse200 result = apiInstance.listBlocks(broadcastId, itemId, programId, startMin, startMax, page, limit, orderBy, orderDirection, externalStationId);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling BlockApi#listBlocks");
@@ -276,22 +288,22 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **page** | **Long**| Current page *(Optional)* | [optional] [default to 1l]
- **broadcastId** | **Long**| Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
- **itemId** | **Long**| Search on Item ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
- **programId** | **Long**| Search on Program ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
- **startMin** | **OffsetDateTime**| Minimum start date *(Optional)* | [optional]
- **startMax** | **OffsetDateTime**| Maximum start date *(Optional)* | [optional]
- **limit** | **Long**| Results per page *(Optional)* | [optional]
- **orderBy** | **String**| Field to order the results *(Optional)* | [optional]
- **orderDirection** | **String**| Direction of ordering *(Optional)* | [optional] [enum: asc, desc]
- **externalStationId** | **Long**| Query on a different (content providing) station *(Optional)* | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **broadcastId** | **Long**| Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; | [optional] |
+| **itemId** | **Long**| Search on Item ID *(Optional)* &#x60;(Relation)&#x60; | [optional] |
+| **programId** | **Long**| Search on Program ID *(Optional)* &#x60;(Relation)&#x60; | [optional] |
+| **startMin** | **OffsetDateTime**| Minimum start date *(Optional)* | [optional] |
+| **startMax** | **OffsetDateTime**| Maximum start date *(Optional)* | [optional] |
+| **page** | **Long**| Current page *(Optional)* | [optional] [default to 1] |
+| **limit** | **Long**| Results per page *(Optional)* | [optional] |
+| **orderBy** | **String**| Field to order the results *(Optional)* | [optional] |
+| **orderDirection** | **String**| Direction of ordering *(Optional)* | [optional] [enum: asc, desc] |
+| **externalStationId** | **Long**| Query on a different (content providing) station *(Optional)* | [optional] |
 
 ### Return type
 
-[**BlockResults**](BlockResults.md)
+[**InlineResponse200**](InlineResponse200.md)
 
 ### Authorization
 
@@ -305,8 +317,12 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully got all blocks |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**429** | Too Many Requests |  -  |
+| **200** | Successfully got all Blocks |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
 

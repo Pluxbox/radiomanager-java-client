@@ -1,6 +1,6 @@
 /*
  * RadioManager
- * RadioManager
+ * This OpenAPI 3 Document describes the functionality of the API v2 of RadioManager. Note that no rights can be derived from this Document and the true functionality of the API might differ.
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@pluxbox.com
@@ -14,17 +14,20 @@
 package radiomanager;
 
 import com.pluxbox.radiomanager.api.invoker.ApiException;
-import com.pluxbox.radiomanager.api.models.Forbidden;
-import com.pluxbox.radiomanager.api.models.NotFound;
-import com.pluxbox.radiomanager.api.models.PostSuccess;
+import com.pluxbox.radiomanager.api.models.InlineResponse20011;
+import com.pluxbox.radiomanager.api.models.InlineResponse2002;
+import com.pluxbox.radiomanager.api.models.InlineResponse202;
+import com.pluxbox.radiomanager.api.models.InlineResponse400;
+import com.pluxbox.radiomanager.api.models.InlineResponse401;
+import com.pluxbox.radiomanager.api.models.InlineResponse403;
+import com.pluxbox.radiomanager.api.models.InlineResponse404;
+import com.pluxbox.radiomanager.api.models.InlineResponse422;
+import com.pluxbox.radiomanager.api.models.InlineResponse429;
+import com.pluxbox.radiomanager.api.models.InlineResponse500;
 import com.pluxbox.radiomanager.api.models.ProgramDataInput;
 import com.pluxbox.radiomanager.api.models.ProgramResult;
-import com.pluxbox.radiomanager.api.models.ProgramResults;
-import com.pluxbox.radiomanager.api.models.Success;
-import com.pluxbox.radiomanager.api.models.TooManyRequests;
-import com.pluxbox.radiomanager.api.models.UnprocessableEntity;
-import org.junit.Test;
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,104 +37,94 @@ import java.util.Map;
 /**
  * API tests for ProgramApi
  */
-@Ignore
+@Disabled
 public class ProgramApiTest {
 
     private final ProgramApi api = new ProgramApi();
 
-    
     /**
      * Create program.
      *
      * Create program.
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void createProgramTest() throws ApiException {
-        ProgramDataInput data = null;
-        PostSuccess response = api.createProgram(data);
-
+        ProgramDataInput programDataInput = null;
+        InlineResponse2002 response = api.createProgram(programDataInput);
         // TODO: test validations
     }
-    
+
     /**
      * Delete program by id
      *
      * Delete program by id
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void deleteProgramByIdTest() throws ApiException {
         Long id = null;
-        Success response = api.deleteProgramById(id);
-
+        InlineResponse202 response = api.deleteProgramById(id);
         // TODO: test validations
     }
-    
+
     /**
      * Get program by id
      *
      * Get program by id
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void getProgramByIdTest() throws ApiException {
         Long id = null;
         Long externalStationId = null;
         ProgramResult response = api.getProgramById(id, externalStationId);
-
         // TODO: test validations
     }
-    
+
     /**
      * Get all programs.
      *
      * List all programs.
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void listProgramsTest() throws ApiException {
-        Long page = null;
         Long broadcastId = null;
         Long modelTypeId = null;
         Long tagId = null;
         Long presenterId = null;
         Long genreId = null;
+        Long groupId = null;
         Long blockId = null;
         Long itemId = null;
         Integer disabled = null;
+        Long page = null;
         Long limit = null;
         String orderBy = null;
         String orderDirection = null;
         Long externalStationId = null;
-        ProgramResults response = api.listPrograms(page, broadcastId, modelTypeId, tagId, presenterId, genreId, blockId, itemId, disabled, limit, orderBy, orderDirection, externalStationId);
-
+        InlineResponse20011 response = api.listPrograms(broadcastId, modelTypeId, tagId, presenterId, genreId, groupId, blockId, itemId, disabled, page, limit, orderBy, orderDirection, externalStationId);
         // TODO: test validations
     }
-    
+
     /**
      * Update program by id
      *
      * Update program by id
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void updateProgramByIDTest() throws ApiException {
         Long id = null;
-        ProgramDataInput data = null;
-        Success response = api.updateProgramByID(id, data);
-
+        ProgramDataInput programDataInput = null;
+        InlineResponse202 response = api.updateProgramByID(id, programDataInput);
         // TODO: test validations
     }
-    
+
 }

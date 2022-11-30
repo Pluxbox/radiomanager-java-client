@@ -1,6 +1,6 @@
 /*
  * RadioManager
- * RadioManager
+ * This OpenAPI 3 Document describes the functionality of the API v2 of RadioManager. Note that no rights can be derived from this Document and the true functionality of the API might differ.
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@pluxbox.com
@@ -27,25 +27,30 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
-import com.pluxbox.radiomanager.api.models.Forbidden;
-import com.pluxbox.radiomanager.api.models.NotFound;
-import com.pluxbox.radiomanager.api.models.PostSuccess;
-import com.pluxbox.radiomanager.api.models.Presenter;
+import com.pluxbox.radiomanager.api.models.InlineResponse20010;
+import com.pluxbox.radiomanager.api.models.InlineResponse2002;
+import com.pluxbox.radiomanager.api.models.InlineResponse202;
+import com.pluxbox.radiomanager.api.models.InlineResponse400;
+import com.pluxbox.radiomanager.api.models.InlineResponse401;
+import com.pluxbox.radiomanager.api.models.InlineResponse403;
+import com.pluxbox.radiomanager.api.models.InlineResponse404;
+import com.pluxbox.radiomanager.api.models.InlineResponse422;
+import com.pluxbox.radiomanager.api.models.InlineResponse429;
+import com.pluxbox.radiomanager.api.models.InlineResponse500;
 import com.pluxbox.radiomanager.api.models.PresenterDataInput;
 import com.pluxbox.radiomanager.api.models.PresenterResult;
-import com.pluxbox.radiomanager.api.models.PresenterResults;
-import com.pluxbox.radiomanager.api.models.Success;
-import com.pluxbox.radiomanager.api.models.TooManyRequests;
-import com.pluxbox.radiomanager.api.models.UnprocessableEntity;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.ws.rs.core.GenericType;
 
 public class PresenterApi {
     private ApiClient localVarApiClient;
+    private int localHostIndex;
+    private String localCustomBaseUrl;
 
     public PresenterApi() {
         this(Configuration.getDefaultApiClient());
@@ -63,24 +68,56 @@ public class PresenterApi {
         this.localVarApiClient = apiClient;
     }
 
+    public int getHostIndex() {
+        return localHostIndex;
+    }
+
+    public void setHostIndex(int hostIndex) {
+        this.localHostIndex = hostIndex;
+    }
+
+    public String getCustomBaseUrl() {
+        return localCustomBaseUrl;
+    }
+
+    public void setCustomBaseUrl(String customBaseUrl) {
+        this.localCustomBaseUrl = customBaseUrl;
+    }
+
     /**
      * Build call for createPresenter
-     * @param data Data **(Required)** (required)
+     * @param presenterDataInput Data **(Required)** (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully created a presenter </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Post Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call createPresenterCall(PresenterDataInput data, final ApiCallback _callback) throws ApiException {
-        Object localVarPostBody = data;
+    public okhttp3.Call createPresenterCall(PresenterDataInput presenterDataInput, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = presenterDataInput;
 
         // create path and map variables
         String localVarPath = "/presenters";
@@ -90,6 +127,7 @@ public class PresenterApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -102,90 +140,98 @@ public class PresenterApi {
             "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call createPresenterValidateBeforeCall(PresenterDataInput data, final ApiCallback _callback) throws ApiException {
-        
-        // verify the required parameter 'data' is set
-        if (data == null) {
-            throw new ApiException("Missing the required parameter 'data' when calling createPresenter(Async)");
+    private okhttp3.Call createPresenterValidateBeforeCall(PresenterDataInput presenterDataInput, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'presenterDataInput' is set
+        if (presenterDataInput == null) {
+            throw new ApiException("Missing the required parameter 'presenterDataInput' when calling createPresenter(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = createPresenterCall(data, _callback);
-        return localVarCall;
+        return createPresenterCall(presenterDataInput, _callback);
 
     }
 
     /**
      * Create presenter.
      * Create presenter.
-     * @param data Data **(Required)** (required)
-     * @return PostSuccess
+     * @param presenterDataInput Data **(Required)** (required)
+     * @return InlineResponse2002
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully created a presenter </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Post Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public PostSuccess createPresenter(PresenterDataInput data) throws ApiException {
-        ApiResponse<PostSuccess> localVarResp = createPresenterWithHttpInfo(data);
+    public InlineResponse2002 createPresenter(PresenterDataInput presenterDataInput) throws ApiException {
+        ApiResponse<InlineResponse2002> localVarResp = createPresenterWithHttpInfo(presenterDataInput);
         return localVarResp.getData();
     }
 
     /**
      * Create presenter.
      * Create presenter.
-     * @param data Data **(Required)** (required)
-     * @return ApiResponse&lt;PostSuccess&gt;
+     * @param presenterDataInput Data **(Required)** (required)
+     * @return ApiResponse&lt;InlineResponse2002&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully created a presenter </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Post Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<PostSuccess> createPresenterWithHttpInfo(PresenterDataInput data) throws ApiException {
-        okhttp3.Call localVarCall = createPresenterValidateBeforeCall(data, null);
-        Type localVarReturnType = new TypeToken<PostSuccess>(){}.getType();
+    public ApiResponse<InlineResponse2002> createPresenterWithHttpInfo(PresenterDataInput presenterDataInput) throws ApiException {
+        okhttp3.Call localVarCall = createPresenterValidateBeforeCall(presenterDataInput, null);
+        Type localVarReturnType = new TypeToken<InlineResponse2002>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * Create presenter. (asynchronously)
      * Create presenter.
-     * @param data Data **(Required)** (required)
+     * @param presenterDataInput Data **(Required)** (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully created a presenter </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Post Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call createPresenterAsync(PresenterDataInput data, final ApiCallback<PostSuccess> _callback) throws ApiException {
+    public okhttp3.Call createPresenterAsync(PresenterDataInput presenterDataInput, final ApiCallback<InlineResponse2002> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = createPresenterValidateBeforeCall(data, _callback);
-        Type localVarReturnType = new TypeToken<PostSuccess>(){}.getType();
+        okhttp3.Call localVarCall = createPresenterValidateBeforeCall(presenterDataInput, _callback);
+        Type localVarReturnType = new TypeToken<InlineResponse2002>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -198,24 +244,42 @@ public class PresenterApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully deleted presenter by id </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call deletePresenterByIdCall(Long id, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
         String localVarPath = "/presenters/{id}"
-            .replaceAll("\\{" + "id" + "\\}", localVarApiClient.escapeString(id.toString()));
+            .replace("{" + "id" + "}", localVarApiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -225,26 +289,24 @@ public class PresenterApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call deletePresenterByIdValidateBeforeCall(Long id, final ApiCallback _callback) throws ApiException {
-        
         // verify the required parameter 'id' is set
         if (id == null) {
             throw new ApiException("Missing the required parameter 'id' when calling deletePresenterById(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = deletePresenterByIdCall(id, _callback);
-        return localVarCall;
+        return deletePresenterByIdCall(id, _callback);
 
     }
 
@@ -252,19 +314,23 @@ public class PresenterApi {
      * Delete presenter by id
      * Delete presenter by id
      * @param id id of presenter (required)
-     * @return Success
+     * @return InlineResponse202
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully deleted presenter by id </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public Success deletePresenterById(Long id) throws ApiException {
-        ApiResponse<Success> localVarResp = deletePresenterByIdWithHttpInfo(id);
+    public InlineResponse202 deletePresenterById(Long id) throws ApiException {
+        ApiResponse<InlineResponse202> localVarResp = deletePresenterByIdWithHttpInfo(id);
         return localVarResp.getData();
     }
 
@@ -272,20 +338,24 @@ public class PresenterApi {
      * Delete presenter by id
      * Delete presenter by id
      * @param id id of presenter (required)
-     * @return ApiResponse&lt;Success&gt;
+     * @return ApiResponse&lt;InlineResponse202&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully deleted presenter by id </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Success> deletePresenterByIdWithHttpInfo(Long id) throws ApiException {
+    public ApiResponse<InlineResponse202> deletePresenterByIdWithHttpInfo(Long id) throws ApiException {
         okhttp3.Call localVarCall = deletePresenterByIdValidateBeforeCall(id, null);
-        Type localVarReturnType = new TypeToken<Success>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -299,51 +369,68 @@ public class PresenterApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully deleted presenter by id </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call deletePresenterByIdAsync(Long id, final ApiCallback<Success> _callback) throws ApiException {
+    public okhttp3.Call deletePresenterByIdAsync(Long id, final ApiCallback<InlineResponse202> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = deletePresenterByIdValidateBeforeCall(id, _callback);
-        Type localVarReturnType = new TypeToken<Success>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for getPresenterById
      * @param id id of Presenter (required)
-     * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully got Presenter by id </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully got Broadcast by id </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getPresenterByIdCall(Long id, Long externalStationId, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getPresenterByIdCall(Long id, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
         String localVarPath = "/presenters/{id}"
-            .replaceAll("\\{" + "id" + "\\}", localVarApiClient.escapeString(id.toString()));
+            .replace("{" + "id" + "}", localVarApiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        if (externalStationId != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("_external_station_id", externalStationId));
-        }
-
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -353,26 +440,24 @@ public class PresenterApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getPresenterByIdValidateBeforeCall(Long id, Long externalStationId, final ApiCallback _callback) throws ApiException {
-        
+    private okhttp3.Call getPresenterByIdValidateBeforeCall(Long id, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'id' is set
         if (id == null) {
             throw new ApiException("Missing the required parameter 'id' when calling getPresenterById(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = getPresenterByIdCall(id, externalStationId, _callback);
-        return localVarCall;
+        return getPresenterByIdCall(id, _callback);
 
     }
 
@@ -380,20 +465,23 @@ public class PresenterApi {
      * Get presenter by id
      * Get presenter by id
      * @param id id of Presenter (required)
-     * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @return PresenterResult
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully got Presenter by id </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully got Broadcast by id </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public PresenterResult getPresenterById(Long id, Long externalStationId) throws ApiException {
-        ApiResponse<PresenterResult> localVarResp = getPresenterByIdWithHttpInfo(id, externalStationId);
+    public PresenterResult getPresenterById(Long id) throws ApiException {
+        ApiResponse<PresenterResult> localVarResp = getPresenterByIdWithHttpInfo(id);
         return localVarResp.getData();
     }
 
@@ -401,20 +489,23 @@ public class PresenterApi {
      * Get presenter by id
      * Get presenter by id
      * @param id id of Presenter (required)
-     * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @return ApiResponse&lt;PresenterResult&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully got Presenter by id </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully got Broadcast by id </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<PresenterResult> getPresenterByIdWithHttpInfo(Long id, Long externalStationId) throws ApiException {
-        okhttp3.Call localVarCall = getPresenterByIdValidateBeforeCall(id, externalStationId, null);
+    public ApiResponse<PresenterResult> getPresenterByIdWithHttpInfo(Long id) throws ApiException {
+        okhttp3.Call localVarCall = getPresenterByIdValidateBeforeCall(id, null);
         Type localVarReturnType = new TypeToken<PresenterResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -423,32 +514,35 @@ public class PresenterApi {
      * Get presenter by id (asynchronously)
      * Get presenter by id
      * @param id id of Presenter (required)
-     * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully got Presenter by id </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully got Broadcast by id </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getPresenterByIdAsync(Long id, Long externalStationId, final ApiCallback<PresenterResult> _callback) throws ApiException {
+    public okhttp3.Call getPresenterByIdAsync(Long id, final ApiCallback<PresenterResult> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = getPresenterByIdValidateBeforeCall(id, externalStationId, _callback);
+        okhttp3.Call localVarCall = getPresenterByIdValidateBeforeCall(id, _callback);
         Type localVarReturnType = new TypeToken<PresenterResult>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for listPresenters
-     * @param page Current page *(Optional)* (optional)
      * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param broadcastId Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param modelTypeId Search on ModelType ID (Optional) (optional)
+     * @param page Current page *(Optional)* (optional, default to 1)
      * @param limit Results per page *(Optional)* (optional)
      * @param orderBy Field to order the results *(Optional)* (optional)
      * @param orderDirection Direction of ordering *(Optional)* (optional)
@@ -460,12 +554,29 @@ public class PresenterApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got all presenters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call listPresentersCall(Long page, Long programId, Long broadcastId, Long modelTypeId, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call listPresentersCall(Long programId, Long broadcastId, Long modelTypeId, Long page, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -473,9 +584,9 @@ public class PresenterApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        if (page != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
-        }
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
         if (programId != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("program_id", programId));
@@ -487,6 +598,10 @@ public class PresenterApi {
 
         if (modelTypeId != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("model_type_id", modelTypeId));
+        }
+
+        if (page != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
         }
 
         if (limit != null) {
@@ -505,9 +620,6 @@ public class PresenterApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("_external_station_id", externalStationId));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -517,86 +629,92 @@ public class PresenterApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call listPresentersValidateBeforeCall(Long page, Long programId, Long broadcastId, Long modelTypeId, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback _callback) throws ApiException {
-        
-
-        okhttp3.Call localVarCall = listPresentersCall(page, programId, broadcastId, modelTypeId, limit, orderBy, orderDirection, externalStationId, _callback);
-        return localVarCall;
+    private okhttp3.Call listPresentersValidateBeforeCall(Long programId, Long broadcastId, Long modelTypeId, Long page, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback _callback) throws ApiException {
+        return listPresentersCall(programId, broadcastId, modelTypeId, page, limit, orderBy, orderDirection, externalStationId, _callback);
 
     }
 
     /**
      * Get all presenters.
      * List all presenters.
-     * @param page Current page *(Optional)* (optional)
      * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param broadcastId Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param modelTypeId Search on ModelType ID (Optional) (optional)
+     * @param page Current page *(Optional)* (optional, default to 1)
      * @param limit Results per page *(Optional)* (optional)
      * @param orderBy Field to order the results *(Optional)* (optional)
      * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
-     * @return PresenterResults
+     * @return InlineResponse20010
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got all presenters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public PresenterResults listPresenters(Long page, Long programId, Long broadcastId, Long modelTypeId, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
-        ApiResponse<PresenterResults> localVarResp = listPresentersWithHttpInfo(page, programId, broadcastId, modelTypeId, limit, orderBy, orderDirection, externalStationId);
+    public InlineResponse20010 listPresenters(Long programId, Long broadcastId, Long modelTypeId, Long page, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
+        ApiResponse<InlineResponse20010> localVarResp = listPresentersWithHttpInfo(programId, broadcastId, modelTypeId, page, limit, orderBy, orderDirection, externalStationId);
         return localVarResp.getData();
     }
 
     /**
      * Get all presenters.
      * List all presenters.
-     * @param page Current page *(Optional)* (optional)
      * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param broadcastId Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param modelTypeId Search on ModelType ID (Optional) (optional)
+     * @param page Current page *(Optional)* (optional, default to 1)
      * @param limit Results per page *(Optional)* (optional)
      * @param orderBy Field to order the results *(Optional)* (optional)
      * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
-     * @return ApiResponse&lt;PresenterResults&gt;
+     * @return ApiResponse&lt;InlineResponse20010&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got all presenters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<PresenterResults> listPresentersWithHttpInfo(Long page, Long programId, Long broadcastId, Long modelTypeId, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
-        okhttp3.Call localVarCall = listPresentersValidateBeforeCall(page, programId, broadcastId, modelTypeId, limit, orderBy, orderDirection, externalStationId, null);
-        Type localVarReturnType = new TypeToken<PresenterResults>(){}.getType();
+    public ApiResponse<InlineResponse20010> listPresentersWithHttpInfo(Long programId, Long broadcastId, Long modelTypeId, Long page, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
+        okhttp3.Call localVarCall = listPresentersValidateBeforeCall(programId, broadcastId, modelTypeId, page, limit, orderBy, orderDirection, externalStationId, null);
+        Type localVarReturnType = new TypeToken<InlineResponse20010>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * Get all presenters. (asynchronously)
      * List all presenters.
-     * @param page Current page *(Optional)* (optional)
      * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param broadcastId Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param modelTypeId Search on ModelType ID (Optional) (optional)
+     * @param page Current page *(Optional)* (optional, default to 1)
      * @param limit Results per page *(Optional)* (optional)
      * @param orderBy Field to order the results *(Optional)* (optional)
      * @param orderDirection Direction of ordering *(Optional)* (optional)
@@ -608,47 +726,68 @@ public class PresenterApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got all presenters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call listPresentersAsync(Long page, Long programId, Long broadcastId, Long modelTypeId, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback<PresenterResults> _callback) throws ApiException {
+    public okhttp3.Call listPresentersAsync(Long programId, Long broadcastId, Long modelTypeId, Long page, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback<InlineResponse20010> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = listPresentersValidateBeforeCall(page, programId, broadcastId, modelTypeId, limit, orderBy, orderDirection, externalStationId, _callback);
-        Type localVarReturnType = new TypeToken<PresenterResults>(){}.getType();
+        okhttp3.Call localVarCall = listPresentersValidateBeforeCall(programId, broadcastId, modelTypeId, page, limit, orderBy, orderDirection, externalStationId, _callback);
+        Type localVarReturnType = new TypeToken<InlineResponse20010>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for updatePresenterByID
      * @param id id of Presenter (required)
-     * @param data Data *(Optional)* (optional)
+     * @param presenterDataInput Data *(Optional)* (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully updated Presenter by id </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call updatePresenterByIDCall(Long id, PresenterDataInput data, final ApiCallback _callback) throws ApiException {
-        Object localVarPostBody = data;
+    public okhttp3.Call updatePresenterByIDCall(Long id, PresenterDataInput presenterDataInput, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = presenterDataInput;
 
         // create path and map variables
         String localVarPath = "/presenters/{id}"
-            .replaceAll("\\{" + "id" + "\\}", localVarApiClient.escapeString(id.toString()));
+            .replace("{" + "id" + "}", localVarApiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -661,23 +800,27 @@ public class PresenterApi {
             "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "PATCH", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "PATCH", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call updatePresenterByIDValidateBeforeCall(Long id, PresenterDataInput data, final ApiCallback _callback) throws ApiException {
-        
+    private okhttp3.Call updatePresenterByIDValidateBeforeCall(Long id, PresenterDataInput presenterDataInput, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'id' is set
         if (id == null) {
             throw new ApiException("Missing the required parameter 'id' when calling updatePresenterByID(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = updatePresenterByIDCall(id, data, _callback);
-        return localVarCall;
+        // verify the required parameter 'presenterDataInput' is set
+        if (presenterDataInput == null) {
+            throw new ApiException("Missing the required parameter 'presenterDataInput' when calling updatePresenterByID(Async)");
+        }
+
+        return updatePresenterByIDCall(id, presenterDataInput, _callback);
 
     }
 
@@ -685,21 +828,24 @@ public class PresenterApi {
      * Update presenter by id
      * Update presenter by id
      * @param id id of Presenter (required)
-     * @param data Data *(Optional)* (optional)
-     * @return Success
+     * @param presenterDataInput Data *(Optional)* (required)
+     * @return InlineResponse202
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully updated Presenter by id </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public Success updatePresenterByID(Long id, PresenterDataInput data) throws ApiException {
-        ApiResponse<Success> localVarResp = updatePresenterByIDWithHttpInfo(id, data);
+    public InlineResponse202 updatePresenterByID(Long id, PresenterDataInput presenterDataInput) throws ApiException {
+        ApiResponse<InlineResponse202> localVarResp = updatePresenterByIDWithHttpInfo(id, presenterDataInput);
         return localVarResp.getData();
     }
 
@@ -707,22 +853,25 @@ public class PresenterApi {
      * Update presenter by id
      * Update presenter by id
      * @param id id of Presenter (required)
-     * @param data Data *(Optional)* (optional)
-     * @return ApiResponse&lt;Success&gt;
+     * @param presenterDataInput Data *(Optional)* (required)
+     * @return ApiResponse&lt;InlineResponse202&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully updated Presenter by id </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Success> updatePresenterByIDWithHttpInfo(Long id, PresenterDataInput data) throws ApiException {
-        okhttp3.Call localVarCall = updatePresenterByIDValidateBeforeCall(id, data, null);
-        Type localVarReturnType = new TypeToken<Success>(){}.getType();
+    public ApiResponse<InlineResponse202> updatePresenterByIDWithHttpInfo(Long id, PresenterDataInput presenterDataInput) throws ApiException {
+        okhttp3.Call localVarCall = updatePresenterByIDValidateBeforeCall(id, presenterDataInput, null);
+        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -730,24 +879,27 @@ public class PresenterApi {
      * Update presenter by id (asynchronously)
      * Update presenter by id
      * @param id id of Presenter (required)
-     * @param data Data *(Optional)* (optional)
+     * @param presenterDataInput Data *(Optional)* (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully updated Presenter by id </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call updatePresenterByIDAsync(Long id, PresenterDataInput data, final ApiCallback<Success> _callback) throws ApiException {
+    public okhttp3.Call updatePresenterByIDAsync(Long id, PresenterDataInput presenterDataInput, final ApiCallback<InlineResponse202> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = updatePresenterByIDValidateBeforeCall(id, data, _callback);
-        Type localVarReturnType = new TypeToken<Success>(){}.getType();
+        okhttp3.Call localVarCall = updatePresenterByIDValidateBeforeCall(id, presenterDataInput, _callback);
+        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

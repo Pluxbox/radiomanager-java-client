@@ -1,6 +1,6 @@
 /*
  * RadioManager
- * RadioManager
+ * This OpenAPI 3 Document describes the functionality of the API v2 of RadioManager. Note that no rights can be derived from this Document and the true functionality of the API might differ.
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@pluxbox.com
@@ -14,7 +14,9 @@
 package com.pluxbox.radiomanager.api.invoker.auth;
 
 import com.pluxbox.radiomanager.api.invoker.Pair;
+import com.pluxbox.radiomanager.api.invoker.ApiException;
 
+import java.net.URI;
 import java.util.Map;
 import java.util.List;
 
@@ -25,6 +27,10 @@ public interface Authentication {
      * @param queryParams List of query parameters
      * @param headerParams Map of header parameters
      * @param cookieParams Map of cookie parameters
+     * @param payload HTTP request body
+     * @param method HTTP method
+     * @param uri URI
+     * @throws ApiException if failed to update the parameters
      */
-    void applyToParams(List<Pair> queryParams, Map<String, String> headerParams, Map<String, String> cookieParams);
+    void applyToParams(List<Pair> queryParams, Map<String, String> headerParams, Map<String, String> cookieParams, String payload, String method, URI uri) throws ApiException;
 }

@@ -1,6 +1,6 @@
 /*
  * RadioManager
- * RadioManager
+ * This OpenAPI 3 Document describes the functionality of the API v2 of RadioManager. Note that no rights can be derived from this Document and the true functionality of the API might differ.
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@pluxbox.com
@@ -20,10 +20,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.pluxbox.radiomanager.api.models.ModelType;
 import com.pluxbox.radiomanager.api.models.ModelTypeOptions;
-import com.pluxbox.radiomanager.api.models.ModelTypeOutputOnly;
-import com.pluxbox.radiomanager.api.models.ModelTypeRelations;
 import com.pluxbox.radiomanager.api.models.ModelTypeRelationsBroadcasts;
 import com.pluxbox.radiomanager.api.models.ModelTypeRelationsCampaigns;
 import com.pluxbox.radiomanager.api.models.ModelTypeRelationsContacts;
@@ -35,10 +32,31 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.pluxbox.radiomanager.api.invoker.JSON;
+
 /**
  * ModelTypeResult
  */
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class ModelTypeResult {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -157,6 +175,8 @@ public class ModelTypeResult {
   @SerializedName(SERIALIZED_NAME_EXTERNAL_STATION_ID)
   private Long externalStationId;
 
+  public ModelTypeResult() {
+  }
 
   public ModelTypeResult id(Long id) {
     
@@ -168,6 +188,7 @@ public class ModelTypeResult {
    * Get id
    * @return id
   **/
+  @javax.annotation.Nonnull
   @ApiModelProperty(example = "1", required = true, value = "")
 
   public Long getId() {
@@ -502,8 +523,9 @@ public class ModelTypeResult {
   }
 
 
+
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -533,7 +555,6 @@ public class ModelTypeResult {
     return Objects.hash(id, name, model, createdAt, updatedAt, options, order, deletedAt, campaigns, broadcasts, programs, contacts, presenters, items, externalStationId);
   }
 
-
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -561,12 +582,151 @@ public class ModelTypeResult {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("id");
+    openapiFields.add("name");
+    openapiFields.add("model");
+    openapiFields.add("created_at");
+    openapiFields.add("updated_at");
+    openapiFields.add("options");
+    openapiFields.add("order");
+    openapiFields.add("deleted_at");
+    openapiFields.add("campaigns");
+    openapiFields.add("broadcasts");
+    openapiFields.add("programs");
+    openapiFields.add("contacts");
+    openapiFields.add("presenters");
+    openapiFields.add("items");
+    openapiFields.add("_external_station_id");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("id");
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to ModelTypeResult
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (!ModelTypeResult.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+          throw new IllegalArgumentException(String.format("The required field(s) %s in ModelTypeResult is not found in the empty JSON string", ModelTypeResult.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!ModelTypeResult.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ModelTypeResult` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : ModelTypeResult.openapiRequiredFields) {
+        if (jsonObj.get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        }
+      }
+      if ((jsonObj.get("name") != null && !jsonObj.get("name").isJsonNull()) && !jsonObj.get("name").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
+      }
+      if ((jsonObj.get("model") != null && !jsonObj.get("model").isJsonNull()) && !jsonObj.get("model").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `model` to be a primitive type in the JSON string but got `%s`", jsonObj.get("model").toString()));
+      }
+      // validate the optional field `options`
+      if (jsonObj.get("options") != null && !jsonObj.get("options").isJsonNull()) {
+        ModelTypeOptions.validateJsonObject(jsonObj.getAsJsonObject("options"));
+      }
+      // validate the optional field `campaigns`
+      if (jsonObj.get("campaigns") != null && !jsonObj.get("campaigns").isJsonNull()) {
+        ModelTypeRelationsCampaigns.validateJsonObject(jsonObj.getAsJsonObject("campaigns"));
+      }
+      // validate the optional field `broadcasts`
+      if (jsonObj.get("broadcasts") != null && !jsonObj.get("broadcasts").isJsonNull()) {
+        ModelTypeRelationsBroadcasts.validateJsonObject(jsonObj.getAsJsonObject("broadcasts"));
+      }
+      // validate the optional field `programs`
+      if (jsonObj.get("programs") != null && !jsonObj.get("programs").isJsonNull()) {
+        ModelTypeRelationsPrograms.validateJsonObject(jsonObj.getAsJsonObject("programs"));
+      }
+      // validate the optional field `contacts`
+      if (jsonObj.get("contacts") != null && !jsonObj.get("contacts").isJsonNull()) {
+        ModelTypeRelationsContacts.validateJsonObject(jsonObj.getAsJsonObject("contacts"));
+      }
+      // validate the optional field `presenters`
+      if (jsonObj.get("presenters") != null && !jsonObj.get("presenters").isJsonNull()) {
+        ModelTypeRelationsPresenters.validateJsonObject(jsonObj.getAsJsonObject("presenters"));
+      }
+      // validate the optional field `items`
+      if (jsonObj.get("items") != null && !jsonObj.get("items").isJsonNull()) {
+        ModelTypeRelationsItems.validateJsonObject(jsonObj.getAsJsonObject("items"));
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!ModelTypeResult.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'ModelTypeResult' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<ModelTypeResult> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(ModelTypeResult.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<ModelTypeResult>() {
+           @Override
+           public void write(JsonWriter out, ModelTypeResult value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public ModelTypeResult read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of ModelTypeResult given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of ModelTypeResult
+  * @throws IOException if the JSON string is invalid with respect to ModelTypeResult
+  */
+  public static ModelTypeResult fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, ModelTypeResult.class);
+  }
+
+ /**
+  * Convert an instance of ModelTypeResult to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

@@ -2,12 +2,13 @@
 
 # BroadcastInputOnly
 
+
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**tags** | **List&lt;Integer&gt;** |  |  [optional]
-**presenters** | **List&lt;Integer&gt;** |  |  [optional]
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**tags** | **List&lt;Integer&gt;** |  |  [optional] |
+|**presenters** | **List&lt;Integer&gt;** |  |  [optional] |
 
 
 

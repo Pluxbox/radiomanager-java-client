@@ -1,6 +1,6 @@
 /*
  * RadioManager
- * RadioManager
+ * This OpenAPI 3 Document describes the functionality of the API v2 of RadioManager. Note that no rights can be derived from this Document and the true functionality of the API might differ.
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@pluxbox.com
@@ -21,10 +21,8 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.pluxbox.radiomanager.api.models.BroadcastRelationsGenre;
+import com.pluxbox.radiomanager.api.models.BroadcastRelationsGroup;
 import com.pluxbox.radiomanager.api.models.BroadcastRelationsModelType;
-import com.pluxbox.radiomanager.api.models.Program;
-import com.pluxbox.radiomanager.api.models.ProgramOutputOnly;
-import com.pluxbox.radiomanager.api.models.ProgramRelations;
 import com.pluxbox.radiomanager.api.models.ProgramRelationsBlocks;
 import com.pluxbox.radiomanager.api.models.ProgramRelationsBroadcasts;
 import com.pluxbox.radiomanager.api.models.ProgramRelationsItems;
@@ -35,10 +33,31 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.pluxbox.radiomanager.api.invoker.JSON;
+
 /**
  * ProgramResult
  */
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class ProgramResult {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -79,6 +98,10 @@ public class ProgramResult {
   public static final String SERIALIZED_NAME_GENRE_ID = "genre_id";
   @SerializedName(SERIALIZED_NAME_GENRE_ID)
   private Long genreId;
+
+  public static final String SERIALIZED_NAME_GROUP_ID = "group_id";
+  @SerializedName(SERIALIZED_NAME_GROUP_ID)
+  private Long groupId;
 
   public static final String SERIALIZED_NAME_DESCRIPTION = "description";
   @SerializedName(SERIALIZED_NAME_DESCRIPTION)
@@ -140,6 +163,12 @@ public class ProgramResult {
   @SerializedName(SERIALIZED_NAME_MODEL_TYPE)
   private BroadcastRelationsModelType modelType;
 
+  public static final String SERIALIZED_NAME_GROUP = "group";
+  @SerializedName(SERIALIZED_NAME_GROUP)
+  private BroadcastRelationsGroup group;
+
+  public ProgramResult() {
+  }
 
   public ProgramResult id(Long id) {
     
@@ -151,6 +180,7 @@ public class ProgramResult {
    * Get id
    * @return id
   **/
+  @javax.annotation.Nonnull
   @ApiModelProperty(example = "1", required = true, value = "")
 
   public Long getId() {
@@ -173,7 +203,8 @@ public class ProgramResult {
    * Get updatedAt
    * @return updatedAt
   **/
-  @ApiModelProperty(example = "2016-01-11T22:01:11+02:00", required = true, value = "")
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "2016-01-11T22:01:11+02:00", value = "")
 
   public OffsetDateTime getUpdatedAt() {
     return updatedAt;
@@ -195,7 +226,8 @@ public class ProgramResult {
    * Get createdAt
    * @return createdAt
   **/
-  @ApiModelProperty(example = "2016-01-11T22:01:11+02:00", required = true, value = "")
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "2016-01-11T22:01:11+02:00", value = "")
 
   public OffsetDateTime getCreatedAt() {
     return createdAt;
@@ -217,7 +249,8 @@ public class ProgramResult {
    * Get deletedAt
    * @return deletedAt
   **/
-  @ApiModelProperty(example = "2016-01-11T22:01:11+02:00", required = true, value = "")
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "2016-01-11T22:01:11+02:00", value = "")
 
   public OffsetDateTime getDeletedAt() {
     return deletedAt;
@@ -262,6 +295,7 @@ public class ProgramResult {
    * Get modelTypeId
    * @return modelTypeId
   **/
+  @javax.annotation.Nonnull
   @ApiModelProperty(example = "1", required = true, value = "")
 
   public Long getModelTypeId() {
@@ -307,6 +341,7 @@ public class ProgramResult {
    * Get title
    * @return title
   **/
+  @javax.annotation.Nonnull
   @ApiModelProperty(example = "FooBar", required = true, value = "")
 
   public String getTitle() {
@@ -365,6 +400,29 @@ public class ProgramResult {
   }
 
 
+  public ProgramResult groupId(Long groupId) {
+    
+    this.groupId = groupId;
+    return this;
+  }
+
+   /**
+   * Get groupId
+   * @return groupId
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "1", value = "")
+
+  public Long getGroupId() {
+    return groupId;
+  }
+
+
+  public void setGroupId(Long groupId) {
+    this.groupId = groupId;
+  }
+
+
   public ProgramResult description(String description) {
     
     this.description = description;
@@ -376,7 +434,7 @@ public class ProgramResult {
    * @return description
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "", value = "")
 
   public String getDescription() {
     return description;
@@ -710,8 +768,32 @@ public class ProgramResult {
   }
 
 
+  public ProgramResult group(BroadcastRelationsGroup group) {
+    
+    this.group = group;
+    return this;
+  }
+
+   /**
+   * Get group
+   * @return group
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public BroadcastRelationsGroup getGroup() {
+    return group;
+  }
+
+
+  public void setGroup(BroadcastRelationsGroup group) {
+    this.group = group;
+  }
+
+
+
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -729,6 +811,7 @@ public class ProgramResult {
         Objects.equals(this.title, programResult.title) &&
         Objects.equals(this.disabled, programResult.disabled) &&
         Objects.equals(this.genreId, programResult.genreId) &&
+        Objects.equals(this.groupId, programResult.groupId) &&
         Objects.equals(this.description, programResult.description) &&
         Objects.equals(this.shortName, programResult.shortName) &&
         Objects.equals(this.mediumName, programResult.mediumName) &&
@@ -743,14 +826,14 @@ public class ProgramResult {
         Objects.equals(this.broadcasts, programResult.broadcasts) &&
         Objects.equals(this.presenters, programResult.presenters) &&
         Objects.equals(this.tags, programResult.tags) &&
-        Objects.equals(this.modelType, programResult.modelType);
+        Objects.equals(this.modelType, programResult.modelType) &&
+        Objects.equals(this.group, programResult.group);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, updatedAt, createdAt, deletedAt, externalStationId, modelTypeId, fieldValues, title, disabled, genreId, description, shortName, mediumName, website, email, recommended, language, ptyCodeId, genre, items, blocks, broadcasts, presenters, tags, modelType);
+    return Objects.hash(id, updatedAt, createdAt, deletedAt, externalStationId, modelTypeId, fieldValues, title, disabled, genreId, groupId, description, shortName, mediumName, website, email, recommended, language, ptyCodeId, genre, items, blocks, broadcasts, presenters, tags, modelType, group);
   }
-
 
   @Override
   public String toString() {
@@ -766,6 +849,7 @@ public class ProgramResult {
     sb.append("    title: ").append(toIndentedString(title)).append("\n");
     sb.append("    disabled: ").append(toIndentedString(disabled)).append("\n");
     sb.append("    genreId: ").append(toIndentedString(genreId)).append("\n");
+    sb.append("    groupId: ").append(toIndentedString(groupId)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    shortName: ").append(toIndentedString(shortName)).append("\n");
     sb.append("    mediumName: ").append(toIndentedString(mediumName)).append("\n");
@@ -781,6 +865,7 @@ public class ProgramResult {
     sb.append("    presenters: ").append(toIndentedString(presenters)).append("\n");
     sb.append("    tags: ").append(toIndentedString(tags)).append("\n");
     sb.append("    modelType: ").append(toIndentedString(modelType)).append("\n");
+    sb.append("    group: ").append(toIndentedString(group)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -789,12 +874,184 @@ public class ProgramResult {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("id");
+    openapiFields.add("updated_at");
+    openapiFields.add("created_at");
+    openapiFields.add("deleted_at");
+    openapiFields.add("_external_station_id");
+    openapiFields.add("model_type_id");
+    openapiFields.add("field_values");
+    openapiFields.add("title");
+    openapiFields.add("disabled");
+    openapiFields.add("genre_id");
+    openapiFields.add("group_id");
+    openapiFields.add("description");
+    openapiFields.add("short_name");
+    openapiFields.add("medium_name");
+    openapiFields.add("website");
+    openapiFields.add("email");
+    openapiFields.add("recommended");
+    openapiFields.add("language");
+    openapiFields.add("pty_code_id");
+    openapiFields.add("genre");
+    openapiFields.add("items");
+    openapiFields.add("blocks");
+    openapiFields.add("broadcasts");
+    openapiFields.add("presenters");
+    openapiFields.add("tags");
+    openapiFields.add("model_type");
+    openapiFields.add("group");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("id");
+    openapiRequiredFields.add("model_type_id");
+    openapiRequiredFields.add("title");
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to ProgramResult
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (!ProgramResult.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+          throw new IllegalArgumentException(String.format("The required field(s) %s in ProgramResult is not found in the empty JSON string", ProgramResult.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!ProgramResult.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ProgramResult` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : ProgramResult.openapiRequiredFields) {
+        if (jsonObj.get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        }
+      }
+      if (!jsonObj.get("title").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `title` to be a primitive type in the JSON string but got `%s`", jsonObj.get("title").toString()));
+      }
+      if ((jsonObj.get("description") != null && !jsonObj.get("description").isJsonNull()) && !jsonObj.get("description").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `description` to be a primitive type in the JSON string but got `%s`", jsonObj.get("description").toString()));
+      }
+      if ((jsonObj.get("short_name") != null && !jsonObj.get("short_name").isJsonNull()) && !jsonObj.get("short_name").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `short_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("short_name").toString()));
+      }
+      if ((jsonObj.get("medium_name") != null && !jsonObj.get("medium_name").isJsonNull()) && !jsonObj.get("medium_name").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `medium_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("medium_name").toString()));
+      }
+      if ((jsonObj.get("website") != null && !jsonObj.get("website").isJsonNull()) && !jsonObj.get("website").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `website` to be a primitive type in the JSON string but got `%s`", jsonObj.get("website").toString()));
+      }
+      if ((jsonObj.get("email") != null && !jsonObj.get("email").isJsonNull()) && !jsonObj.get("email").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `email` to be a primitive type in the JSON string but got `%s`", jsonObj.get("email").toString()));
+      }
+      if ((jsonObj.get("language") != null && !jsonObj.get("language").isJsonNull()) && !jsonObj.get("language").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `language` to be a primitive type in the JSON string but got `%s`", jsonObj.get("language").toString()));
+      }
+      // validate the optional field `genre`
+      if (jsonObj.get("genre") != null && !jsonObj.get("genre").isJsonNull()) {
+        BroadcastRelationsGenre.validateJsonObject(jsonObj.getAsJsonObject("genre"));
+      }
+      // validate the optional field `items`
+      if (jsonObj.get("items") != null && !jsonObj.get("items").isJsonNull()) {
+        ProgramRelationsItems.validateJsonObject(jsonObj.getAsJsonObject("items"));
+      }
+      // validate the optional field `blocks`
+      if (jsonObj.get("blocks") != null && !jsonObj.get("blocks").isJsonNull()) {
+        ProgramRelationsBlocks.validateJsonObject(jsonObj.getAsJsonObject("blocks"));
+      }
+      // validate the optional field `broadcasts`
+      if (jsonObj.get("broadcasts") != null && !jsonObj.get("broadcasts").isJsonNull()) {
+        ProgramRelationsBroadcasts.validateJsonObject(jsonObj.getAsJsonObject("broadcasts"));
+      }
+      // validate the optional field `presenters`
+      if (jsonObj.get("presenters") != null && !jsonObj.get("presenters").isJsonNull()) {
+        ProgramRelationsPresenters.validateJsonObject(jsonObj.getAsJsonObject("presenters"));
+      }
+      // validate the optional field `tags`
+      if (jsonObj.get("tags") != null && !jsonObj.get("tags").isJsonNull()) {
+        ProgramRelationsTags.validateJsonObject(jsonObj.getAsJsonObject("tags"));
+      }
+      // validate the optional field `model_type`
+      if (jsonObj.get("model_type") != null && !jsonObj.get("model_type").isJsonNull()) {
+        BroadcastRelationsModelType.validateJsonObject(jsonObj.getAsJsonObject("model_type"));
+      }
+      // validate the optional field `group`
+      if (jsonObj.get("group") != null && !jsonObj.get("group").isJsonNull()) {
+        BroadcastRelationsGroup.validateJsonObject(jsonObj.getAsJsonObject("group"));
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!ProgramResult.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'ProgramResult' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<ProgramResult> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(ProgramResult.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<ProgramResult>() {
+           @Override
+           public void write(JsonWriter out, ProgramResult value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public ProgramResult read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of ProgramResult given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of ProgramResult
+  * @throws IOException if the JSON string is invalid with respect to ProgramResult
+  */
+  public static ProgramResult fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, ProgramResult.class);
+  }
+
+ /**
+  * Convert an instance of ProgramResult to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

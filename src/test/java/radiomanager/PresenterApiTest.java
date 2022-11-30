@@ -1,6 +1,6 @@
 /*
  * RadioManager
- * RadioManager
+ * This OpenAPI 3 Document describes the functionality of the API v2 of RadioManager. Note that no rights can be derived from this Document and the true functionality of the API might differ.
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@pluxbox.com
@@ -14,18 +14,20 @@
 package radiomanager;
 
 import com.pluxbox.radiomanager.api.invoker.ApiException;
-import com.pluxbox.radiomanager.api.models.Forbidden;
-import com.pluxbox.radiomanager.api.models.NotFound;
-import com.pluxbox.radiomanager.api.models.PostSuccess;
-import com.pluxbox.radiomanager.api.models.Presenter;
+import com.pluxbox.radiomanager.api.models.InlineResponse20010;
+import com.pluxbox.radiomanager.api.models.InlineResponse2002;
+import com.pluxbox.radiomanager.api.models.InlineResponse202;
+import com.pluxbox.radiomanager.api.models.InlineResponse400;
+import com.pluxbox.radiomanager.api.models.InlineResponse401;
+import com.pluxbox.radiomanager.api.models.InlineResponse403;
+import com.pluxbox.radiomanager.api.models.InlineResponse404;
+import com.pluxbox.radiomanager.api.models.InlineResponse422;
+import com.pluxbox.radiomanager.api.models.InlineResponse429;
+import com.pluxbox.radiomanager.api.models.InlineResponse500;
 import com.pluxbox.radiomanager.api.models.PresenterDataInput;
 import com.pluxbox.radiomanager.api.models.PresenterResult;
-import com.pluxbox.radiomanager.api.models.PresenterResults;
-import com.pluxbox.radiomanager.api.models.Success;
-import com.pluxbox.radiomanager.api.models.TooManyRequests;
-import com.pluxbox.radiomanager.api.models.UnprocessableEntity;
-import org.junit.Test;
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,99 +37,87 @@ import java.util.Map;
 /**
  * API tests for PresenterApi
  */
-@Ignore
+@Disabled
 public class PresenterApiTest {
 
     private final PresenterApi api = new PresenterApi();
 
-    
     /**
      * Create presenter.
      *
      * Create presenter.
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void createPresenterTest() throws ApiException {
-        PresenterDataInput data = null;
-        PostSuccess response = api.createPresenter(data);
-
+        PresenterDataInput presenterDataInput = null;
+        InlineResponse2002 response = api.createPresenter(presenterDataInput);
         // TODO: test validations
     }
-    
+
     /**
      * Delete presenter by id
      *
      * Delete presenter by id
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void deletePresenterByIdTest() throws ApiException {
         Long id = null;
-        Success response = api.deletePresenterById(id);
-
+        InlineResponse202 response = api.deletePresenterById(id);
         // TODO: test validations
     }
-    
+
     /**
      * Get presenter by id
      *
      * Get presenter by id
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void getPresenterByIdTest() throws ApiException {
         Long id = null;
-        Long externalStationId = null;
-        PresenterResult response = api.getPresenterById(id, externalStationId);
-
+        PresenterResult response = api.getPresenterById(id);
         // TODO: test validations
     }
-    
+
     /**
      * Get all presenters.
      *
      * List all presenters.
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void listPresentersTest() throws ApiException {
-        Long page = null;
         Long programId = null;
         Long broadcastId = null;
         Long modelTypeId = null;
+        Long page = null;
         Long limit = null;
         String orderBy = null;
         String orderDirection = null;
         Long externalStationId = null;
-        PresenterResults response = api.listPresenters(page, programId, broadcastId, modelTypeId, limit, orderBy, orderDirection, externalStationId);
-
+        InlineResponse20010 response = api.listPresenters(programId, broadcastId, modelTypeId, page, limit, orderBy, orderDirection, externalStationId);
         // TODO: test validations
     }
-    
+
     /**
      * Update presenter by id
      *
      * Update presenter by id
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void updatePresenterByIDTest() throws ApiException {
         Long id = null;
-        PresenterDataInput data = null;
-        Success response = api.updatePresenterByID(id, data);
-
+        PresenterDataInput presenterDataInput = null;
+        InlineResponse202 response = api.updatePresenterByID(id, presenterDataInput);
         // TODO: test validations
     }
-    
+
 }

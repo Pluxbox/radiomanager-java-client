@@ -2,11 +2,12 @@
 
 # ContactRelationsTagsParams
 
+
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**contactId** | **Integer** |  |  [optional]
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**contactId** | **Integer** |  |  [optional] |
 
 
 

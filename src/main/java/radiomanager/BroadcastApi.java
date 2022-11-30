@@ -1,6 +1,6 @@
 /*
  * RadioManager
- * RadioManager
+ * This OpenAPI 3 Document describes the functionality of the API v2 of RadioManager. Note that no rights can be derived from this Document and the true functionality of the API might differ.
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@pluxbox.com
@@ -29,24 +29,32 @@ import java.io.IOException;
 
 import com.pluxbox.radiomanager.api.models.BroadcastDataInput;
 import com.pluxbox.radiomanager.api.models.BroadcastResult;
-import com.pluxbox.radiomanager.api.models.BroadcastResults;
 import com.pluxbox.radiomanager.api.models.EPGResults;
-import com.pluxbox.radiomanager.api.models.Forbidden;
-import com.pluxbox.radiomanager.api.models.NotFound;
+import com.pluxbox.radiomanager.api.models.InlineResponse2001;
+import com.pluxbox.radiomanager.api.models.InlineResponse2002;
+import com.pluxbox.radiomanager.api.models.InlineResponse2003;
+import com.pluxbox.radiomanager.api.models.InlineResponse202;
+import com.pluxbox.radiomanager.api.models.InlineResponse400;
+import com.pluxbox.radiomanager.api.models.InlineResponse401;
+import com.pluxbox.radiomanager.api.models.InlineResponse403;
+import com.pluxbox.radiomanager.api.models.InlineResponse404;
+import com.pluxbox.radiomanager.api.models.InlineResponse422;
+import com.pluxbox.radiomanager.api.models.InlineResponse429;
+import com.pluxbox.radiomanager.api.models.InlineResponse500;
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
-import com.pluxbox.radiomanager.api.models.PostSuccess;
-import com.pluxbox.radiomanager.api.models.Success;
-import com.pluxbox.radiomanager.api.models.TooManyRequests;
-import com.pluxbox.radiomanager.api.models.UnprocessableEntity;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.ws.rs.core.GenericType;
 
 public class BroadcastApi {
     private ApiClient localVarApiClient;
+    private int localHostIndex;
+    private String localCustomBaseUrl;
 
     public BroadcastApi() {
         this(Configuration.getDefaultApiClient());
@@ -64,24 +72,56 @@ public class BroadcastApi {
         this.localVarApiClient = apiClient;
     }
 
+    public int getHostIndex() {
+        return localHostIndex;
+    }
+
+    public void setHostIndex(int hostIndex) {
+        this.localHostIndex = hostIndex;
+    }
+
+    public String getCustomBaseUrl() {
+        return localCustomBaseUrl;
+    }
+
+    public void setCustomBaseUrl(String customBaseUrl) {
+        this.localCustomBaseUrl = customBaseUrl;
+    }
+
     /**
      * Build call for createBroadcast
-     * @param data Data **(Required)** (required)
+     * @param broadcastDataInput Data **(Required)** (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully created a broadcast </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Post Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call createBroadcastCall(BroadcastDataInput data, final ApiCallback _callback) throws ApiException {
-        Object localVarPostBody = data;
+    public okhttp3.Call createBroadcastCall(BroadcastDataInput broadcastDataInput, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = broadcastDataInput;
 
         // create path and map variables
         String localVarPath = "/broadcasts";
@@ -91,6 +131,7 @@ public class BroadcastApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -103,90 +144,98 @@ public class BroadcastApi {
             "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call createBroadcastValidateBeforeCall(BroadcastDataInput data, final ApiCallback _callback) throws ApiException {
-        
-        // verify the required parameter 'data' is set
-        if (data == null) {
-            throw new ApiException("Missing the required parameter 'data' when calling createBroadcast(Async)");
+    private okhttp3.Call createBroadcastValidateBeforeCall(BroadcastDataInput broadcastDataInput, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'broadcastDataInput' is set
+        if (broadcastDataInput == null) {
+            throw new ApiException("Missing the required parameter 'broadcastDataInput' when calling createBroadcast(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = createBroadcastCall(data, _callback);
-        return localVarCall;
+        return createBroadcastCall(broadcastDataInput, _callback);
 
     }
 
     /**
      * Create broadcast.
      * Create broadcast.
-     * @param data Data **(Required)** (required)
-     * @return PostSuccess
+     * @param broadcastDataInput Data **(Required)** (required)
+     * @return InlineResponse2002
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully created a broadcast </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Post Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public PostSuccess createBroadcast(BroadcastDataInput data) throws ApiException {
-        ApiResponse<PostSuccess> localVarResp = createBroadcastWithHttpInfo(data);
+    public InlineResponse2002 createBroadcast(BroadcastDataInput broadcastDataInput) throws ApiException {
+        ApiResponse<InlineResponse2002> localVarResp = createBroadcastWithHttpInfo(broadcastDataInput);
         return localVarResp.getData();
     }
 
     /**
      * Create broadcast.
      * Create broadcast.
-     * @param data Data **(Required)** (required)
-     * @return ApiResponse&lt;PostSuccess&gt;
+     * @param broadcastDataInput Data **(Required)** (required)
+     * @return ApiResponse&lt;InlineResponse2002&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully created a broadcast </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Post Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<PostSuccess> createBroadcastWithHttpInfo(BroadcastDataInput data) throws ApiException {
-        okhttp3.Call localVarCall = createBroadcastValidateBeforeCall(data, null);
-        Type localVarReturnType = new TypeToken<PostSuccess>(){}.getType();
+    public ApiResponse<InlineResponse2002> createBroadcastWithHttpInfo(BroadcastDataInput broadcastDataInput) throws ApiException {
+        okhttp3.Call localVarCall = createBroadcastValidateBeforeCall(broadcastDataInput, null);
+        Type localVarReturnType = new TypeToken<InlineResponse2002>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * Create broadcast. (asynchronously)
      * Create broadcast.
-     * @param data Data **(Required)** (required)
+     * @param broadcastDataInput Data **(Required)** (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully created a broadcast </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Post Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call createBroadcastAsync(BroadcastDataInput data, final ApiCallback<PostSuccess> _callback) throws ApiException {
+    public okhttp3.Call createBroadcastAsync(BroadcastDataInput broadcastDataInput, final ApiCallback<InlineResponse2002> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = createBroadcastValidateBeforeCall(data, _callback);
-        Type localVarReturnType = new TypeToken<PostSuccess>(){}.getType();
+        okhttp3.Call localVarCall = createBroadcastValidateBeforeCall(broadcastDataInput, _callback);
+        Type localVarReturnType = new TypeToken<InlineResponse2002>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -199,24 +248,42 @@ public class BroadcastApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully deleted Broadcast by id </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call deleteBroadcastByIdCall(Long id, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
         String localVarPath = "/broadcasts/{id}"
-            .replaceAll("\\{" + "id" + "\\}", localVarApiClient.escapeString(id.toString()));
+            .replace("{" + "id" + "}", localVarApiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -226,26 +293,24 @@ public class BroadcastApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call deleteBroadcastByIdValidateBeforeCall(Long id, final ApiCallback _callback) throws ApiException {
-        
         // verify the required parameter 'id' is set
         if (id == null) {
             throw new ApiException("Missing the required parameter 'id' when calling deleteBroadcastById(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = deleteBroadcastByIdCall(id, _callback);
-        return localVarCall;
+        return deleteBroadcastByIdCall(id, _callback);
 
     }
 
@@ -253,19 +318,23 @@ public class BroadcastApi {
      * Delete broadcast by id
      * Delete broadcast by id
      * @param id ID of Broadcast **(Required)** (required)
-     * @return Success
+     * @return InlineResponse202
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully deleted Broadcast by id </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public Success deleteBroadcastById(Long id) throws ApiException {
-        ApiResponse<Success> localVarResp = deleteBroadcastByIdWithHttpInfo(id);
+    public InlineResponse202 deleteBroadcastById(Long id) throws ApiException {
+        ApiResponse<InlineResponse202> localVarResp = deleteBroadcastByIdWithHttpInfo(id);
         return localVarResp.getData();
     }
 
@@ -273,20 +342,24 @@ public class BroadcastApi {
      * Delete broadcast by id
      * Delete broadcast by id
      * @param id ID of Broadcast **(Required)** (required)
-     * @return ApiResponse&lt;Success&gt;
+     * @return ApiResponse&lt;InlineResponse202&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully deleted Broadcast by id </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Success> deleteBroadcastByIdWithHttpInfo(Long id) throws ApiException {
+    public ApiResponse<InlineResponse202> deleteBroadcastByIdWithHttpInfo(Long id) throws ApiException {
         okhttp3.Call localVarCall = deleteBroadcastByIdValidateBeforeCall(id, null);
-        Type localVarReturnType = new TypeToken<Success>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -300,16 +373,20 @@ public class BroadcastApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully deleted Broadcast by id </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call deleteBroadcastByIdAsync(Long id, final ApiCallback<Success> _callback) throws ApiException {
+    public okhttp3.Call deleteBroadcastByIdAsync(Long id, final ApiCallback<InlineResponse202> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = deleteBroadcastByIdValidateBeforeCall(id, _callback);
-        Type localVarReturnType = new TypeToken<Success>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -324,27 +401,45 @@ public class BroadcastApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got Broadcast by id </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call getBroadcastByIdCall(Long id, Long externalStationId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
         String localVarPath = "/broadcasts/{id}"
-            .replaceAll("\\{" + "id" + "\\}", localVarApiClient.escapeString(id.toString()));
+            .replace("{" + "id" + "}", localVarApiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         if (externalStationId != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("_external_station_id", externalStationId));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -354,26 +449,24 @@ public class BroadcastApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call getBroadcastByIdValidateBeforeCall(Long id, Long externalStationId, final ApiCallback _callback) throws ApiException {
-        
         // verify the required parameter 'id' is set
         if (id == null) {
             throw new ApiException("Missing the required parameter 'id' when calling getBroadcastById(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = getBroadcastByIdCall(id, externalStationId, _callback);
-        return localVarCall;
+        return getBroadcastByIdCall(id, externalStationId, _callback);
 
     }
 
@@ -388,9 +481,13 @@ public class BroadcastApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got Broadcast by id </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
     public BroadcastResult getBroadcastById(Long id, Long externalStationId) throws ApiException {
@@ -409,9 +506,13 @@ public class BroadcastApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got Broadcast by id </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<BroadcastResult> getBroadcastByIdWithHttpInfo(Long id, Long externalStationId) throws ApiException {
@@ -432,9 +533,13 @@ public class BroadcastApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got Broadcast by id </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call getBroadcastByIdAsync(Long id, Long externalStationId, final ApiCallback<BroadcastResult> _callback) throws ApiException {
@@ -454,12 +559,29 @@ public class BroadcastApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got current Broadcast </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call getCurrentBroadcastCall(Boolean withunpublished, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -467,13 +589,14 @@ public class BroadcastApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         if (withunpublished != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("withunpublished", withunpublished));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -483,27 +606,25 @@ public class BroadcastApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call getCurrentBroadcastValidateBeforeCall(Boolean withunpublished, final ApiCallback _callback) throws ApiException {
-        
-
-        okhttp3.Call localVarCall = getCurrentBroadcastCall(withunpublished, _callback);
-        return localVarCall;
+        return getCurrentBroadcastCall(withunpublished, _callback);
 
     }
 
     /**
      * Get current Broadcast
-     * Get current Broadcast
+     * Get currently playing Broadcast
      * @param withunpublished Show Unpublished *(Optional)* (optional)
      * @return BroadcastResult
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -511,9 +632,13 @@ public class BroadcastApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got current Broadcast </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
     public BroadcastResult getCurrentBroadcast(Boolean withunpublished) throws ApiException {
@@ -523,7 +648,7 @@ public class BroadcastApi {
 
     /**
      * Get current Broadcast
-     * Get current Broadcast
+     * Get currently playing Broadcast
      * @param withunpublished Show Unpublished *(Optional)* (optional)
      * @return ApiResponse&lt;BroadcastResult&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -531,9 +656,13 @@ public class BroadcastApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got current Broadcast </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<BroadcastResult> getCurrentBroadcastWithHttpInfo(Boolean withunpublished) throws ApiException {
@@ -544,7 +673,7 @@ public class BroadcastApi {
 
     /**
      * Get current Broadcast (asynchronously)
-     * Get current Broadcast
+     * Get currently playing Broadcast
      * @param withunpublished Show Unpublished *(Optional)* (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -553,9 +682,13 @@ public class BroadcastApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got current Broadcast </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call getCurrentBroadcastAsync(Boolean withunpublished, final ApiCallback<BroadcastResult> _callback) throws ApiException {
@@ -575,13 +708,30 @@ public class BroadcastApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully got EPG by week </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully got EPG </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call getDailyEPGCall(OffsetDateTime date, Boolean withunpublished, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -589,6 +739,10 @@ public class BroadcastApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         if (date != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("date", date));
         }
@@ -597,9 +751,6 @@ public class BroadcastApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("withunpublished", withunpublished));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -609,27 +760,25 @@ public class BroadcastApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call getDailyEPGValidateBeforeCall(OffsetDateTime date, Boolean withunpublished, final ApiCallback _callback) throws ApiException {
-        
-
-        okhttp3.Call localVarCall = getDailyEPGCall(date, withunpublished, _callback);
-        return localVarCall;
+        return getDailyEPGCall(date, withunpublished, _callback);
 
     }
 
     /**
      * Get daily EPG
-     * Get current Broadcast
+     * Get a list of broadcasts as Programming guide for 1 day
      * @param date Date *(Optional)* (optional)
      * @param withunpublished Show Unpublished *(Optional)* (optional)
      * @return EPGResults
@@ -637,10 +786,14 @@ public class BroadcastApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully got EPG by week </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully got EPG </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
     public EPGResults getDailyEPG(OffsetDateTime date, Boolean withunpublished) throws ApiException {
@@ -650,7 +803,7 @@ public class BroadcastApi {
 
     /**
      * Get daily EPG
-     * Get current Broadcast
+     * Get a list of broadcasts as Programming guide for 1 day
      * @param date Date *(Optional)* (optional)
      * @param withunpublished Show Unpublished *(Optional)* (optional)
      * @return ApiResponse&lt;EPGResults&gt;
@@ -658,10 +811,14 @@ public class BroadcastApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully got EPG by week </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully got EPG </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<EPGResults> getDailyEPGWithHttpInfo(OffsetDateTime date, Boolean withunpublished) throws ApiException {
@@ -672,7 +829,7 @@ public class BroadcastApi {
 
     /**
      * Get daily EPG (asynchronously)
-     * Get current Broadcast
+     * Get a list of broadcasts as Programming guide for 1 day
      * @param date Date *(Optional)* (optional)
      * @param withunpublished Show Unpublished *(Optional)* (optional)
      * @param _callback The callback to be executed when the API call finishes
@@ -681,10 +838,14 @@ public class BroadcastApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully got EPG by week </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully got EPG </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call getDailyEPGAsync(OffsetDateTime date, Boolean withunpublished, final ApiCallback<EPGResults> _callback) throws ApiException {
@@ -704,13 +865,30 @@ public class BroadcastApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully got EPG by week </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully got EPG </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call getEPGByDateCall(OffsetDateTime date, Boolean withunpublished, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -718,6 +896,10 @@ public class BroadcastApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         if (date != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("date", date));
         }
@@ -726,9 +908,6 @@ public class BroadcastApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("withunpublished", withunpublished));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -738,27 +917,25 @@ public class BroadcastApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call getEPGByDateValidateBeforeCall(OffsetDateTime date, Boolean withunpublished, final ApiCallback _callback) throws ApiException {
-        
-
-        okhttp3.Call localVarCall = getEPGByDateCall(date, withunpublished, _callback);
-        return localVarCall;
+        return getEPGByDateCall(date, withunpublished, _callback);
 
     }
 
     /**
      * Get EPG by date
-     * Get EPG by date
+     * Get a list of broadcasts as Programming guide, seperated per day
      * @param date Date *(Optional)* (optional)
      * @param withunpublished Show Unpublished *(Optional)* (optional)
      * @return EPGResults
@@ -766,10 +943,14 @@ public class BroadcastApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully got EPG by week </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully got EPG </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
     public EPGResults getEPGByDate(OffsetDateTime date, Boolean withunpublished) throws ApiException {
@@ -779,7 +960,7 @@ public class BroadcastApi {
 
     /**
      * Get EPG by date
-     * Get EPG by date
+     * Get a list of broadcasts as Programming guide, seperated per day
      * @param date Date *(Optional)* (optional)
      * @param withunpublished Show Unpublished *(Optional)* (optional)
      * @return ApiResponse&lt;EPGResults&gt;
@@ -787,10 +968,14 @@ public class BroadcastApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully got EPG by week </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully got EPG </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<EPGResults> getEPGByDateWithHttpInfo(OffsetDateTime date, Boolean withunpublished) throws ApiException {
@@ -801,7 +986,7 @@ public class BroadcastApi {
 
     /**
      * Get EPG by date (asynchronously)
-     * Get EPG by date
+     * Get a list of broadcasts as Programming guide, seperated per day
      * @param date Date *(Optional)* (optional)
      * @param withunpublished Show Unpublished *(Optional)* (optional)
      * @param _callback The callback to be executed when the API call finishes
@@ -810,10 +995,14 @@ public class BroadcastApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully got EPG by week </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully got EPG </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call getEPGByDateAsync(OffsetDateTime date, Boolean withunpublished, final ApiCallback<EPGResults> _callback) throws ApiException {
@@ -833,12 +1022,29 @@ public class BroadcastApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got next Broadcast </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call getNextBroadcastCall(Boolean withunpublished, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -846,13 +1052,14 @@ public class BroadcastApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         if (withunpublished != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("withunpublished", withunpublished));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -862,27 +1069,25 @@ public class BroadcastApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call getNextBroadcastValidateBeforeCall(Boolean withunpublished, final ApiCallback _callback) throws ApiException {
-        
-
-        okhttp3.Call localVarCall = getNextBroadcastCall(withunpublished, _callback);
-        return localVarCall;
+        return getNextBroadcastCall(withunpublished, _callback);
 
     }
 
     /**
      * Get next Broadcast
-     * Get next Broadcast
+     * Get currently upcoming Broadcast
      * @param withunpublished Show Unpublished *(Optional)* (optional)
      * @return BroadcastResult
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -890,9 +1095,13 @@ public class BroadcastApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got next Broadcast </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
     public BroadcastResult getNextBroadcast(Boolean withunpublished) throws ApiException {
@@ -902,7 +1111,7 @@ public class BroadcastApi {
 
     /**
      * Get next Broadcast
-     * Get next Broadcast
+     * Get currently upcoming Broadcast
      * @param withunpublished Show Unpublished *(Optional)* (optional)
      * @return ApiResponse&lt;BroadcastResult&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -910,9 +1119,13 @@ public class BroadcastApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got next Broadcast </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<BroadcastResult> getNextBroadcastWithHttpInfo(Boolean withunpublished) throws ApiException {
@@ -923,7 +1136,7 @@ public class BroadcastApi {
 
     /**
      * Get next Broadcast (asynchronously)
-     * Get next Broadcast
+     * Get currently upcoming Broadcast
      * @param withunpublished Show Unpublished *(Optional)* (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -932,9 +1145,13 @@ public class BroadcastApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got next Broadcast </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call getNextBroadcastAsync(Boolean withunpublished, final ApiCallback<BroadcastResult> _callback) throws ApiException {
@@ -954,12 +1171,30 @@ public class BroadcastApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully got EPG by week </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully got EPG </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getWeeklyEPGCall(String date, Boolean withunpublished, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getWeeklyEPGCall(LocalDate date, Boolean withunpublished, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -967,6 +1202,10 @@ public class BroadcastApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         if (date != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("date", date));
         }
@@ -975,9 +1214,6 @@ public class BroadcastApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("withunpublished", withunpublished));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -987,27 +1223,25 @@ public class BroadcastApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getWeeklyEPGValidateBeforeCall(String date, Boolean withunpublished, final ApiCallback _callback) throws ApiException {
-        
-
-        okhttp3.Call localVarCall = getWeeklyEPGCall(date, withunpublished, _callback);
-        return localVarCall;
+    private okhttp3.Call getWeeklyEPGValidateBeforeCall(LocalDate date, Boolean withunpublished, final ApiCallback _callback) throws ApiException {
+        return getWeeklyEPGCall(date, withunpublished, _callback);
 
     }
 
     /**
      * Get weekly EPG
-     * Get weekly EPG
+     * Get a list of broadcasts as Programming guide for 7 days, seperated per day
      * @param date Date *(Optional)* (optional)
      * @param withunpublished Show Unpublished *(Optional)* (optional)
      * @return EPGResults
@@ -1015,19 +1249,24 @@ public class BroadcastApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully got EPG by week </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully got EPG </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public EPGResults getWeeklyEPG(String date, Boolean withunpublished) throws ApiException {
+    public EPGResults getWeeklyEPG(LocalDate date, Boolean withunpublished) throws ApiException {
         ApiResponse<EPGResults> localVarResp = getWeeklyEPGWithHttpInfo(date, withunpublished);
         return localVarResp.getData();
     }
 
     /**
      * Get weekly EPG
-     * Get weekly EPG
+     * Get a list of broadcasts as Programming guide for 7 days, seperated per day
      * @param date Date *(Optional)* (optional)
      * @param withunpublished Show Unpublished *(Optional)* (optional)
      * @return ApiResponse&lt;EPGResults&gt;
@@ -1035,12 +1274,17 @@ public class BroadcastApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully got EPG by week </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully got EPG </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<EPGResults> getWeeklyEPGWithHttpInfo(String date, Boolean withunpublished) throws ApiException {
+    public ApiResponse<EPGResults> getWeeklyEPGWithHttpInfo(LocalDate date, Boolean withunpublished) throws ApiException {
         okhttp3.Call localVarCall = getWeeklyEPGValidateBeforeCall(date, withunpublished, null);
         Type localVarReturnType = new TypeToken<EPGResults>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -1048,7 +1292,7 @@ public class BroadcastApi {
 
     /**
      * Get weekly EPG (asynchronously)
-     * Get weekly EPG
+     * Get a list of broadcasts as Programming guide for 7 days, seperated per day
      * @param date Date *(Optional)* (optional)
      * @param withunpublished Show Unpublished *(Optional)* (optional)
      * @param _callback The callback to be executed when the API call finishes
@@ -1057,12 +1301,17 @@ public class BroadcastApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully got EPG by week </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully got EPG </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getWeeklyEPGAsync(String date, Boolean withunpublished, final ApiCallback<EPGResults> _callback) throws ApiException {
+    public okhttp3.Call getWeeklyEPGAsync(LocalDate date, Boolean withunpublished, final ApiCallback<EPGResults> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getWeeklyEPGValidateBeforeCall(date, withunpublished, _callback);
         Type localVarReturnType = new TypeToken<EPGResults>(){}.getType();
@@ -1071,16 +1320,18 @@ public class BroadcastApi {
     }
     /**
      * Build call for listBroadcasts
-     * @param page Current page *(Optional)* (optional, default to 1l)
      * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param blockId Search on Block ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param modelTypeId Search on ModelType ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param presenterId Search on Presenter ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param genreId Search on Genre ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param groupId Search on Group ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param itemId Search on Item ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param plannedInEpg Checks if item is in EPG *(Optional)* (optional)
      * @param startMin Minimum start date *(Optional)* (optional)
      * @param startMax Maximum start date *(Optional)* (optional)
+     * @param page Current page *(Optional)* (optional, default to 1)
      * @param limit Results per page *(Optional)* (optional)
      * @param orderBy Field to order the results *(Optional)* (optional)
      * @param orderDirection Direction of ordering *(Optional)* (optional)
@@ -1092,12 +1343,29 @@ public class BroadcastApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got all broadcasts </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call listBroadcastsCall(Long page, Long programId, Long blockId, Long modelTypeId, Long tagId, Long presenterId, Long genreId, Long itemId, OffsetDateTime startMin, OffsetDateTime startMax, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call listBroadcastsCall(Long programId, Long blockId, Long modelTypeId, Long tagId, Long presenterId, Long genreId, Long groupId, Long itemId, Long plannedInEpg, OffsetDateTime startMin, OffsetDateTime startMax, Long page, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -1105,9 +1373,9 @@ public class BroadcastApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        if (page != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
-        }
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
         if (programId != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("program_id", programId));
@@ -1133,8 +1401,16 @@ public class BroadcastApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("genre_id", genreId));
         }
 
+        if (groupId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("group_id", groupId));
+        }
+
         if (itemId != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("item_id", itemId));
+        }
+
+        if (plannedInEpg != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("planned_in_epg", plannedInEpg));
         }
 
         if (startMin != null) {
@@ -1143,6 +1419,10 @@ public class BroadcastApi {
 
         if (startMax != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("start-max", startMax));
+        }
+
+        if (page != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
         }
 
         if (limit != null) {
@@ -1161,9 +1441,6 @@ public class BroadcastApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("_external_station_id", externalStationId));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -1173,104 +1450,116 @@ public class BroadcastApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call listBroadcastsValidateBeforeCall(Long page, Long programId, Long blockId, Long modelTypeId, Long tagId, Long presenterId, Long genreId, Long itemId, OffsetDateTime startMin, OffsetDateTime startMax, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback _callback) throws ApiException {
-        
-
-        okhttp3.Call localVarCall = listBroadcastsCall(page, programId, blockId, modelTypeId, tagId, presenterId, genreId, itemId, startMin, startMax, limit, orderBy, orderDirection, externalStationId, _callback);
-        return localVarCall;
+    private okhttp3.Call listBroadcastsValidateBeforeCall(Long programId, Long blockId, Long modelTypeId, Long tagId, Long presenterId, Long genreId, Long groupId, Long itemId, Long plannedInEpg, OffsetDateTime startMin, OffsetDateTime startMax, Long page, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback _callback) throws ApiException {
+        return listBroadcastsCall(programId, blockId, modelTypeId, tagId, presenterId, genreId, groupId, itemId, plannedInEpg, startMin, startMax, page, limit, orderBy, orderDirection, externalStationId, _callback);
 
     }
 
     /**
      * Get all broadcasts.
      * List all broadcasts.
-     * @param page Current page *(Optional)* (optional, default to 1l)
      * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param blockId Search on Block ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param modelTypeId Search on ModelType ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param presenterId Search on Presenter ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param genreId Search on Genre ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param groupId Search on Group ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param itemId Search on Item ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param plannedInEpg Checks if item is in EPG *(Optional)* (optional)
      * @param startMin Minimum start date *(Optional)* (optional)
      * @param startMax Maximum start date *(Optional)* (optional)
+     * @param page Current page *(Optional)* (optional, default to 1)
      * @param limit Results per page *(Optional)* (optional)
      * @param orderBy Field to order the results *(Optional)* (optional)
      * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
-     * @return BroadcastResults
+     * @return InlineResponse2001
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got all broadcasts </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public BroadcastResults listBroadcasts(Long page, Long programId, Long blockId, Long modelTypeId, Long tagId, Long presenterId, Long genreId, Long itemId, OffsetDateTime startMin, OffsetDateTime startMax, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
-        ApiResponse<BroadcastResults> localVarResp = listBroadcastsWithHttpInfo(page, programId, blockId, modelTypeId, tagId, presenterId, genreId, itemId, startMin, startMax, limit, orderBy, orderDirection, externalStationId);
+    public InlineResponse2001 listBroadcasts(Long programId, Long blockId, Long modelTypeId, Long tagId, Long presenterId, Long genreId, Long groupId, Long itemId, Long plannedInEpg, OffsetDateTime startMin, OffsetDateTime startMax, Long page, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
+        ApiResponse<InlineResponse2001> localVarResp = listBroadcastsWithHttpInfo(programId, blockId, modelTypeId, tagId, presenterId, genreId, groupId, itemId, plannedInEpg, startMin, startMax, page, limit, orderBy, orderDirection, externalStationId);
         return localVarResp.getData();
     }
 
     /**
      * Get all broadcasts.
      * List all broadcasts.
-     * @param page Current page *(Optional)* (optional, default to 1l)
      * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param blockId Search on Block ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param modelTypeId Search on ModelType ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param presenterId Search on Presenter ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param genreId Search on Genre ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param groupId Search on Group ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param itemId Search on Item ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param plannedInEpg Checks if item is in EPG *(Optional)* (optional)
      * @param startMin Minimum start date *(Optional)* (optional)
      * @param startMax Maximum start date *(Optional)* (optional)
+     * @param page Current page *(Optional)* (optional, default to 1)
      * @param limit Results per page *(Optional)* (optional)
      * @param orderBy Field to order the results *(Optional)* (optional)
      * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
-     * @return ApiResponse&lt;BroadcastResults&gt;
+     * @return ApiResponse&lt;InlineResponse2001&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got all broadcasts </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<BroadcastResults> listBroadcastsWithHttpInfo(Long page, Long programId, Long blockId, Long modelTypeId, Long tagId, Long presenterId, Long genreId, Long itemId, OffsetDateTime startMin, OffsetDateTime startMax, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
-        okhttp3.Call localVarCall = listBroadcastsValidateBeforeCall(page, programId, blockId, modelTypeId, tagId, presenterId, genreId, itemId, startMin, startMax, limit, orderBy, orderDirection, externalStationId, null);
-        Type localVarReturnType = new TypeToken<BroadcastResults>(){}.getType();
+    public ApiResponse<InlineResponse2001> listBroadcastsWithHttpInfo(Long programId, Long blockId, Long modelTypeId, Long tagId, Long presenterId, Long genreId, Long groupId, Long itemId, Long plannedInEpg, OffsetDateTime startMin, OffsetDateTime startMax, Long page, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
+        okhttp3.Call localVarCall = listBroadcastsValidateBeforeCall(programId, blockId, modelTypeId, tagId, presenterId, genreId, groupId, itemId, plannedInEpg, startMin, startMax, page, limit, orderBy, orderDirection, externalStationId, null);
+        Type localVarReturnType = new TypeToken<InlineResponse2001>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * Get all broadcasts. (asynchronously)
      * List all broadcasts.
-     * @param page Current page *(Optional)* (optional, default to 1l)
      * @param programId Search on Program ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param blockId Search on Block ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param modelTypeId Search on ModelType ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param tagId Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param presenterId Search on Presenter ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param genreId Search on Genre ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param groupId Search on Group ID *(Optional)* &#x60;(Relation)&#x60; (optional)
      * @param itemId Search on Item ID *(Optional)* &#x60;(Relation)&#x60; (optional)
+     * @param plannedInEpg Checks if item is in EPG *(Optional)* (optional)
      * @param startMin Minimum start date *(Optional)* (optional)
      * @param startMax Maximum start date *(Optional)* (optional)
+     * @param page Current page *(Optional)* (optional, default to 1)
      * @param limit Results per page *(Optional)* (optional)
      * @param orderBy Field to order the results *(Optional)* (optional)
      * @param orderDirection Direction of ordering *(Optional)* (optional)
@@ -1282,22 +1571,26 @@ public class BroadcastApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got all broadcasts </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call listBroadcastsAsync(Long page, Long programId, Long blockId, Long modelTypeId, Long tagId, Long presenterId, Long genreId, Long itemId, OffsetDateTime startMin, OffsetDateTime startMax, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback<BroadcastResults> _callback) throws ApiException {
+    public okhttp3.Call listBroadcastsAsync(Long programId, Long blockId, Long modelTypeId, Long tagId, Long presenterId, Long genreId, Long groupId, Long itemId, Long plannedInEpg, OffsetDateTime startMin, OffsetDateTime startMax, Long page, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback<InlineResponse2001> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = listBroadcastsValidateBeforeCall(page, programId, blockId, modelTypeId, tagId, presenterId, genreId, itemId, startMin, startMax, limit, orderBy, orderDirection, externalStationId, _callback);
-        Type localVarReturnType = new TypeToken<BroadcastResults>(){}.getType();
+        okhttp3.Call localVarCall = listBroadcastsValidateBeforeCall(programId, blockId, modelTypeId, tagId, presenterId, genreId, groupId, itemId, plannedInEpg, startMin, startMax, page, limit, orderBy, orderDirection, externalStationId, _callback);
+        Type localVarReturnType = new TypeToken<InlineResponse2001>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for printBroadcastById
      * @param id ID of Broadcast **(Required)** (required)
-     * @param templateId Search on template ID *(Optional)* (optional)
+     * @param templateId The print template to be used *(Optional)* (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1305,27 +1598,45 @@ public class BroadcastApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully printed Broadcast by id </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call printBroadcastByIdCall(Long id, Long templateId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
         String localVarPath = "/broadcasts/print/{id}"
-            .replaceAll("\\{" + "id" + "\\}", localVarApiClient.escapeString(id.toString()));
+            .replace("{" + "id" + "}", localVarApiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         if (templateId != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("template_id", templateId));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -1335,77 +1646,83 @@ public class BroadcastApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call printBroadcastByIdValidateBeforeCall(Long id, Long templateId, final ApiCallback _callback) throws ApiException {
-        
         // verify the required parameter 'id' is set
         if (id == null) {
             throw new ApiException("Missing the required parameter 'id' when calling printBroadcastById(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = printBroadcastByIdCall(id, templateId, _callback);
-        return localVarCall;
+        return printBroadcastByIdCall(id, templateId, _callback);
 
     }
 
     /**
      * Print broadcast by id with template
-     * Print broadcast by id with template
+     * Download a rundown in printable format as HTML inside the JSON repsonse
      * @param id ID of Broadcast **(Required)** (required)
-     * @param templateId Search on template ID *(Optional)* (optional)
-     * @return String
+     * @param templateId The print template to be used *(Optional)* (optional)
+     * @return InlineResponse2003
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully printed Broadcast by id </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public String printBroadcastById(Long id, Long templateId) throws ApiException {
-        ApiResponse<String> localVarResp = printBroadcastByIdWithHttpInfo(id, templateId);
+    public InlineResponse2003 printBroadcastById(Long id, Long templateId) throws ApiException {
+        ApiResponse<InlineResponse2003> localVarResp = printBroadcastByIdWithHttpInfo(id, templateId);
         return localVarResp.getData();
     }
 
     /**
      * Print broadcast by id with template
-     * Print broadcast by id with template
+     * Download a rundown in printable format as HTML inside the JSON repsonse
      * @param id ID of Broadcast **(Required)** (required)
-     * @param templateId Search on template ID *(Optional)* (optional)
-     * @return ApiResponse&lt;String&gt;
+     * @param templateId The print template to be used *(Optional)* (optional)
+     * @return ApiResponse&lt;InlineResponse2003&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully printed Broadcast by id </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<String> printBroadcastByIdWithHttpInfo(Long id, Long templateId) throws ApiException {
+    public ApiResponse<InlineResponse2003> printBroadcastByIdWithHttpInfo(Long id, Long templateId) throws ApiException {
         okhttp3.Call localVarCall = printBroadcastByIdValidateBeforeCall(id, templateId, null);
-        Type localVarReturnType = new TypeToken<String>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse2003>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * Print broadcast by id with template (asynchronously)
-     * Print broadcast by id with template
+     * Download a rundown in printable format as HTML inside the JSON repsonse
      * @param id ID of Broadcast **(Required)** (required)
-     * @param templateId Search on template ID *(Optional)* (optional)
+     * @param templateId The print template to be used *(Optional)* (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -1413,47 +1730,68 @@ public class BroadcastApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully printed Broadcast by id </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call printBroadcastByIdAsync(Long id, Long templateId, final ApiCallback<String> _callback) throws ApiException {
+    public okhttp3.Call printBroadcastByIdAsync(Long id, Long templateId, final ApiCallback<InlineResponse2003> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = printBroadcastByIdValidateBeforeCall(id, templateId, _callback);
-        Type localVarReturnType = new TypeToken<String>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse2003>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for updateBroadcastByID
      * @param id ID of Broadcast **(Required)** (required)
-     * @param data Data *(Optional)* (optional)
+     * @param broadcastDataInput Data *(Optional)* (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully updated Broadcast by id </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call updateBroadcastByIDCall(Long id, BroadcastDataInput data, final ApiCallback _callback) throws ApiException {
-        Object localVarPostBody = data;
+    public okhttp3.Call updateBroadcastByIDCall(Long id, BroadcastDataInput broadcastDataInput, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = broadcastDataInput;
 
         // create path and map variables
         String localVarPath = "/broadcasts/{id}"
-            .replaceAll("\\{" + "id" + "\\}", localVarApiClient.escapeString(id.toString()));
+            .replace("{" + "id" + "}", localVarApiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -1466,23 +1804,22 @@ public class BroadcastApi {
             "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "PATCH", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "PATCH", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call updateBroadcastByIDValidateBeforeCall(Long id, BroadcastDataInput data, final ApiCallback _callback) throws ApiException {
-        
+    private okhttp3.Call updateBroadcastByIDValidateBeforeCall(Long id, BroadcastDataInput broadcastDataInput, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'id' is set
         if (id == null) {
             throw new ApiException("Missing the required parameter 'id' when calling updateBroadcastByID(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = updateBroadcastByIDCall(id, data, _callback);
-        return localVarCall;
+        return updateBroadcastByIDCall(id, broadcastDataInput, _callback);
 
     }
 
@@ -1490,21 +1827,24 @@ public class BroadcastApi {
      * Update broadcast by id
      * Update broadcast by id
      * @param id ID of Broadcast **(Required)** (required)
-     * @param data Data *(Optional)* (optional)
-     * @return Success
+     * @param broadcastDataInput Data *(Optional)* (optional)
+     * @return InlineResponse202
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully updated Broadcast by id </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public Success updateBroadcastByID(Long id, BroadcastDataInput data) throws ApiException {
-        ApiResponse<Success> localVarResp = updateBroadcastByIDWithHttpInfo(id, data);
+    public InlineResponse202 updateBroadcastByID(Long id, BroadcastDataInput broadcastDataInput) throws ApiException {
+        ApiResponse<InlineResponse202> localVarResp = updateBroadcastByIDWithHttpInfo(id, broadcastDataInput);
         return localVarResp.getData();
     }
 
@@ -1512,22 +1852,25 @@ public class BroadcastApi {
      * Update broadcast by id
      * Update broadcast by id
      * @param id ID of Broadcast **(Required)** (required)
-     * @param data Data *(Optional)* (optional)
-     * @return ApiResponse&lt;Success&gt;
+     * @param broadcastDataInput Data *(Optional)* (optional)
+     * @return ApiResponse&lt;InlineResponse202&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully updated Broadcast by id </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Success> updateBroadcastByIDWithHttpInfo(Long id, BroadcastDataInput data) throws ApiException {
-        okhttp3.Call localVarCall = updateBroadcastByIDValidateBeforeCall(id, data, null);
-        Type localVarReturnType = new TypeToken<Success>(){}.getType();
+    public ApiResponse<InlineResponse202> updateBroadcastByIDWithHttpInfo(Long id, BroadcastDataInput broadcastDataInput) throws ApiException {
+        okhttp3.Call localVarCall = updateBroadcastByIDValidateBeforeCall(id, broadcastDataInput, null);
+        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -1535,24 +1878,27 @@ public class BroadcastApi {
      * Update broadcast by id (asynchronously)
      * Update broadcast by id
      * @param id ID of Broadcast **(Required)** (required)
-     * @param data Data *(Optional)* (optional)
+     * @param broadcastDataInput Data *(Optional)* (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully updated Broadcast by id </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Request Succesful </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call updateBroadcastByIDAsync(Long id, BroadcastDataInput data, final ApiCallback<Success> _callback) throws ApiException {
+    public okhttp3.Call updateBroadcastByIDAsync(Long id, BroadcastDataInput broadcastDataInput, final ApiCallback<InlineResponse202> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = updateBroadcastByIDValidateBeforeCall(id, data, _callback);
-        Type localVarReturnType = new TypeToken<Success>(){}.getType();
+        okhttp3.Call localVarCall = updateBroadcastByIDValidateBeforeCall(id, broadcastDataInput, _callback);
+        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

@@ -2,17 +2,18 @@
 
 # Campaign
 
+
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**modelTypeId** | **Long** |  | 
-**fieldValues** | [**Object**](.md) |  |  [optional]
-**title** | **String** |  |  [optional]
-**start** | [**OffsetDateTime**](OffsetDateTime.md) |  | 
-**stop** | [**OffsetDateTime**](OffsetDateTime.md) |  | 
-**recommended** | **Boolean** |  |  [optional]
-**description** | **String** |  |  [optional]
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**modelTypeId** | **Long** |  |  |
+|**fieldValues** | **Object** |  |  [optional] |
+|**title** | **String** |  |  [optional] |
+|**start** | **OffsetDateTime** |  |  |
+|**stop** | **OffsetDateTime** |  |  |
+|**recommended** | **Boolean** |  |  [optional] |
+|**description** | **String** |  |  [optional] |
 
 
 

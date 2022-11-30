@@ -2,11 +2,12 @@
 
 # CampaignRelationsItemsParams
 
+
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**campaignId** | **Integer** |  |  [optional]
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**campaignId** | **Integer** |  |  [optional] |
 
 
 

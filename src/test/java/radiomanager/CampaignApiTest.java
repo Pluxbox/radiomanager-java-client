@@ -1,6 +1,6 @@
 /*
  * RadioManager
- * RadioManager
+ * This OpenAPI 3 Document describes the functionality of the API v2 of RadioManager. Note that no rights can be derived from this Document and the true functionality of the API might differ.
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@pluxbox.com
@@ -14,19 +14,21 @@
 package radiomanager;
 
 import com.pluxbox.radiomanager.api.invoker.ApiException;
-import com.pluxbox.radiomanager.api.models.Campaign;
 import com.pluxbox.radiomanager.api.models.CampaignDataInput;
 import com.pluxbox.radiomanager.api.models.CampaignResult;
-import com.pluxbox.radiomanager.api.models.CampaignResults;
-import com.pluxbox.radiomanager.api.models.Forbidden;
-import com.pluxbox.radiomanager.api.models.NotFound;
+import com.pluxbox.radiomanager.api.models.InlineResponse2002;
+import com.pluxbox.radiomanager.api.models.InlineResponse2004;
+import com.pluxbox.radiomanager.api.models.InlineResponse202;
+import com.pluxbox.radiomanager.api.models.InlineResponse400;
+import com.pluxbox.radiomanager.api.models.InlineResponse401;
+import com.pluxbox.radiomanager.api.models.InlineResponse403;
+import com.pluxbox.radiomanager.api.models.InlineResponse404;
+import com.pluxbox.radiomanager.api.models.InlineResponse422;
+import com.pluxbox.radiomanager.api.models.InlineResponse429;
+import com.pluxbox.radiomanager.api.models.InlineResponse500;
 import java.time.OffsetDateTime;
-import com.pluxbox.radiomanager.api.models.PostSuccess;
-import com.pluxbox.radiomanager.api.models.Success;
-import com.pluxbox.radiomanager.api.models.TooManyRequests;
-import com.pluxbox.radiomanager.api.models.UnprocessableEntity;
-import org.junit.Test;
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,100 +38,88 @@ import java.util.Map;
 /**
  * API tests for CampaignApi
  */
-@Ignore
+@Disabled
 public class CampaignApiTest {
 
     private final CampaignApi api = new CampaignApi();
 
-    
     /**
      * Create campaign.
      *
      * Create campaign.
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void createCampaignTest() throws ApiException {
-        CampaignDataInput data = null;
-        PostSuccess response = api.createCampaign(data);
-
+        CampaignDataInput campaignDataInput = null;
+        InlineResponse2002 response = api.createCampaign(campaignDataInput);
         // TODO: test validations
     }
-    
+
     /**
      * Delete campaign by id
      *
      * Delete campaign by id
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void deleteCampaignByIdTest() throws ApiException {
         Long id = null;
-        Success response = api.deleteCampaignById(id);
-
+        InlineResponse202 response = api.deleteCampaignById(id);
         // TODO: test validations
     }
-    
+
     /**
      * Get campaign by id
      *
      * Get campaign by id
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void getCampaignByIdTest() throws ApiException {
         Long id = null;
-        Long externalStationId = null;
-        CampaignResult response = api.getCampaignById(id, externalStationId);
-
+        CampaignResult response = api.getCampaignById(id);
         // TODO: test validations
     }
-    
+
     /**
      * Get all campaigns.
      *
      * List all campaigns.
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void listCampaignsTest() throws ApiException {
-        Long page = null;
         Long itemId = null;
         Long modelTypeId = null;
         OffsetDateTime startMin = null;
         OffsetDateTime startMax = null;
+        Long page = null;
         Long limit = null;
         String orderBy = null;
         String orderDirection = null;
         Long externalStationId = null;
-        CampaignResults response = api.listCampaigns(page, itemId, modelTypeId, startMin, startMax, limit, orderBy, orderDirection, externalStationId);
-
+        InlineResponse2004 response = api.listCampaigns(itemId, modelTypeId, startMin, startMax, page, limit, orderBy, orderDirection, externalStationId);
         // TODO: test validations
     }
-    
+
     /**
      * Update campaign by id
      *
      * Update campaign by id
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void updateCampaignByIDTest() throws ApiException {
         Long id = null;
-        CampaignDataInput data = null;
-        Success response = api.updateCampaignByID(id, data);
-
+        CampaignDataInput campaignDataInput = null;
+        InlineResponse202 response = api.updateCampaignByID(id, campaignDataInput);
         // TODO: test validations
     }
-    
+
 }

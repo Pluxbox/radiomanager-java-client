@@ -2,18 +2,18 @@
 
 All URIs are relative to *https://radiomanager.io/api/v2*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**createPresenter**](PresenterApi.md#createPresenter) | **POST** /presenters | Create presenter.
-[**deletePresenterById**](PresenterApi.md#deletePresenterById) | **DELETE** /presenters/{id} | Delete presenter by id
-[**getPresenterById**](PresenterApi.md#getPresenterById) | **GET** /presenters/{id} | Get presenter by id
-[**listPresenters**](PresenterApi.md#listPresenters) | **GET** /presenters | Get all presenters.
-[**updatePresenterByID**](PresenterApi.md#updatePresenterByID) | **PATCH** /presenters/{id} | Update presenter by id
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**createPresenter**](PresenterApi.md#createPresenter) | **POST** /presenters | Create presenter. |
+| [**deletePresenterById**](PresenterApi.md#deletePresenterById) | **DELETE** /presenters/{id} | Delete presenter by id |
+| [**getPresenterById**](PresenterApi.md#getPresenterById) | **GET** /presenters/{id} | Get presenter by id |
+| [**listPresenters**](PresenterApi.md#listPresenters) | **GET** /presenters | Get all presenters. |
+| [**updatePresenterByID**](PresenterApi.md#updatePresenterByID) | **PATCH** /presenters/{id} | Update presenter by id |
 
 
 <a name="createPresenter"></a>
 # **createPresenter**
-> PostSuccess createPresenter(data)
+> InlineResponse2002 createPresenter(presenterDataInput)
 
 Create presenter.
 
@@ -41,9 +41,9 @@ public class Example {
     //API-Key.setApiKeyPrefix("Token");
 
     PresenterApi apiInstance = new PresenterApi(defaultClient);
-    PresenterDataInput data = new PresenterDataInput(); // PresenterDataInput | Data **(Required)**
+    PresenterDataInput presenterDataInput = new PresenterDataInput(); // PresenterDataInput | Data **(Required)**
     try {
-      PostSuccess result = apiInstance.createPresenter(data);
+      InlineResponse2002 result = apiInstance.createPresenter(presenterDataInput);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling PresenterApi#createPresenter");
@@ -58,13 +58,13 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **data** | [**PresenterDataInput**](PresenterDataInput.md)| Data **(Required)** |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **presenterDataInput** | [**PresenterDataInput**](PresenterDataInput.md)| Data **(Required)** | |
 
 ### Return type
 
-[**PostSuccess**](PostSuccess.md)
+[**InlineResponse2002**](InlineResponse2002.md)
 
 ### Authorization
 
@@ -78,15 +78,18 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully created a presenter |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
+| **200** | Post Request Succesful |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
 
 <a name="deletePresenterById"></a>
 # **deletePresenterById**
-> Success deletePresenterById(id)
+> InlineResponse202 deletePresenterById(id)
 
 Delete presenter by id
 
@@ -114,9 +117,9 @@ public class Example {
     //API-Key.setApiKeyPrefix("Token");
 
     PresenterApi apiInstance = new PresenterApi(defaultClient);
-    Long id = 0lL; // Long | id of presenter
+    Long id = 56L; // Long | id of presenter
     try {
-      Success result = apiInstance.deletePresenterById(id);
+      InlineResponse202 result = apiInstance.deletePresenterById(id);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling PresenterApi#deletePresenterById");
@@ -131,13 +134,13 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **Long**| id of presenter | [default to 0l]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | **Long**| id of presenter | |
 
 ### Return type
 
-[**Success**](Success.md)
+[**InlineResponse202**](InlineResponse202.md)
 
 ### Authorization
 
@@ -151,14 +154,18 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully deleted presenter by id |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**429** | Too Many Requests |  -  |
+| **202** | Request Succesful |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
 
 <a name="getPresenterById"></a>
 # **getPresenterById**
-> PresenterResult getPresenterById(id, externalStationId)
+> PresenterResult getPresenterById(id)
 
 Get presenter by id
 
@@ -186,10 +193,9 @@ public class Example {
     //API-Key.setApiKeyPrefix("Token");
 
     PresenterApi apiInstance = new PresenterApi(defaultClient);
-    Long id = 0lL; // Long | id of Presenter
-    Long externalStationId = 56L; // Long | Query on a different (content providing) station *(Optional)*
+    Long id = 56L; // Long | id of Presenter
     try {
-      PresenterResult result = apiInstance.getPresenterById(id, externalStationId);
+      PresenterResult result = apiInstance.getPresenterById(id);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling PresenterApi#getPresenterById");
@@ -204,10 +210,9 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **Long**| id of Presenter | [default to 0l]
- **externalStationId** | **Long**| Query on a different (content providing) station *(Optional)* | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | **Long**| id of Presenter | |
 
 ### Return type
 
@@ -225,14 +230,18 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully got Presenter by id |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**429** | Too Many Requests |  -  |
+| **200** | Successfully got Broadcast by id |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
 
 <a name="listPresenters"></a>
 # **listPresenters**
-> PresenterResults listPresenters(page, programId, broadcastId, modelTypeId, limit, orderBy, orderDirection, externalStationId)
+> InlineResponse20010 listPresenters(programId, broadcastId, modelTypeId, page, limit, orderBy, orderDirection, externalStationId)
 
 Get all presenters.
 
@@ -260,16 +269,16 @@ public class Example {
     //API-Key.setApiKeyPrefix("Token");
 
     PresenterApi apiInstance = new PresenterApi(defaultClient);
-    Long page = 56L; // Long | Current page *(Optional)*
     Long programId = 56L; // Long | Search on Program ID *(Optional)* `(Relation)`
     Long broadcastId = 56L; // Long | Search on Broadcast ID *(Optional)* `(Relation)`
     Long modelTypeId = 56L; // Long | Search on ModelType ID (Optional)
+    Long page = 1L; // Long | Current page *(Optional)*
     Long limit = 56L; // Long | Results per page *(Optional)*
     String orderBy = "orderBy_example"; // String | Field to order the results *(Optional)*
-    String orderDirection = "orderDirection_example"; // String | Direction of ordering *(Optional)*
+    String orderDirection = "asc"; // String | Direction of ordering *(Optional)*
     Long externalStationId = 56L; // Long | Query on a different (content providing) station *(Optional)*
     try {
-      PresenterResults result = apiInstance.listPresenters(page, programId, broadcastId, modelTypeId, limit, orderBy, orderDirection, externalStationId);
+      InlineResponse20010 result = apiInstance.listPresenters(programId, broadcastId, modelTypeId, page, limit, orderBy, orderDirection, externalStationId);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling PresenterApi#listPresenters");
@@ -284,20 +293,20 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **page** | **Long**| Current page *(Optional)* | [optional]
- **programId** | **Long**| Search on Program ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
- **broadcastId** | **Long**| Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
- **modelTypeId** | **Long**| Search on ModelType ID (Optional) | [optional]
- **limit** | **Long**| Results per page *(Optional)* | [optional]
- **orderBy** | **String**| Field to order the results *(Optional)* | [optional]
- **orderDirection** | **String**| Direction of ordering *(Optional)* | [optional] [enum: asc, desc]
- **externalStationId** | **Long**| Query on a different (content providing) station *(Optional)* | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **programId** | **Long**| Search on Program ID *(Optional)* &#x60;(Relation)&#x60; | [optional] |
+| **broadcastId** | **Long**| Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; | [optional] |
+| **modelTypeId** | **Long**| Search on ModelType ID (Optional) | [optional] |
+| **page** | **Long**| Current page *(Optional)* | [optional] [default to 1] |
+| **limit** | **Long**| Results per page *(Optional)* | [optional] |
+| **orderBy** | **String**| Field to order the results *(Optional)* | [optional] |
+| **orderDirection** | **String**| Direction of ordering *(Optional)* | [optional] [enum: asc, desc] |
+| **externalStationId** | **Long**| Query on a different (content providing) station *(Optional)* | [optional] |
 
 ### Return type
 
-[**PresenterResults**](PresenterResults.md)
+[**InlineResponse20010**](InlineResponse20010.md)
 
 ### Authorization
 
@@ -311,14 +320,18 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully got all presenters |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**429** | Too Many Requests |  -  |
+| **200** | Successfully got all presenters |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
 
 <a name="updatePresenterByID"></a>
 # **updatePresenterByID**
-> Success updatePresenterByID(id, data)
+> InlineResponse202 updatePresenterByID(id, presenterDataInput)
 
 Update presenter by id
 
@@ -346,10 +359,10 @@ public class Example {
     //API-Key.setApiKeyPrefix("Token");
 
     PresenterApi apiInstance = new PresenterApi(defaultClient);
-    Long id = 0lL; // Long | id of Presenter
-    PresenterDataInput data = new PresenterDataInput(); // PresenterDataInput | Data *(Optional)*
+    Long id = 56L; // Long | id of Presenter
+    PresenterDataInput presenterDataInput = new PresenterDataInput(); // PresenterDataInput | Data *(Optional)*
     try {
-      Success result = apiInstance.updatePresenterByID(id, data);
+      InlineResponse202 result = apiInstance.updatePresenterByID(id, presenterDataInput);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling PresenterApi#updatePresenterByID");
@@ -364,14 +377,14 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **Long**| id of Presenter | [default to 0l]
- **data** | [**PresenterDataInput**](PresenterDataInput.md)| Data *(Optional)* | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | **Long**| id of Presenter | |
+| **presenterDataInput** | [**PresenterDataInput**](PresenterDataInput.md)| Data *(Optional)* | |
 
 ### Return type
 
-[**Success**](Success.md)
+[**InlineResponse202**](InlineResponse202.md)
 
 ### Authorization
 
@@ -385,9 +398,12 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully updated Presenter by id |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
+| **200** | Request Succesful |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
 

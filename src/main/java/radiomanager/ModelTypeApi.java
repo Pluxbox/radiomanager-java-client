@@ -1,6 +1,6 @@
 /*
  * RadioManager
- * RadioManager
+ * This OpenAPI 3 Document describes the functionality of the API v2 of RadioManager. Note that no rights can be derived from this Document and the true functionality of the API might differ.
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@pluxbox.com
@@ -27,20 +27,27 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
-import com.pluxbox.radiomanager.api.models.Forbidden;
+import com.pluxbox.radiomanager.api.models.InlineResponse2009;
+import com.pluxbox.radiomanager.api.models.InlineResponse400;
+import com.pluxbox.radiomanager.api.models.InlineResponse401;
+import com.pluxbox.radiomanager.api.models.InlineResponse403;
+import com.pluxbox.radiomanager.api.models.InlineResponse404;
+import com.pluxbox.radiomanager.api.models.InlineResponse422;
+import com.pluxbox.radiomanager.api.models.InlineResponse429;
+import com.pluxbox.radiomanager.api.models.InlineResponse500;
 import com.pluxbox.radiomanager.api.models.ModelTypeResult;
-import com.pluxbox.radiomanager.api.models.ModelTypeResults;
-import com.pluxbox.radiomanager.api.models.NotFound;
-import com.pluxbox.radiomanager.api.models.TooManyRequests;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.ws.rs.core.GenericType;
 
 public class ModelTypeApi {
     private ApiClient localVarApiClient;
+    private int localHostIndex;
+    private String localCustomBaseUrl;
 
     public ModelTypeApi() {
         this(Configuration.getDefaultApiClient());
@@ -58,9 +65,26 @@ public class ModelTypeApi {
         this.localVarApiClient = apiClient;
     }
 
+    public int getHostIndex() {
+        return localHostIndex;
+    }
+
+    public void setHostIndex(int hostIndex) {
+        this.localHostIndex = hostIndex;
+    }
+
+    public String getCustomBaseUrl() {
+        return localCustomBaseUrl;
+    }
+
+    public void setCustomBaseUrl(String customBaseUrl) {
+        this.localCustomBaseUrl = customBaseUrl;
+    }
+
     /**
      * Build call for getModelTypeById
      * @param id ID of ModelType **(Required)** (required)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -69,27 +93,49 @@ public class ModelTypeApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got ModelType by id </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getModelTypeByIdCall(Long id, Long externalStationId, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getModelTypeByIdCall(Long id, String orderDirection, Long externalStationId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
         String localVarPath = "/model_types/{id}"
-            .replaceAll("\\{" + "id" + "\\}", localVarApiClient.escapeString(id.toString()));
+            .replace("{" + "id" + "}", localVarApiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (orderDirection != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("order-direction", orderDirection));
+        }
+
         if (externalStationId != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("_external_station_id", externalStationId));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -99,26 +145,24 @@ public class ModelTypeApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getModelTypeByIdValidateBeforeCall(Long id, Long externalStationId, final ApiCallback _callback) throws ApiException {
-        
+    private okhttp3.Call getModelTypeByIdValidateBeforeCall(Long id, String orderDirection, Long externalStationId, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'id' is set
         if (id == null) {
             throw new ApiException("Missing the required parameter 'id' when calling getModelTypeById(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = getModelTypeByIdCall(id, externalStationId, _callback);
-        return localVarCall;
+        return getModelTypeByIdCall(id, orderDirection, externalStationId, _callback);
 
     }
 
@@ -126,6 +170,7 @@ public class ModelTypeApi {
      * Get modelType by id
      * Get modelType by id
      * @param id ID of ModelType **(Required)** (required)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @return ModelTypeResult
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -133,13 +178,17 @@ public class ModelTypeApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got ModelType by id </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ModelTypeResult getModelTypeById(Long id, Long externalStationId) throws ApiException {
-        ApiResponse<ModelTypeResult> localVarResp = getModelTypeByIdWithHttpInfo(id, externalStationId);
+    public ModelTypeResult getModelTypeById(Long id, String orderDirection, Long externalStationId) throws ApiException {
+        ApiResponse<ModelTypeResult> localVarResp = getModelTypeByIdWithHttpInfo(id, orderDirection, externalStationId);
         return localVarResp.getData();
     }
 
@@ -147,6 +196,7 @@ public class ModelTypeApi {
      * Get modelType by id
      * Get modelType by id
      * @param id ID of ModelType **(Required)** (required)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @return ApiResponse&lt;ModelTypeResult&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -154,13 +204,17 @@ public class ModelTypeApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got ModelType by id </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ModelTypeResult> getModelTypeByIdWithHttpInfo(Long id, Long externalStationId) throws ApiException {
-        okhttp3.Call localVarCall = getModelTypeByIdValidateBeforeCall(id, externalStationId, null);
+    public ApiResponse<ModelTypeResult> getModelTypeByIdWithHttpInfo(Long id, String orderDirection, Long externalStationId) throws ApiException {
+        okhttp3.Call localVarCall = getModelTypeByIdValidateBeforeCall(id, orderDirection, externalStationId, null);
         Type localVarReturnType = new TypeToken<ModelTypeResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -169,6 +223,7 @@ public class ModelTypeApi {
      * Get modelType by id (asynchronously)
      * Get modelType by id
      * @param id ID of ModelType **(Required)** (required)
+     * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -177,21 +232,24 @@ public class ModelTypeApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got ModelType by id </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getModelTypeByIdAsync(Long id, Long externalStationId, final ApiCallback<ModelTypeResult> _callback) throws ApiException {
+    public okhttp3.Call getModelTypeByIdAsync(Long id, String orderDirection, Long externalStationId, final ApiCallback<ModelTypeResult> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = getModelTypeByIdValidateBeforeCall(id, externalStationId, _callback);
+        okhttp3.Call localVarCall = getModelTypeByIdValidateBeforeCall(id, orderDirection, externalStationId, _callback);
         Type localVarReturnType = new TypeToken<ModelTypeResult>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for listModelTypes
-     * @param page Current page *(Optional)* (optional)
      * @param programId Search on Program ID *(Optional)* (optional)
      * @param broadcastId Search on Broadcast ID *(Optional)* (optional)
      * @param itemId Search on Item ID *(Optional)* (optional)
@@ -199,8 +257,6 @@ public class ModelTypeApi {
      * @param presenterId Search on Presenter ID *(Optional)* (optional)
      * @param contactId Search on Contact ID *(Optional)* (optional)
      * @param model Search Modeltypes for certain Model *(Optional)* (optional)
-     * @param limit Results per page *(Optional)* (optional)
-     * @param orderBy Field to order the results *(Optional)* (optional)
      * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @param _callback Callback for upload/download progress
@@ -210,12 +266,29 @@ public class ModelTypeApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got all modelTypes </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call listModelTypesCall(Long page, Long programId, Long broadcastId, Long itemId, Long campaignId, Long presenterId, Long contactId, String model, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call listModelTypesCall(Long programId, Long broadcastId, Long itemId, Long campaignId, Long presenterId, Long contactId, String model, String orderDirection, Long externalStationId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -223,9 +296,9 @@ public class ModelTypeApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        if (page != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
-        }
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
         if (programId != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("program_id", programId));
@@ -255,14 +328,6 @@ public class ModelTypeApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("model", model));
         }
 
-        if (limit != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
-        }
-
-        if (orderBy != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("order-by", orderBy));
-        }
-
         if (orderDirection != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("order-direction", orderDirection));
         }
@@ -271,9 +336,6 @@ public class ModelTypeApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("_external_station_id", externalStationId));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -283,28 +345,25 @@ public class ModelTypeApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "API-Key" };
-        return localVarApiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call listModelTypesValidateBeforeCall(Long page, Long programId, Long broadcastId, Long itemId, Long campaignId, Long presenterId, Long contactId, String model, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback _callback) throws ApiException {
-        
-
-        okhttp3.Call localVarCall = listModelTypesCall(page, programId, broadcastId, itemId, campaignId, presenterId, contactId, model, limit, orderBy, orderDirection, externalStationId, _callback);
-        return localVarCall;
+    private okhttp3.Call listModelTypesValidateBeforeCall(Long programId, Long broadcastId, Long itemId, Long campaignId, Long presenterId, Long contactId, String model, String orderDirection, Long externalStationId, final ApiCallback _callback) throws ApiException {
+        return listModelTypesCall(programId, broadcastId, itemId, campaignId, presenterId, contactId, model, orderDirection, externalStationId, _callback);
 
     }
 
     /**
      * Get all modelTypes.
      * List all modelTypes.
-     * @param page Current page *(Optional)* (optional)
      * @param programId Search on Program ID *(Optional)* (optional)
      * @param broadcastId Search on Broadcast ID *(Optional)* (optional)
      * @param itemId Search on Item ID *(Optional)* (optional)
@@ -312,30 +371,31 @@ public class ModelTypeApi {
      * @param presenterId Search on Presenter ID *(Optional)* (optional)
      * @param contactId Search on Contact ID *(Optional)* (optional)
      * @param model Search Modeltypes for certain Model *(Optional)* (optional)
-     * @param limit Results per page *(Optional)* (optional)
-     * @param orderBy Field to order the results *(Optional)* (optional)
      * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
-     * @return ModelTypeResults
+     * @return InlineResponse2009
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got all modelTypes </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ModelTypeResults listModelTypes(Long page, Long programId, Long broadcastId, Long itemId, Long campaignId, Long presenterId, Long contactId, String model, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
-        ApiResponse<ModelTypeResults> localVarResp = listModelTypesWithHttpInfo(page, programId, broadcastId, itemId, campaignId, presenterId, contactId, model, limit, orderBy, orderDirection, externalStationId);
+    public InlineResponse2009 listModelTypes(Long programId, Long broadcastId, Long itemId, Long campaignId, Long presenterId, Long contactId, String model, String orderDirection, Long externalStationId) throws ApiException {
+        ApiResponse<InlineResponse2009> localVarResp = listModelTypesWithHttpInfo(programId, broadcastId, itemId, campaignId, presenterId, contactId, model, orderDirection, externalStationId);
         return localVarResp.getData();
     }
 
     /**
      * Get all modelTypes.
      * List all modelTypes.
-     * @param page Current page *(Optional)* (optional)
      * @param programId Search on Program ID *(Optional)* (optional)
      * @param broadcastId Search on Broadcast ID *(Optional)* (optional)
      * @param itemId Search on Item ID *(Optional)* (optional)
@@ -343,31 +403,32 @@ public class ModelTypeApi {
      * @param presenterId Search on Presenter ID *(Optional)* (optional)
      * @param contactId Search on Contact ID *(Optional)* (optional)
      * @param model Search Modeltypes for certain Model *(Optional)* (optional)
-     * @param limit Results per page *(Optional)* (optional)
-     * @param orderBy Field to order the results *(Optional)* (optional)
      * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
-     * @return ApiResponse&lt;ModelTypeResults&gt;
+     * @return ApiResponse&lt;InlineResponse2009&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got all modelTypes </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ModelTypeResults> listModelTypesWithHttpInfo(Long page, Long programId, Long broadcastId, Long itemId, Long campaignId, Long presenterId, Long contactId, String model, Long limit, String orderBy, String orderDirection, Long externalStationId) throws ApiException {
-        okhttp3.Call localVarCall = listModelTypesValidateBeforeCall(page, programId, broadcastId, itemId, campaignId, presenterId, contactId, model, limit, orderBy, orderDirection, externalStationId, null);
-        Type localVarReturnType = new TypeToken<ModelTypeResults>(){}.getType();
+    public ApiResponse<InlineResponse2009> listModelTypesWithHttpInfo(Long programId, Long broadcastId, Long itemId, Long campaignId, Long presenterId, Long contactId, String model, String orderDirection, Long externalStationId) throws ApiException {
+        okhttp3.Call localVarCall = listModelTypesValidateBeforeCall(programId, broadcastId, itemId, campaignId, presenterId, contactId, model, orderDirection, externalStationId, null);
+        Type localVarReturnType = new TypeToken<InlineResponse2009>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * Get all modelTypes. (asynchronously)
      * List all modelTypes.
-     * @param page Current page *(Optional)* (optional)
      * @param programId Search on Program ID *(Optional)* (optional)
      * @param broadcastId Search on Broadcast ID *(Optional)* (optional)
      * @param itemId Search on Item ID *(Optional)* (optional)
@@ -375,8 +436,6 @@ public class ModelTypeApi {
      * @param presenterId Search on Presenter ID *(Optional)* (optional)
      * @param contactId Search on Contact ID *(Optional)* (optional)
      * @param model Search Modeltypes for certain Model *(Optional)* (optional)
-     * @param limit Results per page *(Optional)* (optional)
-     * @param orderBy Field to order the results *(Optional)* (optional)
      * @param orderDirection Direction of ordering *(Optional)* (optional)
      * @param externalStationId Query on a different (content providing) station *(Optional)* (optional)
      * @param _callback The callback to be executed when the API call finishes
@@ -386,15 +445,19 @@ public class ModelTypeApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully got all modelTypes </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call listModelTypesAsync(Long page, Long programId, Long broadcastId, Long itemId, Long campaignId, Long presenterId, Long contactId, String model, Long limit, String orderBy, String orderDirection, Long externalStationId, final ApiCallback<ModelTypeResults> _callback) throws ApiException {
+    public okhttp3.Call listModelTypesAsync(Long programId, Long broadcastId, Long itemId, Long campaignId, Long presenterId, Long contactId, String model, String orderDirection, Long externalStationId, final ApiCallback<InlineResponse2009> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = listModelTypesValidateBeforeCall(page, programId, broadcastId, itemId, campaignId, presenterId, contactId, model, limit, orderBy, orderDirection, externalStationId, _callback);
-        Type localVarReturnType = new TypeToken<ModelTypeResults>(){}.getType();
+        okhttp3.Call localVarCall = listModelTypesValidateBeforeCall(programId, broadcastId, itemId, campaignId, presenterId, contactId, model, orderDirection, externalStationId, _callback);
+        Type localVarReturnType = new TypeToken<InlineResponse2009>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

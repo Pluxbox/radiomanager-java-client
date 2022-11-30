@@ -1,6 +1,6 @@
 /*
  * RadioManager
- * RadioManager
+ * This OpenAPI 3 Document describes the functionality of the API v2 of RadioManager. Note that no rights can be derived from this Document and the true functionality of the API might differ.
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@pluxbox.com
@@ -19,9 +19,6 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.pluxbox.radiomanager.api.models.BlockRelationsProgram;
-import com.pluxbox.radiomanager.api.models.Broadcast;
-import com.pluxbox.radiomanager.api.models.BroadcastEPGRelations;
-import com.pluxbox.radiomanager.api.models.BroadcastOutputOnly;
 import com.pluxbox.radiomanager.api.models.BroadcastRelationsBlocks;
 import com.pluxbox.radiomanager.api.models.BroadcastRelationsItems;
 import com.pluxbox.radiomanager.api.models.BroadcastRelationsModelType;
@@ -33,9 +30,8 @@ import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 
 /**
@@ -266,6 +262,22 @@ public class BroadcastEPGResultTest {
     @Test
     public void ptyCodeIdTest() {
         // TODO: test ptyCodeId
+    }
+
+    /**
+     * Test the property 'plannedInEpg'
+     */
+    @Test
+    public void plannedInEpgTest() {
+        // TODO: test plannedInEpg
+    }
+
+    /**
+     * Test the property 'groupId'
+     */
+    @Test
+    public void groupIdTest() {
+        // TODO: test groupId
     }
 
     /**

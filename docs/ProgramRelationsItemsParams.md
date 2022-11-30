@@ -2,11 +2,12 @@
 
 # ProgramRelationsItemsParams
 
+
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**programId** | **Integer** |  |  [optional]
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**programId** | **Integer** |  |  [optional] |
 
 
 

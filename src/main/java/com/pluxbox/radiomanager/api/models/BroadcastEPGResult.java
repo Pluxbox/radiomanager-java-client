@@ -1,6 +1,6 @@
 /*
  * RadioManager
- * RadioManager
+ * This OpenAPI 3 Document describes the functionality of the API v2 of RadioManager. Note that no rights can be derived from this Document and the true functionality of the API might differ.
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@pluxbox.com
@@ -21,9 +21,6 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.pluxbox.radiomanager.api.models.BlockRelationsProgram;
-import com.pluxbox.radiomanager.api.models.Broadcast;
-import com.pluxbox.radiomanager.api.models.BroadcastEPGRelations;
-import com.pluxbox.radiomanager.api.models.BroadcastOutputOnly;
 import com.pluxbox.radiomanager.api.models.BroadcastRelationsBlocks;
 import com.pluxbox.radiomanager.api.models.BroadcastRelationsItems;
 import com.pluxbox.radiomanager.api.models.BroadcastRelationsModelType;
@@ -36,10 +33,31 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.pluxbox.radiomanager.api.invoker.JSON;
+
 /**
  * BroadcastEPGResult
  */
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class BroadcastEPGResult {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -200,6 +218,14 @@ public class BroadcastEPGResult {
   @SerializedName(SERIALIZED_NAME_PTY_CODE_ID)
   private Long ptyCodeId;
 
+  public static final String SERIALIZED_NAME_PLANNED_IN_EPG = "planned_in_epg";
+  @SerializedName(SERIALIZED_NAME_PLANNED_IN_EPG)
+  private Integer plannedInEpg;
+
+  public static final String SERIALIZED_NAME_GROUP_ID = "group_id";
+  @SerializedName(SERIALIZED_NAME_GROUP_ID)
+  private Long groupId;
+
   public static final String SERIALIZED_NAME_ITEMS = "items";
   @SerializedName(SERIALIZED_NAME_ITEMS)
   private BroadcastRelationsItems items;
@@ -224,6 +250,8 @@ public class BroadcastEPGResult {
   @SerializedName(SERIALIZED_NAME_MODEL_TYPE)
   private BroadcastRelationsModelType modelType;
 
+  public BroadcastEPGResult() {
+  }
 
   public BroadcastEPGResult id(Long id) {
     
@@ -235,6 +263,7 @@ public class BroadcastEPGResult {
    * Get id
    * @return id
   **/
+  @javax.annotation.Nonnull
   @ApiModelProperty(example = "1", required = true, value = "")
 
   public Long getId() {
@@ -257,7 +286,8 @@ public class BroadcastEPGResult {
    * Get updatedAt
    * @return updatedAt
   **/
-  @ApiModelProperty(example = "2016-01-11T22:01:11+02:00", required = true, value = "")
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "2016-01-11T22:01:11+02:00", value = "")
 
   public OffsetDateTime getUpdatedAt() {
     return updatedAt;
@@ -279,7 +309,8 @@ public class BroadcastEPGResult {
    * Get createdAt
    * @return createdAt
   **/
-  @ApiModelProperty(example = "2016-01-11T22:01:11+02:00", required = true, value = "")
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "2016-01-11T22:01:11+02:00", value = "")
 
   public OffsetDateTime getCreatedAt() {
     return createdAt;
@@ -301,7 +332,8 @@ public class BroadcastEPGResult {
    * Get deletedAt
    * @return deletedAt
   **/
-  @ApiModelProperty(example = "2016-01-11T22:01:11+02:00", required = true, value = "")
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "2016-01-11T22:01:11+02:00", value = "")
 
   public OffsetDateTime getDeletedAt() {
     return deletedAt;
@@ -842,6 +874,52 @@ public class BroadcastEPGResult {
   }
 
 
+  public BroadcastEPGResult plannedInEpg(Integer plannedInEpg) {
+    
+    this.plannedInEpg = plannedInEpg;
+    return this;
+  }
+
+   /**
+   * Get plannedInEpg
+   * @return plannedInEpg
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public Integer getPlannedInEpg() {
+    return plannedInEpg;
+  }
+
+
+  public void setPlannedInEpg(Integer plannedInEpg) {
+    this.plannedInEpg = plannedInEpg;
+  }
+
+
+  public BroadcastEPGResult groupId(Long groupId) {
+    
+    this.groupId = groupId;
+    return this;
+  }
+
+   /**
+   * Get groupId
+   * @return groupId
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "1", value = "")
+
+  public Long getGroupId() {
+    return groupId;
+  }
+
+
+  public void setGroupId(Long groupId) {
+    this.groupId = groupId;
+  }
+
+
   public BroadcastEPGResult items(BroadcastRelationsItems items) {
     
     this.items = items;
@@ -988,8 +1066,9 @@ public class BroadcastEPGResult {
   }
 
 
+
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -1024,6 +1103,8 @@ public class BroadcastEPGResult {
         Objects.equals(this.repetitionStart, broadcastEPGResult.repetitionStart) &&
         Objects.equals(this.repetitionDays, broadcastEPGResult.repetitionDays) &&
         Objects.equals(this.ptyCodeId, broadcastEPGResult.ptyCodeId) &&
+        Objects.equals(this.plannedInEpg, broadcastEPGResult.plannedInEpg) &&
+        Objects.equals(this.groupId, broadcastEPGResult.groupId) &&
         Objects.equals(this.items, broadcastEPGResult.items) &&
         Objects.equals(this.blocks, broadcastEPGResult.blocks) &&
         Objects.equals(this.program, broadcastEPGResult.program) &&
@@ -1034,9 +1115,8 @@ public class BroadcastEPGResult {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, updatedAt, createdAt, deletedAt, externalStationId, programId, modelTypeId, stationId, fieldValues, title, start, stop, genreId, description, shortName, mediumName, website, email, recommended, language, published, repetitionUid, repetitionType, repetitionEnd, repetitionStart, repetitionDays, ptyCodeId, items, blocks, program, tags, presenters, modelType);
+    return Objects.hash(id, updatedAt, createdAt, deletedAt, externalStationId, programId, modelTypeId, stationId, fieldValues, title, start, stop, genreId, description, shortName, mediumName, website, email, recommended, language, published, repetitionUid, repetitionType, repetitionEnd, repetitionStart, repetitionDays, ptyCodeId, plannedInEpg, groupId, items, blocks, program, tags, presenters, modelType);
   }
-
 
   @Override
   public String toString() {
@@ -1069,6 +1149,8 @@ public class BroadcastEPGResult {
     sb.append("    repetitionStart: ").append(toIndentedString(repetitionStart)).append("\n");
     sb.append("    repetitionDays: ").append(toIndentedString(repetitionDays)).append("\n");
     sb.append("    ptyCodeId: ").append(toIndentedString(ptyCodeId)).append("\n");
+    sb.append("    plannedInEpg: ").append(toIndentedString(plannedInEpg)).append("\n");
+    sb.append("    groupId: ").append(toIndentedString(groupId)).append("\n");
     sb.append("    items: ").append(toIndentedString(items)).append("\n");
     sb.append("    blocks: ").append(toIndentedString(blocks)).append("\n");
     sb.append("    program: ").append(toIndentedString(program)).append("\n");
@@ -1083,12 +1165,201 @@ public class BroadcastEPGResult {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("id");
+    openapiFields.add("updated_at");
+    openapiFields.add("created_at");
+    openapiFields.add("deleted_at");
+    openapiFields.add("_external_station_id");
+    openapiFields.add("program_id");
+    openapiFields.add("model_type_id");
+    openapiFields.add("station_id");
+    openapiFields.add("field_values");
+    openapiFields.add("title");
+    openapiFields.add("start");
+    openapiFields.add("stop");
+    openapiFields.add("genre_id");
+    openapiFields.add("description");
+    openapiFields.add("short_name");
+    openapiFields.add("medium_name");
+    openapiFields.add("website");
+    openapiFields.add("email");
+    openapiFields.add("recommended");
+    openapiFields.add("language");
+    openapiFields.add("published");
+    openapiFields.add("repetition_uid");
+    openapiFields.add("repetition_type");
+    openapiFields.add("repetition_end");
+    openapiFields.add("repetition_start");
+    openapiFields.add("repetition_days");
+    openapiFields.add("pty_code_id");
+    openapiFields.add("planned_in_epg");
+    openapiFields.add("group_id");
+    openapiFields.add("items");
+    openapiFields.add("blocks");
+    openapiFields.add("program");
+    openapiFields.add("tags");
+    openapiFields.add("presenters");
+    openapiFields.add("model_type");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("id");
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to BroadcastEPGResult
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (!BroadcastEPGResult.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+          throw new IllegalArgumentException(String.format("The required field(s) %s in BroadcastEPGResult is not found in the empty JSON string", BroadcastEPGResult.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!BroadcastEPGResult.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `BroadcastEPGResult` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : BroadcastEPGResult.openapiRequiredFields) {
+        if (jsonObj.get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        }
+      }
+      if ((jsonObj.get("title") != null && !jsonObj.get("title").isJsonNull()) && !jsonObj.get("title").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `title` to be a primitive type in the JSON string but got `%s`", jsonObj.get("title").toString()));
+      }
+      if ((jsonObj.get("description") != null && !jsonObj.get("description").isJsonNull()) && !jsonObj.get("description").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `description` to be a primitive type in the JSON string but got `%s`", jsonObj.get("description").toString()));
+      }
+      if ((jsonObj.get("short_name") != null && !jsonObj.get("short_name").isJsonNull()) && !jsonObj.get("short_name").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `short_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("short_name").toString()));
+      }
+      if ((jsonObj.get("medium_name") != null && !jsonObj.get("medium_name").isJsonNull()) && !jsonObj.get("medium_name").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `medium_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("medium_name").toString()));
+      }
+      if ((jsonObj.get("website") != null && !jsonObj.get("website").isJsonNull()) && !jsonObj.get("website").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `website` to be a primitive type in the JSON string but got `%s`", jsonObj.get("website").toString()));
+      }
+      if ((jsonObj.get("email") != null && !jsonObj.get("email").isJsonNull()) && !jsonObj.get("email").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `email` to be a primitive type in the JSON string but got `%s`", jsonObj.get("email").toString()));
+      }
+      if ((jsonObj.get("language") != null && !jsonObj.get("language").isJsonNull()) && !jsonObj.get("language").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `language` to be a primitive type in the JSON string but got `%s`", jsonObj.get("language").toString()));
+      }
+      if ((jsonObj.get("repetition_uid") != null && !jsonObj.get("repetition_uid").isJsonNull()) && !jsonObj.get("repetition_uid").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `repetition_uid` to be a primitive type in the JSON string but got `%s`", jsonObj.get("repetition_uid").toString()));
+      }
+      if ((jsonObj.get("repetition_type") != null && !jsonObj.get("repetition_type").isJsonNull()) && !jsonObj.get("repetition_type").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `repetition_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("repetition_type").toString()));
+      }
+      if ((jsonObj.get("repetition_days") != null && !jsonObj.get("repetition_days").isJsonNull()) && !jsonObj.get("repetition_days").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `repetition_days` to be a primitive type in the JSON string but got `%s`", jsonObj.get("repetition_days").toString()));
+      }
+      // validate the optional field `items`
+      if (jsonObj.get("items") != null && !jsonObj.get("items").isJsonNull()) {
+        BroadcastRelationsItems.validateJsonObject(jsonObj.getAsJsonObject("items"));
+      }
+      // validate the optional field `blocks`
+      if (jsonObj.get("blocks") != null && !jsonObj.get("blocks").isJsonNull()) {
+        BroadcastRelationsBlocks.validateJsonObject(jsonObj.getAsJsonObject("blocks"));
+      }
+      // validate the optional field `program`
+      if (jsonObj.get("program") != null && !jsonObj.get("program").isJsonNull()) {
+        BlockRelationsProgram.validateJsonObject(jsonObj.getAsJsonObject("program"));
+      }
+      // validate the optional field `tags`
+      if (jsonObj.get("tags") != null && !jsonObj.get("tags").isJsonNull()) {
+        BroadcastRelationsTags.validateJsonObject(jsonObj.getAsJsonObject("tags"));
+      }
+      if (jsonObj.get("presenters") != null && !jsonObj.get("presenters").isJsonNull()) {
+        JsonArray jsonArraypresenters = jsonObj.getAsJsonArray("presenters");
+        if (jsonArraypresenters != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("presenters").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `presenters` to be an array in the JSON string but got `%s`", jsonObj.get("presenters").toString()));
+          }
+
+          // validate the optional field `presenters` (array)
+          for (int i = 0; i < jsonArraypresenters.size(); i++) {
+            PresenterEPGResult.validateJsonObject(jsonArraypresenters.get(i).getAsJsonObject());
+          };
+        }
+      }
+      // validate the optional field `model_type`
+      if (jsonObj.get("model_type") != null && !jsonObj.get("model_type").isJsonNull()) {
+        BroadcastRelationsModelType.validateJsonObject(jsonObj.getAsJsonObject("model_type"));
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!BroadcastEPGResult.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'BroadcastEPGResult' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<BroadcastEPGResult> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(BroadcastEPGResult.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<BroadcastEPGResult>() {
+           @Override
+           public void write(JsonWriter out, BroadcastEPGResult value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public BroadcastEPGResult read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of BroadcastEPGResult given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of BroadcastEPGResult
+  * @throws IOException if the JSON string is invalid with respect to BroadcastEPGResult
+  */
+  public static BroadcastEPGResult fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, BroadcastEPGResult.class);
+  }
+
+ /**
+  * Convert an instance of BroadcastEPGResult to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

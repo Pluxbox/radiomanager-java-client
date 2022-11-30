@@ -1,6 +1,6 @@
 /*
  * RadioManager
- * RadioManager
+ * This OpenAPI 3 Document describes the functionality of the API v2 of RadioManager. Note that no rights can be derived from this Document and the true functionality of the API might differ.
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@pluxbox.com
@@ -14,11 +14,13 @@
 package radiomanager;
 
 import com.pluxbox.radiomanager.api.invoker.ApiException;
-import com.pluxbox.radiomanager.api.models.NotFound;
-import com.pluxbox.radiomanager.api.models.TooManyRequests;
+import com.pluxbox.radiomanager.api.models.InlineResponse401;
+import com.pluxbox.radiomanager.api.models.InlineResponse404;
+import com.pluxbox.radiomanager.api.models.InlineResponse429;
+import com.pluxbox.radiomanager.api.models.InlineResponse500;
 import com.pluxbox.radiomanager.api.models.VisualResult;
-import org.junit.Test;
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,25 +30,22 @@ import java.util.Map;
 /**
  * API tests for VisualSlideApi
  */
-@Ignore
+@Disabled
 public class VisualSlideApiTest {
 
     private final VisualSlideApi api = new VisualSlideApi();
 
-    
     /**
-     * Get Visual Slide Image as Base64
+     * Get Visual Slide Image
      *
-     * Get Visual Slide Image as Base64
+     * Get VisualRadio Image as PNG for publication Base64 encoded inside a JSON object
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void getVisualSlideTest() throws ApiException {
         VisualResult response = api.getVisualSlide();
-
         // TODO: test validations
     }
-    
+
 }

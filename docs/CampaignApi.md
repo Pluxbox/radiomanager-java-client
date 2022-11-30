@@ -2,18 +2,18 @@
 
 All URIs are relative to *https://radiomanager.io/api/v2*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**createCampaign**](CampaignApi.md#createCampaign) | **POST** /campaigns | Create campaign.
-[**deleteCampaignById**](CampaignApi.md#deleteCampaignById) | **DELETE** /campaigns/{id} | Delete campaign by id
-[**getCampaignById**](CampaignApi.md#getCampaignById) | **GET** /campaigns/{id} | Get campaign by id
-[**listCampaigns**](CampaignApi.md#listCampaigns) | **GET** /campaigns | Get all campaigns.
-[**updateCampaignByID**](CampaignApi.md#updateCampaignByID) | **PATCH** /campaigns/{id} | Update campaign by id
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**createCampaign**](CampaignApi.md#createCampaign) | **POST** /campaigns | Create campaign. |
+| [**deleteCampaignById**](CampaignApi.md#deleteCampaignById) | **DELETE** /campaigns/{id} | Delete campaign by id |
+| [**getCampaignById**](CampaignApi.md#getCampaignById) | **GET** /campaigns/{id} | Get campaign by id |
+| [**listCampaigns**](CampaignApi.md#listCampaigns) | **GET** /campaigns | Get all campaigns. |
+| [**updateCampaignByID**](CampaignApi.md#updateCampaignByID) | **PATCH** /campaigns/{id} | Update campaign by id |
 
 
 <a name="createCampaign"></a>
 # **createCampaign**
-> PostSuccess createCampaign(data)
+> InlineResponse2002 createCampaign(campaignDataInput)
 
 Create campaign.
 
@@ -41,9 +41,9 @@ public class Example {
     //API-Key.setApiKeyPrefix("Token");
 
     CampaignApi apiInstance = new CampaignApi(defaultClient);
-    CampaignDataInput data = new CampaignDataInput(); // CampaignDataInput | Data **(Required)**
+    CampaignDataInput campaignDataInput = new CampaignDataInput(); // CampaignDataInput | Data **(Required)**
     try {
-      PostSuccess result = apiInstance.createCampaign(data);
+      InlineResponse2002 result = apiInstance.createCampaign(campaignDataInput);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling CampaignApi#createCampaign");
@@ -58,13 +58,13 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **data** | [**CampaignDataInput**](CampaignDataInput.md)| Data **(Required)** |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **campaignDataInput** | [**CampaignDataInput**](CampaignDataInput.md)| Data **(Required)** | |
 
 ### Return type
 
-[**PostSuccess**](PostSuccess.md)
+[**InlineResponse2002**](InlineResponse2002.md)
 
 ### Authorization
 
@@ -78,15 +78,18 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully created a campaign |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
+| **200** | Post Request Succesful |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
 
 <a name="deleteCampaignById"></a>
 # **deleteCampaignById**
-> Success deleteCampaignById(id)
+> InlineResponse202 deleteCampaignById(id)
 
 Delete campaign by id
 
@@ -114,9 +117,9 @@ public class Example {
     //API-Key.setApiKeyPrefix("Token");
 
     CampaignApi apiInstance = new CampaignApi(defaultClient);
-    Long id = 0lL; // Long | ID of Campaign **(Required)**
+    Long id = 56L; // Long | ID of Campaign **(Required)**
     try {
-      Success result = apiInstance.deleteCampaignById(id);
+      InlineResponse202 result = apiInstance.deleteCampaignById(id);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling CampaignApi#deleteCampaignById");
@@ -131,13 +134,13 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **Long**| ID of Campaign **(Required)** | [default to 0l]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | **Long**| ID of Campaign **(Required)** | |
 
 ### Return type
 
-[**Success**](Success.md)
+[**InlineResponse202**](InlineResponse202.md)
 
 ### Authorization
 
@@ -151,14 +154,18 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully deleted Campaign by id |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**429** | Too Many Requests |  -  |
+| **202** | Request Succesful |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
 
 <a name="getCampaignById"></a>
 # **getCampaignById**
-> CampaignResult getCampaignById(id, externalStationId)
+> CampaignResult getCampaignById(id)
 
 Get campaign by id
 
@@ -186,10 +193,9 @@ public class Example {
     //API-Key.setApiKeyPrefix("Token");
 
     CampaignApi apiInstance = new CampaignApi(defaultClient);
-    Long id = 0lL; // Long | ID of Campaign **(Required)**
-    Long externalStationId = 56L; // Long | Query on a different (content providing) station *(Optional)*
+    Long id = 56L; // Long | ID of Campaign **(Required)**
     try {
-      CampaignResult result = apiInstance.getCampaignById(id, externalStationId);
+      CampaignResult result = apiInstance.getCampaignById(id);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling CampaignApi#getCampaignById");
@@ -204,10 +210,9 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **Long**| ID of Campaign **(Required)** | [default to 0l]
- **externalStationId** | **Long**| Query on a different (content providing) station *(Optional)* | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | **Long**| ID of Campaign **(Required)** | |
 
 ### Return type
 
@@ -225,14 +230,18 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully got Campaign by id |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**429** | Too Many Requests |  -  |
+| **200** | Successfully got Campaign by id |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
 
 <a name="listCampaigns"></a>
 # **listCampaigns**
-> CampaignResults listCampaigns(page, itemId, modelTypeId, startMin, startMax, limit, orderBy, orderDirection, externalStationId)
+> InlineResponse2004 listCampaigns(itemId, modelTypeId, startMin, startMax, page, limit, orderBy, orderDirection, externalStationId)
 
 Get all campaigns.
 
@@ -260,17 +269,17 @@ public class Example {
     //API-Key.setApiKeyPrefix("Token");
 
     CampaignApi apiInstance = new CampaignApi(defaultClient);
-    Long page = 56L; // Long | Current page *(Optional)*
     Long itemId = 56L; // Long | Search on Item ID *(Optional)* `(Relation)`
     Long modelTypeId = 56L; // Long | Search on ModelType ID *(Optional)* `(Relation)`
-    OffsetDateTime startMin = new OffsetDateTime(); // OffsetDateTime | Minimum start date *(Optional)*
-    OffsetDateTime startMax = new OffsetDateTime(); // OffsetDateTime | Maximum start date *(Optional)*
+    OffsetDateTime startMin = OffsetDateTime.now(); // OffsetDateTime | Minimum start date *(Optional)*
+    OffsetDateTime startMax = OffsetDateTime.now(); // OffsetDateTime | Maximum start date *(Optional)*
+    Long page = 1L; // Long | Current page *(Optional)*
     Long limit = 56L; // Long | Results per page *(Optional)*
     String orderBy = "orderBy_example"; // String | Field to order the results *(Optional)*
-    String orderDirection = "orderDirection_example"; // String | Direction of ordering *(Optional)*
+    String orderDirection = "asc"; // String | Direction of ordering *(Optional)*
     Long externalStationId = 56L; // Long | Query on a different (content providing) station *(Optional)*
     try {
-      CampaignResults result = apiInstance.listCampaigns(page, itemId, modelTypeId, startMin, startMax, limit, orderBy, orderDirection, externalStationId);
+      InlineResponse2004 result = apiInstance.listCampaigns(itemId, modelTypeId, startMin, startMax, page, limit, orderBy, orderDirection, externalStationId);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling CampaignApi#listCampaigns");
@@ -285,21 +294,21 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **page** | **Long**| Current page *(Optional)* | [optional]
- **itemId** | **Long**| Search on Item ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
- **modelTypeId** | **Long**| Search on ModelType ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
- **startMin** | **OffsetDateTime**| Minimum start date *(Optional)* | [optional]
- **startMax** | **OffsetDateTime**| Maximum start date *(Optional)* | [optional]
- **limit** | **Long**| Results per page *(Optional)* | [optional]
- **orderBy** | **String**| Field to order the results *(Optional)* | [optional]
- **orderDirection** | **String**| Direction of ordering *(Optional)* | [optional] [enum: asc, desc]
- **externalStationId** | **Long**| Query on a different (content providing) station *(Optional)* | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **itemId** | **Long**| Search on Item ID *(Optional)* &#x60;(Relation)&#x60; | [optional] |
+| **modelTypeId** | **Long**| Search on ModelType ID *(Optional)* &#x60;(Relation)&#x60; | [optional] |
+| **startMin** | **OffsetDateTime**| Minimum start date *(Optional)* | [optional] |
+| **startMax** | **OffsetDateTime**| Maximum start date *(Optional)* | [optional] |
+| **page** | **Long**| Current page *(Optional)* | [optional] [default to 1] |
+| **limit** | **Long**| Results per page *(Optional)* | [optional] |
+| **orderBy** | **String**| Field to order the results *(Optional)* | [optional] |
+| **orderDirection** | **String**| Direction of ordering *(Optional)* | [optional] [enum: asc, desc] |
+| **externalStationId** | **Long**| Query on a different (content providing) station *(Optional)* | [optional] |
 
 ### Return type
 
-[**CampaignResults**](CampaignResults.md)
+[**InlineResponse2004**](InlineResponse2004.md)
 
 ### Authorization
 
@@ -313,14 +322,18 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully got all campaigns |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**429** | Too Many Requests |  -  |
+| **200** | Successfully got all campaigns |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
 
 <a name="updateCampaignByID"></a>
 # **updateCampaignByID**
-> Success updateCampaignByID(id, data)
+> InlineResponse202 updateCampaignByID(id, campaignDataInput)
 
 Update campaign by id
 
@@ -348,10 +361,10 @@ public class Example {
     //API-Key.setApiKeyPrefix("Token");
 
     CampaignApi apiInstance = new CampaignApi(defaultClient);
-    Long id = 0lL; // Long | ID of Campaign **(Required)**
-    CampaignDataInput data = new CampaignDataInput(); // CampaignDataInput | Data *(Optional)*
+    Long id = 56L; // Long | ID of Campaign **(Required)**
+    CampaignDataInput campaignDataInput = new CampaignDataInput(); // CampaignDataInput | Data **(Optional)**
     try {
-      Success result = apiInstance.updateCampaignByID(id, data);
+      InlineResponse202 result = apiInstance.updateCampaignByID(id, campaignDataInput);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling CampaignApi#updateCampaignByID");
@@ -366,14 +379,14 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **Long**| ID of Campaign **(Required)** | [default to 0l]
- **data** | [**CampaignDataInput**](CampaignDataInput.md)| Data *(Optional)* | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | **Long**| ID of Campaign **(Required)** | |
+| **campaignDataInput** | [**CampaignDataInput**](CampaignDataInput.md)| Data **(Optional)** | |
 
 ### Return type
 
-[**Success**](Success.md)
+[**InlineResponse202**](InlineResponse202.md)
 
 ### Authorization
 
@@ -387,9 +400,12 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully updated Campaign by ID |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
+| **200** | Request Succesful |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
 

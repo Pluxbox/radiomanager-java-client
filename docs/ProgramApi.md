@@ -2,18 +2,18 @@
 
 All URIs are relative to *https://radiomanager.io/api/v2*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**createProgram**](ProgramApi.md#createProgram) | **POST** /programs | Create program.
-[**deleteProgramById**](ProgramApi.md#deleteProgramById) | **DELETE** /programs/{id} | Delete program by id
-[**getProgramById**](ProgramApi.md#getProgramById) | **GET** /programs/{id} | Get program by id
-[**listPrograms**](ProgramApi.md#listPrograms) | **GET** /programs | Get all programs.
-[**updateProgramByID**](ProgramApi.md#updateProgramByID) | **PATCH** /programs/{id} | Update program by id
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**createProgram**](ProgramApi.md#createProgram) | **POST** /programs | Create program. |
+| [**deleteProgramById**](ProgramApi.md#deleteProgramById) | **DELETE** /programs/{id} | Delete program by id |
+| [**getProgramById**](ProgramApi.md#getProgramById) | **GET** /programs/{id} | Get program by id |
+| [**listPrograms**](ProgramApi.md#listPrograms) | **GET** /programs | Get all programs. |
+| [**updateProgramByID**](ProgramApi.md#updateProgramByID) | **PATCH** /programs/{id} | Update program by id |
 
 
 <a name="createProgram"></a>
 # **createProgram**
-> PostSuccess createProgram(data)
+> InlineResponse2002 createProgram(programDataInput)
 
 Create program.
 
@@ -41,9 +41,9 @@ public class Example {
     //API-Key.setApiKeyPrefix("Token");
 
     ProgramApi apiInstance = new ProgramApi(defaultClient);
-    ProgramDataInput data = new ProgramDataInput(); // ProgramDataInput | Data **(Required)**
+    ProgramDataInput programDataInput = new ProgramDataInput(); // ProgramDataInput | Data **(Required)**
     try {
-      PostSuccess result = apiInstance.createProgram(data);
+      InlineResponse2002 result = apiInstance.createProgram(programDataInput);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling ProgramApi#createProgram");
@@ -58,13 +58,13 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **data** | [**ProgramDataInput**](ProgramDataInput.md)| Data **(Required)** |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **programDataInput** | [**ProgramDataInput**](ProgramDataInput.md)| Data **(Required)** | |
 
 ### Return type
 
-[**PostSuccess**](PostSuccess.md)
+[**InlineResponse2002**](InlineResponse2002.md)
 
 ### Authorization
 
@@ -78,15 +78,18 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully created a program |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
+| **200** | Post Request Succesful |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
 
 <a name="deleteProgramById"></a>
 # **deleteProgramById**
-> Success deleteProgramById(id)
+> InlineResponse202 deleteProgramById(id)
 
 Delete program by id
 
@@ -114,9 +117,9 @@ public class Example {
     //API-Key.setApiKeyPrefix("Token");
 
     ProgramApi apiInstance = new ProgramApi(defaultClient);
-    Long id = 0lL; // Long | ID of program **(Required)**
+    Long id = 56L; // Long | ID of program **(Required)**
     try {
-      Success result = apiInstance.deleteProgramById(id);
+      InlineResponse202 result = apiInstance.deleteProgramById(id);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling ProgramApi#deleteProgramById");
@@ -131,13 +134,13 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **Long**| ID of program **(Required)** | [default to 0l]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | **Long**| ID of program **(Required)** | |
 
 ### Return type
 
-[**Success**](Success.md)
+[**InlineResponse202**](InlineResponse202.md)
 
 ### Authorization
 
@@ -151,10 +154,14 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully deleted program by id |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**429** | Too Many Requests |  -  |
+| **202** | Request Succesful |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
 
 <a name="getProgramById"></a>
 # **getProgramById**
@@ -186,7 +193,7 @@ public class Example {
     //API-Key.setApiKeyPrefix("Token");
 
     ProgramApi apiInstance = new ProgramApi(defaultClient);
-    Long id = 0lL; // Long | ID of Program **(Required)**
+    Long id = 56L; // Long | ID of Program **(Required)**
     Long externalStationId = 56L; // Long | Query on a different (content providing) station *(Optional)*
     try {
       ProgramResult result = apiInstance.getProgramById(id, externalStationId);
@@ -204,10 +211,10 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **Long**| ID of Program **(Required)** | [default to 0l]
- **externalStationId** | **Long**| Query on a different (content providing) station *(Optional)* | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | **Long**| ID of Program **(Required)** | |
+| **externalStationId** | **Long**| Query on a different (content providing) station *(Optional)* | [optional] |
 
 ### Return type
 
@@ -225,14 +232,18 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully got Program by id |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**429** | Too Many Requests |  -  |
+| **200** | Successfully got Program by id |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
 
 <a name="listPrograms"></a>
 # **listPrograms**
-> ProgramResults listPrograms(page, broadcastId, modelTypeId, tagId, presenterId, genreId, blockId, itemId, disabled, limit, orderBy, orderDirection, externalStationId)
+> InlineResponse20011 listPrograms(broadcastId, modelTypeId, tagId, presenterId, genreId, groupId, blockId, itemId, disabled, page, limit, orderBy, orderDirection, externalStationId)
 
 Get all programs.
 
@@ -260,21 +271,22 @@ public class Example {
     //API-Key.setApiKeyPrefix("Token");
 
     ProgramApi apiInstance = new ProgramApi(defaultClient);
-    Long page = 56L; // Long | Current page *(Optional)*
     Long broadcastId = 56L; // Long | Search on Broadcast ID *(Optional)* `(Relation)`
     Long modelTypeId = 56L; // Long | Search on ModelType ID *(Optional)* `(Relation)`
     Long tagId = 56L; // Long | Search on Tag ID *(Optional)* `(Relation)`
     Long presenterId = 56L; // Long | Search on Presenter ID *(Optional)* `(Relation)`
     Long genreId = 56L; // Long | Search on Genre ID *(Optional)*
+    Long groupId = 56L; // Long | Search on Group ID *(Optional)*
     Long blockId = 56L; // Long | Search on Block ID *(Optional)* `(Relation)`
     Long itemId = 56L; // Long | Search on Item ID *(Optional)* `(Relation)`
     Integer disabled = 56; // Integer | Search on Disabled status *(Optional)*
+    Long page = 1L; // Long | Current page *(Optional)*
     Long limit = 56L; // Long | Results per page *(Optional)*
     String orderBy = "orderBy_example"; // String | Field to order the results *(Optional)*
-    String orderDirection = "orderDirection_example"; // String | Direction of ordering *(Optional)*
+    String orderDirection = "asc"; // String | Direction of ordering *(Optional)*
     Long externalStationId = 56L; // Long | Query on a different (content providing) station *(Optional)*
     try {
-      ProgramResults result = apiInstance.listPrograms(page, broadcastId, modelTypeId, tagId, presenterId, genreId, blockId, itemId, disabled, limit, orderBy, orderDirection, externalStationId);
+      InlineResponse20011 result = apiInstance.listPrograms(broadcastId, modelTypeId, tagId, presenterId, genreId, groupId, blockId, itemId, disabled, page, limit, orderBy, orderDirection, externalStationId);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling ProgramApi#listPrograms");
@@ -289,25 +301,26 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **page** | **Long**| Current page *(Optional)* | [optional]
- **broadcastId** | **Long**| Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
- **modelTypeId** | **Long**| Search on ModelType ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
- **tagId** | **Long**| Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
- **presenterId** | **Long**| Search on Presenter ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
- **genreId** | **Long**| Search on Genre ID *(Optional)* | [optional]
- **blockId** | **Long**| Search on Block ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
- **itemId** | **Long**| Search on Item ID *(Optional)* &#x60;(Relation)&#x60; | [optional]
- **disabled** | **Integer**| Search on Disabled status *(Optional)* | [optional]
- **limit** | **Long**| Results per page *(Optional)* | [optional]
- **orderBy** | **String**| Field to order the results *(Optional)* | [optional]
- **orderDirection** | **String**| Direction of ordering *(Optional)* | [optional] [enum: asc, desc]
- **externalStationId** | **Long**| Query on a different (content providing) station *(Optional)* | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **broadcastId** | **Long**| Search on Broadcast ID *(Optional)* &#x60;(Relation)&#x60; | [optional] |
+| **modelTypeId** | **Long**| Search on ModelType ID *(Optional)* &#x60;(Relation)&#x60; | [optional] |
+| **tagId** | **Long**| Search on Tag ID *(Optional)* &#x60;(Relation)&#x60; | [optional] |
+| **presenterId** | **Long**| Search on Presenter ID *(Optional)* &#x60;(Relation)&#x60; | [optional] |
+| **genreId** | **Long**| Search on Genre ID *(Optional)* | [optional] |
+| **groupId** | **Long**| Search on Group ID *(Optional)* | [optional] |
+| **blockId** | **Long**| Search on Block ID *(Optional)* &#x60;(Relation)&#x60; | [optional] |
+| **itemId** | **Long**| Search on Item ID *(Optional)* &#x60;(Relation)&#x60; | [optional] |
+| **disabled** | **Integer**| Search on Disabled status *(Optional)* | [optional] |
+| **page** | **Long**| Current page *(Optional)* | [optional] [default to 1] |
+| **limit** | **Long**| Results per page *(Optional)* | [optional] |
+| **orderBy** | **String**| Field to order the results *(Optional)* | [optional] |
+| **orderDirection** | **String**| Direction of ordering *(Optional)* | [optional] [enum: asc, desc] |
+| **externalStationId** | **Long**| Query on a different (content providing) station *(Optional)* | [optional] |
 
 ### Return type
 
-[**ProgramResults**](ProgramResults.md)
+[**InlineResponse20011**](InlineResponse20011.md)
 
 ### Authorization
 
@@ -321,14 +334,18 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully got all programs |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**429** | Too Many Requests |  -  |
+| **200** | Successfully got all programs |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
 
 <a name="updateProgramByID"></a>
 # **updateProgramByID**
-> Success updateProgramByID(id, data)
+> InlineResponse202 updateProgramByID(id, programDataInput)
 
 Update program by id
 
@@ -356,10 +373,10 @@ public class Example {
     //API-Key.setApiKeyPrefix("Token");
 
     ProgramApi apiInstance = new ProgramApi(defaultClient);
-    Long id = 0lL; // Long | ID of Program **(Required)**
-    ProgramDataInput data = new ProgramDataInput(); // ProgramDataInput | Data *(Optional)*
+    Long id = 56L; // Long | ID of Program **(Required)**
+    ProgramDataInput programDataInput = new ProgramDataInput(); // ProgramDataInput | Data *(Optional)*
     try {
-      Success result = apiInstance.updateProgramByID(id, data);
+      InlineResponse202 result = apiInstance.updateProgramByID(id, programDataInput);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling ProgramApi#updateProgramByID");
@@ -374,14 +391,14 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **Long**| ID of Program **(Required)** | [default to 0l]
- **data** | [**ProgramDataInput**](ProgramDataInput.md)| Data *(Optional)* | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | **Long**| ID of Program **(Required)** | |
+| **programDataInput** | [**ProgramDataInput**](ProgramDataInput.md)| Data *(Optional)* | |
 
 ### Return type
 
-[**Success**](Success.md)
+[**InlineResponse202**](InlineResponse202.md)
 
 ### Authorization
 
@@ -395,9 +412,12 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully updated Program by id |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
+| **200** | Request Succesful |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
 
