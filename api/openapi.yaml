@@ -14,7 +14,7 @@ info:
   title: RadioManager
   version: "2.0"
 servers:
-- url: https://radiomanager.io/api/v2
+- url: https://staging.radiomanager.io/api/v2
 - url: https://radiomanager.io/api/v2
 - url: https://staging.radiomanager.io/api/v2
 - url: http://radiomanager.pb/api/v2
@@ -6228,7 +6228,7 @@ components:
       oneOf:
       - $ref: '#/components/schemas/IntegerBoolean'
       - $ref: '#/components/schemas/BooleanParameter'
-      title: unusedBooleanParameter
+      title: booleanParameter
     IntegerBoolean:
       type: integer
     BooleanParameter:

@@ -1,6 +1,6 @@
 # ProgramApi
 
-All URIs are relative to *https://radiomanager.io/api/v2*
+All URIs are relative to *https://staging.radiomanager.io/api/v2*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
@@ -32,7 +32,7 @@ import radiomanager.ProgramApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://radiomanager.io/api/v2");
+    defaultClient.setBasePath("https://staging.radiomanager.io/api/v2");
     
     // Configure API key authorization: API-Key
     ApiKeyAuth API-Key = (ApiKeyAuth) defaultClient.getAuthentication("API-Key");
@@ -108,7 +108,7 @@ import radiomanager.ProgramApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://radiomanager.io/api/v2");
+    defaultClient.setBasePath("https://staging.radiomanager.io/api/v2");
     
     // Configure API key authorization: API-Key
     ApiKeyAuth API-Key = (ApiKeyAuth) defaultClient.getAuthentication("API-Key");
@@ -184,7 +184,7 @@ import radiomanager.ProgramApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://radiomanager.io/api/v2");
+    defaultClient.setBasePath("https://staging.radiomanager.io/api/v2");
     
     // Configure API key authorization: API-Key
     ApiKeyAuth API-Key = (ApiKeyAuth) defaultClient.getAuthentication("API-Key");
@@ -262,7 +262,7 @@ import radiomanager.ProgramApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://radiomanager.io/api/v2");
+    defaultClient.setBasePath("https://staging.radiomanager.io/api/v2");
     
     // Configure API key authorization: API-Key
     ApiKeyAuth API-Key = (ApiKeyAuth) defaultClient.getAuthentication("API-Key");
@@ -364,7 +364,7 @@ import radiomanager.ProgramApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://radiomanager.io/api/v2");
+    defaultClient.setBasePath("https://staging.radiomanager.io/api/v2");
     
     // Configure API key authorization: API-Key
     ApiKeyAuth API-Key = (ApiKeyAuth) defaultClient.getAuthentication("API-Key");
